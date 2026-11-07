@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import "@/styles/global.css";
 import { BaseTemplate } from "@/templates/BaseTemplate";
 import SiteNav from "@/components/SiteNav";
 import MobileNav from "@/components/MobileNav";
 import { AppConfig } from "@/utils/AppConfig";
 import { RATES_RULES_LABEL } from "@/lib/rates";
+
+const GA_MEASUREMENT_ID = "G-0R7G7GZ0CK";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,6 +55,18 @@ export default function RootLayout({
   return (
     <html lang="en-GB" className={inter.variable}>
       <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <BaseTemplate
           leftNav={<SiteNav />}
           mobileNav={<MobileNav />}
