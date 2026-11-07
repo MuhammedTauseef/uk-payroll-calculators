@@ -146,7 +146,7 @@ export default function BestHrSoftwarePage() {
           The shortlist at a glance
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full min-w-[520px] text-left text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50">
                 <th className="px-4 py-2 font-semibold text-slate-700">

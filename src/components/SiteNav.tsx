@@ -12,8 +12,13 @@ export default function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <ul className="flex flex-wrap items-center gap-1">
-      {AppConfig.nav.map((item) => {
+    <ul className="flex flex-nowrap items-center gap-0.5">
+      {/* "Home" is omitted here: the logo at the left of the header is
+          the home link (the mobile menu keeps the full list). Dropping
+          it is what lets all eight remaining pills fit one row at xl. */}
+      {AppConfig.nav
+        .filter((item) => item.href !== "/")
+        .map((item) => {
         const active = pathname === item.href;
         return (
           <li key={item.href}>
@@ -22,8 +27,8 @@ export default function SiteNav() {
               aria-current={active ? "page" : undefined}
               className={
                 active
-                  ? "rounded-full bg-brand-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-brand-800"
-                  : "rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap text-slate-600 transition hover:bg-slate-100 hover:text-brand-800"
+                  ? "rounded-full bg-brand-50 px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap text-brand-800"
+                  : "rounded-full px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-slate-600 transition hover:bg-slate-100 hover:text-brand-800"
               }
             >
               {item.label}

@@ -35,7 +35,7 @@ export default function MaternityCalculator() {
     scheme === "nhs" ? "NHS occupational maternity pay" : "Statutory Maternity Pay only";
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="mat-salary" className={labelClass}>

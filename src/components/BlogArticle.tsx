@@ -51,7 +51,7 @@ function Block({ block }: { block: BlogBodyBlock }) {
   }
   if (block.kind === "list") {
     return (
-      <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed text-slate-700">
+      <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed break-words text-slate-700">
         {block.items.map((item, index) => (
           <li key={index}>
             <Segments segments={item} />
@@ -61,7 +61,7 @@ function Block({ block }: { block: BlogBodyBlock }) {
     );
   }
   return (
-    <p className="mt-4 text-base leading-relaxed text-slate-700">
+    <p className="mt-4 text-base leading-relaxed break-words text-slate-700">
       <Segments segments={block.segments} />
     </p>
   );

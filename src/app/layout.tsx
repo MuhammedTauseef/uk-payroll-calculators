@@ -73,10 +73,13 @@ export default function RootLayout({
           rightNav={
             <Link
               href="/ssp-calculator"
-              className="flex min-h-9 items-center rounded-full bg-brand-700 px-3 text-[13px] font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800 lg:min-h-0 lg:px-4 lg:py-2 lg:text-sm"
+              className="flex min-h-11 items-center rounded-full bg-brand-700 px-4 text-sm font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800"
             >
-              <span className="lg:hidden">Try SSP</span>
-              <span className="hidden lg:inline">Try the SSP calculator</span>
+              {/* Short label at every width: the full "Try the SSP
+                  calculator" pill made the xl header row overflow
+                  (logo + 8 nav pills + CTA > container). The hero
+                  button keeps the full wording. */}
+              <span>Try SSP</span>
             </Link>
           }
           footerNote={

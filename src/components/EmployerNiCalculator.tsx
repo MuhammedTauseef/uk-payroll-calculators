@@ -53,7 +53,7 @@ export default function EmployerNiCalculator() {
   const pensionPercent = PENSION.employerMinimumRate * 100;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="salary" className={labelClass}>
@@ -114,12 +114,12 @@ export default function EmployerNiCalculator() {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="flex items-start gap-2 text-sm font-medium text-slate-700">
+          <label className="flex min-h-11 items-start gap-2.5 text-sm font-medium text-slate-700">
             <input
               type="checkbox"
               checked={allowance}
               onChange={(e) => setAllowance(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-slate-300 accent-brand-700"
+              className="mt-0.5 h-5 w-5 rounded border-slate-300 accent-brand-700"
             />
             <span>
               We claim the Employment Allowance (
@@ -137,12 +137,12 @@ export default function EmployerNiCalculator() {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="flex items-start gap-2 text-sm font-medium text-slate-700">
+          <label className="flex min-h-11 items-start gap-2.5 text-sm font-medium text-slate-700">
             <input
               type="checkbox"
               checked={pension}
               onChange={(e) => setPension(e.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-slate-300 accent-brand-700"
+              className="mt-0.5 h-5 w-5 rounded border-slate-300 accent-brand-700"
             />
             <span>
               Include employer pension contributions (auto-enrolment

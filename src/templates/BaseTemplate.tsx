@@ -19,22 +19,24 @@ export const BaseTemplate = (props: {
   return (
     <div className="flex min-h-screen w-full flex-col text-slate-700 antialiased">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4">
-          <Link href="/" className="flex min-w-0 items-center gap-2.5">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 sm:gap-4">
+          <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-lg font-bold text-white shadow-sm">
               £
             </span>
             <span className="leading-tight">
-              <span className="block text-[15px] font-bold text-slate-900 sm:text-base">
+              <span className="block text-[15px] font-bold whitespace-nowrap text-slate-900 sm:text-base">
                 {AppConfig.name}
               </span>
-              <span className="hidden text-xs text-slate-500 md:block">
+              {/* Tagline yields at xl: the full desktop pill nav needs
+                  the width, and the name alone identifies the site. */}
+              <span className="hidden text-xs whitespace-nowrap text-slate-500 md:block xl:hidden">
                 {AppConfig.tagline}
               </span>
             </span>
           </Link>
 
-          <nav aria-label="Main navigation" className="hidden lg:block">
+          <nav aria-label="Main navigation" className="hidden xl:block">
             {props.leftNav}
           </nav>
 
@@ -45,7 +47,7 @@ export const BaseTemplate = (props: {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:py-12">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
         {props.children}
       </main>
 
@@ -67,14 +69,14 @@ export const BaseTemplate = (props: {
 
           <nav aria-label="Calculator links">
             <p className="text-sm font-semibold text-slate-900">Calculators</p>
-            <ul className="mt-3 space-y-2 text-sm">
+            <ul className="mt-3 space-y-1 text-sm">
               {AppConfig.nav
                 .filter((item) => item.href !== "/")
                 .map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-slate-600 transition hover:text-brand-800"
+                      className="block py-1.5 text-slate-600 transition hover:text-brand-800"
                     >
                       {item.label}
                     </Link>
@@ -85,12 +87,12 @@ export const BaseTemplate = (props: {
 
           <nav aria-label="Guide links">
             <p className="text-sm font-semibold text-slate-900">Guides</p>
-            <ul className="mt-3 space-y-2 text-sm">
+            <ul className="mt-3 space-y-1 text-sm">
               {AppConfig.guides.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-slate-600 transition hover:text-brand-800"
+                    className="block py-1.5 text-slate-600 transition hover:text-brand-800"
                   >
                     {item.label}
                   </Link>
@@ -101,12 +103,12 @@ export const BaseTemplate = (props: {
 
           <nav aria-label="Site links">
             <p className="text-sm font-semibold text-slate-900">Site</p>
-            <ul className="mt-3 space-y-2 text-sm">
+            <ul className="mt-3 space-y-1 text-sm">
               {AppConfig.siteLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-slate-600 transition hover:text-brand-800"
+                    className="block py-1.5 text-slate-600 transition hover:text-brand-800"
                   >
                     {item.label}
                   </Link>

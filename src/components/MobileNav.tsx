@@ -32,7 +32,7 @@ export default function MobileNav() {
   }, [open ]);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         type="button"
         aria-expanded={open}
@@ -72,7 +72,7 @@ export default function MobileNav() {
         <nav
           id="mobile-nav-panel"
           aria-label="Main navigation"
-          className="fixed inset-x-0 top-16 z-30 border-b border-slate-200 bg-white shadow-lg"
+          className="fixed inset-x-0 top-16 z-30 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-slate-200 bg-white shadow-lg"
         >
           <ul className="mx-auto w-full max-w-6xl px-4 py-2">
             {AppConfig.nav.map((item) => {

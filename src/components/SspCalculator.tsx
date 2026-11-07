@@ -45,7 +45,7 @@ export default function SspCalculator() {
   const eightyPercentAmount = SSP.aweFraction * aweNumber;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="awe" className={labelClass}>
@@ -110,13 +110,13 @@ export default function SspCalculator() {
           <label className={labelClass}>
             Linked previous sickness?
           </label>
-          <div className="flex items-center gap-2 pt-2">
+          <div className="flex min-h-11 items-center gap-2.5">
             <input
               id="linked"
               type="checkbox"
               checked={hasLinked}
               onChange={(e) => setHasLinked(e.target.checked)}
-              className="h-4 w-4 rounded border-slate-300 accent-brand-700"
+              className="h-5 w-5 shrink-0 rounded border-slate-300 accent-brand-700"
             />
             <label htmlFor="linked" className="text-sm text-slate-700">
               The employee was off sick within the last 8 weeks

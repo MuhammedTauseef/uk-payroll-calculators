@@ -215,7 +215,7 @@ export default async function HomePage() {
     .catch(() => []);
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-10 sm:space-y-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
