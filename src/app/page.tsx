@@ -211,7 +211,7 @@ const STEPS = [
 
 export default async function HomePage() {
   const latestPosts = await listPublishedBlogPosts()
-    .then((posts) => posts.slice(0, 3))
+    .then((posts) => posts.slice(0, 2))
     .catch(() => []);
 
   return (
