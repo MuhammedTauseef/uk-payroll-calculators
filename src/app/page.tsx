@@ -221,13 +221,8 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <section className="relative pt-4 text-center sm:pt-8">
-        {/* Background photo carousel (decorative): fills the hero's
-            whole box — pill, headline, copy, CTAs and the trust row
-            all sit on it — and ends at the section's bottom edge,
-            where "The calculators" begins on the plain page wash. */}
-        <HeroCarousel />
-        <div className="relative z-10 space-y-6">
+      <section className="pt-4 text-center sm:pt-8">
+        <div className="space-y-6">
         <p className="inline-block rounded-full border border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-900/30 px-3 py-1 text-xs font-semibold tracking-wide text-brand-800 dark:text-brand-300 uppercase">
           Built on the April 2026 rules
         </p>
@@ -264,6 +259,11 @@ export default async function HomePage() {
           ))}
         </ul>
         </div>
+        {/* Photo panel: the three workplace photos in a framed
+            16:9 card below the trust row, every photo shown whole
+            (never cropped — see HeroCarousel). The hero section
+            ends with this panel; "The calculators" follows. */}
+        <HeroCarousel />
       </section>
 
       <section id="calculators" className="scroll-mt-32">
