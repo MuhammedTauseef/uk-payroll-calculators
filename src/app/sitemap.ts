@@ -1,14 +1,21 @@
 import type { MetadataRoute } from "next";
 import { AppConfig } from "@/utils/AppConfig";
+import { listPublishedBlogSitemapEntries } from "@/lib/blog/queries";
 
 /**
- * Sitemap for the whole hub: the home page, the four calculators (from
- * AppConfig.nav, minus the home entry), the five SSP guides (from
- * AppConfig.guides) and the trust pages (from AppConfig.siteLinks).
+ * Sitemap for the whole hub: the home page, the calculators (from
+ * AppConfig.nav, minus the home entry), the SSP guides (from
+ * AppConfig.guides), the trust pages (from AppConfig.siteLinks), the
+ * blog index and every published blog post (from the database).
  * Keeping the route list driven by AppConfig means a route added to
  * the configuration appears here automatically.
+ *
+ * The blog read is failure-safe: before the Supabase env vars are set
+ * (or if the database is unreachable) the sitemap returns exactly the
+ * static routes it always carried — publishing can only ever ADD
+ * entries, never remove the existing ones.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const calculatorPaths = AppConfig.nav
     .map((item) => item.href)
     .filter((href) => href !== "/");
@@ -22,9 +29,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...sitePaths.map((path) => ({ path, priority: 0.5 })),
   ];
 
-  return routes.map(({ path, priority }) => ({
+  const entries: MetadataRoute.Sitemap = routes.map(({ path, priority }) => ({
     url: `${AppConfig.siteUrl}${path}`,
     changeFrequency: "monthly",
     priority,
   }));
+
+  const posts = await listPublishedBlogSitemapEntries().catch(() => []);
+  if (posts.length > 0) {
+    entries.push({
+      url: `${AppConfig.siteUrl}/blog`,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    });
+    for (const post of posts) {
+      entries.push({
+        url: `${AppConfig.siteUrl}/blog/${post.slug}`,
+        ...(post.lastModified ? { lastModified: new Date(post.lastModified) } : {}),
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+    }
+  }
+
+  return entries;
 }
