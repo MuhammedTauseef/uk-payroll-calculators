@@ -55,9 +55,10 @@ export default function RootLayout({
           rightNav={
             <Link
               href="/ssp-calculator"
-              className="rounded-full bg-brand-700 px-3 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800 sm:px-4 sm:text-sm"
+              className="flex min-h-9 items-center rounded-full bg-brand-700 px-3 text-[13px] font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800 lg:min-h-0 lg:px-4 lg:py-2 lg:text-sm"
             >
-              Try the SSP calculator
+              <span className="lg:hidden">Try SSP</span>
+              <span className="hidden lg:inline">Try the SSP calculator</span>
             </Link>
           }
           footerNote={
