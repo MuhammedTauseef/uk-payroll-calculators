@@ -1,6 +1,20 @@
 @import "tailwindcss";
 
 /*
+  Dark mode is class-based: the `dark` class on <html> (set before
+  first paint by the inline theme script in the root layout, then
+  owned by the header toggle + localStorage) drives every dark:
+  variant. Tailwind v4 needs this custom variant for the class
+  strategy — without it, dark: follows prefers-color-scheme instead.
+*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Native UI (scrollbars, date pickers, select dropdowns) follows. */
+.dark {
+  color-scheme: dark;
+}
+
+/*
   Design foundation adopted from ixartz/Next-js-Boilerplate (MIT licence —
   see the LICENSE file in the project root): Tailwind CSS v4 with
   CSS-first theme tokens declared in this file, which lives in
@@ -25,7 +39,7 @@
 }
 
 body {
-  @apply bg-slate-50 font-sans text-slate-900 antialiased;
+  @apply bg-slate-50 font-sans text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
 }
 
 /*
@@ -48,5 +62,17 @@ body {
   main {
     padding-top: 0;
     padding-bottom: 0;
+  }
+
+  /*
+    Printing from dark mode: browsers drop backgrounds when printing
+    by default, which would leave dark mode's light text invisible on
+    white paper. Force the printed main content back to dark text on
+    transparent backgrounds (light-mode printing is untouched).
+  */
+  .dark main * {
+    color: #0f172a !important;
+    background-color: transparent !important;
+    border-color: #94a3b8 !important;
   }
 }

@@ -6,6 +6,7 @@ import "@/styles/global.css";
 import { BaseTemplate } from "@/templates/BaseTemplate";
 import SiteNav from "@/components/SiteNav";
 import MobileNav from "@/components/MobileNav";
+import ThemeToggle from "@/components/ThemeToggle";
 import { AppConfig } from "@/utils/AppConfig";
 import { RATES_RULES_LABEL } from "@/lib/rates";
 
@@ -53,8 +54,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-GB" className={inter.variable}>
+    <html lang="en-GB" className={inter.variable} suppressHydrationWarning>
       <body>
+        {/* Theme init — must run before first paint to avoid a flash
+            of the wrong theme: saved localStorage choice wins, else
+            the visitor's system preference. The header ThemeToggle
+            owns the class after this. (CSP allows inline scripts.) */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`
+            try {
+              var saved = localStorage.getItem('theme');
+              var dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+              document.documentElement.classList.toggle('dark', dark);
+              document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+            } catch (e) {}
+          `}
+        </Script>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -71,16 +86,19 @@ export default function RootLayout({
           leftNav={<SiteNav />}
           mobileNav={<MobileNav />}
           rightNav={
-            <Link
-              href="/ssp-calculator"
+            <>
+              <ThemeToggle />
+              <Link
+                href="/ssp-calculator"
               className="flex min-h-11 items-center rounded-full bg-brand-700 px-4 text-sm font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800"
             >
               {/* Short label at every width: the full "Try the SSP
                   calculator" pill made the xl header row overflow
                   (logo + 8 nav pills + CTA > container). The hero
                   button keeps the full wording. */}
-              <span>Try SSP</span>
-            </Link>
+                <span>Try SSP</span>
+              </Link>
+            </>
           }
           footerNote={
             <p>
