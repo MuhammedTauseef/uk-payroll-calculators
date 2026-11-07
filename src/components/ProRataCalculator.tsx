@@ -55,8 +55,8 @@ export default function ProRataCalculator() {
   const ftePercent = Math.round(result.fteFraction * 1000) / 10;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+      <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="ft-salary" className={labelClass}>
             Full-time annual salary (£)
@@ -166,17 +166,33 @@ export default function ProRataCalculator() {
       </div>
 
       {overFullTime && (
-        <p className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+        <p className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900 print:hidden">
           The part-time amount is more than the full-time amount, so the
           fraction is capped at 1.0 FTE (100%). Hours beyond the full-time
           pattern are normally overtime, not pro-rata pay.
         </p>
       )}
 
-      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5">
+      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Your pro-rata pay
         </h2>
+
+        {/* Print-only recap of the inputs (the form itself is not printed). */}
+        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
+          <p className="font-semibold text-slate-900">
+            Pro-rata salary calculation — inputs used
+          </p>
+          <p>
+            Full-time annual salary: {gbp.format(salaryNumber)} · Fraction
+            worked out by:{" "}
+            {mode === "hours"
+              ? `hours per week (${ptHoursNumber} of ${ftHoursNumber} hours)`
+              : `days per week (${ptDaysNumber} of ${ftDaysNumber} days)`}{" "}
+            · Working pattern for holiday: {ptDaysNumber} of {ftDaysNumber}{" "}
+            days a week.
+          </p>
+        </div>
         <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
           {gbp.format(result.annualSalary)}
           <span className="text-base font-medium text-slate-600">
@@ -225,6 +241,21 @@ export default function ProRataCalculator() {
             {STATUTORY_HOLIDAY_WEEKS} × {result.holidayBasisDaysPerWeek} days
             a week = {result.holidayDaysPerYear} days. Bank holidays are
             usually counted inside this total.
+          </p>
+        </div>
+
+        <div className="print:hidden">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="mt-4 rounded-full border border-brand-700 bg-white px-5 py-2.5 text-sm font-semibold text-brand-800 shadow-sm transition hover:bg-brand-50"
+          >
+            Print / save this result
+          </button>
+          <p className="mt-2 text-xs text-slate-500">
+            Opens your browser&apos;s print view with a clean summary of
+            this calculation — choose &ldquo;Save as PDF&rdquo; there to
+            keep a copy.
           </p>
         </div>
       </div>

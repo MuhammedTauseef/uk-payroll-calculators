@@ -9,6 +9,13 @@ export const metadata = pageMetadata(
   AppConfig.description,
 );
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: AppConfig.name,
+  url: AppConfig.siteUrl,
+};
+
 
 const iconProps = {
   fill: "none",
@@ -144,6 +151,10 @@ const STEPS = [
 export default function HomePage() {
   return (
     <div className="space-y-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <section className="space-y-6 pt-4 text-center sm:pt-8">
         <p className="inline-block rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-800 uppercase">
           Built on the April 2026 rules

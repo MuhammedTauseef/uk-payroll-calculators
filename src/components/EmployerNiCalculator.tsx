@@ -53,8 +53,8 @@ export default function EmployerNiCalculator() {
   const pensionPercent = PENSION.employerMinimumRate * 100;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+      <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="salary" className={labelClass}>
             Employee&apos;s gross salary (£)
@@ -159,10 +159,27 @@ export default function EmployerNiCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5">
+      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Employer National Insurance cost
         </h2>
+
+        {/* Print-only recap of the inputs (the form itself is not printed). */}
+        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
+          <p className="font-semibold text-slate-900">
+            Employer National Insurance calculation — inputs used
+          </p>
+          <p>
+            Gross salary: {gbp.format(salaryNumber)}{" "}
+            {period === "annual" ? "per year" : "per month"} (
+            {gbp.format(annualSalary)} a year) · Employee category:{" "}
+            {category === "reduced"
+              ? "under 21, or apprentice under 25"
+              : "standard (21 or over)"}{" "}
+            · Employment Allowance claimed: {allowance ? "yes" : "no"} ·
+            Employer pension included: {pension ? "yes" : "no"}.
+          </p>
+        </div>
         <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
           {gbp.format(result.employerNiPerYear)}
           <span className="text-base font-medium text-slate-600">
@@ -243,6 +260,21 @@ export default function EmployerNiCalculator() {
           {gbp.format(EMPLOYER_NI.secondaryThresholdAnnual)}-a-year Secondary
           Threshold — {EMPLOYER_NI_RATES_LABEL}.
         </p>
+
+        <div className="print:hidden">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="mt-4 rounded-full border border-brand-700 bg-white px-5 py-2.5 text-sm font-semibold text-brand-800 shadow-sm transition hover:bg-brand-50"
+          >
+            Print / save this result
+          </button>
+          <p className="mt-2 text-xs text-slate-500">
+            Opens your browser&apos;s print view with a clean summary of
+            this calculation — choose &ldquo;Save as PDF&rdquo; there to
+            keep a copy.
+          </p>
+        </div>
       </div>
       <StickyResultBar
         label="Employer NI cost"

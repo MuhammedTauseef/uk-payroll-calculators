@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     template: `%s | ${AppConfig.name}`,
   },
   description: AppConfig.description,
+  verification: {
+    google: "OqzJ7p9A53jE79MV7_VOsJqKOAMiv0dQy4S957lDxpU",
+  },
   icons: {
     icon: [
       {

@@ -56,8 +56,8 @@ export default function NoticeCalculator() {
   const serviceRemainderMonths = result.serviceCompleteMonths % 12;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+      <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="who" className={labelClass}>
             Who is giving notice?
@@ -143,16 +143,34 @@ export default function NoticeCalculator() {
       </div>
 
       {datesInverted && (
-        <p className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+        <p className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900 print:hidden">
           The notice date is before the start date, so the length of service
           counts as zero. Check the two dates.
         </p>
       )}
 
-      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5">
+      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Your result
         </h2>
+
+        {/* Print-only recap of the inputs (the form itself is not printed). */}
+        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
+          <p className="font-semibold text-slate-900">
+            Notice period calculation — inputs used
+          </p>
+          <p>
+            Notice given by:{" "}
+            {who === "employer" ? "the employer" : "the employee"} ·
+            Employment start date: {formatDateGB(startDate)} · Date notice
+            is given: {formatDateGB(noticeDate)} · Notice period in the
+            contract:{" "}
+            {contractNumber === 0
+              ? "none entered"
+              : `${contractNumber} ${contractUnit}`}
+            .
+          </p>
+        </div>
         {result.lastWorkingDay ? (
           <>
             <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
@@ -225,6 +243,21 @@ export default function NoticeCalculator() {
           earliest last working day is the notice date plus the full notice
           period. Either side can agree a longer period than the minimum.
         </p>
+
+        <div className="print:hidden">
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="mt-4 rounded-full border border-brand-700 bg-white px-5 py-2.5 text-sm font-semibold text-brand-800 shadow-sm transition hover:bg-brand-50"
+          >
+            Print / save this result
+          </button>
+          <p className="mt-2 text-xs text-slate-500">
+            Opens your browser&apos;s print view with a clean summary of
+            this calculation — choose &ldquo;Save as PDF&rdquo; there to
+            keep a copy.
+          </p>
+        </div>
       </div>
       <StickyResultBar
         label="Earliest last working day"
