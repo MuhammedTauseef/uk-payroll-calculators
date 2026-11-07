@@ -30,6 +30,7 @@ export const AppConfig = {
     },
     { href: "/paternity-pay-calculator", label: "Paternity Pay" },
     { href: "/40k-after-tax-uk", label: "Take-Home Pay" },
+    { href: "/blog", label: "Blog" },
   ],
   guides: [
     {
@@ -47,6 +48,7 @@ export const AppConfig = {
   ],
   siteLinks: [
     { href: "/about", label: "About" },
+    { href: "/blog", label: "Blog" },
     { href: "/privacy-policy", label: "Privacy Policy" },
   ],
 };
