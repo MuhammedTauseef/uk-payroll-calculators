@@ -19,13 +19,19 @@ export const BaseTemplate = (props: {
   return (
     <div className="flex min-h-screen w-full flex-col text-slate-700 dark:text-slate-300 antialiased">
       <header className="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur dark:bg-slate-950/90">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 sm:gap-4">
-          <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-1.5 px-3 min-[432px]:gap-2 min-[432px]:px-4 sm:gap-4">
+          {/* Below 432px the logo link may shrink and the site name
+              wraps to two lines ("UK Payroll" / "Calculators"): the
+              fixed-width right cluster (toggle + CTA + hamburger,
+              181px) plus a single-line name cannot fit a 360–390px
+              phone otherwise. From 432px up the name is one line and
+              the link is shrink-0 again, exactly as before. */}
+          <Link href="/" className="flex min-w-0 items-center gap-2 min-[432px]:shrink-0 min-[432px]:gap-2.5">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-lg font-bold text-white shadow-sm">
               £
             </span>
             <span className="leading-tight">
-              <span className="block text-[15px] font-bold whitespace-nowrap text-slate-900 dark:text-slate-50 sm:text-base">
+              <span className="block text-[15px] font-bold text-slate-900 dark:text-slate-50 min-[432px]:whitespace-nowrap sm:text-base">
                 {AppConfig.name}
               </span>
               {/* Tagline yields at xl: the full desktop pill nav needs
