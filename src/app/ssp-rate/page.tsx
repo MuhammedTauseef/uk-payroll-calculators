@@ -26,7 +26,7 @@ const FAQS: GuideFaq[] = [
   {
     question: "What is the SSP rate per day?",
     answer:
-      "There is no single daily rate: it depends on the employee's working pattern. Divide the weekly SSP amount by the number of qualifying days in the week — a Monday-to-Friday worker at the full rate gets £24.65 a day, while a three-day-a-week worker at the full rate gets £41.08 a day, paid on fewer days.",
+      "There is no single daily rate: it depends on the employee's working pattern. Divide the weekly SSP amount by the number of qualifying days in the week — a Monday-to-Friday worker at the full rate gets £24.65 a day, while a three-day-a-week worker at the full rate gets £41.09 a day, paid on fewer days.",
   },
   {
     question: "Is the SSP rate before or after tax?",
@@ -59,11 +59,11 @@ export default function SspRatePage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           SSP Rate
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The SSP rate is {gbp.format(SSP.weeklyCap)} a week — but that
           figure is a maximum, not a guarantee. Under the April 2026 rules,
           the amount actually paid is the lower of{" "}
@@ -72,16 +72,16 @@ export default function SspRatePage() {
           about {gbp.format(154)} a week receives less than the headline
           rate.
         </p>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Rates: {RATES_RULES_LABEL}. Last verified: {RATES_LAST_VERIFIED}.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What is the SSP rate?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           There are effectively two rates, and the employee always gets the
           lower of them. The first is the flat statutory rate:{" "}
           {gbp.format(SSP.weeklyCap)} a week. The second is personal to the
@@ -93,7 +93,7 @@ export default function SspRatePage() {
           less and the percentage figure is the lower one, so that is what
           you receive.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Whichever figure applies, it is a weekly amount. It is then shared
           across the employee&apos;s qualifying days to produce the daily
           rate that payroll actually pays for each day of sickness.
@@ -101,10 +101,10 @@ export default function SspRatePage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Why might my SSP be less than £123.25 a week?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The most common reason is the {SSP.aweFraction * 100}% rule. An
           employee earning {gbp.format(100)} a week receives{" "}
           {gbp.format(80)}; one earning {gbp.format(140)} receives{" "}
@@ -116,7 +116,7 @@ export default function SspRatePage() {
           absent, not a full week. Our guide to{" "}
           <Link
             href="/how-much-is-ssp-per-week"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             SSP per week
           </Link>{" "}
@@ -125,22 +125,22 @@ export default function SspRatePage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What is the daily SSP rate?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Divide the weekly amount by the qualifying days in the
           employee&apos;s normal week. At the full flat rate, a
           Monday-to-Friday worker receives {gbp.format(24.65)} a day (
           {gbp.format(SSP.weeklyCap)} ÷ 5), while a three-day-a-week worker
-          receives {gbp.format(41.08)} a day ({gbp.format(SSP.weeklyCap)} ÷
+          receives {gbp.format(41.09)} a day ({gbp.format(SSP.weeklyCap)} ÷
           3) — a higher daily rate, but paid on fewer days, so a full week
           of sickness still comes to the same {gbp.format(SSP.weeklyCap)}.
           If the {SSP.aweFraction * 100}%-of-earnings figure is the weekly
           amount, divide that figure by the qualifying days instead. The{" "}
           <Link
             href="/how-is-ssp-calculated"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             step-by-step calculation guide
           </Link>{" "}
@@ -149,10 +149,10 @@ export default function SspRatePage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Has the SSP rate changed under the April 2026 rules?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The headline figure is only half of the April 2026 story — the
           structure around the rate changed as well. SSP is now paid from
           the first full day of sickness, with no unpaid waiting days at the
@@ -166,10 +166,10 @@ export default function SspRatePage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           When does the SSP rate change?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Statutory payment rates are normally reviewed once a year, with
           any new figures taking effect each April. Between reviews the rate
           stays fixed, so the figure on this page holds until the next

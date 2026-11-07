@@ -39,7 +39,7 @@ export default function MobileNav() {
         aria-controls="mobile-nav-panel"
         aria-label={open ? "Close navigation menu" : "Open navigation menu"}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-11 w-11 items-center justify-center rounded-full text-slate-700 transition hover:bg-slate-100"
+        className="flex h-11 w-11 items-center justify-center rounded-full text-slate-700 dark:text-slate-300 transition hover:bg-slate-100 dark:hover:bg-slate-800"
       >
         {open ? (
           <svg
@@ -72,7 +72,7 @@ export default function MobileNav() {
         <nav
           id="mobile-nav-panel"
           aria-label="Main navigation"
-          className="fixed inset-x-0 top-16 z-30 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-slate-200 bg-white shadow-lg"
+          className="fixed inset-x-0 top-16 z-30 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg"
         >
           <ul className="mx-auto w-full max-w-6xl px-4 py-2">
             {AppConfig.nav.map((item) => {
@@ -85,8 +85,8 @@ export default function MobileNav() {
                     onClick={() => setOpen(false)}
                     className={
                       active
-                        ? "flex min-h-11 items-center rounded-lg bg-brand-50 px-3 py-3 text-base font-semibold text-brand-800"
-                        : "flex min-h-11 items-center rounded-lg px-3 py-3 text-base font-medium text-slate-700 transition hover:bg-slate-100"
+                        ? "flex min-h-11 items-center rounded-lg bg-brand-50 dark:bg-brand-900/30 px-3 py-3 text-base font-semibold text-brand-800 dark:text-brand-300"
+                        : "flex min-h-11 items-center rounded-lg px-3 py-3 text-base font-medium text-slate-700 dark:text-slate-300 transition hover:bg-slate-100 dark:hover:bg-slate-800"
                     }
                   >
                     {item.label}

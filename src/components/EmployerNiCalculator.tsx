@@ -23,8 +23,8 @@ function parseAmount(value: string): number {
 }
 
 const inputClass =
-  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
-const labelClass = "block text-sm font-medium text-slate-700";
+  "w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
+const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300";
 
 type SalaryPeriod = "annual" | "monthly";
 
@@ -53,7 +53,7 @@ export default function EmployerNiCalculator() {
   const pensionPercent = PENSION.employerMinimumRate * 100;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
+    <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="salary" className={labelClass}>
@@ -81,7 +81,7 @@ export default function EmployerNiCalculator() {
               <option value="monthly">per month</option>
             </select>
           </div>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Gross pay before tax and National Insurance.
             {period === "monthly"
               ? ` That is ${gbp.format(annualSalary)} a year.`
@@ -106,7 +106,7 @@ export default function EmployerNiCalculator() {
               Under 21, or apprentice under 25
             </option>
           </select>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Under-21s and younger apprentices attract a 0% employer rate up
             to {gbp.format(EMPLOYER_NI.youngWorkerUpperThresholdAnnual)} a
             year.
@@ -114,12 +114,12 @@ export default function EmployerNiCalculator() {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="flex min-h-11 items-start gap-2.5 text-sm font-medium text-slate-700">
+          <label className="flex min-h-11 items-start gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-300">
             <input
               type="checkbox"
               checked={allowance}
               onChange={(e) => setAllowance(e.target.checked)}
-              className="mt-0.5 h-5 w-5 rounded border-slate-300 accent-brand-700"
+              className="mt-0.5 h-5 w-5 rounded border-slate-300 dark:border-slate-700 accent-brand-700"
             />
             <span>
               We claim the Employment Allowance (
@@ -127,7 +127,7 @@ export default function EmployerNiCalculator() {
               employer NIC bill)
             </span>
           </label>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             The allowance comes off the employer&apos;s total NIC bill for
             the year, so for a single employee it covers their NICs until
             the {gbp.format(EMPLOYMENT_ALLOWANCE.annualAmount)} is used up.
@@ -137,19 +137,19 @@ export default function EmployerNiCalculator() {
         </div>
 
         <div className="sm:col-span-2">
-          <label className="flex min-h-11 items-start gap-2.5 text-sm font-medium text-slate-700">
+          <label className="flex min-h-11 items-start gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-300">
             <input
               type="checkbox"
               checked={pension}
               onChange={(e) => setPension(e.target.checked)}
-              className="mt-0.5 h-5 w-5 rounded border-slate-300 accent-brand-700"
+              className="mt-0.5 h-5 w-5 rounded border-slate-300 dark:border-slate-700 accent-brand-700"
             />
             <span>
               Include employer pension contributions (auto-enrolment
               minimum: {pensionPercent}% of qualifying earnings)
             </span>
           </label>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Qualifying earnings are the slice of the salary between{" "}
             {gbp.format(PENSION.qualifyingEarningsLowerAnnual)} and{" "}
             {gbp.format(PENSION.qualifyingEarningsUpperAnnual)} a year.
@@ -159,14 +159,14 @@ export default function EmployerNiCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Employer National Insurance cost
         </h2>
 
         {/* Print-only recap of the inputs (the form itself is not printed). */}
-        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
-          <p className="font-semibold text-slate-900">
+        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 dark:text-slate-300 print:block">
+          <p className="font-semibold text-slate-900 dark:text-slate-50">
             Employer National Insurance calculation — inputs used
           </p>
           <p>
@@ -180,18 +180,18 @@ export default function EmployerNiCalculator() {
             Employer pension included: {pension ? "yes" : "no"}.
           </p>
         </div>
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
+        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {gbp.format(result.employerNiPerYear)}
-          <span className="text-base font-medium text-slate-600">
+          <span className="text-base font-medium text-slate-600 dark:text-slate-300">
             {" "}
             per year
           </span>
         </p>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-slate-600 dark:text-slate-300">
           {gbp.format(result.employerNiPerMonth)} per month
         </p>
 
-        <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700">
+        <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
           <div>
             <dt className="inline font-medium">Earnings above the threshold: </dt>
             <dd className="inline">
@@ -255,7 +255,7 @@ export default function EmployerNiCalculator() {
           </div>
         </dl>
 
-        <p className="mt-3 text-sm text-slate-600">
+        <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
           Rates used: employer Class 1 rate {ratePercent}% above the{" "}
           {gbp.format(EMPLOYER_NI.secondaryThresholdAnnual)}-a-year Secondary
           Threshold — {EMPLOYER_NI_RATES_LABEL}.
@@ -265,11 +265,11 @@ export default function EmployerNiCalculator() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="mt-4 rounded-full border border-brand-700 bg-white px-5 py-2.5 text-sm font-semibold text-brand-800 shadow-sm transition hover:bg-brand-50"
+            className="mt-4 rounded-full border border-brand-700 bg-white dark:bg-slate-900 px-5 py-2.5 text-sm font-semibold text-brand-800 dark:text-brand-300 shadow-sm transition hover:bg-brand-50 dark:hover:bg-brand-900/40"
           >
             Print / save this result
           </button>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
             Opens your browser&apos;s print view with a clean summary of
             this calculation — choose &ldquo;Save as PDF&rdquo; there to
             keep a copy.

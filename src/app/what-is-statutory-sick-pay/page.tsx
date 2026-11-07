@@ -59,11 +59,11 @@ export default function WhatIsStatutorySickPayPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           What is Statutory Sick Pay?
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Statutory Sick Pay (SSP) is the legal minimum an employer must pay
           an employee who is off work sick. Under the April 2026 rules, it is
           the lower of {gbp.format(SSP.weeklyCap)} a week or{" "}
@@ -74,10 +74,10 @@ export default function WhatIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Who pays Statutory Sick Pay — the employer or the government?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The employer pays it. SSP is not a benefit claimed from the state:
           it is a legal obligation that sits with whoever employs the person
           who is sick. The employer works out the amount, pays it through
@@ -85,13 +85,13 @@ export default function WhatIsStatutorySickPayPage() {
           National Insurance in the normal way. The government&apos;s role
           is to set the rate and the rules that every employer must follow.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The full cost sits with the employer too. Unlike some statutory
           payments, SSP cannot be reclaimed from HMRC, so the amount worked
           out on this page — and in the{" "}
           <Link
             href="/ssp-calculator"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             SSP calculator
           </Link>{" "}
@@ -101,10 +101,10 @@ export default function WhatIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Who qualifies for SSP?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP covers people who work for an employer as an employee —
           full-time, part-time, fixed-term and agency workers can all
           qualify. The basic conditions are that the person is employed, is
@@ -113,7 +113,7 @@ export default function WhatIsStatutorySickPayPage() {
           employer they are sick, following the employer&apos;s normal
           reporting rules.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           One older barrier has gone: there is no longer a lower earnings
           limit for SSP. Under the April 2026 rules, an employee does not
           have to earn a minimum amount each week before SSP can be paid —
@@ -124,10 +124,10 @@ export default function WhatIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much is SSP, and how long does it last?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The weekly amount is the lower of two figures: the flat rate of{" "}
           {gbp.format(SSP.weeklyCap)}, or {SSP.aweFraction * 100}% of the
           employee&apos;s average weekly earnings. That weekly amount is
@@ -136,13 +136,13 @@ export default function WhatIsStatutorySickPayPage() {
           absence. Our guide to{" "}
           <Link
             href="/how-is-ssp-calculated"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             how SSP is calculated
           </Link>{" "}
           walks through each step.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP can be paid for up to {SSP.maxWeeks} weeks in one period of
           sickness. If an employee returns to work and is off sick again
           within eight weeks, the spells are linked and count as one period
@@ -150,7 +150,7 @@ export default function WhatIsStatutorySickPayPage() {
           amounts at different pay levels, see{" "}
           <Link
             href="/how-much-is-statutory-sick-pay"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             how much SSP is
           </Link>
@@ -159,10 +159,10 @@ export default function WhatIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What does SSP look like in practice?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Take an employee whose average weekly earnings are{" "}
           {gbp.format(400)}, who normally works Monday to Friday — five
           qualifying days. First, the weekly amount: {SSP.aweFraction * 100}
@@ -178,10 +178,10 @@ export default function WhatIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Is SSP the same as company sick pay?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           No. Company (or occupational) sick pay is whatever extra scheme an
           employer chooses to offer in the employment contract — it might
           pay full salary for a set number of weeks, for example. SSP is the

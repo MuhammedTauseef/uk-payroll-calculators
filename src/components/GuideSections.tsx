@@ -72,19 +72,19 @@ export function faqJsonLd(faqs: GuideFaq[]) {
 export function FaqSection({ faqs }: { faqs: GuideFaq[] }) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold text-slate-900">
+      <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
         Frequently asked questions
       </h2>
       <div className="space-y-4">
         {faqs.map((f) => (
           <div
             key={f.question}
-            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm"
           >
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               {f.question}
             </h3>
-            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
               {f.answer}
             </p>
           </div>
@@ -98,20 +98,20 @@ export function FaqSection({ faqs }: { faqs: GuideFaq[] }) {
 export function SspRatesTable() {
   return (
     <section className="space-y-3">
-      <h2 className="text-xl font-semibold text-slate-900">
+      <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
         SSP rates at a glance
       </h2>
-      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="px-4 py-2 font-semibold text-slate-700">Rule</th>
-              <th className="px-4 py-2 font-semibold text-slate-700">
+            <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+              <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">Rule</th>
+              <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                 Amount
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             <tr>
               <td className="px-4 py-2">SSP flat weekly rate (the maximum)</td>
               <td className="px-4 py-2">{gbp.format(SSP.weeklyCap)} per week</td>
@@ -144,7 +144,7 @@ export function SspRatesTable() {
           </tbody>
         </table>
       </div>
-      <p className="text-sm text-slate-500">
+      <p className="text-sm text-slate-500 dark:text-slate-400">
         Rates: {RATES_RULES_LABEL}. Last verified: {RATES_LAST_VERIFIED}.
       </p>
     </section>
@@ -154,11 +154,11 @@ export function SspRatesTable() {
 /** Call-to-action card sending guide readers to the SSP calculator. */
 export function CalculatorCta() {
   return (
-    <section className="rounded-2xl border border-brand-200 bg-brand-50 p-6">
-      <h2 className="text-xl font-semibold text-brand-900">
+    <section className="rounded-2xl border border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-900/30 p-6">
+      <h2 className="text-xl font-semibold text-brand-900 dark:text-brand-100">
         Work out your own SSP
       </h2>
-      <p className="mt-1 max-w-2xl text-base leading-relaxed text-brand-900/80">
+      <p className="mt-1 max-w-2xl text-base leading-relaxed text-brand-900/80 dark:text-brand-200">
         Enter the employee&apos;s average weekly earnings and the days they
         normally work, and the free SSP calculator shows the weekly rate,
         the daily rate and the total payable — with the working shown.
@@ -178,21 +178,21 @@ export function SiblingGuides({ currentHref }: { currentHref: string }) {
   const others = SSP_GUIDES.filter((g) => g.href !== currentHref);
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold text-slate-900">More SSP guides</h2>
+      <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">More SSP guides</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {others.map((g) => (
           <Link
             key={g.href}
             href={g.href}
-            className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               {g.title}
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               {g.description}
             </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Read the guide →
             </span>
           </Link>

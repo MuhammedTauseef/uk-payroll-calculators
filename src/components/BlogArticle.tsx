@@ -11,7 +11,7 @@ import { parseBlogBody } from "@/lib/blog/markup";
 // rel="noopener noreferrer". Styling matches the guide pages
 // (slate text, brand links).
 
-const LINK_CLASS = "font-medium text-brand-800 underline";
+const LINK_CLASS = "font-medium text-brand-800 dark:text-brand-300 underline";
 
 function Segments({ segments }: { segments: BlogTextSegment[] }) {
   return (
@@ -44,14 +44,14 @@ function Segments({ segments }: { segments: BlogTextSegment[] }) {
 function Block({ block }: { block: BlogBodyBlock }) {
   if (block.kind === "heading") {
     return (
-      <h2 className="mt-10 text-xl font-semibold text-slate-900">
+      <h2 className="mt-10 text-xl font-semibold text-slate-900 dark:text-slate-50">
         <Segments segments={block.segments} />
       </h2>
     );
   }
   if (block.kind === "list") {
     return (
-      <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed break-words text-slate-700">
+      <ul className="mt-4 list-disc space-y-2 pl-6 text-base leading-relaxed break-words text-slate-700 dark:text-slate-300">
         {block.items.map((item, index) => (
           <li key={index}>
             <Segments segments={item} />
@@ -61,7 +61,7 @@ function Block({ block }: { block: BlogBodyBlock }) {
     );
   }
   return (
-    <p className="mt-4 text-base leading-relaxed break-words text-slate-700">
+    <p className="mt-4 text-base leading-relaxed break-words text-slate-700 dark:text-slate-300">
       <Segments segments={block.segments} />
     </p>
   );
