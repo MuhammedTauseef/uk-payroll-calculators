@@ -1,13 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SSP_GUIDES } from "@/components/GuideSections";
 import { pageMetadata } from "@/utils/metadata";
 import { AppConfig } from "@/utils/AppConfig";
+import { formatDateGB } from "@/lib/blog/format";
+import { listPublishedBlogPosts } from "@/lib/blog/queries";
 
 export const metadata = pageMetadata(
   "/",
   "UK Payroll Calculators — UK employer & payroll calculators",
   AppConfig.description,
 );
+
+// Dynamic on purpose (same as /blog): the "Latest from the blog"
+// section below reads published posts at request time, so a post
+// published from the admin panel appears on the front page straight
+// away — a static prerender would freeze the list at build time.
+export const dynamic = "force-dynamic";
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -200,7 +209,11 @@ const STEPS = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const latestPosts = await listPublishedBlogPosts()
+    .then((posts) => posts.slice(0, 3))
+    .catch(() => []);
+
   return (
     <div className="space-y-16">
       <script
@@ -332,6 +345,62 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {latestPosts.length > 0 && (
+        <section className="scroll-mt-32">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+            Latest from the blog
+          </h2>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+            {latestPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+              >
+                {post.cover_image_url && (
+                  <Image
+                    src={post.cover_image_url}
+                    alt={post.title}
+                    width={1280}
+                    height={720}
+                    className="aspect-video w-full object-cover"
+                  />
+                )}
+                <div className="p-6">
+                  {!post.cover_image_url && (
+                    <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm">
+                      <GuideIcon />
+                    </span>
+                  )}
+                  {post.published_at && (
+                    <p className="text-sm font-medium text-slate-500">
+                      {formatDateGB(post.published_at)}
+                    </p>
+                  )}
+                  <h3 className="mt-1 text-lg font-semibold text-slate-900">
+                    {post.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                    {post.description}
+                  </p>
+                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+                    Read the guide →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-6">
+            <Link
+              href="/blog"
+              className="text-sm font-semibold text-brand-700 hover:text-brand-800"
+            >
+              View all articles →
+            </Link>
+          </p>
+        </section>
+      )}
 
       <section>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900">
