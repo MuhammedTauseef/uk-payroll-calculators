@@ -53,6 +53,20 @@ function round2(n: number): number {
   return Math.round((n + Number.EPSILON) * 100) / 100;
 }
 
+/**
+ * Round UP to the next penny. GOV.UK's official SSP "amounts to pay"
+ * tables round the daily rate and the payable total up, not to the
+ * nearest penny (accuracy audit F2, 7 Nov 2026: 7 of the 28 flat-rate
+ * day combinations sat exactly 1p low under round-to-nearest). The
+ * total is the ceiling of the EXACT daily rate × days — not the
+ * ceilinged daily rate × days — so a full week still totals exactly
+ * the weekly rate. The epsilon keeps values that are already exact
+ * pennies (within float error) from jumping a penny.
+ */
+function ceil2(n: number): number {
+  return Math.ceil((n - 1e-9) * 100) / 100;
+}
+
 function wholeDays(n: number | undefined): number {
   if (!n || Number.isNaN(n)) return 0;
   return Math.max(0, Math.floor(n));
@@ -85,12 +99,12 @@ export function calculateSsp(input: SspInput): SspResult {
   return {
     weeklyRate: round2(weeklyRateExact),
     rateBasis,
-    dailyRate: round2(dailyRateExact),
+    dailyRate: ceil2(dailyRateExact),
     maxPayableDays,
     linkedDaysPaid: linked,
     daysPayable,
     daysNotPayable,
     cappedByLinkedPeriod: daysNotPayable > 0,
-    totalPayable: round2(dailyRateExact * daysPayable),
+    totalPayable: ceil2(dailyRateExact * daysPayable),
   };
 }

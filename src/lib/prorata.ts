@@ -51,7 +51,7 @@ export interface ProRataResult {
   weeklySalary: number;
   /** Days per week the holiday figure is based on. */
   holidayBasisDaysPerWeek: number;
-  /** Statutory holiday entitlement in days: 5.6 × days per week. */
+  /** Statutory holiday entitlement in days: 5.6 × days per week, capped at 28. */
   holidayDaysPerYear: number;
 }
 
@@ -107,6 +107,12 @@ export function calculateProRata(input: ProRataInput): ProRataResult {
     monthlySalary: round2(annualExact / 12),
     weeklySalary: round2(annualExact / 52),
     holidayBasisDaysPerWeek: round2(holidayBasisDays),
-    holidayDaysPerYear: round1(STATUTORY_HOLIDAY_WEEKS * holidayBasisDays),
+    // Statutory holiday is 5.6 weeks of the worker's own pattern, but
+    // the entitlement is capped at 28 days a year (Working Time
+    // Regulations): a 6- or 7-day pattern earns 28 days, not 33.6 or
+    // 39.2 (accuracy audit F3, 7 Nov 2026).
+    holidayDaysPerYear: round1(
+      Math.min(28, STATUTORY_HOLIDAY_WEEKS * holidayBasisDays),
+    ),
   };
 }
