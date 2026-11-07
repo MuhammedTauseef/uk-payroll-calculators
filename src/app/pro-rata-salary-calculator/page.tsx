@@ -7,7 +7,7 @@ import { RATES_RULES_LABEL } from "@/lib/rates";
 export const metadata = pageMetadata(
   "/pro-rata-salary-calculator",
   "Pro Rata Salary Calculator — Part-Time Pay & FTE",
-  "Free pro rata salary calculator. Work out part-time pay from the full-time salary by hours or days per week: pro-rata annual, monthly and weekly pay, the FTE fraction, and pro-rata holiday entitlement in days.",
+  "Free pro rata salary calculator: part-time pay from the full-time salary by hours or days per week, the FTE fraction, and pro-rata holiday entitlement.",
 );
 
 const FAQS: { question: string; answer: string }[] = [

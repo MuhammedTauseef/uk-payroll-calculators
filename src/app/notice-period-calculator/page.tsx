@@ -6,7 +6,7 @@ import { MAX_EMPLOYER_STATUTORY_WEEKS } from "@/lib/notice";
 export const metadata = pageMetadata(
   "/notice-period-calculator",
   "Notice Period Calculator UK — Statutory Minimum Notice",
-  "Free UK notice period calculator. Work out the statutory minimum notice an employer or employee must give under the Employment Rights Act 1996, compare it with the contract, and find the earliest last working day.",
+  "Free UK notice period calculator: the statutory minimum notice an employer or employee must give under the Employment Rights Act 1996, and the last working day.",
 );
 
 const FAQS: { question: string; answer: string }[] = [

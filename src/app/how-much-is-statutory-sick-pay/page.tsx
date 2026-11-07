@@ -141,11 +141,11 @@ export default function HowMuchIsStatutorySickPayPage() {
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700">
           For a full Monday-to-Friday week off, a higher earner on{" "}
-          {gbp.format(600)} a week receives {gbp.format(123.25)}:{" "}
+          {gbp.format(600)} a week receives {gbp.format(SSP.weeklyCap)}:{" "}
           {SSP.aweFraction * 100}% of {gbp.format(600)} is{" "}
           {gbp.format(480)}, so the lower figure is the flat rate, and five
           days at the daily rate of {gbp.format(24.65)} comes back to{" "}
-          {gbp.format(123.25)}. A lower earner on {gbp.format(120)} a week
+          {gbp.format(SSP.weeklyCap)}. A lower earner on {gbp.format(120)} a week
           working four qualifying days receives less:{" "}
           {SSP.aweFraction * 100}% of {gbp.format(120)} is{" "}
           {gbp.format(96)} a week, a daily rate of {gbp.format(24)}, so

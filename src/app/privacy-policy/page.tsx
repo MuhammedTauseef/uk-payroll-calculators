@@ -3,7 +3,7 @@ import { pageMetadata } from "@/utils/metadata";
 export const metadata = pageMetadata(
   "/privacy-policy",
   "Privacy Policy",
-  "The privacy position of UK Payroll Calculators in plain English: the calculators run in your browser, there are no accounts, and the site does not collect or store the numbers you enter.",
+  "UK Payroll Calculators' privacy position in plain English: calculators run in your browser, there are no accounts, and your numbers are never collected or stored.",
 );
 
 export default function PrivacyPolicyPage() {

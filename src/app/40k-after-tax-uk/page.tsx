@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = pageMetadata(
   "/40k-after-tax-uk",
   "£40k After Tax UK — Take-Home Pay on a £40,000 Salary",
-  "On a £40,000 salary in 2026/27 you take home £32,319.60 a year (£2,693.30 a month) after Income Tax and National Insurance. See the full breakdown — and check any other salary with the calculator.",
+  "On a £40,000 salary in 2026/27 you take home £32,319.60 a year (£2,693.30 a month) after tax and National Insurance. Check any salary with the calculator.",
 );
 
 const gbp = new Intl.NumberFormat("en-GB", {
@@ -142,7 +142,9 @@ export default function FortyKAfterTaxPage() {
         </div>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700">
           Nothing on a £40,000 salary reaches the 40% higher-rate band,
-          which starts at {gbp.format(50270)} of income with a full
+          which starts at{" "}
+          {gbp.format(INCOME_TAX.personalAllowance + INCOME_TAX.basicRateBand)}{" "}
+          of income with a full
           Personal Allowance — that is why every taxable pound is charged
           at 20% and every National Insurance pound at 8%.
         </p>

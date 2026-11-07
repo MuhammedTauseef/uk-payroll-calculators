@@ -11,7 +11,7 @@ import {
 export const metadata = pageMetadata(
   "/employer-national-insurance-calculator",
   "Employer National Insurance Calculator — Employers NIC Cost",
-  "Free employers National Insurance calculator. Work out employer Class 1 NICs on a salary at 15% above the £5,000 Secondary Threshold, with the Employment Allowance, and see the total cost of employing someone.",
+  "Free employer National Insurance calculator: employer Class 1 NICs at 15% above the £5,000 Secondary Threshold, with the Employment Allowance and total cost.",
 );
 
 const FAQS: { question: string; answer: string }[] = [

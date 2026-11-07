@@ -6,7 +6,7 @@ import { PAYE_RATES_LABEL, RATES_LAST_VERIFIED } from "@/lib/rates";
 export const metadata: Metadata = pageMetadata(
   "/best-hr-software-for-small-business-uk",
   "Best HR Software for Small Business UK — Compared",
-  "The best HR software for UK small businesses compared honestly: Breathe HR, PeopleHR, Sage HR, Ciphr and Xero Payroll — who each one suits, what it costs, and how to choose without overbuying.",
+  "Breathe HR, PeopleHR, Sage HR, Ciphr and Xero Payroll compared for UK small businesses — who each one suits, what it costs, and how to choose.",
 );
 
 interface Product {

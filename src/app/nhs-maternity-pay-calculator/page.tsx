@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = pageMetadata(
   "/nhs-maternity-pay-calculator",
   "NHS Maternity Pay Calculator — Agenda for Change & SMP",
-  "Work out maternity pay for NHS staff under Agenda for Change — 8 weeks at full pay, 18 weeks at half pay plus SMP, then 13 weeks of SMP — or Statutory Maternity Pay only, at the 2026/27 rate of £194.32 a week.",
+  "NHS maternity pay calculator: 8 weeks at full pay, 18 weeks at half pay plus SMP, then 13 weeks of SMP — or SMP only at the 2026/27 rate of £194.32 a week.",
 );
 
 const gbp = new Intl.NumberFormat("en-GB", {

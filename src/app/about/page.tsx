@@ -4,7 +4,7 @@ import { RATES_LAST_VERIFIED } from "@/lib/rates";
 export const metadata = pageMetadata(
   "/about",
   "About UK Payroll Calculators",
-  "What UK Payroll Calculators is, who it is for, and how its figures are produced: free UK statutory pay calculators and plain-English guides, built on official GOV.UK rates.",
+  "What UK Payroll Calculators is and how its figures are produced: free UK statutory pay calculators and plain-English guides, built on official GOV.UK rates.",
 );
 
 export default function AboutPage() {
