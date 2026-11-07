@@ -120,7 +120,7 @@ function CheckIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       viewBox="0 0 24 24"
-      className="h-4 w-4 text-brand-700"
+      className="h-4 w-4 text-brand-700 dark:text-brand-300"
       aria-hidden
     >
       <path d="M5 13l4 4L19 7" />
@@ -221,14 +221,14 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       <section className="space-y-6 pt-4 text-center sm:pt-8">
-        <p className="inline-block rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-800 uppercase">
+        <p className="inline-block rounded-full border border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-900/30 px-3 py-1 text-xs font-semibold tracking-wide text-brand-800 dark:text-brand-300 uppercase">
           Built on the April 2026 rules
         </p>
-        <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        <h1 className="mx-auto max-w-3xl text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-5xl">
           UK payroll,{" "}
-          <span className="text-brand-700">worked out properly.</span>
+          <span className="text-brand-700 dark:text-brand-300">worked out properly.</span>
         </h1>
-        <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+        <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
           Free calculators for UK statutory payments, built on the April 2026
           rules. Each calculator shows its working from your own numbers —
           weekly rates, daily rates and totals — so you can see exactly how a
@@ -243,12 +243,12 @@ export default async function HomePage() {
           </Link>
           <Link
             href="#calculators"
-            className="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-brand-300 hover:text-brand-800"
+            className="rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition hover:border-brand-300 dark:hover:border-brand-700 hover:text-brand-800 dark:hover:text-brand-300"
           >
             Browse all calculators
           </Link>
         </div>
-        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-4 text-sm font-medium text-slate-600">
+        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-4 text-sm font-medium text-slate-600 dark:text-slate-300">
           {TRUST_POINTS.map((point) => (
             <li key={point} className="flex items-center gap-1.5">
               <CheckIcon />
@@ -259,96 +259,121 @@ export default async function HomePage() {
       </section>
 
       <section id="calculators" className="scroll-mt-32">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
           The calculators
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {CALCULATORS.map((calc) => (
-            <Link
-              key={calc.href}
-              href={calc.href}
-              className="group block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
-            >
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm">
-                {calc.icon}
-              </span>
-              <h3 className="text-lg font-semibold text-slate-900">
-                {calc.title}
-              </h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">
-                {calc.description}
-              </p>
-              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
-                {calc.linkText}
-              </span>
-            </Link>
-          ))}
+          {CALCULATORS.map((calc, i) => {
+            // Odd card out (7 calculators): the last card spans the
+            // full row as a wide feature card instead of leaving a
+            // half-empty slot beside it.
+            const wide = i === CALCULATORS.length - 1 && CALCULATORS.length % 2 === 1;
+            return (
+              <Link
+                key={calc.href}
+                href={calc.href}
+                className={`group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md ${wide ? "sm:col-span-2 sm:flex sm:items-start sm:gap-5" : ""}`}
+              >
+                <span
+                  className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm ${wide ? "sm:mb-0" : ""}`}
+                >
+                  {calc.icon}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                    {calc.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    {calc.description}
+                  </p>
+                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                    {calc.linkText}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
       <section id="guides" className="scroll-mt-32">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
           SSP guides
         </h2>
-        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600">
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           Straight answers to the sick-pay questions employers and employees
           actually ask — what SSP is, how much it pays, the current rate,
           and how the calculation works.
         </p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {SSP_GUIDES.map((guide) => (
-            <Link
-              key={guide.href}
-              href={guide.href}
-              className="group block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
-            >
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm">
-                <GuideIcon />
-              </span>
-              <h3 className="text-lg font-semibold text-slate-900">
-                {guide.title}
-              </h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">
-                {guide.description}
-              </p>
-              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
-                Read the guide →
-              </span>
-            </Link>
-          ))}
+          {SSP_GUIDES.map((guide, i) => {
+            // Odd card out (5 guides): the last card spans the full
+            // row as a wide feature card, same treatment as the
+            // calculators grid above.
+            const wide = i === SSP_GUIDES.length - 1 && SSP_GUIDES.length % 2 === 1;
+            return (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className={`group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md ${wide ? "sm:col-span-2 sm:flex sm:items-start sm:gap-5" : ""}`}
+              >
+                <span
+                  className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm ${wide ? "sm:mb-0" : ""}`}
+                >
+                  <GuideIcon />
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                    {guide.title}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    {guide.description}
+                  </p>
+                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                    Read the guide →
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
       <section className="scroll-mt-32">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
           More guides
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {/* Single guide in a 2-column grid: the card spans the
+              full row as a wide feature card (icon left, text right
+              from sm up) so the section never looks half-empty. */}
           <Link
             href="/best-hr-software-for-small-business-uk"
-            className="group block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md sm:col-span-2 sm:flex sm:items-start sm:gap-5"
           >
-            <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm">
+            <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm sm:mb-0">
               <GuideIcon />
             </span>
-            <h3 className="text-lg font-semibold text-slate-900">
-              Best HR Software for Small Business UK
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
-              Breathe HR, PeopleHR, Sage HR, Ciphr and Xero Payroll
-              compared: who each one suits, what it costs, and how to
-              choose without overbuying.
-            </p>
-            <span className="mt-3 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
-              Read the guide →
-            </span>
+            <div className="min-w-0">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                Best HR Software for Small Business UK
+              </h3>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                Breathe HR, PeopleHR, Sage HR, Ciphr and Xero Payroll
+                compared: who each one suits, what it costs, and how to
+                choose without overbuying.
+              </p>
+              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                Read the guide →
+              </span>
+            </div>
           </Link>
         </div>
       </section>
 
       {latestPosts.length > 0 && (
         <section className="scroll-mt-32">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
             Latest from the blog
           </h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
@@ -356,7 +381,7 @@ export default async function HomePage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+                className="group block overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
               >
                 {post.cover_image_url && (
                   <Image
@@ -374,17 +399,17 @@ export default async function HomePage() {
                     </span>
                   )}
                   {post.published_at && (
-                    <p className="text-sm font-medium text-slate-500">
+                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                       {formatDateGB(post.published_at)}
                     </p>
                   )}
-                  <h3 className="mt-1 text-lg font-semibold text-slate-900">
+                  <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-50">
                     {post.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                     {post.description}
                   </p>
-                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
                     Read the guide →
                   </span>
                 </div>
@@ -394,7 +419,7 @@ export default async function HomePage() {
           <p className="mt-6">
             <Link
               href="/blog"
-              className="text-sm font-semibold text-brand-700 hover:text-brand-800"
+              className="text-sm font-semibold text-brand-700 dark:text-brand-300 hover:text-brand-800 dark:hover:text-brand-300"
             >
               View all articles →
             </Link>
@@ -403,22 +428,22 @@ export default async function HomePage() {
       )}
 
       <section>
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
           How it works
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-3">
           {STEPS.map((step, i) => (
             <div
               key={step.title}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-50 text-sm font-bold text-brand-800">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-50 dark:bg-brand-900/30 text-sm font-bold text-brand-800 dark:text-brand-300">
                 {i + 1}
               </span>
-              <h3 className="mt-3 text-base font-semibold text-slate-900">
+              <h3 className="mt-3 text-base font-semibold text-slate-900 dark:text-slate-50">
                 {step.title}
               </h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 {step.text}
               </p>
             </div>

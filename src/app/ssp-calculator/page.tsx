@@ -70,11 +70,11 @@ export default function SspCalculatorPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           SSP Calculator
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Use this SSP calculator to work out Statutory Sick Pay under the
           April 2026 rules. Enter the employee&apos;s average weekly earnings
           and the qualifying days they normally work, and the calculator shows
@@ -85,16 +85,16 @@ export default function SspCalculatorPage() {
 
       <SspCalculator />
 
-      <section className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-900">
+      <section className="space-y-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What to do next
         </h2>
         <div className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               Fit notes and self-certification
             </h3>
-            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
               For the first 7 days of sickness, an employee can self-certify
               — they simply tell the employer they are too sick to work, and
               no evidence is needed. For sickness lasting longer than 7 days
@@ -104,10 +104,10 @@ export default function SspCalculatorPage() {
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               The SSP1 form
             </h3>
-            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
               When an employee&apos;s SSP is coming to an end — or they do
               not qualify for SSP at all — the employer must give them form
               SSP1. The employee uses the SSP1 to claim other support, such
@@ -117,10 +117,10 @@ export default function SspCalculatorPage() {
             </p>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               Keep SSP records
             </h3>
-            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+            <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
               Keep a record of every sickness spell — the dates, the
               qualifying days paid and the SSP amounts — with your payroll
               records, and hold them for at least three years. HMRC can ask
@@ -132,10 +132,10 @@ export default function SspCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How is Statutory Sick Pay calculated?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The weekly amount is the lower of two figures: the flat statutory
           rate of {gbp.format(SSP.weeklyCap)} a week, or{" "}
           {SSP.aweFraction * 100}% of the employee&apos;s average weekly
@@ -148,10 +148,10 @@ export default function SspCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           When does SSP start, and how long can it be paid for?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP starts on the first full day of sickness and can be paid for up
           to {SSP.maxWeeks} weeks in one period of incapacity for work. If an
           employee returns to work and goes off sick again within eight weeks,
@@ -163,10 +163,10 @@ export default function SspCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What are qualifying days?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Qualifying days are the days of the week the employee normally
           works — for a standard Monday-to-Friday pattern, that is five
           qualifying days. SSP is only ever paid for qualifying days: a
@@ -177,13 +177,13 @@ export default function SspCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Can employers reclaim SSP from HMRC?
         </h2>
-        <p className="max-w-2xl rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 text-base font-medium leading-relaxed text-brand-900">
+        <p className="max-w-2xl rounded-xl border border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-900/30 px-4 py-3 text-base font-medium leading-relaxed text-brand-900 dark:text-brand-100">
           Employers cannot reclaim SSP from HMRC.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Statutory Sick Pay is paid by the employer through the normal
           payroll, in the same way as ordinary wages, and the full cost sits
           with the employer. There is no scheme that pays any of it back, so
@@ -193,20 +193,20 @@ export default function SspCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Statutory rates used by this calculator
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">Rate</th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">Rate</th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Amount
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               <tr>
                 <td className="px-4 py-2">SSP flat weekly rate</td>
                 <td className="px-4 py-2">{gbp.format(SSP.weeklyCap)} per week</td>
@@ -246,22 +246,22 @@ export default function SspCalculatorPage() {
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Rates: {RATES_RULES_LABEL}. Last verified: {RATES_LAST_VERIFIED}.
         </p>
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions
         </h2>
         <div className="space-y-4">
           {FAQS.map((f) => (
-            <div key={f.question} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-slate-900">
+            <div key={f.question} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {f.question}
               </h3>
-              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {f.answer}
               </p>
             </div>
@@ -270,7 +270,7 @@ export default function SspCalculatorPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Guides and answers about SSP
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -278,15 +278,15 @@ export default function SspCalculatorPage() {
             <Link
               key={g.href}
               href={g.href}
-              className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+              className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
             >
-              <h3 className="text-base font-semibold text-slate-900">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {g.title}
               </h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 {g.description}
               </p>
-              <span className="mt-2 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+              <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
                 Read the guide →
               </span>
             </Link>

@@ -14,10 +14,10 @@ export default function NotFound() {
         <p className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-xl font-bold text-white shadow-sm">
           £
         </p>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Page not found
         </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The page you were looking for does not exist on UK Payroll
           Calculators — the address may be mistyped, or the page may have
           moved. The calculators themselves are all still here:
@@ -29,7 +29,7 @@ export default function NotFound() {
           <li key={item.href}>
             <Link
               href={item.href}
-              className="block rounded-xl border border-slate-200 bg-white px-5 py-4 font-semibold text-brand-800 shadow-sm transition hover:border-brand-300 hover:bg-brand-50"
+              className="block rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 py-4 font-semibold text-brand-800 dark:text-brand-300 shadow-sm transition hover:border-brand-300 dark:hover:border-brand-700 hover:bg-brand-50 dark:hover:bg-brand-900/40"
             >
               {item.label} →
             </Link>

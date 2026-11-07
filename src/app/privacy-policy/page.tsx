@@ -10,25 +10,25 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="space-y-10">
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Privacy Policy
         </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The short version: this site has no accounts and no forms that
           send your figures anywhere. Every calculation happens in your
           own browser, and the numbers you type in are never collected,
           stored or shared by this site.
         </p>
-        <p className="max-w-2xl text-sm text-slate-500">
+        <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">
           Last updated: 7 November 2026.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Calculations happen on your device
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Each calculator does its maths locally, in the browser on your
           phone or computer, the moment you type. The pay figures, dates
           and other numbers you enter are not transmitted to us and are
@@ -39,10 +39,10 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           No accounts, no tracking cookies
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           There is nothing to sign up for and no sign-in. The site itself
           sets no tracking cookies and runs no advertising or visitor
           profiling. If that ever changes — for example, if privacy-first
@@ -52,10 +52,10 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Hosting and server logs
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The site is hosted by Vercel. Like every web host, Vercel keeps
           standard server logs of requests (such as the page requested,
           the time, and the visitor&apos;s IP address) so it can deliver
@@ -66,10 +66,10 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Links to other websites
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Pages here link to official guidance on GOV.UK. Once you follow
           a link and leave this site, that website&apos;s own privacy
           policy applies to anything you do there.

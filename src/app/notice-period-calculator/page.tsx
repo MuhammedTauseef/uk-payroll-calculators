@@ -68,11 +68,11 @@ export default function NoticePeriodCalculatorPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Notice Period Calculator
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Use this notice period calculator to work out how much notice must
           be given under UK law. Enter who is giving notice, the employment
           start date and what the contract says, and the calculator compares
@@ -84,10 +84,10 @@ export default function NoticePeriodCalculatorPage() {
       <NoticeCalculator />
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much notice does my employer have to give me?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Under section 86 of the Employment Rights Act 1996, an employer
           must give at least one week&apos;s notice once an employee has a
           month&apos;s service. From two years&apos; service the minimum
@@ -96,19 +96,19 @@ export default function NoticePeriodCalculatorPage() {
           a month&apos;s service there is no statutory minimum, and the
           contract decides.
         </p>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Length of service
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Employer&apos;s statutory minimum
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {SERVICE_TABLE.map((row) => (
                 <tr key={row.service}>
                   <td className="px-4 py-2">{row.service}</td>
@@ -121,10 +121,10 @@ export default function NoticePeriodCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much notice do I have to give my employer?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           An employee&apos;s statutory minimum is simpler: once you have one
           month&apos;s service, you must give at least one week&apos;s
           notice, and it does not rise with length of service. With under a
@@ -136,10 +136,10 @@ export default function NoticePeriodCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What if my contract says a longer notice period?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Then the contract period is the one that applies. The statutory
           minimum is a floor, not a ceiling: the effective notice is always
           the longer of the contract period and the statutory minimum, in
@@ -153,10 +153,10 @@ export default function NoticePeriodCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           When does a notice period start?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           A notice period starts on the day after notice is given — the day
           notice is handed over does not itself count. The period then runs
           for the full number of weeks that apply, so the earliest last
@@ -167,20 +167,20 @@ export default function NoticePeriodCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What are payment in lieu of notice and garden leave?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           <strong>Payment in lieu of notice (PILON)</strong> means the
           employment ends immediately and the employee is paid the salary for
           the notice period instead of working it.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           <strong>Garden leave</strong> means the employee stays employed and
           paid during the notice period but is asked not to come to work or
           contact clients until it ends.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Either side can also simply agree a longer notice period than the
           minimum — nothing in the statutory rules prevents a longer period
           by agreement. This page is general guidance on how the minimums
@@ -189,16 +189,16 @@ export default function NoticePeriodCalculatorPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions
         </h2>
         <div className="space-y-4">
           {FAQS.map((f) => (
-            <div key={f.question} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-slate-900">
+            <div key={f.question} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {f.question}
               </h3>
-              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {f.answer}
               </p>
             </div>

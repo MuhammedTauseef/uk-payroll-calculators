@@ -79,11 +79,11 @@ export default function ProRataSalaryCalculatorPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Pro Rata Salary Calculator
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Use this pro-rata salary calculator to work out what a part-time
           role pays compared with the full-time salary. Enter the full-time
           salary and the part-time hours or days, and the calculator shows
@@ -95,10 +95,10 @@ export default function ProRataSalaryCalculatorPage() {
       <ProRataCalculator />
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How is a pro-rata salary calculated?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           In three steps. First, work out the fraction of full-time work:
           part-time hours divided by full-time hours (or part-time days
           divided by full-time days). Second, multiply the full-time salary
@@ -112,10 +112,10 @@ export default function ProRataSalaryCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What does FTE mean?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           FTE stands for full-time equivalent. It expresses a part-time role
           as a fraction of one full-time role: 1.0 FTE is a full-time job,
           0.6 FTE is 60% of one, and 0.5 FTE is half. Employers use it in job
@@ -127,10 +127,10 @@ export default function ProRataSalaryCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much holiday does a part-time worker get?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The statutory minimum paid holiday is {STATUTORY_HOLIDAY_WEEKS}{" "}
           weeks a year for every worker, full-time or part-time. For a
           part-time worker the weeks are simply smaller: at 3 days a week
@@ -144,10 +144,10 @@ export default function ProRataSalaryCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Can a part-time worker be paid a lower hourly rate?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Not just for being part-time. The Part-time Workers (Prevention of
           Less Favourable Treatment) Regulations 2000 say a part-time worker
           must not be treated less favourably than a comparable full-time
@@ -159,22 +159,22 @@ export default function ProRataSalaryCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Rules used by this calculator
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Figure
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   How it is worked out
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {RULES_TABLE.map((row) => (
                 <tr key={row.item}>
                   <td className="px-4 py-2">{row.item}</td>
@@ -184,7 +184,7 @@ export default function ProRataSalaryCalculatorPage() {
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           The {STATUTORY_HOLIDAY_WEEKS}-week holiday minimum comes from the
           Working Time Regulations 1998. Figures on this site follow the{" "}
           {RATES_RULES_LABEL.charAt(0).toLowerCase() +
@@ -194,16 +194,16 @@ export default function ProRataSalaryCalculatorPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions
         </h2>
         <div className="space-y-4">
           {FAQS.map((f) => (
-            <div key={f.question} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-slate-900">
+            <div key={f.question} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {f.question}
               </h3>
-              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {f.answer}
               </p>
             </div>
