@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import {
   CalculatorCta,
@@ -10,11 +11,11 @@ import {
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "What is Statutory Sick Pay (SSP)?",
-  description:
-    "Statutory Sick Pay explained in plain English: what SSP is, who pays it, who qualifies, how much it is under the April 2026 rules and how long it lasts.",
-};
+export const metadata = pageMetadata(
+  "/what-is-statutory-sick-pay",
+  "What is Statutory Sick Pay (SSP)?",
+  "Statutory Sick Pay explained in plain English: what SSP is, who pays it, who qualifies, how much it is under the April 2026 rules and how long it lasts.",
+);
 
 const FAQS: GuideFaq[] = [
   {

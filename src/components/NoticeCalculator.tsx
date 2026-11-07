@@ -1,5 +1,7 @@
 "use client";
 
+import StickyResultBar from "@/components/StickyResultBar";
+
 import { useMemo, useState } from "react";
 import {
   calculateNotice,
@@ -54,7 +56,7 @@ export default function NoticeCalculator() {
   const serviceRemainderMonths = result.serviceCompleteMonths % 12;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="who" className={labelClass}>
@@ -148,9 +150,9 @@ export default function NoticeCalculator() {
       )}
 
       <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Your result
-        </h3>
+        </h2>
         {result.lastWorkingDay ? (
           <>
             <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
@@ -224,6 +226,10 @@ export default function NoticeCalculator() {
           period. Either side can agree a longer period than the minimum.
         </p>
       </div>
+      <StickyResultBar
+        label="Earliest last working day"
+        value={result.lastWorkingDay ? formatDateGB(result.lastWorkingDay) : "Enter both dates"}
+      />
     </div>
   );
 }

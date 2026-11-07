@@ -35,4 +35,8 @@ export const AppConfig = {
     { href: "/how-much-is-ssp-per-week", label: "How much is SSP per week?" },
     { href: "/how-is-ssp-calculated", label: "How is SSP calculated?" },
   ],
+  siteLinks: [
+    { href: "/about", label: "About" },
+    { href: "/privacy-policy", label: "Privacy Policy" },
+  ],
 };

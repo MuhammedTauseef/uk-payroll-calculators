@@ -1,5 +1,7 @@
 "use client";
 
+import StickyResultBar from "@/components/StickyResultBar";
+
 import { useMemo, useState } from "react";
 import { calculateEmployerNi } from "@/lib/employerNi";
 import {
@@ -51,7 +53,7 @@ export default function EmployerNiCalculator() {
   const pensionPercent = PENSION.employerMinimumRate * 100;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="salary" className={labelClass}>
@@ -158,9 +160,9 @@ export default function EmployerNiCalculator() {
       </div>
 
       <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Employer National Insurance cost
-        </h3>
+        </h2>
         <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
           {gbp.format(result.employerNiPerYear)}
           <span className="text-base font-medium text-slate-600">
@@ -242,6 +244,10 @@ export default function EmployerNiCalculator() {
           Threshold — {EMPLOYER_NI_RATES_LABEL}.
         </p>
       </div>
+      <StickyResultBar
+        label="Employer NI cost"
+        value={`${gbp.format(result.employerNiPerYear)} per year`}
+      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import EmployerNiCalculator from "@/components/EmployerNiCalculator";
 import {
   EMPLOYER_NI,
@@ -7,11 +8,11 @@ import {
   EMPLOYMENT_ALLOWANCE,
 } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "Employer National Insurance Calculator — Employers NIC Cost",
-  description:
-    "Free employers National Insurance calculator. Work out employer Class 1 NICs on a salary at 15% above the £5,000 Secondary Threshold, with the Employment Allowance, and see the total cost of employing someone.",
-};
+export const metadata = pageMetadata(
+  "/employer-national-insurance-calculator",
+  "Employer National Insurance Calculator — Employers NIC Cost",
+  "Free employers National Insurance calculator. Work out employer Class 1 NICs on a salary at 15% above the £5,000 Secondary Threshold, with the Employment Allowance, and see the total cost of employing someone.",
+);
 
 const FAQS: { question: string; answer: string }[] = [
   {

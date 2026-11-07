@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import {
   CalculatorCta,
@@ -10,11 +11,11 @@ import {
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "How Much is Statutory Sick Pay?",
-  description:
-    "How much SSP you get, worked out: up to £123.25 a week, or 80% of your average weekly earnings if that is lower. Weekly and daily amounts with worked examples.",
-};
+export const metadata = pageMetadata(
+  "/how-much-is-statutory-sick-pay",
+  "How Much is Statutory Sick Pay?",
+  "How much SSP you get, worked out: up to £123.25 a week, or 80% of your average weekly earnings if that is lower. Weekly and daily amounts with worked examples.",
+);
 
 const FAQS: GuideFaq[] = [
   {

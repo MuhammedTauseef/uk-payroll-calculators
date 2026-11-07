@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import ProRataCalculator from "@/components/ProRataCalculator";
 import { STATUTORY_HOLIDAY_WEEKS } from "@/lib/prorata";
 import { RATES_RULES_LABEL } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "Pro Rata Salary Calculator — Part-Time Pay & FTE",
-  description:
-    "Free pro rata salary calculator. Work out part-time pay from the full-time salary by hours or days per week: pro-rata annual, monthly and weekly pay, the FTE fraction, and pro-rata holiday entitlement in days.",
-};
+export const metadata = pageMetadata(
+  "/pro-rata-salary-calculator",
+  "Pro Rata Salary Calculator — Part-Time Pay & FTE",
+  "Free pro rata salary calculator. Work out part-time pay from the full-time salary by hours or days per week: pro-rata annual, monthly and weekly pay, the FTE fraction, and pro-rata holiday entitlement in days.",
+);
 
 const FAQS: { question: string; answer: string }[] = [
   {

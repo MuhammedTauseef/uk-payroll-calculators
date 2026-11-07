@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import {
   CalculatorCta,
@@ -10,11 +11,11 @@ import {
 } from "@/components/GuideSections";
 import { RATES_LAST_VERIFIED, RATES_RULES_LABEL, SSP } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "SSP Rate — Current Statutory Sick Pay Rate",
-  description:
-    "The current SSP rate is £123.25 a week — a maximum, not a guarantee. Why your SSP might be less, the daily rates, and when the rate changes.",
-};
+export const metadata = pageMetadata(
+  "/ssp-rate",
+  "SSP Rate — Current Statutory Sick Pay Rate",
+  "The current SSP rate is £123.25 a week — a maximum, not a guarantee. Why your SSP might be less, the daily rates, and when the rate changes.",
+);
 
 const FAQS: GuideFaq[] = [
   {

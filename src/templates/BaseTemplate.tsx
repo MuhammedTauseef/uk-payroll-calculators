@@ -12,19 +12,20 @@ import { AppConfig } from "@/utils/AppConfig";
 export const BaseTemplate = (props: {
   leftNav: React.ReactNode;
   rightNav?: React.ReactNode;
+  mobileNav?: React.ReactNode;
   footerNote: React.ReactNode;
   children: React.ReactNode;
 }) => {
   return (
     <div className="flex min-h-screen w-full flex-col text-slate-700 antialiased">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4">
-          <Link href="/" className="flex shrink-0 items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-700 text-lg font-bold text-white shadow-sm">
+        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-lg font-bold text-white shadow-sm">
               £
             </span>
             <span className="leading-tight">
-              <span className="block text-base font-bold text-slate-900">
+              <span className="block text-[15px] font-bold text-slate-900 sm:text-base">
                 {AppConfig.name}
               </span>
               <span className="hidden text-xs text-slate-500 md:block">
@@ -37,15 +38,11 @@ export const BaseTemplate = (props: {
             {props.leftNav}
           </nav>
 
-          <div className="hidden shrink-0 sm:block">{props.rightNav}</div>
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+            {props.rightNav}
+            {props.mobileNav}
+          </div>
         </div>
-
-        <nav
-          aria-label="Main navigation"
-          className="border-t border-slate-100 px-4 py-2 lg:hidden"
-        >
-          <div className="mx-auto w-full max-w-6xl">{props.leftNav}</div>
-        </nav>
       </header>
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:py-12">
@@ -53,7 +50,7 @@ export const BaseTemplate = (props: {
       </main>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-cols-[1fr_auto_auto]">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-cols-[1fr_auto_auto_auto]">
           <div className="max-w-xl space-y-3">
             <p className="flex items-center gap-2.5">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-700 text-base font-bold text-white">
@@ -101,24 +98,28 @@ export const BaseTemplate = (props: {
               ))}
             </ul>
           </nav>
+
+          <nav aria-label="Site links">
+            <p className="text-sm font-semibold text-slate-900">Site</p>
+            <ul className="mt-3 space-y-2 text-sm">
+              {AppConfig.siteLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-slate-600 transition hover:text-brand-800"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         <div className="border-t border-slate-100">
           <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-slate-400">
             <p>
               © {new Date().getFullYear()} {AppConfig.name}.
-            </p>
-            <p>
-              Design foundation:{" "}
-              <a
-                href="https://github.com/ixartz/Next-js-Boilerplate"
-                target="_blank"
-                rel="noreferrer"
-                className="underline transition hover:text-brand-800"
-              >
-                Next.js Boilerplate
-              </a>{" "}
-              by Ixartz (MIT licence).
             </p>
           </div>
         </div>

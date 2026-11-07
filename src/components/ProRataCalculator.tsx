@@ -1,5 +1,7 @@
 "use client";
 
+import StickyResultBar from "@/components/StickyResultBar";
+
 import { useMemo, useState } from "react";
 import { calculateProRata, STATUTORY_HOLIDAY_WEEKS } from "@/lib/prorata";
 import type { ProRataMode } from "@/lib/prorata";
@@ -53,7 +55,7 @@ export default function ProRataCalculator() {
   const ftePercent = Math.round(result.fteFraction * 1000) / 10;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="ft-salary" className={labelClass}>
@@ -172,9 +174,9 @@ export default function ProRataCalculator() {
       )}
 
       <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Your pro-rata pay
-        </h3>
+        </h2>
         <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
           {gbp.format(result.annualSalary)}
           <span className="text-base font-medium text-slate-600">
@@ -226,6 +228,10 @@ export default function ProRataCalculator() {
           </p>
         </div>
       </div>
+      <StickyResultBar
+        label="Pro-rata pay"
+        value={`${gbp.format(result.annualSalary)} per year`}
+      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import SspCalculator from "@/components/SspCalculator";
 import { SSP_GUIDES } from "@/components/GuideSections";
@@ -11,11 +12,11 @@ import {
   SSP,
 } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "SSP Calculator — Statutory Sick Pay Calculator",
-  description:
-    "Free SSP calculator for UK employers and employees. Work out Statutory Sick Pay under the April 2026 rules: the lower of £123.25 a week or 80% of average weekly earnings, from the first day of sickness.",
-};
+export const metadata = pageMetadata(
+  "/ssp-calculator",
+  "SSP Calculator — Statutory Sick Pay Calculator",
+  "Free SSP calculator for UK employers and employees. Work out Statutory Sick Pay under the April 2026 rules: the lower of £123.25 a week or 80% of average weekly earnings, from the first day of sickness.",
+);
 
 const FAQS: { question: string; answer: string }[] = [
   {

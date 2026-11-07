@@ -4,6 +4,7 @@ import Link from "next/link";
 import "@/styles/global.css";
 import { BaseTemplate } from "@/templates/BaseTemplate";
 import SiteNav from "@/components/SiteNav";
+import MobileNav from "@/components/MobileNav";
 import { AppConfig } from "@/utils/AppConfig";
 import { RATES_RULES_LABEL } from "@/lib/rates";
 
@@ -14,11 +15,30 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(AppConfig.siteUrl),
   title: {
     default: `${AppConfig.name} — UK employer & payroll calculators`,
     template: `%s | ${AppConfig.name}`,
   },
   description: AppConfig.description,
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        type: "image/x-icon",
+        sizes: "16x16 24x24 32x32 48x48 64x64",
+      },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
+  openGraph: {
+    siteName: AppConfig.name,
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+  },
 };
 
 export default function RootLayout({
@@ -31,10 +51,11 @@ export default function RootLayout({
       <body>
         <BaseTemplate
           leftNav={<SiteNav />}
+          mobileNav={<MobileNav />}
           rightNav={
             <Link
               href="/ssp-calculator"
-              className="rounded-full bg-brand-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-800"
+              className="rounded-full bg-brand-700 px-3 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800 sm:px-4 sm:text-sm"
             >
               Try the SSP calculator
             </Link>

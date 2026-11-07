@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import {
   CalculatorCta,
@@ -10,11 +11,11 @@ import {
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "How Much is SSP Per Week?",
-  description:
-    "SSP per week worked out for different pay levels: a table of average weekly earnings and the weekly SSP each produces, plus part-week and part-time examples.",
-};
+export const metadata = pageMetadata(
+  "/how-much-is-ssp-per-week",
+  "How Much is SSP Per Week?",
+  "SSP per week worked out for different pay levels: a table of average weekly earnings and the weekly SSP each produces, plus part-week and part-time examples.",
+);
 
 const FAQS: GuideFaq[] = [
   {

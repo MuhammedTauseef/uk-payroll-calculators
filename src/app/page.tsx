@@ -1,5 +1,14 @@
 import Link from "next/link";
 import { SSP_GUIDES } from "@/components/GuideSections";
+import { pageMetadata } from "@/utils/metadata";
+import { AppConfig } from "@/utils/AppConfig";
+
+export const metadata = pageMetadata(
+  "/",
+  "UK Payroll Calculators — UK employer & payroll calculators",
+  AppConfig.description,
+);
+
 
 const iconProps = {
   fill: "none",

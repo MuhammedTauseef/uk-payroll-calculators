@@ -1,5 +1,7 @@
 "use client";
 
+import StickyResultBar from "@/components/StickyResultBar";
+
 import { useMemo, useState } from "react";
 import { calculateSsp } from "@/lib/ssp";
 import { SSP } from "@/lib/rates";
@@ -43,7 +45,7 @@ export default function SspCalculator() {
   const eightyPercentAmount = SSP.aweFraction * aweNumber;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
+    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm print:border-slate-300 print:shadow-none">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="awe" className={labelClass}>
@@ -141,9 +143,9 @@ export default function SspCalculator() {
       </div>
 
       <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
           Your result
-        </h3>
+        </h2>
 
         {/* Print-only recap of the inputs (the form itself is not printed). */}
         <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
@@ -232,6 +234,10 @@ export default function SspCalculator() {
           </p>
         </div>
       </div>
+      <StickyResultBar
+        label="Total SSP for this spell"
+        value={gbp.format(result.totalPayable)}
+      />
     </div>
   );
 }

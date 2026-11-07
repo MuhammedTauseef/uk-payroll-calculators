@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import {
   CalculatorCta,
@@ -10,11 +11,11 @@ import {
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
 
-export const metadata: Metadata = {
-  title: "How is SSP Calculated?",
-  description:
-    "How SSP is calculated in three steps: the weekly amount (the lower of £123.25 or 80% of earnings), the daily rate, and payment per qualifying day absent.",
-};
+export const metadata = pageMetadata(
+  "/how-is-ssp-calculated",
+  "How is SSP Calculated?",
+  "How SSP is calculated in three steps: the weekly amount (the lower of £123.25 or 80% of earnings), the daily rate, and payment per qualifying day absent.",
+);
 
 const FAQS: GuideFaq[] = [
   {
