@@ -22,8 +22,8 @@ function weeksLabel(weeks: number): string {
 }
 
 const inputClass =
-  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
-const labelClass = "block text-sm font-medium text-slate-700";
+  "w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
+const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300";
 
 function todayIso(): string {
   const now = new Date();
@@ -56,7 +56,7 @@ export default function NoticeCalculator() {
   const serviceRemainderMonths = result.serviceCompleteMonths % 12;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
+    <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="who" className={labelClass}>
@@ -71,7 +71,7 @@ export default function NoticeCalculator() {
             <option value="employer">The employer</option>
             <option value="employee">The employee</option>
           </select>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             The statutory minimum is different in each direction.
           </p>
         </div>
@@ -87,7 +87,7 @@ export default function NoticeCalculator() {
             onChange={(e) => setStartDate(e.target.value)}
             className={inputClass}
           />
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             The employee&apos;s first day of employment.
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function NoticeCalculator() {
             onChange={(e) => setNoticeDate(e.target.value)}
             className={inputClass}
           />
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Notice starts running from the day after this date.
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function NoticeCalculator() {
               <option value="months">months</option>
             </select>
           </div>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Enter 0 if the contract gives no notice period. Months are
             converted at 52 ÷ 12 ≈ {WEEKS_PER_MONTH.toFixed(2)} weeks per
             month.
@@ -143,20 +143,20 @@ export default function NoticeCalculator() {
       </div>
 
       {datesInverted && (
-        <p className="mt-4 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900 print:hidden">
+        <p className="mt-4 rounded-md border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-3 py-2 text-sm text-amber-900 dark:text-amber-200 print:hidden">
           The notice date is before the start date, so the length of service
           counts as zero. Check the two dates.
         </p>
       )}
 
-      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
 
         {/* Print-only recap of the inputs (the form itself is not printed). */}
-        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
-          <p className="font-semibold text-slate-900">
+        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 dark:text-slate-300 print:block">
+          <p className="font-semibold text-slate-900 dark:text-slate-50">
             Notice period calculation — inputs used
           </p>
           <p>
@@ -173,20 +173,20 @@ export default function NoticeCalculator() {
         </div>
         {result.lastWorkingDay ? (
           <>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
+            <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
               {formatDateGB(result.lastWorkingDay)}
             </p>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               Earliest last working day
             </p>
           </>
         ) : (
-          <p className="mt-2 text-base text-slate-700">
+          <p className="mt-2 text-base text-slate-700 dark:text-slate-300">
             Enter both dates to see the earliest last working day.
           </p>
         )}
 
-        <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700">
+        <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
           <div>
             <dt className="inline font-medium">Length of service: </dt>
             <dd className="inline">
@@ -238,7 +238,7 @@ export default function NoticeCalculator() {
           </div>
         </dl>
 
-        <p className="mt-3 text-sm text-slate-600">
+        <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
           The notice period runs from the day after notice is given, so the
           earliest last working day is the notice date plus the full notice
           period. Either side can agree a longer period than the minimum.
@@ -248,11 +248,11 @@ export default function NoticeCalculator() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="mt-4 rounded-full border border-brand-700 bg-white px-5 py-2.5 text-sm font-semibold text-brand-800 shadow-sm transition hover:bg-brand-50"
+            className="mt-4 rounded-full border border-brand-700 bg-white dark:bg-slate-900 px-5 py-2.5 text-sm font-semibold text-brand-800 dark:text-brand-300 shadow-sm transition hover:bg-brand-50 dark:hover:bg-brand-900/40"
           >
             Print / save this result
           </button>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
             Opens your browser&apos;s print view with a clean summary of
             this calculation — choose &ldquo;Save as PDF&rdquo; there to
             keep a copy.

@@ -16,13 +16,13 @@ import { createClient } from "@/lib/supabase/client";
 const COVER_BUCKET = "blog-images";
 
 const inputClass =
-  "mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100 disabled:opacity-60";
-const labelClass = "block text-sm font-medium text-slate-900";
-const hintClass = "mt-1 block text-xs font-normal leading-5 text-slate-500";
+  "mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-50 shadow-sm focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100 disabled:opacity-60";
+const labelClass = "block text-sm font-medium text-slate-900 dark:text-slate-50";
+const hintClass = "mt-1 block text-xs font-normal leading-5 text-slate-500 dark:text-slate-400";
 const primaryButtonClass =
   "inline-flex items-center rounded-full bg-brand-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-800 disabled:opacity-60";
 const outlineButtonClass =
-  "inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:opacity-60";
+  "inline-flex items-center rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-60";
 
 function sanitizeCoverFileName(name: string): string {
   const cleaned = name
@@ -57,8 +57,8 @@ function ActionNotice({ state }: { state: AdminActionState }) {
   if (state.status === "idle" || !state.message) return null;
   const tone =
     state.status === "success"
-      ? "border-brand-200 bg-brand-50 text-brand-900"
-      : "border-red-200 bg-red-50 text-red-800";
+      ? "border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-900/30 text-brand-900 dark:text-brand-100"
+      : "border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950 text-red-800 dark:text-red-300";
   return (
     <p role="status" className={`rounded-lg border px-4 py-3 text-sm leading-6 ${tone}`}>
       {state.message}
@@ -206,7 +206,7 @@ export function BlogPostForm({ post }: { post: AdminBlogPostRow | null }) {
               alt="Cover preview"
               width={1280}
               height={720}
-              className="aspect-video w-full rounded-lg border border-slate-200 object-cover"
+              className="aspect-video w-full rounded-lg border border-slate-200 dark:border-slate-800 object-cover"
             />
             <button
               type="button"
@@ -224,12 +224,12 @@ export function BlogPostForm({ post }: { post: AdminBlogPostRow | null }) {
           accept="image/*"
           onChange={onCoverFileChange}
           disabled={pending || uploading}
-          className="mt-2 block text-sm text-slate-700"
+          className="mt-2 block text-sm text-slate-700 dark:text-slate-300"
         />
         <input type="hidden" name="coverImageUrl" value={coverUrl} />
         {uploading && <span className={hintClass}>Uploading…</span>}
         {uploadError && (
-          <p role="alert" className="mt-1 text-sm font-normal leading-6 text-red-700">
+          <p role="alert" className="mt-1 text-sm font-normal leading-6 text-red-700 dark:text-red-400">
             {uploadError}
           </p>
         )}
@@ -263,7 +263,7 @@ export function BlogPostForm({ post }: { post: AdminBlogPostRow | null }) {
       </div>
 
       <fieldset className="space-y-5">
-        <legend className="text-sm font-medium text-slate-900">
+        <legend className="text-sm font-medium text-slate-900 dark:text-slate-50">
           FAQs (all 5 are required to publish)
         </legend>
         {FAQ_SLOTS.map((slot) => (
@@ -320,7 +320,7 @@ export function BlogPostForm({ post }: { post: AdminBlogPostRow | null }) {
         </button>
         {post?.status === "published" && (
           <Link
-            className="pb-2 font-medium text-brand-800 underline"
+            className="pb-2 font-medium text-brand-800 dark:text-brand-300 underline"
             href={`/blog/${post.slug}`}
             target="_blank"
             rel="noreferrer"

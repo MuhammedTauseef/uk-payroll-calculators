@@ -27,8 +27,8 @@ export default function SiteNav() {
               aria-current={active ? "page" : undefined}
               className={
                 active
-                  ? "rounded-full bg-brand-50 px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap text-brand-800"
-                  : "rounded-full px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-slate-600 transition hover:bg-slate-100 hover:text-brand-800"
+                  ? "rounded-full bg-brand-50 dark:bg-brand-900/30 px-2.5 py-2 text-[13px] font-semibold whitespace-nowrap text-brand-800 dark:text-brand-300"
+                  : "rounded-full px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-slate-600 dark:text-slate-300 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-brand-800 dark:hover:text-brand-300"
               }
             >
               {item.label}

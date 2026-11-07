@@ -5,8 +5,8 @@ import { adminLoginAction } from "@/lib/admin/login-action";
 import { adminActionIdle } from "@/lib/admin/state";
 
 const inputClass =
-  "mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100";
-const labelClass = "block text-sm font-medium text-slate-900";
+  "mt-1 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-sm text-slate-900 dark:text-slate-50 shadow-sm focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100";
+const labelClass = "block text-sm font-medium text-slate-900 dark:text-slate-50";
 
 // The login form. It posts to the server action, which checks the
 // submitted pair against the ADMIN_EMAIL / ADMIN_PASSWORD env vars —
@@ -46,7 +46,7 @@ export function AdminLoginForm() {
         />
       </div>
       {state.status === "error" && state.message && (
-        <p role="alert" className="text-sm leading-6 text-red-700">
+        <p role="alert" className="text-sm leading-6 text-red-700 dark:text-red-400">
           {state.message}
         </p>
       )}

@@ -17,8 +17,8 @@ function parseAmount(value: string): number {
 }
 
 const inputClass =
-  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
-const labelClass = "block text-sm font-medium text-slate-700";
+  "w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2.5 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
+const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300";
 
 export default function SspCalculator() {
   const [awe, setAwe] = useState("500");
@@ -45,7 +45,7 @@ export default function SspCalculator() {
   const eightyPercentAmount = SSP.aweFraction * aweNumber;
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
+    <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="awe" className={labelClass}>
@@ -61,7 +61,7 @@ export default function SspCalculator() {
             onChange={(e) => setAwe(e.target.value)}
             className={inputClass}
           />
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             The employee&apos;s normal weekly pay before tax.
           </p>
         </div>
@@ -82,7 +82,7 @@ export default function SspCalculator() {
               </option>
             ))}
           </select>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             The days the employee normally works each week.
           </p>
         </div>
@@ -101,7 +101,7 @@ export default function SspCalculator() {
             onChange={(e) => setDaysAbsent(e.target.value)}
             className={inputClass}
           />
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Count only the days the employee would normally have worked.
           </p>
         </div>
@@ -116,9 +116,9 @@ export default function SspCalculator() {
               type="checkbox"
               checked={hasLinked}
               onChange={(e) => setHasLinked(e.target.checked)}
-              className="h-5 w-5 shrink-0 rounded border-slate-300 accent-brand-700"
+              className="h-5 w-5 shrink-0 rounded border-slate-300 dark:border-slate-700 accent-brand-700"
             />
-            <label htmlFor="linked" className="text-sm text-slate-700">
+            <label htmlFor="linked" className="text-sm text-slate-700 dark:text-slate-300">
               The employee was off sick within the last 8 weeks
             </label>
           </div>
@@ -142,14 +142,14 @@ export default function SspCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-brand-100 bg-brand-50 p-5 print:mt-0 print:border-slate-300">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700">
+      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
 
         {/* Print-only recap of the inputs (the form itself is not printed). */}
-        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 print:block">
-          <p className="font-semibold text-slate-900">
+        <div className="mt-2 hidden text-sm leading-relaxed text-slate-700 dark:text-slate-300 print:block">
+          <p className="font-semibold text-slate-900 dark:text-slate-50">
             Statutory Sick Pay calculation — inputs used
           </p>
           <p>
@@ -162,14 +162,14 @@ export default function SspCalculator() {
             .
           </p>
         </div>
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800">
+        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {gbp.format(result.totalPayable)}
         </p>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-slate-600 dark:text-slate-300">
           Total Statutory Sick Pay for this spell
         </p>
 
-        <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700">
+        <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
           <div>
             <dt className="inline font-medium">Weekly SSP amount: </dt>
             <dd className="inline">
@@ -207,14 +207,14 @@ export default function SspCalculator() {
         </dl>
 
         {result.cappedByLinkedPeriod && (
-          <p className="mt-3 rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+          <p className="mt-3 rounded-md border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-3 py-2 text-sm text-amber-900 dark:text-amber-200">
             The 28-week maximum has been reached: {result.daysNotPayable} of
             the absent days are not payable because the linked spells have
             used up the entitlement.
           </p>
         )}
 
-        <p className="mt-3 text-sm text-slate-600">
+        <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
           SSP is paid by the employer through the normal payroll. Employers
           cannot reclaim SSP from HMRC.
         </p>
@@ -223,11 +223,11 @@ export default function SspCalculator() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="mt-4 rounded-full border border-brand-700 bg-white px-5 py-2.5 text-sm font-semibold text-brand-800 shadow-sm transition hover:bg-brand-50"
+            className="mt-4 rounded-full border border-brand-700 bg-white dark:bg-slate-900 px-5 py-2.5 text-sm font-semibold text-brand-800 dark:text-brand-300 shadow-sm transition hover:bg-brand-50 dark:hover:bg-brand-900/40"
           >
             Print / save this result
           </button>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
             Opens your browser&apos;s print view with a clean summary of
             this calculation — choose &ldquo;Save as PDF&rdquo; there to
             keep a copy.

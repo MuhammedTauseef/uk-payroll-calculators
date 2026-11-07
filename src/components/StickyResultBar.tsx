@@ -39,12 +39,12 @@ export default function StickyResultBar(props: {
         className="pointer-events-none absolute inset-0"
       />
       {show && (
-        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-brand-100 bg-white/95 px-4 py-3 shadow-[0_-2px_10px_rgba(15,23,42,0.08)] backdrop-blur print:hidden md:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-brand-100 dark:border-brand-900 bg-white/95 px-4 dark:bg-slate-950/95 py-3 shadow-[0_-2px_10px_rgba(15,23,42,0.08)] backdrop-blur print:hidden md:hidden">
           <div className="mx-auto flex w-full max-w-6xl items-baseline justify-between gap-3">
-            <span className="shrink-0 text-sm text-slate-600">
+            <span className="shrink-0 text-sm text-slate-600 dark:text-slate-300">
               {props.label}
             </span>
-            <span className="text-right text-lg font-bold text-brand-800">
+            <span className="text-right text-lg font-bold text-brand-800 dark:text-brand-300">
               {props.value}
             </span>
           </div>

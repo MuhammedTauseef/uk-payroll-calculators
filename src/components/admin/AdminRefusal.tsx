@@ -5,9 +5,9 @@ import Link from "next/link";
 // whether any data exists — just the way back in.
 export function AdminRefusal() {
   return (
-    <div className="mx-auto max-w-xl rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-      <h1 className="text-xl font-semibold text-slate-900">Admin access only</h1>
-      <p className="mt-3 text-sm leading-6 text-slate-600">
+    <div className="mx-auto max-w-xl rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 text-center shadow-sm">
+      <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Admin access only</h1>
+      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
         This area is for the site admin. If that is you, sign in with the admin account and try
         again.
       </p>

@@ -17,20 +17,20 @@ export const BaseTemplate = (props: {
   children: React.ReactNode;
 }) => {
   return (
-    <div className="flex min-h-screen w-full flex-col text-slate-700 antialiased">
-      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div className="flex min-h-screen w-full flex-col text-slate-700 dark:text-slate-300 antialiased">
+      <header className="sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 bg-white/95 backdrop-blur dark:bg-slate-950/90">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 sm:gap-4">
           <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5">
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-lg font-bold text-white shadow-sm">
               £
             </span>
             <span className="leading-tight">
-              <span className="block text-[15px] font-bold whitespace-nowrap text-slate-900 sm:text-base">
+              <span className="block text-[15px] font-bold whitespace-nowrap text-slate-900 dark:text-slate-50 sm:text-base">
                 {AppConfig.name}
               </span>
               {/* Tagline yields at xl: the full desktop pill nav needs
                   the width, and the name alone identifies the site. */}
-              <span className="hidden text-xs whitespace-nowrap text-slate-500 md:block xl:hidden">
+              <span className="hidden text-xs whitespace-nowrap text-slate-500 dark:text-slate-400 md:block xl:hidden">
                 {AppConfig.tagline}
               </span>
             </span>
@@ -51,24 +51,24 @@ export const BaseTemplate = (props: {
         {props.children}
       </main>
 
-      <footer className="border-t border-slate-200 bg-white">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
         <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-cols-[1fr_auto_auto_auto]">
           <div className="max-w-xl space-y-3">
             <p className="flex items-center gap-2.5">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-700 text-base font-bold text-white">
                 £
               </span>
-              <span className="text-base font-bold text-slate-900">
+              <span className="text-base font-bold text-slate-900 dark:text-slate-50">
                 {AppConfig.name}
               </span>
             </p>
-            <div className="text-sm leading-relaxed text-slate-500">
+            <div className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
               {props.footerNote}
             </div>
           </div>
 
           <nav aria-label="Calculator links">
-            <p className="text-sm font-semibold text-slate-900">Calculators</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Calculators</p>
             <ul className="mt-3 space-y-1 text-sm">
               {AppConfig.nav
                 .filter((item) => item.href !== "/")
@@ -76,7 +76,7 @@ export const BaseTemplate = (props: {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="block py-1.5 text-slate-600 transition hover:text-brand-800"
+                      className="block py-1.5 text-slate-600 dark:text-slate-300 transition hover:text-brand-800 dark:hover:text-brand-300"
                     >
                       {item.label}
                     </Link>
@@ -86,13 +86,13 @@ export const BaseTemplate = (props: {
           </nav>
 
           <nav aria-label="Guide links">
-            <p className="text-sm font-semibold text-slate-900">Guides</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Guides</p>
             <ul className="mt-3 space-y-1 text-sm">
               {AppConfig.guides.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block py-1.5 text-slate-600 transition hover:text-brand-800"
+                    className="block py-1.5 text-slate-600 dark:text-slate-300 transition hover:text-brand-800 dark:hover:text-brand-300"
                   >
                     {item.label}
                   </Link>
@@ -102,13 +102,13 @@ export const BaseTemplate = (props: {
           </nav>
 
           <nav aria-label="Site links">
-            <p className="text-sm font-semibold text-slate-900">Site</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Site</p>
             <ul className="mt-3 space-y-1 text-sm">
               {AppConfig.siteLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block py-1.5 text-slate-600 transition hover:text-brand-800"
+                    className="block py-1.5 text-slate-600 dark:text-slate-300 transition hover:text-brand-800 dark:hover:text-brand-300"
                   >
                     {item.label}
                   </Link>
@@ -118,8 +118,8 @@ export const BaseTemplate = (props: {
           </nav>
         </div>
 
-        <div className="border-t border-slate-100">
-          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-slate-400">
+        <div className="border-t border-slate-100 dark:border-slate-800">
+          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-slate-500 dark:text-slate-400">
             <p>
               © {new Date().getFullYear()} {AppConfig.name}.
             </p>
