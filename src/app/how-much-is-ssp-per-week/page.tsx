@@ -61,11 +61,11 @@ export default function HowMuchIsSspPerWeekPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           How much is SSP per week?
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP is {gbp.format(SSP.weeklyCap)} per week at most. The exact
           weekly amount is the lower of that flat rate or{" "}
           {SSP.aweFraction * 100}% of your average weekly earnings: someone
@@ -76,10 +76,10 @@ export default function HowMuchIsSspPerWeekPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much is SSP per week for a full-time worker?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Most full-time workers earn enough that {SSP.aweFraction * 100}%
           of their pay is more than the flat rate, so their SSP is simply{" "}
           {gbp.format(SSP.weeklyCap)} for each full week of sickness. The
@@ -92,7 +92,7 @@ export default function HowMuchIsSspPerWeekPage() {
           as the{" "}
           <Link
             href="/ssp-rate"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             SSP rate
           </Link>{" "}
@@ -101,25 +101,25 @@ export default function HowMuchIsSspPerWeekPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much is SSP per week at different pay levels?
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full min-w-[520px] text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Average weekly earnings
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   {SSP.aweFraction * 100}% of earnings
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   SSP per week (the lower figure)
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {EARNINGS_LEVELS.map((awe) => {
                 const eighty = awe * SSP.aweFraction;
                 const weekly = Math.min(SSP.weeklyCap, eighty);
@@ -137,7 +137,7 @@ export default function HowMuchIsSspPerWeekPage() {
             </tbody>
           </table>
         </div>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Read the table row by row: find the earnings closest to the
           employee&apos;s average weekly pay, and the right-hand column is
           the weekly SSP. From {gbp.format(160)} of earnings upwards, the
@@ -148,10 +148,10 @@ export default function HowMuchIsSspPerWeekPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What if I am off for only part of a week?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Then the weekly amount is broken down into a daily rate and only
           the days of absence are paid. The daily rate is the weekly amount
           divided by your qualifying days — the days you normally work. A
@@ -163,7 +163,7 @@ export default function HowMuchIsSspPerWeekPage() {
           a Monday-to-Friday worker. Our guide to{" "}
           <Link
             href="/how-much-is-statutory-sick-pay"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             how much SSP is
           </Link>{" "}
@@ -172,10 +172,10 @@ export default function HowMuchIsSspPerWeekPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Worked example: two weeks off sick
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           An employee earns {gbp.format(250)} a week and is off sick for two
           full weeks. Step one: {SSP.aweFraction * 100}% of{" "}
           {gbp.format(250)} is {gbp.format(200)}, which is more than the
@@ -191,10 +191,10 @@ export default function HowMuchIsSspPerWeekPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Is the weekly SSP amount the same every week?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Yes, for as long as the sickness lasts and the employee&apos;s
           earnings basis stays the same — the weekly amount is fixed at the
           start of the spell from average weekly earnings and does not drift

@@ -16,11 +16,11 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Admin</h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Admin</h1>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Write and publish blog posts here — no deploy needed. Drafts are visible only in this
           panel; published posts are live on{" "}
-          <Link href="/blog" className="font-medium text-brand-800 underline">
+          <Link href="/blog" className="font-medium text-brand-800 dark:text-brand-300 underline">
             /blog
           </Link>{" "}
           the moment you save them.
@@ -28,17 +28,17 @@ export default async function AdminDashboardPage() {
       </section>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-3xl font-bold text-slate-900">{posts.length}</p>
-          <p className="mt-1 text-sm text-slate-600">Posts in total</p>
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+          <p className="text-3xl font-bold text-slate-900 dark:text-slate-50">{posts.length}</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Posts in total</p>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-3xl font-bold text-slate-900">{published}</p>
-          <p className="mt-1 text-sm text-slate-600">Published and live</p>
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+          <p className="text-3xl font-bold text-slate-900 dark:text-slate-50">{published}</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Published and live</p>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-3xl font-bold text-slate-900">{drafts}</p>
-          <p className="mt-1 text-sm text-slate-600">Drafts (invisible to the public)</p>
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+          <p className="text-3xl font-bold text-slate-900 dark:text-slate-50">{drafts}</p>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Drafts (invisible to the public)</p>
         </div>
       </div>
 

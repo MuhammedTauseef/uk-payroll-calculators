@@ -89,11 +89,11 @@ export default function EmployerNationalInsuranceCalculatorPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Employer National Insurance Calculator
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Use this employer National Insurance calculator to work out the
           employer&apos;s Class 1 National Insurance cost of an
           employee&apos;s salary. Enter the annual gross salary, and the
@@ -106,10 +106,10 @@ export default function EmployerNationalInsuranceCalculatorPage() {
       <EmployerNiCalculator />
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How is employer National Insurance calculated?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Employer (secondary) Class 1 National Insurance is charged at{" "}
           {EMPLOYER_NI.rate * 100}% on the part of an employee&apos;s pay
           above the Secondary Threshold of{" "}
@@ -126,10 +126,10 @@ export default function EmployerNationalInsuranceCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What are the employer NI rates for 2026/27?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Employer NI rates are set for each tax year, and the figures in
           the table below are the 2026/27 rates this calculator uses —
           verified against GOV.UK on 7 November 2026. They were set by the
@@ -140,19 +140,19 @@ export default function EmployerNationalInsuranceCalculatorPage() {
           employer National Insurance rates page before running payroll,
           because a Budget can change them from the next April.
         </p>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Rate or threshold
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Amount (2026/27)
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {RATES_TABLE.map((row) => (
                 <tr key={row.item}>
                   <td className="px-4 py-2">{row.item}</td>
@@ -162,17 +162,17 @@ export default function EmployerNationalInsuranceCalculatorPage() {
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Rates: {EMPLOYER_NI_RATES_LABEL}. Figures verified:{" "}
           {EMPLOYER_NI_RATES_VERIFIED}.
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What is the Employment Allowance?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The Employment Allowance reduces an employer&apos;s National
           Insurance bill by up to{" "}
           {gbp.format(EMPLOYMENT_ALLOWANCE.annualAmount)} a year. It is
@@ -188,10 +188,10 @@ export default function EmployerNationalInsuranceCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Do employers pay National Insurance for under-21s and apprentices?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Not on most of their pay. For employees under 21, and for
           apprentices under 25, the employer rate is 0% on earnings up to
           the upper secondary threshold of{" "}
@@ -207,10 +207,10 @@ export default function EmployerNationalInsuranceCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What is the total cost of employing someone?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           More than the salary. The minimum true cost is the gross salary
           plus the employer&apos;s National Insurance on top — a{" "}
           {gbp.format(30000)} salary costs {gbp.format(33750)} once the{" "}
@@ -226,16 +226,16 @@ export default function EmployerNationalInsuranceCalculatorPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions
         </h2>
         <div className="space-y-4">
           {FAQS.map((f) => (
-            <div key={f.question} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-slate-900">
+            <div key={f.question} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {f.question}
               </h3>
-              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {f.answer}
               </p>
             </div>

@@ -21,11 +21,11 @@ export default async function BlogIndexPage() {
   return (
     <div className="space-y-10">
       <section className="space-y-3">
-        <p className="text-sm font-semibold tracking-wide text-brand-700 uppercase">Blog</p>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <p className="text-sm font-semibold tracking-wide text-brand-700 dark:text-brand-300 uppercase">Blog</p>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Payroll, explained plainly.
         </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Guides on the parts of UK payroll employers and employees actually ask about:
           statutory sick pay, maternity and paternity pay, notice periods and employer National
           Insurance — with the figures checked against the current rules.
@@ -33,9 +33,9 @@ export default async function BlogIndexPage() {
       </section>
 
       {posts.length === 0 ? (
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The first guides are on their way. In the meantime, the{" "}
-          <Link href="/ssp-calculator" className="font-medium text-brand-800 underline">
+          <Link href="/ssp-calculator" className="font-medium text-brand-800 dark:text-brand-300 underline">
             SSP calculator
           </Link>{" "}
           and the guides linked from it are live now.
@@ -45,7 +45,7 @@ export default async function BlogIndexPage() {
           {posts.map((post) => (
             <article
               key={post.slug}
-              className="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
+              className="flex flex-col overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm"
             >
               {post.cover_image_url && (
                 <Image
@@ -58,19 +58,19 @@ export default async function BlogIndexPage() {
               )}
               <div className="flex flex-1 flex-col px-6 py-6">
                 {post.published_at && (
-                  <p className="text-sm font-medium text-slate-500">
+                  <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                     {formatDateGB(post.published_at)}
                   </p>
                 )}
-                <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-900">
+                <h2 className="mt-2 text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
                   <Link className="hover:underline" href={`/blog/${post.slug}`}>
                     {post.title}
                   </Link>
                 </h2>
-                <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">{post.description}</p>
+                <p className="mt-2 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{post.description}</p>
                 <p className="mt-4">
                   <Link
-                    className="font-medium text-brand-800 underline"
+                    className="font-medium text-brand-800 dark:text-brand-300 underline"
                     href={`/blog/${post.slug}`}
                   >
                     Read the guide

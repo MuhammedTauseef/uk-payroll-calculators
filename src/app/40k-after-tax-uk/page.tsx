@@ -74,11 +74,11 @@ export default function FortyKAfterTaxPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           £40k After Tax UK
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           On a £40,000 salary in 2026/27 you take home{" "}
           {gbp.format(at40k.netAnnual)} a year —{" "}
           {gbp.format(at40k.netMonthly)} a month — after{" "}
@@ -92,12 +92,12 @@ export default function FortyKAfterTaxPage() {
       <TakeHomeCalculator />
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           The £40,000 breakdown, line by line
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               <tr>
                 <td className="px-4 py-2">Gross salary</td>
                 <td className="px-4 py-2">{gbp.format(at40k.grossAnnual)}</td>
@@ -128,7 +128,7 @@ export default function FortyKAfterTaxPage() {
                   −{gbp.format(at40k.employeeNationalInsurance)}
                 </td>
               </tr>
-              <tr className="bg-slate-50 font-semibold text-slate-900">
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
                 <td className="px-4 py-2">Take-home pay</td>
                 <td className="px-4 py-2">
                   {gbp.format(at40k.netAnnual)} a year ·{" "}
@@ -140,7 +140,7 @@ export default function FortyKAfterTaxPage() {
             </tbody>
           </table>
         </div>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Nothing on a £40,000 salary reaches the 40% higher-rate band,
           which starts at{" "}
           {gbp.format(INCOME_TAX.personalAllowance + INCOME_TAX.basicRateBand)}{" "}
@@ -151,37 +151,37 @@ export default function FortyKAfterTaxPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Take-home pay around £40,000
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Salary
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Income Tax
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   National Insurance
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Take-home / year
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Take-home / month
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {comparison.map(({ salary, result }) => (
                 <tr
                   key={salary}
                   className={
                     salary === 40000
-                      ? "bg-brand-50 font-semibold text-slate-900"
+                      ? "bg-brand-50 dark:bg-brand-900/30 font-semibold text-slate-900 dark:text-slate-50"
                       : undefined
                   }
                 >
@@ -201,7 +201,7 @@ export default function FortyKAfterTaxPage() {
             </tbody>
           </table>
         </div>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Notice how the jump from £50,000 to £60,000 keeps less of each
           extra pound: above {gbp.format(EMPLOYEE_NI.upperEarningsLimitAnnual)}{" "}
           the tax rate rises from 20% to 40%, while National Insurance
@@ -211,10 +211,10 @@ export default function FortyKAfterTaxPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What else comes off a £40,000 salary?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The figures here are tax and National Insurance only. Two common
           deductions are not included. Workplace pension contributions —
           typically 5% of qualifying earnings from the employee under
@@ -225,7 +225,7 @@ export default function FortyKAfterTaxPage() {
           our{" "}
           <Link
             href="/employer-national-insurance-calculator"
-            className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
           >
             employer National Insurance calculator
           </Link>
@@ -234,20 +234,20 @@ export default function FortyKAfterTaxPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Rates used by this calculator
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">Rate</th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">Rate</th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Amount
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               <tr>
                 <td className="px-4 py-2">Personal Allowance</td>
                 <td className="px-4 py-2">
@@ -287,26 +287,26 @@ export default function FortyKAfterTaxPage() {
             </tbody>
           </table>
         </div>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Rates: {PAYE_RATES_LABEL} (England, Wales and Northern Ireland).
           Last verified: {RATES_LAST_VERIFIED}.
         </p>
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions
         </h2>
         <div className="space-y-4">
           {FAQS.map((f) => (
             <div
               key={f.question}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm"
             >
-              <h3 className="text-base font-semibold text-slate-900">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {f.question}
               </h3>
-              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {f.answer}
               </p>
             </div>
@@ -315,37 +315,37 @@ export default function FortyKAfterTaxPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Related calculators
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
             href="/pro-rata-salary-calculator"
-            className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               Pro Rata Salary Calculator
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               What a £40,000 role pays part-time — by hours or days per
               week, with pro-rata holiday entitlement.
             </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Open the calculator →
             </span>
           </Link>
           <Link
             href="/paternity-pay-calculator"
-            className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               Paternity Pay Calculator
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               Statutory Paternity Pay for one or two weeks of leave, worked
               out from any salary.
             </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Open the calculator →
             </span>
           </Link>

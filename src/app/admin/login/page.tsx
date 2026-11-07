@@ -24,16 +24,16 @@ export default function AdminLoginPage() {
     Boolean(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
   return (
-    <div className="mx-auto max-w-md rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h1 className="text-2xl font-bold tracking-tight text-slate-900">Admin sign in</h1>
-      <p className="mt-2 text-sm leading-6 text-slate-600">
+    <div className="mx-auto max-w-md rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-sm">
+      <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Admin sign in</h1>
+      <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
         Sign in to write and publish blog posts. Drafts stay invisible until you publish them.
       </p>
 
       {!configured ? (
         <p
           role="alert"
-          className="mt-5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-800"
+          className="mt-5 rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-sm leading-6 text-amber-800 dark:text-amber-200"
         >
           The admin panel is not connected yet — its environment variables (the Supabase keys and
           the admin sign-in pair) have not been set for this site. Nothing can be signed in or

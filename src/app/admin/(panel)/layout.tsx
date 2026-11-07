@@ -24,23 +24,23 @@ export default async function AdminPanelLayout({
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium">
-          <Link href="/admin" className="text-slate-900 hover:underline">
+          <Link href="/admin" className="text-slate-900 dark:text-slate-50 hover:underline">
             Admin
           </Link>
-          <Link href="/admin/blog" className="text-brand-800 hover:underline">
+          <Link href="/admin/blog" className="text-brand-800 dark:text-brand-300 hover:underline">
             Blog posts
           </Link>
-          <Link href="/admin/blog/new" className="text-brand-800 hover:underline">
+          <Link href="/admin/blog/new" className="text-brand-800 dark:text-brand-300 hover:underline">
             New post
           </Link>
-          <Link href="/blog" className="text-brand-800 hover:underline">
+          <Link href="/blog" className="text-brand-800 dark:text-brand-300 hover:underline">
             View blog
           </Link>
         </nav>
         <div className="flex items-center gap-3">
-          {ctx.email && <span className="text-sm text-slate-500">{ctx.email}</span>}
+          {ctx.email && <span className="text-sm text-slate-500 dark:text-slate-400">{ctx.email}</span>}
           <SignOutButton />
         </div>
       </div>

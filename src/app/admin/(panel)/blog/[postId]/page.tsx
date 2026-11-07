@@ -25,8 +25,8 @@ export default async function AdminBlogEditPage({
   return (
     <div className="space-y-8">
       <section className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Edit blog post</h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Edit blog post</h1>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           {post.status === "published"
             ? "This post is live. Saving updates it everywhere right away — the blog list, the article page and the sitemap. Setting the status back to Draft unpublishes it."
             : "This is a draft. It stays invisible to the public until you set the status to Published and save."}
@@ -35,9 +35,9 @@ export default async function AdminBlogEditPage({
 
       <div className="max-w-3xl space-y-8">
         <BlogPostForm post={post} />
-        <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-900">Delete this post</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
+        <section className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Delete this post</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
             Deleting removes the post from the blog for good — the article page, the blog list
             and the sitemap stop showing it, and its cover image is removed too. This can&rsquo;t
             be undone.

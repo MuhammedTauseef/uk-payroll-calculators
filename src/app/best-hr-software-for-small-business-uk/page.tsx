@@ -128,11 +128,11 @@ export default function BestHrSoftwarePage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           Best HR Software for Small Business UK
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           For most UK small businesses the shortlist is short: Breathe HR
           for simplicity, PeopleHR for features per pound, Sage HR if you
           already live in Sage, Ciphr when you have outgrown the others,
@@ -142,28 +142,28 @@ export default function BestHrSoftwarePage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           The shortlist at a glance
         </h2>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full min-w-[520px] text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Product
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Best for
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Standout point
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {PRODUCTS.map((p) => (
                 <tr key={p.name}>
-                  <td className="px-4 py-2 font-medium text-slate-900">
+                  <td className="px-4 py-2 font-medium text-slate-900 dark:text-slate-50">
                     {p.name}
                   </td>
                   <td className="px-4 py-2">{p.bestFor}</td>
@@ -177,18 +177,18 @@ export default function BestHrSoftwarePage() {
 
       {PRODUCTS.map((p, i) => (
         <section key={p.name} className="space-y-3">
-          <h2 className="text-xl font-semibold text-slate-900">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
             {i + 1}. {p.name} — {p.bestFor.toLowerCase()}
           </h2>
           {p.body.map((para) => (
             <p
               key={para.slice(0, 24)}
-              className="max-w-2xl text-base leading-relaxed text-slate-700"
+              className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300"
             >
               {para}
             </p>
           ))}
-          <p className="max-w-2xl rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-base leading-relaxed text-amber-900">
+          <p className="max-w-2xl rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 text-base leading-relaxed text-amber-900 dark:text-amber-200">
             <span className="font-semibold">Watch out: </span>
             {p.watchOut}
           </p>
@@ -197,7 +197,7 @@ export default function BestHrSoftwarePage() {
               href={p.url}
               target="_blank"
               rel="noopener"
-              className="text-sm font-semibold text-brand-700 hover:text-brand-800"
+              className="text-sm font-semibold text-brand-700 dark:text-brand-300 hover:text-brand-800 dark:hover:text-brand-300"
             >
               Visit {p.name} →
             </a>
@@ -206,10 +206,10 @@ export default function BestHrSoftwarePage() {
       ))}
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How do I choose the right one?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Start from the job that hurts most. If it is holiday requests and
           absence records, the simplest tool (Breathe) wins. If it is
           recruitment and performance as you grow, shortlist PeopleHR. If
@@ -220,12 +220,12 @@ export default function BestHrSoftwarePage() {
           offers a trial or a demo; use it before you commit, because
           switching later means moving every employee record by hand.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Finally, count the whole cost of employing people, not just the
           software. Our{" "}
           <Link
             href="/employer-national-insurance-calculator"
-            className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
           >
             employer National Insurance calculator
           </Link>{" "}
@@ -235,10 +235,10 @@ export default function BestHrSoftwarePage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How this guide is put together
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           UK Payroll Calculators is a free calculator site for UK employers
           and employees. This guide is based on each provider&apos;s own
           published product and pricing pages, checked in November 2026;
@@ -249,26 +249,26 @@ export default function BestHrSoftwarePage() {
           or included. Links on this page currently go straight to the
           providers&apos; own websites.
         </p>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Guide checked: {RATES_LAST_VERIFIED}. Calculator rates on this
           site: {PAYE_RATES_LABEL}.
         </p>
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions
         </h2>
         <div className="space-y-4">
           {FAQS.map((f) => (
             <div
               key={f.question}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm"
             >
-              <h3 className="text-base font-semibold text-slate-900">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
                 {f.question}
               </h3>
-              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700">
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
                 {f.answer}
               </p>
             </div>
@@ -277,37 +277,37 @@ export default function BestHrSoftwarePage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Related calculators
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
             href="/employer-national-insurance-calculator"
-            className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               Employer National Insurance Calculator
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               The full cost of employing someone — employer NICs, the
               Employment Allowance and pension contributions.
             </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Open the calculator →
             </span>
           </Link>
           <Link
             href="/pro-rata-salary-calculator"
-            className="group block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
               Pro Rata Salary Calculator
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               Part-time pay and pro-rata holiday entitlement, worked out
               from the full-time role.
             </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Open the calculator →
             </span>
           </Link>

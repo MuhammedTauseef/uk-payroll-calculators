@@ -59,11 +59,11 @@ export default function HowMuchIsStatutorySickPayPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           How much is Statutory Sick Pay?
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Statutory Sick Pay is worth up to {gbp.format(SSP.weeklyCap)} a
           week — but exactly how much you get depends on your pay. You
           receive the lower of {gbp.format(SSP.weeklyCap)} a week or{" "}
@@ -74,10 +74,10 @@ export default function HowMuchIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much is SSP per week?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           There are two possible weekly amounts, and you always get the
           lower one. Earn {gbp.format(500)} a week and {SSP.aweFraction * 100}
           % of your earnings is {gbp.format(400)} — well above the flat
@@ -87,7 +87,7 @@ export default function HowMuchIsStatutorySickPayPage() {
           {gbp.format(80)} a week. In short: higher earners are capped at
           the flat rate; lower earners receive four-fifths of their normal
           weekly pay. The{" "}
-          <Link href="/ssp-rate" className="font-medium text-brand-800 underline">
+          <Link href="/ssp-rate" className="font-medium text-brand-800 dark:text-brand-300 underline">
             SSP rate
           </Link>{" "}
           guide explains where the switch-over happens.
@@ -95,28 +95,28 @@ export default function HowMuchIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much is SSP per day?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP is worked out as a weekly amount but paid by the day. The
           daily rate is the weekly amount divided by your qualifying days —
           the days of the week you normally work. At the full flat rate, the
           daily amounts look like this:
         </p>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-4 py-2 font-semibold text-slate-700">
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Qualifying days per week
                 </th>
-                <th className="px-4 py-2 font-semibold text-slate-700">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
                   Daily SSP at the flat rate
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {[1, 2, 3, 4, 5, 6, 7].map((d) => (
                 <tr key={d}>
                   <td className="px-4 py-2">
@@ -128,7 +128,7 @@ export default function HowMuchIsStatutorySickPayPage() {
             </tbody>
           </table>
         </div>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           If your weekly amount is the {SSP.aweFraction * 100}%-of-earnings
           figure rather than the flat rate, divide that amount by your
           qualifying days instead — the method is identical.
@@ -136,10 +136,10 @@ export default function HowMuchIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much will I get for a week off sick?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           For a full Monday-to-Friday week off, a higher earner on{" "}
           {gbp.format(600)} a week receives {gbp.format(SSP.weeklyCap)}:{" "}
           {SSP.aweFraction * 100}% of {gbp.format(600)} is{" "}
@@ -154,10 +154,10 @@ export default function HowMuchIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How much is SSP if I work part-time?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Part-time staff are treated by the same rules. Your weekly amount
           is still the lower of {gbp.format(SSP.weeklyCap)} or{" "}
           {SSP.aweFraction * 100}% of your own average weekly earnings, and
@@ -170,7 +170,7 @@ export default function HowMuchIsStatutorySickPayPage() {
           lower earnings limit no longer applies. See{" "}
           <Link
             href="/how-much-is-ssp-per-week"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             how much SSP is per week
           </Link>{" "}
@@ -179,10 +179,10 @@ export default function HowMuchIsStatutorySickPayPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How long is SSP paid at this rate?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The weekly amount stays the same throughout a sickness spell, and
           SSP can be paid for up to {SSP.maxWeeks} weeks in one period.
           Spells separated by eight weeks or less are linked and share the

@@ -11,10 +11,10 @@ export default function AboutPage() {
   return (
     <div className="space-y-10">
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           About UK Payroll Calculators
         </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           UK Payroll Calculators is a free set of calculators and
           plain-English guides for UK statutory pay — Statutory Sick Pay,
           notice periods, pro-rata salary and employer National Insurance.
@@ -25,10 +25,10 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What you can work out here
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The calculators cover the statutory payments an employer is most
           often asked about: how much SSP is payable under the current
           rules (including linked sickness periods), the statutory minimum
@@ -42,10 +42,10 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How the figures are produced
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Every rate and threshold used on this site comes from the
           official guidance published on GOV.UK. The figures live in one
           place in the site&apos;s code, each calculator shows its working
@@ -57,10 +57,10 @@ export default function AboutPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What this site is — and is not
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           This site provides general guidance only. It is not affiliated
           with GOV.UK or HMRC, and nothing on it is legal, tax or payroll
           advice for a specific situation. Statutory pay has edge cases —

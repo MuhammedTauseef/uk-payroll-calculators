@@ -18,8 +18,8 @@ export default async function AdminBlogPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <section className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">Blog</h1>
-          <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Blog</h1>
+          <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
             Write and publish blog posts here — no deploy needed. Drafts are visible only in
             this list; published posts are live on /blog the moment you save them.
           </p>
@@ -33,22 +33,22 @@ export default async function AdminBlogPage() {
       </div>
 
       {posts === null ? (
-        <p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm leading-6 text-red-800">
+        <p role="alert" className="rounded-lg border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950 px-4 py-3 text-sm leading-6 text-red-800 dark:text-red-300">
           The posts could not be loaded. Check the database connection and try again.
         </p>
       ) : posts.length === 0 ? (
-        <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-900">No blog posts yet</h2>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50">No blog posts yet</h2>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-300">
             Write the first one with the New post button. A post can stay a draft for as long as
             you like — nothing is public until you set it to Published.
           </p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full min-w-[720px] text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500">
+              <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400">
                 <th className="px-4 py-3 font-medium">Title</th>
                 <th className="px-4 py-3 font-medium">Slug</th>
                 <th className="px-4 py-3 font-medium">Status</th>
@@ -57,35 +57,35 @@ export default async function AdminBlogPage() {
                 <th className="px-4 py-3 font-medium">Delete</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {posts.map((post) => (
-                <tr key={post.id} className="hover:bg-slate-50">
+                <tr key={post.id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
                   <td className="px-4 py-3">
                     <Link
-                      className="font-medium text-slate-900 hover:underline"
+                      className="font-medium text-slate-900 dark:text-slate-50 hover:underline"
                       href={`/admin/blog/${post.id}`}
                     >
                       {post.title}
                     </Link>
                   </td>
-                  <td className="px-4 py-3 text-slate-500">/blog/{post.slug}</td>
+                  <td className="px-4 py-3 text-slate-500 dark:text-slate-400">/blog/{post.slug}</td>
                   <td className="px-4 py-3">
                     {post.status === "published" ? (
-                      <span className="inline-flex rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-semibold text-brand-800 ring-1 ring-brand-200">
+                      <span className="inline-flex rounded-full bg-brand-50 dark:bg-brand-900/30 px-2.5 py-0.5 text-xs font-semibold text-brand-800 dark:text-brand-300 ring-1 ring-brand-200">
                         Published
                       </span>
                     ) : (
-                      <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-600 ring-1 ring-slate-200">
+                      <span className="inline-flex rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 text-xs font-semibold text-slate-600 dark:text-slate-300 ring-1 ring-slate-200 dark:ring-slate-700">
                         Draft
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 whitespace-nowrap text-slate-600">
+                  <td className="px-4 py-3 whitespace-nowrap text-slate-600 dark:text-slate-300">
                     {formatDateGB(post.updated_at)}
                   </td>
                   <td className="px-4 py-3">
                     <Link
-                      className="font-medium text-brand-800 underline"
+                      className="font-medium text-brand-800 dark:text-brand-300 underline"
                       href={`/admin/blog/${post.id}`}
                     >
                       Edit

@@ -59,11 +59,11 @@ export default function HowIsSspCalculatedPage() {
       />
 
       <section className="space-y-3">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
           How is SSP calculated?
         </h1>
         {/* Answer-first intro (40–60 words). */}
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP is calculated in three steps. First, the weekly amount is set
           at the lower of {gbp.format(SSP.weeklyCap)} or{" "}
           {SSP.aweFraction * 100}% of average weekly earnings. Second, that
@@ -74,10 +74,10 @@ export default function HowIsSspCalculatedPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Step 1: work out the weekly amount
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Every SSP calculation starts with average weekly earnings — the
           employee&apos;s normal weekly pay. From that figure, take{" "}
           {SSP.aweFraction * 100}% and compare it with the flat statutory
@@ -92,7 +92,7 @@ export default function HowIsSspCalculatedPage() {
           across days. If you want the amounts at other pay levels, see{" "}
           <Link
             href="/how-much-is-ssp-per-week"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             how much SSP is per week
           </Link>
@@ -101,17 +101,17 @@ export default function HowIsSspCalculatedPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Step 2: turn the weekly amount into a daily rate
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           SSP is paid per day, so the weekly amount is divided by the
           employee&apos;s qualifying days — the days of the week they
           normally work, agreed between employer and employee. A
           Monday-to-Friday employee has five qualifying days; a three-day
           worker has three. A weekly amount of {gbp.format(SSP.weeklyCap)}{" "}
           therefore becomes a daily rate of {gbp.format(24.65)} for the
-          five-day worker and {gbp.format(41.08)} for the three-day worker.
+          five-day worker and {gbp.format(41.09)} for the three-day worker.
           The weekly total is identical either way — the division simply
           matches the payment to each employee&apos;s working pattern, so
           part-weeks of sickness can be paid accurately.
@@ -119,10 +119,10 @@ export default function HowIsSspCalculatedPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Step 3: pay for each qualifying day absent
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Finally, multiply the daily rate by the number of qualifying days
           the employee is absent. Payment runs from the first full day of
           sickness — there are no waiting days to subtract. Only qualifying
@@ -134,7 +134,7 @@ export default function HowIsSspCalculatedPage() {
           guide to{" "}
           <Link
             href="/what-is-statutory-sick-pay"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             what SSP is
           </Link>{" "}
@@ -143,10 +143,10 @@ export default function HowIsSspCalculatedPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Worked example: the full calculation
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           An employee with average weekly earnings of {gbp.format(350)},
           working five qualifying days a week, is off sick for eight
           qualifying days. Step 1: {SSP.aweFraction * 100}% of{" "}
@@ -156,7 +156,7 @@ export default function HowIsSspCalculatedPage() {
           daily rate of {gbp.format(24.65)}. Step 3: eight days at{" "}
           {gbp.format(24.65)} comes to {gbp.format(197.2)} of SSP in total.
         </p>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Now the same absence for a lower-paid colleague earning{" "}
           {gbp.format(90)} a week over three qualifying days. Step 1:{" "}
           {SSP.aweFraction * 100}% of {gbp.format(90)} is {gbp.format(72)} —
@@ -168,7 +168,7 @@ export default function HowIsSspCalculatedPage() {
           changed. The free{" "}
           <Link
             href="/ssp-calculator"
-            className="font-medium text-brand-800 underline"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
             SSP calculator
           </Link>{" "}
@@ -177,10 +177,10 @@ export default function HowIsSspCalculatedPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How are average weekly earnings worked out?
         </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Average weekly earnings are the employee&apos;s normal weekly pay,
           based on what they were actually paid in the weeks running up to
           the sickness — the figures already sitting in the employer&apos;s

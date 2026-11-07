@@ -14,8 +14,8 @@ export default async function AdminBlogNewPage() {
   return (
     <div className="space-y-6">
       <section className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">New blog post</h1>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">New blog post</h1>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Drafts stay invisible to the public. Set the status to Published when the post —
           including all 5 FAQs — is ready.
         </p>
