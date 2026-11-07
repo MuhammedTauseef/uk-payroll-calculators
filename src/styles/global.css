@@ -43,6 +43,60 @@ body {
 }
 
 /*
+  Mobile stacked tables (owner-caught, 7 Nov 2026): content tables on
+  guide and static pages carry the `table-stack` class. Below the sm
+  breakpoint a multi-column table pushes its last columns off-screen
+  inside a sideways-scrolling wrapper, so instead each row becomes a
+  bordered card — the header row is hidden, the first cell reads as
+  the card's bold title line and the remaining cells stack as plain
+  lines beneath it. Every column's content stays visible with NO
+  horizontal scrolling. At sm and up this media query stops applying
+  and tables render exactly as before, min-w scroll wrappers
+  included. Calculator RESULT tables (the client components) do not
+  carry the class and are untouched.
+*/
+@media (max-width: 639.98px) {
+  .table-stack {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .table-stack,
+  .table-stack tbody,
+  .table-stack tr,
+  .table-stack td {
+    display: block;
+  }
+
+  .table-stack thead {
+    display: none;
+  }
+
+  .table-stack tr {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 0.625rem 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .dark .table-stack tr {
+    border-color: #1e293b;
+    background: #0f172a;
+  }
+
+  .table-stack td {
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .table-stack tbody td:first-child {
+    font-weight: 600;
+  }
+}
+
+/*
   Print rules — used by the calculators' "Print / save this result"
   buttons: a printed page carries the result, not the site chrome.
   Header and footer (from the BaseTemplate shell) are dropped, the page

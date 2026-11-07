@@ -359,9 +359,9 @@ export default async function HomePage() {
                 Best HR Software for Small Business UK
               </h3>
               <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                Breathe HR, PeopleHR, Sage HR, Ciphr and Xero Payroll
-                compared: who each one suits, what it costs, and how to
-                choose without overbuying.
+                The quick shortlist: five systems on one page — who
+                each one suits, in one line each. For full prices and
+                limits, see the in-depth blog guide.
               </p>
               <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
                 Read the guide →

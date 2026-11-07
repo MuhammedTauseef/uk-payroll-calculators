@@ -5,7 +5,7 @@ import { MAX_EMPLOYER_STATUTORY_WEEKS } from "@/lib/notice";
 
 export const metadata = pageMetadata(
   "/notice-period-calculator",
-  "Notice Period Calculator UK — Statutory Minimum Notice",
+  "Notice Period Calculator — Statutory Notice",
   "Free UK notice period calculator: the statutory minimum notice an employer or employee must give under the Employment Rights Act 1996, and the last working day.",
 );
 
@@ -97,7 +97,7 @@ export default function NoticePeriodCalculatorPage() {
           contract decides.
         </p>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">

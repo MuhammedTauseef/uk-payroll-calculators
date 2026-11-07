@@ -10,6 +10,12 @@ import { listPublishedBlogSitemapEntries } from "@/lib/blog/queries";
  * Keeping the route list driven by AppConfig means a route added to
  * the configuration appears here automatically.
  *
+ * "/blog" is deliberately EXCLUDED from the nav- and siteLinks-derived
+ * lists below: it is a navigation/footer link in AppConfig, but its
+ * sitemap entry comes only from the blog block at the bottom (weekly,
+ * 0.6) — listing it from all three places produced three conflicting
+ * entries for the same URL (technical SEO audit, 7 Nov 2026).
+ *
  * The blog read is failure-safe: before the Supabase env vars are set
  * (or if the database is unreachable) the sitemap returns exactly the
  * static routes it always carried — publishing can only ever ADD
@@ -18,9 +24,11 @@ import { listPublishedBlogSitemapEntries } from "@/lib/blog/queries";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const calculatorPaths = AppConfig.nav
     .map((item) => item.href)
-    .filter((href) => href !== "/");
+    .filter((href) => href !== "/" && href !== "/blog");
   const guidePaths = AppConfig.guides.map((item) => item.href);
-  const sitePaths = AppConfig.siteLinks.map((item) => item.href);
+  const sitePaths = AppConfig.siteLinks
+    .map((item) => item.href)
+    .filter((href) => href !== "/blog");
 
   const routes: { path: string; priority: number }[] = [
     { path: "/", priority: 1.0 },

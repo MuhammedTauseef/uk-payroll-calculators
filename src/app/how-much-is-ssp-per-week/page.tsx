@@ -105,7 +105,7 @@ export default function HowMuchIsSspPerWeekPage() {
           How much is SSP per week at different pay levels?
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full min-w-[520px] text-left text-sm">
+          <table className="w-full min-w-[520px] text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">

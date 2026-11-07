@@ -7,7 +7,7 @@ import { listPublishedBlogPosts } from "@/lib/blog/queries";
 export const metadata = pageMetadata(
   "/blog",
   "Blog — UK payroll guides and explainers",
-  "Plain-English guides from UK Payroll Calculators: statutory sick pay, payroll, maternity and paternity pay, and employer National Insurance — checked against the April 2026 rules.",
+  "Plain-English guides from UK Payroll Calculators: statutory sick pay, payroll, maternity and paternity pay and employer National Insurance — April 2026 rules.",
 );
 
 // Dynamic on purpose: posts are published from the admin panel and

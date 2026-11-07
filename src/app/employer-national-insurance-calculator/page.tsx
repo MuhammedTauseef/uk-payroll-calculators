@@ -10,7 +10,7 @@ import {
 
 export const metadata = pageMetadata(
   "/employer-national-insurance-calculator",
-  "Employer National Insurance Calculator — Employers NIC Cost",
+  "Employer National Insurance Calculator UK",
   "Free employer National Insurance calculator: employer Class 1 NICs at 15% above the £5,000 Secondary Threshold, with the Employment Allowance and total cost.",
 );
 
@@ -141,7 +141,7 @@ export default function EmployerNationalInsuranceCalculatorPage() {
           because a Budget can change them from the next April.
         </p>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">

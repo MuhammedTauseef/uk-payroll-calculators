@@ -63,7 +63,7 @@ function round2(n: number): number {
  * the weekly rate. The epsilon keeps values that are already exact
  * pennies (within float error) from jumping a penny.
  */
-function ceil2(n: number): number {
+export function ceil2(n: number): number {
   return Math.ceil((n - 1e-9) * 100) / 100;
 }
 

@@ -10,6 +10,7 @@ import {
   type GuideFaq,
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
+import { ceil2 } from "@/lib/ssp";
 
 export const metadata = pageMetadata(
   "/how-much-is-statutory-sick-pay",
@@ -105,7 +106,7 @@ export default function HowMuchIsStatutorySickPayPage() {
           daily amounts look like this:
         </p>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
@@ -122,7 +123,11 @@ export default function HowMuchIsStatutorySickPayPage() {
                   <td className="px-4 py-2">
                     {d} day{d > 1 ? "s" : ""} a week
                   </td>
-                  <td className="px-4 py-2">{gbp.format(SSP.weeklyCap / d)}</td>
+                  {/* Daily rates rounded UP to the penny, matching
+                      GOV.UK's "amounts to pay" tables and the SSP
+                      calculator (audit F2): plain formatting left the
+                      3-day row a penny low (£41.09 is correct). */}
+                  <td className="px-4 py-2">{gbp.format(ceil2(SSP.weeklyCap / d))}</td>
                 </tr>
               ))}
             </tbody>

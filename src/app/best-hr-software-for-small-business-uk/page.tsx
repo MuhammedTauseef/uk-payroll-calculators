@@ -146,7 +146,7 @@ export default function BestHrSoftwarePage() {
           The shortlist at a glance
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full min-w-[520px] text-left text-sm">
+          <table className="w-full min-w-[520px] text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
@@ -231,6 +231,18 @@ export default function BestHrSoftwarePage() {
           </Link>{" "}
           shows the NICs and pension costs that sit on top of every salary
           — the numbers HR software will be tracking for you.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Want the deeper version of this shortlist — full prices, plan
+          limits and headcount cost comparisons? Read our in-depth guide
+          to the{" "}
+          <Link
+            href="/blog/best-hr-systems-uk"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            best HR systems in the UK
+          </Link>
+          .
         </p>
       </section>
 

@@ -12,7 +12,7 @@ import {
 
 export const metadata: Metadata = pageMetadata(
   "/40k-after-tax-uk",
-  "£40k After Tax UK — Take-Home Pay on a £40,000 Salary",
+  "£40k After Tax UK — Take-Home Pay Calculator",
   "On a £40,000 salary in 2026/27 you take home £32,319.60 a year (£2,693.30 a month) after tax and National Insurance. Check any salary with the calculator.",
 );
 
@@ -96,7 +96,7 @@ export default function FortyKAfterTaxPage() {
           The £40,000 breakdown, line by line
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm table-stack">
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               <tr>
                 <td className="px-4 py-2">Gross salary</td>
@@ -155,7 +155,7 @@ export default function FortyKAfterTaxPage() {
           Take-home pay around £40,000
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
@@ -238,7 +238,7 @@ export default function FortyKAfterTaxPage() {
           Rates used by this calculator
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm table-stack">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
                 <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">Rate</th>
