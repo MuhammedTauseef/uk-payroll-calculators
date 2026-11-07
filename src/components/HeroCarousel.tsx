@@ -7,6 +7,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 
 /**
@@ -43,7 +44,17 @@ import {
  * Motion: autoplay every 6s, looping; hovering the panel pauses
  * it, focus inside the carousel pauses it (the plugin's
  * stopOnFocusIn), and under prefers-reduced-motion autoplay never
- * starts. No arrows, no dots.
+ * starts. No arrows.
+ *
+ * Slide dots (owner request, 8 Nov 2026 — "carousel kuch aisa
+ * nishan ho ke pata chale carousel chal raha hai"): three small
+ * indicator buttons sit at the bottom-centre inside the frame on
+ * a subtle dark pill, so they read clearly over any photo in
+ * either colour mode. The active dot stretches into a pill and
+ * follows the Embla "select" event as autoplay advances; clicking
+ * a dot jumps to that slide (api.scrollTo) and autoplay then
+ * resumes its normal cycle (hover-pause via play() on mouseleave
+ * is untouched).
  */
 const HERO_SLIDES = [
   {
@@ -67,6 +78,23 @@ export function HeroCarousel() {
   // No plugin during SSR / first paint: autoplay is attached only
   // after mount, and never when the visitor prefers reduced motion.
   const [plugins, setPlugins] = React.useState<AutoplayPlugin[]>([]);
+  // Embla api + the currently selected slide, driving the dots.
+  const [api, setApi] = React.useState<CarouselApi | null>(null);
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+    const onSelect = () => setCurrent(api.selectedScrollSnap());
+    onSelect();
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+    return () => {
+      api.off("select", onSelect);
+      api.off("reInit", onSelect);
+    };
+  }, [api]);
 
   React.useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -98,10 +126,11 @@ export function HeroCarousel() {
   }, []);
 
   return (
-    <div ref={panelRef} className="mt-10 sm:mt-12">
+    <div ref={panelRef} className="relative mt-10 sm:mt-12">
       <Carousel
         opts={{ loop: true }}
         plugins={plugins}
+        setApi={setApi}
         aria-label="UK payroll in everyday life"
         className="w-full"
       >
@@ -137,6 +166,35 @@ export function HeroCarousel() {
           ))}
         </CarouselContent>
       </Carousel>
+      {/* Slide indicators: bottom-centre inside the frame, on a
+          subtle dark pill so the white dots read clearly over any
+          photo, light or dark mode. The active dot stretches into
+          a pill and tracks the selected slide; each dot is a real
+          button that jumps to its slide. */}
+      <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center sm:bottom-4">
+        <div className="flex items-center gap-1 rounded-full bg-black/35 px-2 py-1 shadow-sm backdrop-blur-sm">
+          {HERO_SLIDES.map((slide, i) => {
+            const active = i === current;
+            return (
+              <button
+                key={slide.src}
+                type="button"
+                onClick={() => api?.scrollTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={active || undefined}
+                className="flex h-5 w-5 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <span
+                  aria-hidden
+                  className={`block h-2 rounded-full transition-all duration-300 ${
+                    active ? "w-5 bg-white" : "w-2 bg-white/60 hover:bg-white/85"
+                  }`}
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
