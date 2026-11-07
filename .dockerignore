@@ -1,0 +1,24 @@
+# Dependencies
+node_modules
+
+# Build output
+.next
+out
+dist
+
+# VCS
+.git
+.gitignore
+
+# Environment files / secrets — never copied into the image
+.env
+.env.*
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Misc
+.vercel
+coverage
+npm-debug.log*
