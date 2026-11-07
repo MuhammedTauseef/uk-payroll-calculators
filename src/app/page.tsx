@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { SSP_GUIDES } from "@/components/GuideSections";
 import { pageMetadata } from "@/utils/metadata";
 import { AppConfig } from "@/utils/AppConfig";
@@ -220,7 +221,13 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <section className="space-y-6 pt-4 text-center sm:pt-8">
+      <section className="relative pt-4 text-center sm:pt-8">
+        {/* Background photo carousel (decorative): fills the hero's
+            whole box — pill, headline, copy, CTAs and the trust row
+            all sit on it — and ends at the section's bottom edge,
+            where "The calculators" begins on the plain page wash. */}
+        <HeroCarousel />
+        <div className="relative z-10 space-y-6">
         <p className="inline-block rounded-full border border-brand-200 dark:border-brand-800 bg-brand-50 dark:bg-brand-900/30 px-3 py-1 text-xs font-semibold tracking-wide text-brand-800 dark:text-brand-300 uppercase">
           Built on the April 2026 rules
         </p>
@@ -256,6 +263,7 @@ export default async function HomePage() {
             </li>
           ))}
         </ul>
+        </div>
       </section>
 
       <section id="calculators" className="scroll-mt-32">
