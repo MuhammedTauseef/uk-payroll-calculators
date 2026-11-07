@@ -13,7 +13,7 @@ export const AppConfig = {
   siteUrl: "https://uk-payroll-calculators.vercel.app",
   tagline: "Free UK employer & payroll calculators",
   description:
-    "Free UK employer calculators for statutory payments: Statutory Sick Pay (SSP), notice period, pro-rata salary and employer National Insurance calculators.",
+    "Free UK employer calculators for statutory payments and pay: Statutory Sick Pay (SSP), notice period, pro-rata salary, employer National Insurance, NHS maternity pay, paternity pay and take-home pay calculators, plus an HR software guide for small businesses.",
   locale: "en-GB",
   nav: [
     { href: "/", label: "Home" },
@@ -24,8 +24,18 @@ export const AppConfig = {
       href: "/employer-national-insurance-calculator",
       label: "Employer NI",
     },
+    {
+      href: "/nhs-maternity-pay-calculator",
+      label: "Maternity Pay",
+    },
+    { href: "/paternity-pay-calculator", label: "Paternity Pay" },
+    { href: "/40k-after-tax-uk", label: "Take-Home Pay" },
   ],
   guides: [
+    {
+      href: "/best-hr-software-for-small-business-uk",
+      label: "Best HR Software for Small Business UK",
+    },
     { href: "/what-is-statutory-sick-pay", label: "What is Statutory Sick Pay?" },
     {
       href: "/how-much-is-statutory-sick-pay",

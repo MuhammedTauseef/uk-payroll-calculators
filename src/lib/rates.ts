@@ -130,3 +130,126 @@ export const PENSION_RATES_LABEL =
 
 /** Date the pension figures above were verified against GOV.UK. */
 export const PENSION_RATES_VERIFIED = "7 November 2026";
+
+
+/**
+ * Statutory Paternity Pay (SPP) — weekly amount.
+ *
+ * 2026/27: the LOWER of £194.32 a week or 90% of the employee's average
+ * weekly earnings — the same statutory flat rate as SMP. Verified against
+ * GOV.UK "Rates and thresholds for employers 2026 to 2027" on
+ * 7 November 2026. (The 2025/26 flat rate was £187.18 — do not use it.)
+ *
+ * SPP is paid for one or two weeks, chosen by the employee. Since April
+ * 2024 the two weeks can be taken as one block of two, or as two separate
+ * blocks of one week, at any point in the first year after the birth or
+ * adoption placement.
+ */
+export const SPP = {
+  /** Flat statutory weekly rate, £/week (shared with SMP for 2026/27). */
+  weeklyRate: 194.32,
+  /** Earnings-related fraction of average weekly earnings. */
+  aweFraction: 0.9,
+  /** Maximum number of weeks SPP can be paid. */
+  maxWeeks: 2,
+} as const;
+
+/**
+ * Statutory Maternity Pay (SMP) structure — April 2026 rules.
+ *
+ * SMP is payable for up to 39 weeks:
+ *   - weeks 1–6:  90% of average weekly earnings (no cap)
+ *   - weeks 7–39: the LOWER of £194.32 a week or 90% of average weekly
+ *     earnings
+ * Weeks 40–52 of maternity leave are unpaid (statutory leave is 52 weeks).
+ *
+ * Eligibility (employer guide, GOV.UK): the employee must have been
+ * continuously employed by the same employer for at least 26 weeks by the
+ * 15th week before the expected week of childbirth, and their average
+ * weekly earnings in the relevant 8-week period must be at least the
+ * Lower Earnings Limit (£129 a week for 2026/27, from the same GOV.UK
+ * rates page, verified 7 November 2026).
+ */
+export const MATERNITY = {
+  /** Weeks paid at 90% of average weekly earnings. */
+  earningsRelatedWeeks: 6,
+  /** Total weeks SMP is payable (including the earnings-related weeks). */
+  totalPaidWeeks: 39,
+  /** Statutory maternity leave length in weeks (paid + unpaid). */
+  leaveWeeks: 52,
+  /** Earnings fraction used for both SMP stages. */
+  aweFraction: 0.9,
+  /** Lower Earnings Limit — minimum AWE to qualify for SMP, £/week. */
+  lowerEarningsLimitWeekly: 129,
+} as const;
+
+/**
+ * NHS occupational maternity pay — Agenda for Change (Section 15).
+ *
+ * For NHS staff who qualify for occupational maternity pay (broadly: 12
+ * months' continuous NHS service by the 11th week before the expected
+ * week of childbirth, and an intention to return to NHS work):
+ *   - weeks 1–8:   full pay (average weekly earnings)
+ *   - weeks 9–26:  half pay PLUS SMP, provided the total does not exceed
+ *     full pay
+ *   - weeks 27–39: SMP only (the flat statutory stage amount)
+ *   - weeks 40–52: unpaid
+ * The SMP element inside the half-pay stage is the same statutory weekly
+ * amount used above (the lower of £194.32 or 90% of AWE).
+ */
+export const NHS_MATERNITY = {
+  /** Weeks at full pay. */
+  fullPayWeeks: 8,
+  /** Last week of the half-pay + SMP stage. */
+  halfPayEndWeek: 26,
+} as const;
+
+/**
+ * Income Tax — England, Wales and Northern Ireland, 2026/27.
+ *
+ * Verified against GOV.UK ("Income Tax rates and Personal Allowances"
+ * and "Rates and thresholds for employers 2026 to 2027") on
+ * 7 November 2026:
+ *   - Personal Allowance: £12,570, reduced by £1 for every £2 of income
+ *     over £100,000, reaching zero at £125,140.
+ *   - Basic rate 20% on the first £37,700 of taxable income (income up
+ *     to £50,270 with a full Personal Allowance).
+ *   - Higher rate 40% above that, up to £125,140 of income.
+ *   - Additional rate 45% on income over £125,140. (At that income the
+ *     Personal Allowance is already zero, so the threshold applies to
+ *     taxable income unchanged.)
+ * Scotland has different bands — this hub's take-home calculator covers
+ * England, Wales and Northern Ireland only and says so on the page.
+ */
+export const INCOME_TAX = {
+  personalAllowance: 12570,
+  allowanceTaperThreshold: 100000,
+  /** Width of the basic-rate band, measured in taxable income. */
+  basicRateBand: 37700,
+  basicRate: 0.2,
+  higherRate: 0.4,
+  /** Income level where the additional rate starts. */
+  additionalRateThreshold: 125140,
+  additionalRate: 0.45,
+} as const;
+
+/**
+ * Employee (primary) Class 1 National Insurance — 2026/27.
+ *
+ * Verified against GOV.UK "Rates and thresholds for employers 2026 to
+ * 2027" on 7 November 2026 (category A): 0% up to the Primary Threshold
+ * (£12,570 a year), 8% from the Primary Threshold up to the Upper
+ * Earnings Limit (£50,270 a year), 2% on earnings above that.
+ */
+export const EMPLOYEE_NI = {
+  primaryThresholdAnnual: 12570,
+  upperEarningsLimitAnnual: 50270,
+  mainRate: 0.08,
+  additionalRate: 0.02,
+} as const;
+
+/** Dating label for take-home (PAYE) figures (2026/27 — GOV.UK-verified). */
+export const PAYE_RATES_LABEL = "2026/27 rates — verified against GOV.UK";
+
+/** Date the PAYE figures above were verified against GOV.UK. */
+export const PAYE_RATES_VERIFIED = "7 November 2026";

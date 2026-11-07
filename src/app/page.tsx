@@ -65,6 +65,34 @@ function EmployerNiIcon() {
   );
 }
 
+function MaternityIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 20.5s-7-4.6-9-9A5.2 5.2 0 0 1 12 6.4a5.2 5.2 0 0 1 9 5.1c-2 4.4-9 9-9 9z" />
+    </svg>
+  );
+}
+
+function PaternityIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" />
+      <circle cx="17.2" cy="9.5" r="2.3" />
+      <path d="M16 15.2c2.3.3 3.9 1.9 4.4 4.3" />
+    </svg>
+  );
+}
+
+function TakeHomeIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 12l6.5-6.5M8.6 9.4h.01M15.4 14.6h.01" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -123,6 +151,30 @@ const CALCULATORS = [
     description:
       "Work out employer Class 1 NICs on a salary — 15% on earnings above the £5,000 Secondary Threshold (2026/27 rates) — with the Employment Allowance, and see the total cost of employing someone.",
     linkText: "Open the employer NI calculator →",
+  },
+  {
+    href: "/nhs-maternity-pay-calculator",
+    icon: <MaternityIcon />,
+    title: "NHS Maternity Pay Calculator",
+    description:
+      "Maternity pay under Agenda for Change — 8 weeks at full pay, 18 weeks at half pay plus SMP, 13 weeks at SMP — or Statutory Maternity Pay only, stage by stage from your salary.",
+    linkText: "Open the maternity pay calculator →",
+  },
+  {
+    href: "/paternity-pay-calculator",
+    icon: <PaternityIcon />,
+    title: "Paternity Pay Calculator",
+    description:
+      "Statutory Paternity Pay for one or two weeks of leave: the lower of £194.32 a week or 90% of average weekly earnings, with the two weeks taken together or separately.",
+    linkText: "Open the paternity pay calculator →",
+  },
+  {
+    href: "/40k-after-tax-uk",
+    icon: <TakeHomeIcon />,
+    title: "£40k After Tax UK",
+    description:
+      "Take-home pay on a £40,000 salary in 2026/27 — £32,319.60 a year after Income Tax and National Insurance — with a calculator that works for any salary you enter.",
+    linkText: "Open the take-home calculator →",
   },
 ];
 
@@ -251,6 +303,33 @@ export default function HomePage() {
               </span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="scroll-mt-32">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          More guides
+        </h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          <Link
+            href="/best-hr-software-for-small-business-uk"
+            className="group block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-md"
+          >
+            <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm">
+              <GuideIcon />
+            </span>
+            <h3 className="text-lg font-semibold text-slate-900">
+              Best HR Software for Small Business UK
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+              Breathe HR, PeopleHR, Sage HR, Ciphr and Xero Payroll
+              compared: who each one suits, what it costs, and how to
+              choose without overbuying.
+            </p>
+            <span className="mt-3 inline-block text-sm font-semibold text-brand-700 group-hover:text-brand-800">
+              Read the guide →
+            </span>
+          </Link>
         </div>
       </section>
 
