@@ -48,7 +48,11 @@ export const AppConfig = {
   ],
   siteLinks: [
     { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
     { href: "/blog", label: "Blog" },
     { href: "/privacy-policy", label: "Privacy Policy" },
+    { href: "/cookies", label: "Cookie Policy" },
+    { href: "/terms", label: "Terms of Use" },
+    { href: "/disclaimer", label: "Disclaimer" },
   ],
 };
