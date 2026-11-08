@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
           stored or shared by this site.
         </p>
         <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">
-          Last updated: 7 November 2026.
+          Last updated: 8 November 2026.
         </p>
       </section>
 
@@ -40,14 +40,53 @@ export default function PrivacyPolicyPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          No accounts, no tracking cookies
+          No accounts
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-          There is nothing to sign up for and no sign-in. The site itself
-          sets no tracking cookies and runs no advertising or visitor
-          profiling. If that ever changes — for example, if privacy-first
-          analytics are added — this page will be updated first, before
-          the change goes live.
+          There is nothing to sign up for and no sign-in for visitors.
+          The only sign-in on the site is the admin area used by the
+          people who run it.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Analytics
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          We use Google Analytics (GA4) to count visits and see which
+          pages are used, in aggregate. It sets cookies such as _ga for
+          that purpose. It never receives the figures you type into the
+          calculators — those stay in your browser, as the section above
+          explains. You can opt out with Google&apos;s Analytics opt-out
+          add-on, or by blocking cookies in your browser.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Advertising
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The site currently shows no adverts. If advertising is
+          introduced later, third-party vendors, including Google, will
+          use cookies to serve ads based on your prior visits to this
+          and other sites, and you can opt out of personalised
+          advertising at{" "}
+          <a
+            className="font-medium text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900 dark:text-slate-50 dark:decoration-slate-500 dark:hover:decoration-slate-50"
+            href="https://www.google.com/settings/ads"
+          >
+            google.com/settings/ads
+          </a>{" "}
+          and{" "}
+          <a
+            className="font-medium text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900 dark:text-slate-50 dark:decoration-slate-500 dark:hover:decoration-slate-50"
+            href="https://www.aboutads.info/choices"
+          >
+            aboutads.info/choices
+          </a>
+          . This page will be updated before any such change goes live.
         </p>
       </section>
 
