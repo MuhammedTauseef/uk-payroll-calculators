@@ -9,7 +9,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata = pageMetadata(
   "/pro-rata-salary-calculator",
-  "Pro Rata Salary Calculator — Part-Time Pay & FTE",
+  "Pro Rata Salary Calculator — FTE",
   "Free pro rata salary calculator: part-time pay from the full-time salary by hours or days per week, the FTE fraction, and pro-rata holiday entitlement.",
 );
 
