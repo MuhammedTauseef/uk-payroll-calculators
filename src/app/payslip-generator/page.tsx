@@ -15,7 +15,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/payslip-generator",
-  "Payslip Generator — Free UK Payslip Maker",
+  "Payslip Generator — Free UK Payslip",
   "Free UK payslip generator: add employer, employee, gross pay and tax code to build a payslip with tax, National Insurance and net pay. Print or save as PDF.",
 );
 
