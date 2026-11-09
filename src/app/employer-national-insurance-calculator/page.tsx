@@ -13,7 +13,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata = pageMetadata(
   "/employer-national-insurance-calculator",
-  "Employer National Insurance Calculator UK",
+  "Employer National Insurance Calculator",
   "Free employer National Insurance calculator: employer Class 1 NICs at 15% above the £5,000 Secondary Threshold, with the Employment Allowance and total cost.",
 );
 
