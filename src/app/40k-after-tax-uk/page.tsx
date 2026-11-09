@@ -320,6 +320,22 @@ export default function FortyKAfterTaxPage() {
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
+            href="/payslip-generator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Payslip Generator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Turn any salary into a payslip document — gross pay, Income
+              Tax, National Insurance and net pay, monthly or weekly —
+              ready to print or save as a PDF.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the generator →
+            </span>
+          </Link>
+          <Link
             href="/pro-rata-salary-calculator"
             className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >

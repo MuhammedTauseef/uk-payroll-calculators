@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
+import Link from "next/link";
 import EmployerNiCalculator from "@/components/EmployerNiCalculator";
 import {
   EMPLOYER_NI,
@@ -240,6 +241,46 @@ export default function EmployerNationalInsuranceCalculatorPage() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Related calculators
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/payslip-generator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Payslip Generator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              The employee&apos;s side of the same payroll run: build a
+              payslip showing the employee&apos;s Income Tax and National
+              Insurance on any gross pay, ready to print.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the generator →
+            </span>
+          </Link>
+          <Link
+            href="/40k-after-tax-uk"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Take-Home Pay Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              What the employee actually keeps: take-home pay on any salary
+              after Income Tax and employee National Insurance, per year,
+              month and week.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
         </div>
       </section>
     </div>

@@ -103,6 +103,15 @@ function TakeHomeIcon() {
   );
 }
 
+function PayslipIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="5" y="3" width="14" height="18" rx="2" />
+      <path d="M9 8h6M9 12h6M9 16h4" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -185,6 +194,14 @@ const CALCULATORS = [
     description:
       "Take-home pay on a £40,000 salary in 2026/27 — £32,319.60 a year after Income Tax and National Insurance — with a calculator that works for any salary you enter.",
     linkText: "Open the take-home calculator →",
+  },
+  {
+    href: "/payslip-generator",
+    icon: <PayslipIcon />,
+    title: "Payslip Generator",
+    description:
+      "Create a UK payslip from an employer name, an employee name, the gross pay and a tax code: Income Tax and employee National Insurance worked out monthly or weekly, ready to print or save as a PDF.",
+    linkText: "Open the payslip generator →",
   },
 ];
 
@@ -272,7 +289,7 @@ export default async function HomePage() {
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           {CALCULATORS.map((calc, i) => {
-            // Odd card out (7 calculators): the last card spans the
+            // Odd card out (odd counts): the last card spans the
             // full row as a wide feature card instead of leaving a
             // half-empty slot beside it.
             const wide = i === CALCULATORS.length - 1 && CALCULATORS.length % 2 === 1;
