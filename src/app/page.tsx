@@ -148,6 +148,14 @@ function Ir35Icon() {
   );
 }
 
+function TexasIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 3.5l2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16.4l-5.1 2.8L8 13.5 3.7 9.5l5.8-.7z" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -396,6 +404,45 @@ export default async function HomePage() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section id="us-calculators" className="scroll-mt-32">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+          US Calculators
+        </h2>
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
+          The hub&apos;s first United States section — the same
+          shows-its-working treatment as the UK tools, run on IRS rules
+          instead of HMRC ones.
+        </p>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {/* Single US tool so far: the card spans the full row as a
+              wide feature card, same treatment as the odd card out in
+              the grids above. */}
+          <Link
+            href="/us/texas-paycheck-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md sm:col-span-2 sm:flex sm:items-start sm:gap-5"
+          >
+            <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm sm:mb-0">
+              <TexasIcon />
+            </span>
+            <div className="min-w-0">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                Texas Paycheck Calculator
+              </h3>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                Net pay on a Texas salary or hourly wage under the 2026
+                IRS rules: federal income tax withholding, Social
+                Security and Medicare worked out line by line — and a
+                Texas state income tax line of exactly $0, because Texas
+                has none.
+              </p>
+              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                Open the Texas paycheck calculator →
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
