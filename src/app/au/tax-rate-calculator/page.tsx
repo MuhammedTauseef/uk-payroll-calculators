@@ -14,7 +14,7 @@ import { AppConfig } from "@/utils/AppConfig";
 export const metadata: Metadata = pageMetadata(
   "/au/tax-rate-calculator",
   "Australia Tax Rate Calculator — 2025–26 Rates",
-  "Free Australia tax rate calculator for 2025–26: income tax and the Medicare levy on any income, your marginal and effective tax rate — ATO resident and non-resident rates.",
+  "Free Australia tax rate calculator 2025–26: income tax and Medicare levy on any income, marginal and effective rates — ATO resident and non-resident rates.",
 );
 
 const aud = new Intl.NumberFormat("en-AU", {
