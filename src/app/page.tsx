@@ -306,8 +306,20 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      <section className="relative overflow-hidden rounded-3xl px-4 py-12 text-center sm:px-8 sm:py-16">
-        {/* Background photo carousel: full-bleed UK photos
+      {/* Full-screen hero (owner order 9 Nov 2026, evening —
+          "carousel full screen par show hon laptop"): the section
+          breaks out of <main>'s centred max-w-6xl column to the
+          full viewport width (w-[100vw] + the centring negative
+          margin; global.css clips any scrollbar-width overshoot
+          on body so no horizontal scrollbar can appear), the
+          negative top margin cancels <main>'s py-8/sm:py-12 so
+          the hero starts directly under the sticky h-16 header,
+          and min-height fills the rest of the first screen
+          (100svh - 4rem header). No rounded card, no side
+          margins: the carousel photos run edge to edge, with the
+          copy centred over them in its own readable column. */}
+      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(100svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16">
+        {/* Background photo carousel: full-screen UK photos
             crossfade behind the hero copy (see HeroCarousel). */}
         <HeroCarousel />
         <div className="relative z-10 space-y-6">
