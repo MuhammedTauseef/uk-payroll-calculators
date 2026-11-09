@@ -571,7 +571,7 @@ export default function TaxCodeCheckerPage() {
         </div>
       </section>
 
-      <section className="space-y-4">
+      <section className="space-y-4 print:hidden">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Related calculators
         </h2>

@@ -1,5 +1,6 @@
 "use client";
 
+import PrintButton from "@/components/PrintButton";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
@@ -41,8 +42,8 @@ export default function TaxCodeChecker() {
           : "—";
 
   return (
-    <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm sm:p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
+      <div className="grid gap-4 print:hidden sm:grid-cols-2">
         <div>
           <label htmlFor="tc-code" className={labelClass}>
             Your tax code
@@ -81,13 +82,27 @@ export default function TaxCodeChecker() {
         </div>
       </div>
 
-      <p className="mt-4 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+      <p className="mt-4 text-xs leading-relaxed text-slate-500 dark:text-slate-400 print:hidden">
         Private by design: everything is worked out in your browser.
         Nothing you type here is sent to a server, stored or tracked.
       </p>
 
       {/* The verdict. */}
-      <div className="mt-6 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 p-5 sm:p-6">
+      <div className="mt-6 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 p-5 print:mt-0 print:border-slate-300 sm:p-6">
+        {/* Print-only recap of the inputs (the form itself is not printed). */}
+        <div className="mb-4 hidden text-sm leading-relaxed text-slate-700 dark:text-slate-300 print:block">
+          <p className="font-semibold text-slate-900 dark:text-slate-50">
+            HMRC tax code check — inputs used
+          </p>
+          <p>
+            Tax code checked: {taxCode.trim() || "—"}
+            {salaryNumber > 0
+              ? ` · Salary entered: ${gbp.format(salaryNumber)} a year`
+              : " · No salary entered"}
+            .
+          </p>
+        </div>
+
         {!result.recognised ? (
           <div className="space-y-2">
             <p className="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-50">
@@ -214,6 +229,8 @@ export default function TaxCodeChecker() {
           </div>
         )}
       </div>
+
+      <PrintButton />
 
       <StickyResultBar label="Tax-free allowance" value={stickyValue} />
     </div>

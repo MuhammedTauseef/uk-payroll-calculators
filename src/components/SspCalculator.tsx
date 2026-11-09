@@ -1,5 +1,6 @@
 "use client";
 
+import PrintButton from "@/components/PrintButton";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
@@ -219,20 +220,7 @@ export default function SspCalculator() {
           cannot reclaim SSP from HMRC.
         </p>
 
-        <div className="print:hidden">
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="mt-4 rounded-full border border-brand-700 bg-white dark:bg-slate-900 px-5 py-2.5 text-sm font-semibold text-brand-800 dark:text-brand-300 shadow-sm transition hover:bg-brand-50 dark:hover:bg-brand-900/40"
-          >
-            Print / save this result
-          </button>
-          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-            Opens your browser&apos;s print view with a clean summary of
-            this calculation — choose &ldquo;Save as PDF&rdquo; there to
-            keep a copy.
-          </p>
-        </div>
+        <PrintButton />
       </div>
       <StickyResultBar
         label="Total SSP for this spell"
