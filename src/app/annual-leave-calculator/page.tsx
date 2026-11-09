@@ -8,7 +8,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/annual-leave-calculator",
-  "Annual Leave Calculator — How Much Holiday Do You Get?",
+  "Annual Leave Calculator — Holidays",
   "Free annual leave calculator: holiday entitlement for full-time, part-time and irregular-hours workers — 5.6 weeks a year and the 12.07% accrual method.",
 );
 
