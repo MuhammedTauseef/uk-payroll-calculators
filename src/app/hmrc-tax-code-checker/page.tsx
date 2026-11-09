@@ -14,7 +14,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/hmrc-tax-code-checker",
-  "HMRC Tax Code Checker — What Does My Tax Code Mean?",
+  "HMRC Tax Code Checker — Tax Codes",
   "Free HMRC tax code checker: enter your code — 1257L, BR, D0, 0T, K475, 1257L W1 — to see what it means, your tax-free allowance, and what it costs vs 1257L.",
 );
 
