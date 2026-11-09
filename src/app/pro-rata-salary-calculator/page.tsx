@@ -5,6 +5,8 @@ import ProRataCalculator from "@/components/ProRataCalculator";
 import { STATUTORY_HOLIDAY_WEEKS } from "@/lib/prorata";
 import { RATES_RULES_LABEL } from "@/lib/rates";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata = pageMetadata(
   "/pro-rata-salary-calculator",
   "Pro Rata Salary Calculator — Part-Time Pay & FTE",
@@ -49,6 +51,22 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Pro Rata Salary Calculator",
+  url: `${AppConfig.siteUrl}/pro-rata-salary-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 const gbp = new Intl.NumberFormat("en-GB", {
   style: "currency",
   currency: "GBP",
@@ -77,6 +95,10 @@ export default function ProRataSalaryCalculatorPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
