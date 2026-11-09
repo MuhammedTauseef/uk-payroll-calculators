@@ -7,8 +7,8 @@ import { BaseTemplate } from "@/templates/BaseTemplate";
 import SiteNav from "@/components/SiteNav";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
+import FooterNote from "@/components/FooterNote";
 import { AppConfig } from "@/utils/AppConfig";
-import { RATES_RULES_LABEL } from "@/lib/rates";
 
 const GA_MEASUREMENT_ID = "G-0R7G7GZ0CK";
 
@@ -100,15 +100,7 @@ export default function RootLayout({
               </Link>
             </>
           }
-          footerNote={
-            <p>
-              This site provides general guidance only, based on the{" "}
-              {RATES_RULES_LABEL.charAt(0).toLowerCase() +
-                RATES_RULES_LABEL.slice(1)}
-              . It is not affiliated with GOV.UK or HMRC. Always check the
-              official guidance on GOV.UK for your specific circumstances.
-            </p>
-          }
+          footerNote={<FooterNote />}
         >
           {children}
         </BaseTemplate>
