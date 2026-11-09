@@ -293,6 +293,47 @@ export default function SspCalculatorPage() {
           ))}
         </div>
       </section>
+
+      <section className="space-y-4 print:hidden">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Related calculators
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/annual-leave-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Annual Leave Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Holiday entitlement keeps building up while an employee is
+              off sick — work out the statutory annual leave in days and
+              hours: 5.6 weeks a year, part-time pro-rata, part-year
+              starters and the 12.07% accrual for irregular hours.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+          <Link
+            href="/pro-rata-salary-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Pro Rata Salary Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Part-time pay from the full-time salary, by hours or days
+              per week: pro-rata annual, monthly and weekly pay, and the
+              FTE fraction.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

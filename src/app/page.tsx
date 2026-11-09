@@ -121,6 +121,15 @@ function TaxCodeIcon() {
   );
 }
 
+function AnnualLeaveIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -219,6 +228,14 @@ const CALCULATORS = [
     description:
       "Check what your tax code means — 1257L, BR, D0, 0T, a K code or an emergency W1/M1 ending: the tax-free allowance it gives you, what each part stands for, and how much more or less tax it takes than the standard 1257L on your salary.",
     linkText: "Open the tax code checker →",
+  },
+  {
+    href: "/annual-leave-calculator",
+    icon: <AnnualLeaveIcon />,
+    title: "Annual Leave Calculator",
+    description:
+      "Work out statutory holiday entitlement: 5.6 weeks a year in your own working days — 28 days on a five-day week, pro-rata part-time, part-year starters, and the 12.07% accrual for irregular-hours workers — less the leave already taken.",
+    linkText: "Open the annual leave calculator →",
   },
 ];
 

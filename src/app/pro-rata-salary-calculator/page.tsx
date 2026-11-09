@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
+import Link from "next/link";
 import ProRataCalculator from "@/components/ProRataCalculator";
 import { STATUTORY_HOLIDAY_WEEKS } from "@/lib/prorata";
 import { RATES_RULES_LABEL } from "@/lib/rates";
@@ -208,6 +209,47 @@ export default function ProRataSalaryCalculatorPage() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="space-y-4 print:hidden">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Related calculators
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/annual-leave-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Annual Leave Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              The holiday figure in full: statutory annual leave for
+              regular and irregular hours — 5.6 weeks in your own working
+              days, part-year starters, the 12.07% accrual, and what is
+              left after the leave already taken.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+          <Link
+            href="/ssp-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              SSP Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Statutory Sick Pay under the April 2026 rules: the weekly
+              rate, the daily rate and the total payable from the first
+              full day of sickness.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
         </div>
       </section>
     </div>

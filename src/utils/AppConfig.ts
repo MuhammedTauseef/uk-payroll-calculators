@@ -13,7 +13,7 @@ export const AppConfig = {
   siteUrl: "https://uk-payroll-calculators.vercel.app",
   tagline: "Free UK employer & payroll calculators",
   description:
-    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, paternity pay, take-home pay, a payslip generator and a tax code checker — April 2026 rules.",
+    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, paternity pay, take-home pay, a payslip generator, a tax code checker and an annual leave calculator — April 2026 rules.",
   locale: "en-GB",
   nav: [
     { href: "/", label: "Home" },
@@ -32,6 +32,7 @@ export const AppConfig = {
     { href: "/40k-after-tax-uk", label: "Take-Home Pay" },
     { href: "/payslip-generator", label: "Payslip Generator" },
     { href: "/hmrc-tax-code-checker", label: "Tax Code Checker" },
+    { href: "/annual-leave-calculator", label: "Annual Leave" },
     { href: "/blog", label: "Blog" },
   ],
   guides: [
