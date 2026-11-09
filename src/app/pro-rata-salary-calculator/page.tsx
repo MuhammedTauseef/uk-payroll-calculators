@@ -250,6 +250,24 @@ export default function ProRataSalaryCalculatorPage() {
               Open the calculator →
             </span>
           </Link>
+          <Link
+            href="/overtime-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Overtime Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Worked extra hours on top of the contracted ones?
+              Overtime pay at the contract rate — flat, time and a
+              quarter, time and a half or double time — worked out from
+              the salary-derived hourly rate, with a minimum wage check
+              on the average.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
         </div>
       </section>
     </div>

@@ -130,6 +130,15 @@ function AnnualLeaveIcon() {
   );
 }
 
+function OvertimeIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="13" r="8" />
+      <path d="M12 9v4l2.5 2.5M9 2.5h6" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -236,6 +245,14 @@ const CALCULATORS = [
     description:
       "Work out statutory holiday entitlement: 5.6 weeks a year in your own working days — 28 days on a five-day week, pro-rata part-time, part-year starters, and the 12.07% accrual for irregular-hours workers — less the leave already taken.",
     linkText: "Open the annual leave calculator →",
+  },
+  {
+    href: "/overtime-calculator",
+    icon: <OvertimeIcon />,
+    title: "Overtime Calculator",
+    description:
+      "Work out overtime pay at the rate in your contract — flat, time and a quarter, time and a half or double time — from an hourly rate or a salary, with a National Minimum Wage check on your average pay.",
+    linkText: "Open the overtime calculator →",
   },
 ];
 
