@@ -4,10 +4,12 @@ import Link from "next/link";
 import AnnualLeaveCalculator from "@/components/AnnualLeaveCalculator";
 import { calculateAnnualLeave } from "@/lib/annualleave";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata: Metadata = pageMetadata(
   "/annual-leave-calculator",
   "Annual Leave Calculator — How Much Holiday Do You Get?",
-  "Free annual leave calculator: calculate holiday entitlement for full-time, part-time and irregular-hours workers — 5.6 weeks a year, part-year starters and the 12.07% accrual, less leave already taken.",
+  "Free annual leave calculator: holiday entitlement for full-time, part-time and irregular-hours workers — 5.6 weeks a year and the 12.07% accrual method.",
 );
 
 const linkClass =
@@ -119,12 +121,32 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Annual Leave Calculator",
+  url: `${AppConfig.siteUrl}/annual-leave-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 export default function AnnualLeaveCalculatorPage() {
   return (
     <div className="space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
