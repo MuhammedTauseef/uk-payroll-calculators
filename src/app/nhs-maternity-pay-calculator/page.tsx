@@ -10,6 +10,8 @@ import {
   SMP,
 } from "@/lib/rates";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata: Metadata = pageMetadata(
   "/nhs-maternity-pay-calculator",
   "NHS Maternity Pay Calculator — AfC & SMP",
@@ -69,12 +71,32 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "NHS Maternity Pay Calculator",
+  url: `${AppConfig.siteUrl}/nhs-maternity-pay-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 export default function NhsMaternityPayCalculatorPage() {
   return (
     <div className="space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
