@@ -8,7 +8,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/overtime-calculator",
-  "Overtime Calculator — Overtime Pay at Your Contract Rate",
+  "Overtime Calculator — Overtime Pay",
   "Free overtime calculator: pay at flat rate, time and a quarter, time and a half or double time, from an hourly rate or a salary — plus a minimum wage check.",
 );
 
