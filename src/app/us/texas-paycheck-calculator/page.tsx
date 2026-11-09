@@ -65,7 +65,7 @@ const FAQS: { question: string; answer: string }[] = [
   },
   {
     question: "How is federal withholding worked out on a Texas paycheck?",
-    answer: `The same way as in every other state — Texas changes nothing about the federal calculation. Employers use the IRS percentage method in Publication 15-T: your pay for the period is annualised, the Form W-4 worksheet amount (${fmt(WORKSHEET_1A_AMOUNT.other)} for most filers, ${fmt(WORKSHEET_1A_AMOUNT.married)} if married filing jointly) is subtracted, the ${TAX_YEAR} rate tables for your filing status are applied, and any Step 3 credits on your W-4 come off the tax. This calculator follows that method exactly, assuming a current Form W-4 with the Step 2 box not checked.`,
+    answer: `The same way as in every other state — Texas changes nothing about the federal calculation. Employers use the IRS percentage method in Publication 15-T: your pay for the period is annualized, the Form W-4 worksheet amount (${fmt(WORKSHEET_1A_AMOUNT.other)} for most filers, ${fmt(WORKSHEET_1A_AMOUNT.married)} if married filing jointly) is subtracted, the ${TAX_YEAR} rate tables for your filing status are applied, and any Step 3 credits on your W-4 come off the tax. This calculator follows that method exactly, assuming a current Form W-4 with the Step 2 box not checked.`,
   },
   {
     question: "What are the Social Security and Medicare rates in 2026?",
@@ -128,9 +128,10 @@ export default function TexasPaycheckCalculatorPage() {
           A Texas paycheck has <strong>no state income tax</strong> taken
           out — the state line is $0 — so your net pay is what is left
           after federal income tax withholding and FICA. On a $60,000
-          salary, single and paid every 2 weeks, that is{" "}
+          salary, single and paid every 2 weeks — the worked example
+          used across this page — that is{" "}
           {fmt(ex60.netPerPeriod)} net per paycheck in {TAX_YEAR}. Enter
-          your own pay below and the breakdown updates instantly.
+          your own pay below and the calculator updates instantly.
         </p>
       </section>
 
@@ -138,7 +139,7 @@ export default function TexasPaycheckCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          The $60,000 breakdown, line by line
+          Worked example: the $60,000 breakdown, line by line
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm table-stack">
@@ -235,7 +236,8 @@ export default function TexasPaycheckCalculatorPage() {
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Single, paid every 2 weeks, no pre-tax deductions, {TAX_YEAR}{" "}
           rates. Notice the state column that is not there: in a state
-          with an income tax, every row would show a fourth deduction.
+          with an income tax, every row would show a state deduction
+          as well.
         </p>
       </section>
 
@@ -248,7 +250,7 @@ export default function TexasPaycheckCalculatorPage() {
         </h3>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Your employer follows the IRS percentage method (Publication
-          15-T). Your taxable pay for the period is annualised, the
+          15-T). Your taxable pay for the period is annualized, the
           Form W-4 worksheet amount — {fmt(WORKSHEET_1A_AMOUNT.married)}{" "}
           if married filing jointly, {fmt(WORKSHEET_1A_AMOUNT.other)}{" "}
           otherwise — is subtracted, and the {TAX_YEAR} rate table for
