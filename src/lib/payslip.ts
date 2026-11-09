@@ -190,7 +190,31 @@ export function calculatePayslip(input: PayslipInput): PayslipResult {
   }
 
   const employeeNiAnnual = employeeNiFor(grossAnnual);
-  const netAnnual = grossAnnual - incomeTaxAnnual - employeeNiAnnual;
+
+  // DISPLAY ROUNDING RULE: every figure the payslip prints is rounded
+  // to the penny first, and each printed total is then built from those
+  // rounded lines — total deductions = rounded tax + rounded NI, and
+  // net = printed gross − that total. Building the totals from the
+  // unrounded values instead left the printed lines a penny adrift of
+  // the printed total (weekly £600 showed tax £71.65 + NI £28.66 =
+  // £100.31 beside a £100.32 total and a £499.68 net). The annual tax
+  // and NI themselves are untouched — only how the displayed totals
+  // are assembled from the displayed lines.
+  const grossPerPeriodShown = round2(grossPerPeriod);
+  const incomeTaxPerPeriodShown = round2(incomeTaxAnnual / periodsPerYear);
+  const employeeNiPerPeriodShown = round2(employeeNiAnnual / periodsPerYear);
+  const totalDeductionsPerPeriodShown = round2(
+    incomeTaxPerPeriodShown + employeeNiPerPeriodShown,
+  );
+  const netPerPeriodShown = round2(
+    grossPerPeriodShown - totalDeductionsPerPeriodShown,
+  );
+  const grossAnnualShown = round2(grossAnnual);
+  const incomeTaxAnnualShown = round2(incomeTaxAnnual);
+  const employeeNiAnnualShown = round2(employeeNiAnnual);
+  const netAnnualShown = round2(
+    grossAnnualShown - incomeTaxAnnualShown - employeeNiAnnualShown,
+  );
 
   return {
     employerName: input.employerName,
@@ -200,16 +224,14 @@ export function calculatePayslip(input: PayslipInput): PayslipResult {
     taxCode: parsed.code,
     taxCodeRecognised: parsed.recognised,
     allowanceUsed: round2(allowanceUsed),
-    grossPerPeriod: round2(grossPerPeriod),
-    incomeTaxPerPeriod: round2(incomeTaxAnnual / periodsPerYear),
-    employeeNiPerPeriod: round2(employeeNiAnnual / periodsPerYear),
-    totalDeductionsPerPeriod: round2(
-      (incomeTaxAnnual + employeeNiAnnual) / periodsPerYear,
-    ),
-    netPerPeriod: round2(netAnnual / periodsPerYear),
-    grossAnnual: round2(grossAnnual),
-    incomeTaxAnnual: round2(incomeTaxAnnual),
-    employeeNiAnnual: round2(employeeNiAnnual),
-    netAnnual: round2(netAnnual),
+    grossPerPeriod: grossPerPeriodShown,
+    incomeTaxPerPeriod: incomeTaxPerPeriodShown,
+    employeeNiPerPeriod: employeeNiPerPeriodShown,
+    totalDeductionsPerPeriod: totalDeductionsPerPeriodShown,
+    netPerPeriod: netPerPeriodShown,
+    grossAnnual: grossAnnualShown,
+    incomeTaxAnnual: incomeTaxAnnualShown,
+    employeeNiAnnual: employeeNiAnnualShown,
+    netAnnual: netAnnualShown,
   };
 }

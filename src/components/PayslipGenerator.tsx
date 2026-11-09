@@ -155,6 +155,12 @@ export default function PayslipGenerator() {
         </div>
       </div>
 
+      {grossNumber <= 0 && (
+        <p className="mt-4 text-sm font-medium text-slate-600 dark:text-slate-300 print:hidden">
+          Enter a gross pay amount to see your payslip figures.
+        </p>
+      )}
+
       <p className="mt-4 text-xs leading-relaxed text-slate-500 dark:text-slate-400 print:hidden">
         Private by design: everything is worked out in your browser.
         Nothing you type here is sent to a server, stored or tracked — the

@@ -41,12 +41,18 @@ function check(caseName: string, field: string, actual: number, expected: number
   check("A", "netAnnual", r.netAnnual, 25119.6);
   check("A", "incomeTaxPerPeriod", r.incomeTaxPerPeriod, 290.5);
   check("A", "employeeNiPerPeriod", r.employeeNiPerPeriod, 116.2);
+  check("A", "totalDeductionsPerPeriod", r.totalDeductionsPerPeriod, 406.7);
   check("A", "netPerPeriod", r.netPerPeriod, 2093.3);
 }
 
 // Case B — weekly £500, code 1257L.
 // Annual £26,000. Taxable £13,430 → tax £2,686.00; NI 8% → £1,074.40;
-// net £22,239.60. Weekly: tax £51.65, NI £20.66, net £427.68.
+// net £22,239.60. Weekly: tax £51.65, NI £20.66, total £72.31.
+// Net per week is £427.69 under the display rounding rule in
+// payslip.ts: the printed net is printed gross − printed total
+// (£500.00 − £72.31), so the lines a reader adds up agree. (Dividing
+// the unrounded annual net by 52 would give £427.68, a penny adrift
+// of the printed lines.)
 {
   const r = calculatePayslip({
     employerName: "",
@@ -61,7 +67,31 @@ function check(caseName: string, field: string, actual: number, expected: number
   check("B", "netAnnual", r.netAnnual, 22239.6);
   check("B", "incomeTaxPerPeriod", r.incomeTaxPerPeriod, 51.65);
   check("B", "employeeNiPerPeriod", r.employeeNiPerPeriod, 20.66);
-  check("B", "netPerPeriod", r.netPerPeriod, 427.68);
+  check("B", "totalDeductionsPerPeriod", r.totalDeductionsPerPeriod, 72.31);
+  check("B", "netPerPeriod", r.netPerPeriod, 427.69);
+}
+
+// Case J — weekly £600, code 1257L (the penny-out case a user spotted
+// on the live payslip). Annual £31,200. Taxable £18,630 → tax
+// £3,726.00/yr (£71.65/wk); NI 8% → £1,490.40/yr (£28.66/wk).
+// Displayed total must be the sum of the displayed lines:
+// £71.65 + £28.66 = £100.31, and net £600.00 − £100.31 = £499.69.
+{
+  const r = calculatePayslip({
+    employerName: "",
+    employeeName: "",
+    frequency: "weekly",
+    grossPerPeriod: 600,
+    taxCode: "1257L",
+  });
+  check("J", "grossAnnual", r.grossAnnual, 31200);
+  check("J", "incomeTaxAnnual", r.incomeTaxAnnual, 3726);
+  check("J", "employeeNiAnnual", r.employeeNiAnnual, 1490.4);
+  check("J", "netAnnual", r.netAnnual, 25983.6);
+  check("J", "incomeTaxPerPeriod", r.incomeTaxPerPeriod, 71.65);
+  check("J", "employeeNiPerPeriod", r.employeeNiPerPeriod, 28.66);
+  check("J", "totalDeductionsPerPeriod", r.totalDeductionsPerPeriod, 100.31);
+  check("J", "netPerPeriod", r.netPerPeriod, 499.69);
 }
 
 // Case C — standard-code equivalence with the verified take-home maths.
