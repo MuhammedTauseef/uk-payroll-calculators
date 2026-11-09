@@ -8,7 +8,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/ir35-calculator",
-  "IR35 Calculator — Inside or Outside IR35?",
+  "IR35 Calculator — Inside or Outside",
   "Free IR35 calculator: check whether a contract is inside or outside IR35 from eight status questions, then compare inside vs outside take-home pay by day rate.",
 );
 
