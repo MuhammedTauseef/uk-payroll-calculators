@@ -7,7 +7,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata = pageMetadata(
   "/notice-period-calculator",
-  "Notice Period Calculator — Statutory Notice",
+  "Notice Period Calculator",
   "Free UK notice period calculator: the statutory minimum notice an employer or employee must give under the Employment Rights Act 1996, and the last working day.",
 );
 
