@@ -4,10 +4,12 @@ import Link from "next/link";
 import OvertimeCalculator from "@/components/OvertimeCalculator";
 import { calculateOvertime, NMW_BANDS } from "@/lib/overtime";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata: Metadata = pageMetadata(
   "/overtime-calculator",
   "Overtime Calculator — Overtime Pay at Your Contract Rate",
-  "Free overtime calculator: overtime pay at flat rate, time and a quarter, time and a half or double time, from an hourly rate or a salary — plus a National Minimum Wage check on your average pay.",
+  "Free overtime calculator: pay at flat rate, time and a quarter, time and a half or double time, from an hourly rate or a salary — plus a minimum wage check.",
 );
 
 const linkClass =
@@ -114,12 +116,32 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Overtime Calculator",
+  url: `${AppConfig.siteUrl}/overtime-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 export default function OvertimeCalculatorPage() {
   return (
     <div className="space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
