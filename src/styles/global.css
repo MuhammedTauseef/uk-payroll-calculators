@@ -130,3 +130,128 @@ body {
     border-color: #94a3b8 !important;
   }
 }
+
+/*
+  Homepage hero background carousel (.hbg — added 2026-11-09, owner
+  order: "UK calculator wali website par aisa carousel banao jaisa
+  SEORank me banaya; wo pehle wala remove kar do"). The component is
+  src/components/HeroCarousel.tsx; the pattern mirrors SEORankGulf's
+  hero of the same day. Stacking: the background layer sits at
+  z-index 0 — clipped by the hero section's overflow-hidden +
+  rounded corners, behind the hero copy (which page.tsx wraps in a
+  relative z-10 div) — while the dots sit at z-index 20 so they stay
+  clickable. The section itself is the positioning context
+  (relative), so the layer can never spill outside the hero: no
+  horizontal-overflow risk.
+
+  The veil is theme-aware, because this hero's copy is dark text on
+  a pale ground in light mode and light text on slate-950 in dark
+  mode (SEORankGulf's copy is light in both, so one dark veil
+  sufficed there): a pale slate veil in light mode, a slate-950
+  veil in dark mode, each strong enough that the copy keeps the
+  contrast it had on the plain page background — the photos read
+  as a soft backdrop through it, never competing with the text.
+*/
+.hbg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hbg-slides {
+  position: absolute;
+  inset: 0;
+}
+.hbg-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s ease-in-out;
+}
+.hbg-slide.is-active {
+  opacity: 1;
+}
+.hbg-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hbg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.94) 0%,
+    rgba(248, 250, 252, 0.89) 55%,
+    rgba(248, 250, 252, 0.85) 100%
+  );
+}
+.dark .hbg-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 6, 23, 0.9) 0%,
+    rgba(2, 6, 23, 0.85) 55%,
+    rgba(2, 6, 23, 0.82) 100%
+  );
+}
+/* Dots: the old panel indicators' dark-pill language, now at the
+   bottom-centre of the whole hero. */
+.hbg-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.hbg-dots-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 4px 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+.hbg-dot-btn {
+  display: flex;
+  height: 20px;
+  width: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.hbg-dot-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.hbg-dot {
+  display: block;
+  height: 8px;
+  width: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+.hbg-dot-btn:hover .hbg-dot {
+  background: rgba(255, 255, 255, 0.85);
+}
+.hbg-dot.is-active {
+  width: 20px;
+  background: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hbg-slide {
+    transition: none;
+  }
+}
