@@ -12,6 +12,8 @@ import {
   SSP,
 } from "@/lib/rates";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata = pageMetadata(
   "/ssp-calculator",
   "SSP Calculator — Statutory Sick Pay Calculator",
@@ -56,6 +58,22 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "SSP Calculator",
+  url: `${AppConfig.siteUrl}/ssp-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 const gbp = new Intl.NumberFormat("en-GB", {
   style: "currency",
   currency: "GBP",
@@ -67,6 +85,10 @@ export default function SspCalculatorPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
