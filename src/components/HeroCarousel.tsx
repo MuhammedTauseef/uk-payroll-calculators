@@ -1,200 +1,179 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 
 /**
- * Photo panel for the homepage hero — the ready-made shadcn/ui
- * Carousel (Embla) with its Autoplay plugin, shown as a visible
- * framed card BELOW the hero copy and trust row.
+ * Homepage hero BACKGROUND carousel — owner order 9 Nov 2026
+ * ("UK calculator wali website par aisa carousel banao jaisa
+ * SEORank me banaya; wo pehle wala remove kar do, wo acha nahi
+ * hai"): the framed Embla photo panel that used to sit below the
+ * hero copy is gone, and the photos now crossfade as the hero
+ * section's full-bleed background, behind the unchanged hero copy
+ * (badge, title, subtitle, both CTAs and the trust row render on
+ * top of them). Same build as SEORankGulf's hero (shipped earlier
+ * the same day): plain crossfading slides + a veil + dot pill.
  *
- * Why a framed panel and not a hero background (owner rejection,
- * 8 Nov 2026): as a full-bleed background the photos were cropped
- * hard by object-cover — on a tall phone most of each 3:2 / 16:9
- * photo was cut away and the people in them were sliced at the
- * edges. The owner's standing rule is that every person must be
- * FULLY visible in frame, nothing important cropped. So the hero
- * copy sits on the plain page background again, and the photos
- * live in this panel instead.
+ * Why the photos changed: the panel's three photos centred on
+ * people (sick pay at home, family leave, an HR office). As
+ * object-cover backgrounds, people get cropped hard on tall
+ * screens — that is exactly why the 8 Nov 2026 background attempt
+ * on this page was rejected and replaced by the panel. The
+ * owner's standing rule is that every person stays fully in
+ * frame, so — like SEORankGulf — the backgrounds are people-free
+ * scenes of the world the calculators serve: Westminster over the
+ * Thames, a payroll desk, the City of London, Tower Bridge at
+ * dusk. Cover-cropping only ever trims sky, water and rooftops.
+ * Every candidate was downloaded and eyeballed before use; two
+ * were rejected at that step (a desk photo whose report was
+ * printed in Russian, and a high-street photo with colour-fringe
+ * artefacts and edge-cropped pedestrians).
  *
- * Zero-crop display: the slides are NOT all the same ratio — the
- * sick-pay and family photos are 3:2, the HR-office photo is
- * 16:9 — so no single frame ratio can match all three under
- * object-cover. Each slide is therefore shown with object-contain
- * inside a 16:9 frame (every pixel of every photo stays visible),
- * over a blurred, enlarged copy of the same photo that fills the
- * frame's side space for the 3:2 slides, so the panel never shows
- * empty bars. The 16:9 slide fills its frame exactly.
+ * Photos: Pexels (free to use), hotlinked as plain <img> — not
+ * next/image, because the Pexels CDN is not in next.config's
+ * remotePatterns. srcSet serves a 1080w copy to small screens and
+ * 1920w to large ones. The CSP img-src allowance for
+ * images.pexels.com lives in next.config.ts.
  *
- * The slides are the owner-approved workplace photos (SSP at home,
- * family leave, HR office — the three themes of the calculators
- * below), hosted in the site's public Supabase storage because
- * binaries cannot be pushed through the GitHub connector (the same
- * arrangement as the default og:image). They are content images
- * now, not decoration: each carries a real alt text and the
- * carousel region is labelled.
+ * The veil (global.css .hbg-overlay) is theme-aware: a pale slate
+ * veil in light mode and a slate-950 veil in dark mode, strong
+ * enough that the hero copy keeps the contrast it had on the
+ * plain page background in both themes.
  *
- * Motion: autoplay every 6s, looping; hovering the panel pauses
- * it, focus inside the carousel pauses it (the plugin's
- * stopOnFocusIn), and under prefers-reduced-motion autoplay never
- * starts. No arrows.
+ * Behaviour: crossfade every 5s; hovering the hero or focusing
+ * inside it pauses the cycle; a hidden tab pauses it too; under
+ * prefers-reduced-motion it never auto-advances and the fade is
+ * disabled in CSS. Indicator dots sit at the bottom-centre of the
+ * hero on a dark pill and jump to their slide. The slides are
+ * decorative (alt="") — the hero text carries the meaning — and
+ * the dot buttons are labelled.
  *
- * Slide dots (owner request, 8 Nov 2026 — "carousel kuch aisa
- * nishan ho ke pata chale carousel chal raha hai"): three small
- * indicator buttons sit at the bottom-centre inside the frame on
- * a subtle dark pill, so they read clearly over any photo in
- * either colour mode. The active dot stretches into a pill and
- * follows the Embla "select" event as autoplay advances; clicking
- * a dot jumps to that slide (api.scrollTo) and autoplay then
- * resumes its normal cycle (hover-pause via play() on mouseleave
- * is untouched).
+ * The two returned elements are siblings on purpose: the
+ * background layer stacks below the hero copy (.z-10 wrapper in
+ * page.tsx) while the dots must stack above it to stay clickable,
+ * so they cannot share one stacking context.
  */
 const HERO_SLIDES = [
   {
-    src: "https://zrwssbvlettgrcfdwxsw.supabase.co/storage/v1/object/public/blog-images/hero/hero-sickpay.webp",
-    alt: "A man resting unwell on a sofa at home under a blanket, while a woman hands him a note about his sick pay",
+    // Westminster and Big Ben over the Thames, from above — Pexels
+    base: "https://images.pexels.com/photos/39473887/pexels-photo-39473887.jpeg",
   },
   {
-    src: "https://zrwssbvlettgrcfdwxsw.supabase.co/storage/v1/object/public/blog-images/hero/hero-family.webp",
-    alt: "New parents at home on a sofa with their newborn baby, checking family leave information on a tablet",
+    // A tidy payroll desk: calculator, keyboard, laptop, calendar — Pexels
+    base: "https://images.pexels.com/photos/16213402/pexels-photo-16213402.jpeg",
   },
   {
-    src: "https://zrwssbvlettgrcfdwxsw.supabase.co/storage/v1/object/public/blog-images/hero/hero-hroffice.webp",
-    alt: "Two colleagues talking in a bright, modern HR office",
+    // The City of London towers, the Gherkin in the middle — Pexels
+    base: "https://images.pexels.com/photos/7245368/pexels-photo-7245368.jpeg",
+  },
+  {
+    // Tower Bridge and the Thames at dusk, from above — Pexels
+    base: "https://images.pexels.com/photos/372470/pexels-photo-372470.jpeg",
   },
 ] as const;
 
-type AutoplayPlugin = ReturnType<typeof Autoplay>;
+const AUTOPLAY_MS = 5000;
 
 export function HeroCarousel() {
-  const panelRef = React.useRef<HTMLDivElement>(null);
-  // No plugin during SSR / first paint: autoplay is attached only
-  // after mount, and never when the visitor prefers reduced motion.
-  const [plugins, setPlugins] = React.useState<AutoplayPlugin[]>([]);
-  // Embla api + the currently selected slide, driving the dots.
-  const [api, setApi] = React.useState<CarouselApi | null>(null);
+  const bgRef = React.useRef<HTMLDivElement>(null);
   const [current, setCurrent] = React.useState(0);
+  const [paused, setPaused] = React.useState(false);
+  const [reducedMotion, setReducedMotion] = React.useState(false);
 
+  // Track the reduced-motion preference, including live changes.
   React.useEffect(() => {
-    if (!api) {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  // Pause while the pointer is over the hero or focus is inside it.
+  React.useEffect(() => {
+    const section = bgRef.current?.closest("section");
+    if (!section) {
       return;
     }
-    const onSelect = () => setCurrent(api.selectedScrollSnap());
-    onSelect();
-    api.on("select", onSelect);
-    api.on("reInit", onSelect);
+    const on = () => setPaused(true);
+    const off = () => setPaused(false);
+    section.addEventListener("mouseenter", on);
+    section.addEventListener("mouseleave", off);
+    section.addEventListener("focusin", on);
+    section.addEventListener("focusout", off);
     return () => {
-      api.off("select", onSelect);
-      api.off("reInit", onSelect);
-    };
-  }, [api]);
-
-  React.useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-    const autoplay = Autoplay({
-      delay: 6000,
-      stopOnMouseEnter: false,
-      stopOnFocusIn: true,
-    });
-    setPlugins([autoplay]);
-
-    const panel = panelRef.current;
-    if (!panel) {
-      return () => autoplay.stop();
-    }
-    const pause = () => autoplay.stop();
-    // play(), not reset(): in embla-carousel-autoplay v8 reset()
-    // only restarts the timer while playing — after a stop() it is
-    // a no-op (checked against the installed source).
-    const resume = () => autoplay.play();
-    panel.addEventListener("mouseenter", pause);
-    panel.addEventListener("mouseleave", resume);
-    return () => {
-      panel.removeEventListener("mouseenter", pause);
-      panel.removeEventListener("mouseleave", resume);
-      autoplay.stop();
+      section.removeEventListener("mouseenter", on);
+      section.removeEventListener("mouseleave", off);
+      section.removeEventListener("focusin", on);
+      section.removeEventListener("focusout", off);
     };
   }, []);
 
+  // Autoplay: advance every 5s unless paused, reduced-motion, or
+  // the tab is hidden. `current` is a dependency so a dot click
+  // restarts the clock and the chosen slide gets its full 5s.
+  React.useEffect(() => {
+    if (paused || reducedMotion) {
+      return;
+    }
+    const id = window.setInterval(() => {
+      if (document.hidden) {
+        return;
+      }
+      setCurrent((c) => (c + 1) % HERO_SLIDES.length);
+    }, AUTOPLAY_MS);
+    return () => window.clearInterval(id);
+  }, [paused, reducedMotion, current]);
+
   return (
-    <div ref={panelRef} className="relative mt-10 sm:mt-12">
-      <Carousel
-        opts={{ loop: true }}
-        plugins={plugins}
-        setApi={setApi}
-        aria-label="UK payroll in everyday life"
-        className="w-full"
-      >
-        <CarouselContent className="ml-0">
+    <>
+      <div ref={bgRef} className="hbg" aria-hidden="true">
+        <div className="hbg-slides">
           {HERO_SLIDES.map((slide, i) => (
-            <CarouselItem key={slide.src} className="pl-0">
-              <div className="relative aspect-video overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-md dark:border-slate-800 dark:bg-slate-900">
-                {/* Blurred backdrop: the same photo, enlarged and
-                    blurred, fills the frame behind the contained
-                    image so the 3:2 slides show no empty side bars.
-                    Purely decorative — the sharp copy in front
-                    carries the alt text. */}
-                <Image
-                  src={slide.src}
-                  alt=""
-                  aria-hidden
-                  fill
-                  sizes="(min-width: 1152px) 1120px, 100vw"
-                  draggable={false}
-                  className="scale-125 object-cover blur-2xl"
-                />
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  sizes="(min-width: 1152px) 1120px, 100vw"
-                  priority={i === 0}
-                  draggable={false}
-                  className="object-contain"
-                />
-              </div>
-            </CarouselItem>
+            <div
+              key={slide.base}
+              className={`hbg-slide${i === current ? " is-active" : ""}`}
+            >
+              <img
+                src={`${slide.base}?auto=compress&w=1920`}
+                srcSet={`${slide.base}?auto=compress&w=1080 1080w, ${slide.base}?auto=compress&w=1920 1920w`}
+                sizes="100vw"
+                alt=""
+                draggable={false}
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : undefined}
+              />
+            </div>
           ))}
-        </CarouselContent>
-      </Carousel>
-      {/* Slide indicators: bottom-centre inside the frame, on a
-          subtle dark pill so the white dots read clearly over any
-          photo, light or dark mode. The active dot stretches into
-          a pill and tracks the selected slide; each dot is a real
-          button that jumps to its slide. */}
-      <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center sm:bottom-4">
-        <div className="flex items-center gap-1 rounded-full bg-black/35 px-2 py-1 shadow-sm backdrop-blur-sm">
+        </div>
+        <div className="hbg-overlay" />
+      </div>
+      {/* Slide indicators: bottom-centre of the hero, on the same
+          subtle dark pill the old panel used, so the white dots
+          read clearly over any photo in either colour mode. The
+          active dot stretches into a pill and follows the
+          crossfade; clicking a dot jumps to that slide. */}
+      <div className="hbg-dots" role="group" aria-label="Hero background photos">
+        <div className="hbg-dots-pill">
           {HERO_SLIDES.map((slide, i) => {
             const active = i === current;
             return (
               <button
-                key={slide.src}
+                key={slide.base}
                 type="button"
-                onClick={() => api?.scrollTo(i)}
+                onClick={() => setCurrent(i)}
                 aria-label={`Go to slide ${i + 1}`}
                 aria-current={active || undefined}
-                className="flex h-5 w-5 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="hbg-dot-btn"
               >
                 <span
                   aria-hidden
-                  className={`block h-2 rounded-full transition-all duration-300 ${
-                    active ? "w-5 bg-white" : "w-2 bg-white/60 hover:bg-white/85"
-                  }`}
+                  className={`hbg-dot${active ? " is-active" : ""}`}
                 />
               </button>
             );
           })}
         </div>
       </div>
-    </div>
+    </>
   );
 }
