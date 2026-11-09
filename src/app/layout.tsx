@@ -8,6 +8,7 @@ import SiteNav from "@/components/SiteNav";
 import MobileNav from "@/components/MobileNav";
 import ThemeToggle from "@/components/ThemeToggle";
 import FooterNote from "@/components/FooterNote";
+import PageSchema from "@/components/PageSchema";
 import { AppConfig } from "@/utils/AppConfig";
 
 const GA_MEASUREMENT_ID = "G-0R7G7GZ0CK";
@@ -82,6 +83,7 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        <PageSchema />
         <BaseTemplate
           leftNav={<SiteNav />}
           mobileNav={<MobileNav />}
