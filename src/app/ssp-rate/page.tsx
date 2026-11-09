@@ -13,7 +13,7 @@ import { RATES_LAST_VERIFIED, RATES_RULES_LABEL, SSP } from "@/lib/rates";
 
 export const metadata = pageMetadata(
   "/ssp-rate",
-  "SSP Rate — Current Statutory Sick Pay Rate",
+  "SSP Rate — Statutory Sick Pay Rate",
   "The current SSP rate is £123.25 a week — a maximum, not a guarantee. Why your SSP might be less, the daily rates, and when the rate changes.",
 );
 
