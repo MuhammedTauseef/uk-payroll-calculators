@@ -139,6 +139,15 @@ function OvertimeIcon() {
   );
 }
 
+function Ir35Icon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 3v18M5 7l7-4 7 4M3 13l2-2 2 2 2-2 2 2 2-2 2 2 2-2 2 2" />
+      <path d="M8 21h8" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -253,6 +262,14 @@ const CALCULATORS = [
     description:
       "Work out overtime pay at the rate in your contract — flat, time and a quarter, time and a half or double time — from an hourly rate or a salary, with a National Minimum Wage check on your average pay.",
     linkText: "Open the overtime calculator →",
+  },
+  {
+    href: "/ir35-calculator",
+    icon: <Ir35Icon />,
+    title: "IR35 Calculator",
+    description:
+      "Check whether a contract is inside or outside IR35 from eight questions about control, substitution and the other status factors, then compare inside vs outside take-home pay on your day rate.",
+    linkText: "Open the IR35 calculator →",
   },
 ];
 
