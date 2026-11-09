@@ -14,7 +14,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/40k-after-tax-uk",
-  "£40k After Tax UK — Take-Home Pay Calculator",
+  "£40k After Tax UK — Take-Home Pay",
   "On a £40,000 salary in 2026/27 you take home £32,319.60 a year (£2,693.30 a month) after tax and National Insurance. Check any salary with the calculator.",
 );
 
