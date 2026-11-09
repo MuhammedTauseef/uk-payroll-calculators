@@ -9,6 +9,12 @@ import type { NextConfig } from "next";
  * the site's own Supabase project (API/auth/storage over https, plus
  * its realtime websocket) for connect-src, and Supabase storage for
  * img-src (blog cover images). Everything else stays 'self'.
+ *
+ * GA4 fix (2026-11-09): the layout loads the Google tag from
+ * www.googletagmanager.com and GA4 collects to the google-analytics
+ * endpoints — both were missing here, so the CSP silently blocked
+ * Google Analytics (GA4 read empty while Search Console showed real
+ * visits). Allow exactly the origins SRG's working policy allows.
  */
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -17,7 +23,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+      "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
   },
 ];
 
