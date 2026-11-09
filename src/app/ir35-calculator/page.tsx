@@ -4,10 +4,12 @@ import Link from "next/link";
 import Ir35Calculator from "@/components/Ir35Calculator";
 import { calculateIr35 } from "@/lib/ir35";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata: Metadata = pageMetadata(
   "/ir35-calculator",
   "IR35 Calculator — Inside or Outside IR35?",
-  "Free IR35 calculator: check whether a contract is inside or outside IR35 from eight questions about control, substitution and the other status factors, then compare inside vs outside take-home pay on your day rate.",
+  "Free IR35 calculator: check whether a contract is inside or outside IR35 from eight status questions, then compare inside vs outside take-home pay by day rate.",
 );
 
 const linkClass =
@@ -66,12 +68,32 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "IR35 Calculator",
+  url: `${AppConfig.siteUrl}/ir35-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 export default function Ir35CalculatorPage() {
   return (
     <div className="space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
