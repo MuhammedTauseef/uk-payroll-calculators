@@ -10,6 +10,8 @@ import {
   SPP,
 } from "@/lib/rates";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata: Metadata = pageMetadata(
   "/paternity-pay-calculator",
   "Paternity Pay Calculator — Statutory Pay",
@@ -62,12 +64,32 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Paternity Pay Calculator",
+  url: `${AppConfig.siteUrl}/paternity-pay-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 export default function PaternityPayCalculatorPage() {
   return (
     <div className="space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
