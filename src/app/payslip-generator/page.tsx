@@ -104,7 +104,14 @@ export default function PayslipGeneratorPage() {
           pay for one period — before tax, not the amount that lands in
           the bank. Third, enter the tax code from the employee&apos;s
           latest payslip or HMRC notice (1257L is the standard code for
-          2026/27). Fourth, check the payslip, then use the Print / Save as
+          2026/27 — if you are not sure what a code means, our{" "}
+          <Link
+            href="/hmrc-tax-code-checker"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            tax code checker
+          </Link>{" "}
+          decodes it). Fourth, check the payslip, then use the Print / Save as
           PDF button to keep a copy. Nothing leaves your browser at any
           point.
         </p>
@@ -347,6 +354,22 @@ export default function PayslipGeneratorPage() {
             </p>
             <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Open the calculator →
+            </span>
+          </Link>
+          <Link
+            href="/hmrc-tax-code-checker"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Tax Code Checker
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Every payslip carries a tax code — check what yours means:
+              the allowance it gives you, what each letter stands for, and
+              what it costs against the standard 1257L.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the checker →
             </span>
           </Link>
           <Link

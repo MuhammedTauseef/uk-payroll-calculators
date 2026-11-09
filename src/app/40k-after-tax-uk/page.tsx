@@ -336,6 +336,23 @@ export default function FortyKAfterTaxPage() {
             </span>
           </Link>
           <Link
+            href="/hmrc-tax-code-checker"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Tax Code Checker
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              This calculator uses the standard 1257L code. If your
+              payslip shows something else — BR, 0T, a K code or an
+              emergency ending — check what it means and what it costs
+              you against 1257L.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the checker →
+            </span>
+          </Link>
+          <Link
             href="/pro-rata-salary-calculator"
             className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >

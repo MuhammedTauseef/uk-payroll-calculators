@@ -112,6 +112,15 @@ function PayslipIcon() {
   );
 }
 
+function TaxCodeIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="11" cy="11" r="7" />
+      <path d="M21 21l-4.3-4.3M8.8 11l1.7 1.7 3-3.2" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -202,6 +211,14 @@ const CALCULATORS = [
     description:
       "Create a UK payslip from an employer name, an employee name, the gross pay and a tax code: Income Tax and employee National Insurance worked out monthly or weekly, ready to print or save as a PDF.",
     linkText: "Open the payslip generator →",
+  },
+  {
+    href: "/hmrc-tax-code-checker",
+    icon: <TaxCodeIcon />,
+    title: "Tax Code Checker",
+    description:
+      "Check what your tax code means — 1257L, BR, D0, 0T, a K code or an emergency W1/M1 ending: the tax-free allowance it gives you, what each part stands for, and how much more or less tax it takes than the standard 1257L on your salary.",
+    linkText: "Open the tax code checker →",
   },
 ];
 
