@@ -3,6 +3,8 @@ import { pageMetadata } from "@/utils/metadata";
 import NoticeCalculator from "@/components/NoticeCalculator";
 import { MAX_EMPLOYER_STATUTORY_WEEKS } from "@/lib/notice";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata = pageMetadata(
   "/notice-period-calculator",
   "Notice Period Calculator — Statutory Notice",
@@ -47,6 +49,22 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Notice Period Calculator",
+  url: `${AppConfig.siteUrl}/notice-period-calculator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 const SERVICE_TABLE: { service: string; employerMinimum: string }[] = [
   { service: "Less than 1 month", employerMinimum: "No statutory minimum" },
   { service: "1 month to 2 years", employerMinimum: "1 week" },
@@ -65,6 +83,10 @@ export default function NoticePeriodCalculatorPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
