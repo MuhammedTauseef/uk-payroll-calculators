@@ -118,3 +118,5 @@ export default function PageSchema() {
     </>
   );
 }
+
+// Serving note: central schema for utility pages + breadcrumbs (technical SEO, Nov 2026).
