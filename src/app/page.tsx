@@ -75,6 +75,15 @@ function EmployerNiIcon() {
   );
 }
 
+function EmployerCostIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="3" y="7.5" width="18" height="12" rx="2" />
+      <path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3 12.5h18" />
+    </svg>
+  );
+}
+
 function MaternityIcon() {
   return (
     <svg {...iconProps}>
@@ -224,6 +233,14 @@ const CALCULATORS = [
     description:
       "Work out employer Class 1 NICs on a salary — 15% on earnings above the £5,000 Secondary Threshold (2026/27 rates) — with the Employment Allowance, and see the total cost of employing someone.",
     linkText: "Open the employer NI calculator →",
+  },
+  {
+    href: "/employer-cost-calculator",
+    icon: <EmployerCostIcon />,
+    title: "Employer Cost Calculator",
+    description:
+      "What a salary really costs the employer: gross pay plus employer National Insurance at 15% above the £5,000 Secondary Threshold and workplace pension on qualifying earnings — the total cost of employing, per year and per month.",
+    linkText: "Open the employer cost calculator →",
   },
   {
     href: "/nhs-maternity-pay-calculator",
