@@ -25,6 +25,10 @@ export const AppConfig = {
       label: "Employer NI",
     },
     {
+      href: "/employer-cost-calculator",
+      label: "Employer Cost",
+    },
+    {
       href: "/nhs-maternity-pay-calculator",
       label: "Maternity Pay",
     },
