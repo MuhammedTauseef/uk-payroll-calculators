@@ -11,6 +11,8 @@ import {
   RATES_LAST_VERIFIED,
 } from "@/lib/rates";
 
+import { AppConfig } from "@/utils/AppConfig";
+
 export const metadata: Metadata = pageMetadata(
   "/payslip-generator",
   "Payslip Generator — Free UK Payslip Maker",
@@ -69,12 +71,32 @@ const faqJsonLd = {
   })),
 };
 
+const webAppJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Payslip Generator",
+  url: `${AppConfig.siteUrl}/payslip-generator`,
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  browserRequirements: "Requires JavaScript",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+  publisher: {
+    "@type": "Organization",
+    name: AppConfig.name,
+    url: AppConfig.siteUrl,
+  },
+};
+
 export default function PayslipGeneratorPage() {
   return (
     <div className="space-y-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
       />
 
       <section className="space-y-3">
