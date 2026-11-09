@@ -156,6 +156,16 @@ function TexasIcon() {
   );
 }
 
+function AuIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="8" cy="8" r="2.4" />
+      <circle cx="16" cy="16" r="2.4" />
+      <path d="M17 5L7 19" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
@@ -440,6 +450,43 @@ export default async function HomePage() {
               </p>
               <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
                 Open the Texas paycheck calculator →
+              </span>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      <section id="au-calculators" className="scroll-mt-32">
+        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+          AU Calculators
+        </h2>
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
+          The hub&apos;s Australia section — the same
+          shows-its-working treatment as the UK and US tools, run on
+          ATO rules instead of HMRC or IRS ones.
+        </p>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {/* Single AU tool so far: the card spans the full row as a
+              wide feature card, same treatment as the US section. */}
+          <Link
+            href="/au/tax-rate-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md sm:col-span-2 sm:flex sm:items-start sm:gap-5"
+          >
+            <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm sm:mb-0">
+              <AuIcon />
+            </span>
+            <div className="min-w-0">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                Australia Tax Rate Calculator
+              </h3>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                Income tax and the Medicare levy on any Australian
+                income under the ATO 2025–26 rates — your marginal
+                and effective tax rate side by side, for residents
+                and non-residents alike.
+              </p>
+              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                Open the Australia tax rate calculator →
               </span>
             </div>
           </Link>
