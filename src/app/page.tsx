@@ -10,7 +10,7 @@ import { listPublishedBlogPosts } from "@/lib/blog/queries";
 export const metadata = pageMetadata(
   "/",
   "UK Payroll Calculators — UK employer & payroll calculators",
-  AppConfig.description,
+  "Free UK payroll calculators: SSP, employer NI, take-home pay, payslip generator, tax code checker, annual leave, overtime and IR35 — April 2026 rules.",
 );
 
 // Dynamic on purpose (same as /blog): the "Latest from the blog"
