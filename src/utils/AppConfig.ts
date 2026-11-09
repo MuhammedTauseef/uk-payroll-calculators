@@ -35,6 +35,10 @@ export const AppConfig = {
     { href: "/annual-leave-calculator", label: "Annual Leave" },
     { href: "/overtime-calculator", label: "Overtime" },
     { href: "/ir35-calculator", label: "IR35 Calculator" },
+    {
+      href: "/us/texas-paycheck-calculator",
+      label: "Texas Paycheck",
+    },
     { href: "/blog", label: "Blog" },
   ],
   guides: [
