@@ -39,6 +39,10 @@ export const AppConfig = {
       href: "/us/texas-paycheck-calculator",
       label: "Texas Paycheck",
     },
+    {
+      href: "/au/tax-rate-calculator",
+      label: "AU Tax Rate",
+    },
     { href: "/blog", label: "Blog" },
   ],
   guides: [
