@@ -136,7 +136,7 @@ export default function AuTaxRateCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          The $90,000 breakdown, line by line
+          Worked example: the $90,000 breakdown, line by line
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm table-stack">
