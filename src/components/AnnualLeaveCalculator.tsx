@@ -294,7 +294,7 @@ export default function AnnualLeaveCalculator() {
           Statutory entitlement is capped at {MAX_STATUTORY_LEAVE_DAYS}{" "}
           days a year, however many days a week you work — so a{" "}
           {daysNumber}-day week still gets {MAX_STATUTORY_LEAVE_DAYS}{" "}
-          days, not {STATUTORY_LEAVE_WEEKS * daysNumber}.
+          days, not {fmtDays(STATUTORY_LEAVE_WEEKS * daysNumber)}.
         </p>
       )}
 
