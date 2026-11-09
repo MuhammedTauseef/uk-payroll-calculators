@@ -13,7 +13,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata: Metadata = pageMetadata(
   "/au/tax-rate-calculator",
-  "Australia Tax Rate Calculator — 2025–26 Rates",
+  "Australia Tax Rate Calculator",
   "Free Australia tax rate calculator 2025–26: income tax and Medicare levy on any income, marginal and effective rates — ATO resident and non-resident rates.",
 );
 
