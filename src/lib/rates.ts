@@ -253,3 +253,52 @@ export const PAYE_RATES_LABEL = "2026/27 rates — verified against GOV.UK";
 
 /** Date the PAYE figures above were verified against GOV.UK. */
 export const PAYE_RATES_VERIFIED = "7 November 2026";
+
+/**
+ * Corporation Tax — company profits.
+ *
+ * Verified against GOV.UK ("Corporation Tax rates, expenses and
+ * reliefs") on 9 November 2026: the main rate is 25% on profits
+ * over £250,000; the small profits rate is 19% on profits of
+ * £50,000 or less; Marginal Relief applies between the two, at
+ * a fraction of 3/200 of (£250,000 − profit).
+ */
+export const CORPORATION_TAX = {
+  /** Main rate on profits over the main-rate limit. */
+  mainRate: 0.25,
+  /** Profit above which the main rate applies, £. */
+  mainRateLimit: 250000,
+  /** Small profits rate on profits at or below the limit. */
+  smallProfitsRate: 0.19,
+  /** Profit at or below which the small profits rate applies, £. */
+  smallProfitsLimit: 50000,
+  /** Marginal Relief fraction (3/200). */
+  marginalReliefFraction: 0.015,
+} as const;
+
+/** Date the Corporation Tax figures above were verified against GOV.UK. */
+export const CORPORATION_TAX_RATES_VERIFIED = "9 November 2026";
+
+/**
+ * Tax on dividends — 2026/27.
+ *
+ * Verified against GOV.UK ("Tax on dividends") on 9 November
+ * 2026: a £500 dividend allowance each year, then 10.75% at the
+ * basic rate, 35.75% at the higher rate and 39.35% at the
+ * additional rate. Dividends are the top slice of income —
+ * employment income is taxed first — and the Personal Allowance
+ * covers dividend income that falls within it.
+ */
+export const DIVIDEND_TAX = {
+  /** Dividend allowance, £/year, taxed at 0%. */
+  allowance: 500,
+  /** Basic-rate dividend tax. */
+  basicRate: 0.1075,
+  /** Higher-rate dividend tax. */
+  higherRate: 0.3575,
+  /** Additional-rate dividend tax. */
+  additionalRate: 0.3935,
+} as const;
+
+/** Date the dividend tax figures above were verified against GOV.UK. */
+export const DIVIDEND_TAX_RATES_VERIFIED = "9 November 2026";
