@@ -43,6 +43,21 @@ body {
 }
 
 /*
+  Full-bleed guard for the homepage hero (added 9 Nov 2026,
+  evening, with the full-screen hero): the hero section is
+  100vw wide, and 100vw includes the classic-scrollbar width,
+  so on Windows it can overshoot the layout width by a few
+  pixels on each side. overflow-x: clip swallows that
+  overshoot without creating a scroll container (unlike
+  hidden), so the sticky header keeps working and no
+  horizontal scrollbar can appear at any width.
+*/
+html,
+body {
+  overflow-x: clip;
+}
+
+/*
   Mobile stacked tables (owner-caught, 7 Nov 2026): content tables on
   guide and static pages carry the `table-stack` class. Below the sm
   breakpoint a multi-column table pushes its last columns off-screen
@@ -137,12 +152,15 @@ body {
   SEORank me banaya; wo pehle wala remove kar do"). The component is
   src/components/HeroCarousel.tsx; the pattern mirrors SEORankGulf's
   hero of the same day. Stacking: the background layer sits at
-  z-index 0 — clipped by the hero section's overflow-hidden +
-  rounded corners, behind the hero copy (which page.tsx wraps in a
-  relative z-10 div) — while the dots sit at z-index 20 so they stay
-  clickable. The section itself is the positioning context
-  (relative), so the layer can never spill outside the hero: no
-  horizontal-overflow risk.
+  z-index 0 — clipped by the hero section's overflow-hidden, behind
+  the hero copy (which page.tsx wraps in a relative z-10 div) —
+  while the dots sit at z-index 20 so they stay clickable. The
+  section itself is the positioning context (relative), so the
+  layer can never spill outside the hero. Since the evening of
+  9 Nov 2026 the section is full-bleed full-screen (see page.tsx):
+  no rounded corners, photos run to the viewport edges, and the
+  only horizontal-overflow risk (100vw vs the scrollbar width) is
+  absorbed by the overflow-x: clip guard on html/body above.
 
   The veil is theme-aware, because this hero's copy is dark text on
   a pale ground in light mode and light text on slate-950 in dark
