@@ -147,10 +147,14 @@ body {
   The veil is theme-aware, because this hero's copy is dark text on
   a pale ground in light mode and light text on slate-950 in dark
   mode (SEORankGulf's copy is light in both, so one dark veil
-  sufficed there): a pale slate veil in light mode, a slate-950
-  veil in dark mode, each strong enough that the copy keeps the
-  contrast it had on the plain page background — the photos read
-  as a soft backdrop through it, never competing with the text.
+  sufficed there). The first light-mode veil (a flat 0.94→0.85 pale
+  wash) was too strong — the owner found the photos reading as
+  ghosts on his laptop and ordered them "full show" (9 Nov 2026,
+  evening). The light-mode veil is therefore LAYERED: a soft pale
+  radial patch held behind the centred copy block, over a much
+  lighter overall wash, so the photos read clearly as real photos
+  at the hero's edges and corners while the text zone stays calm.
+  The dark-mode veil is unchanged from the first build.
 */
 .hbg {
   position: absolute;
@@ -180,12 +184,30 @@ body {
 .hbg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 250, 252, 0.94) 0%,
-    rgba(248, 250, 252, 0.89) 55%,
-    rgba(248, 250, 252, 0.85) 100%
-  );
+  /* Light mode (owner order 9 Nov 2026, evening — photos "full
+     show"): the radial patch (first layer, on top) keeps a soft
+     pale calm zone behind the centred hero copy — badge, H1,
+     sub-paragraph, CTAs and trust row — fading to nothing at its
+     rim; the linear wash beneath it is light (0.38→0.30→0.36), so
+     away from the text the four photos show at roughly two-thirds
+     strength and read as real photos across the whole hero,
+     edges and corners included. Combined coverage at the patch
+     centre is ~0.87, close to the old flat veil's mid value, so
+     the dark copy keeps its readability even over the busiest
+     slide (the payroll desk). */
+  background:
+    radial-gradient(
+      ellipse 62% 58% at 50% 46%,
+      rgba(248, 250, 252, 0.8) 0%,
+      rgba(248, 250, 252, 0.55) 55%,
+      rgba(248, 250, 252, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(248, 250, 252, 0.38) 0%,
+      rgba(248, 250, 252, 0.3) 55%,
+      rgba(248, 250, 252, 0.36) 100%
+    );
 }
 .dark .hbg-overlay {
   background: linear-gradient(
