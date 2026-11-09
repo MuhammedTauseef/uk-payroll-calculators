@@ -16,7 +16,7 @@ import { AppConfig } from "@/utils/AppConfig";
 
 export const metadata = pageMetadata(
   "/ssp-calculator",
-  "SSP Calculator — Statutory Sick Pay Calculator",
+  "SSP Calculator — Statutory Sick Pay",
   "Free SSP calculator: work out Statutory Sick Pay under the April 2026 rules — the lower of £123.25 a week or 80% of average weekly earnings, from day one.",
 );
 
