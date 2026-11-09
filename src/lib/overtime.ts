@@ -28,9 +28,9 @@
  *     apprentices aged 19 or over in the first year of their
  *     apprenticeship; after that, the age-band rate applies.
  *
- * The multipliers offered (1.0× flat, 1.25×, 1.5×, 2.0×, custom)
- * are common CONTRACT rates, not legal entitlements — the page
- * says so in plain words.
+ * The multipliers offered (0× unpaid, 1.0× flat, 1.25×, 1.5×,
+ * 2.0×, custom) are common CONTRACT rates, not legal
+ * entitlements — the page says so in plain words.
  */
 
 export type OvertimeRateBasis = "hourly" | "salary";
@@ -66,6 +66,7 @@ export interface OvertimePreset {
 
 /** Common contract overtime rates — presets, not legal rights. */
 export const OVERTIME_PRESETS: OvertimePreset[] = [
+  { multiplier: 0, label: "Unpaid (0×)" },
   { multiplier: 1, label: "Flat rate (1×) — no premium" },
   { multiplier: 1.25, label: "Time and a quarter (1.25×)" },
   { multiplier: 1.5, label: "Time and a half (1.5×)" },

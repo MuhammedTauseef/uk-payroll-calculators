@@ -208,6 +208,12 @@ export default function OvertimeCalculator() {
             One pay period at a time — a week, or the hours in a
             monthly pay period.
           </p>
+          {basis === "salary" && (
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              Usually the same as your contracted hours per week —
+              change it if this period was different.
+            </p>
+          )}
         </div>
 
         <div>
