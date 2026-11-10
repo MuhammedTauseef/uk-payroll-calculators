@@ -11,7 +11,7 @@ import { parseBlogBody } from "@/lib/blog/markup";
 // rel="noopener noreferrer". Styling matches the guide pages
 // (slate text, brand links).
 
-const LINK_CLASS = "font-medium text-brand-800 dark:text-brand-300 underline";
+const LINK_CLASS = "font-semibold text-brand-700 dark:text-brand-300 underline decoration-2 underline-offset-2 hover:text-brand-900 dark:hover:text-brand-100";
 
 function Segments({ segments }: { segments: BlogTextSegment[] }) {
   return (
