@@ -149,11 +149,17 @@ export default function SiteNav() {
                     onClick={() => setOpen(false)}
                     className={
                       active
-                        ? "block rounded-lg bg-brand-50 px-3 py-2 text-[13px] font-semibold whitespace-nowrap text-brand-800 dark:bg-brand-900/30 dark:text-brand-300"
-                        : "block rounded-lg px-3 py-2 text-[13px] font-medium whitespace-nowrap text-slate-600 transition hover:bg-slate-100 hover:text-brand-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-300"
+                        ? "flex items-center gap-2 rounded-lg bg-brand-50 px-3 py-2 text-[13px] font-semibold whitespace-nowrap text-brand-800 dark:bg-brand-900/30 dark:text-brand-300"
+                        : "flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-medium whitespace-nowrap text-slate-600 transition hover:bg-slate-100 hover:text-brand-800 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-brand-300"
                     }
                   >
-                    {item.label}
+                    <span aria-hidden="true">{item.icon}</span>
+                    <span>{item.label}</span>
+                    {item.flag ? (
+                      <span aria-hidden="true" className="ml-auto pl-2">
+                        {item.flag}
+                      </span>
+                    ) : null}
                   </Link>
                 </li>
               );

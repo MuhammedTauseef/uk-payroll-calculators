@@ -398,7 +398,7 @@ export default async function HomePage() {
 
       <section id="calculators" className="scroll-mt-32">
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          The calculators
+          The calculators 🇬🇧
         </h2>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
           {CALCULATORS.map((calc, i) => {
@@ -436,7 +436,7 @@ export default async function HomePage() {
 
       <section id="us-calculators" className="scroll-mt-32">
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          US Calculators
+          US Calculators 🇺🇸
         </h2>
         <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           The hub&apos;s first United States section — the same
@@ -475,7 +475,7 @@ export default async function HomePage() {
 
       <section id="au-calculators" className="scroll-mt-32">
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          AU Calculators
+          AU Calculators 🇦🇺
         </h2>
         <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           The hub&apos;s Australia section — the same

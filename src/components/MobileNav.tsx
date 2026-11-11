@@ -89,7 +89,18 @@ export default function MobileNav() {
                         : "flex min-h-11 items-center rounded-lg px-3 py-3 text-base font-medium text-slate-700 dark:text-slate-300 transition hover:bg-slate-100 dark:hover:bg-slate-800"
                     }
                   >
-                    {item.label}
+                    <span
+                      aria-hidden="true"
+                      className="mr-3 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-lg dark:bg-slate-800"
+                    >
+                      {item.icon}
+                    </span>
+                    <span>{item.label}</span>
+                    {item.flag ? (
+                      <span aria-hidden="true" className="ml-auto pl-3 text-lg">
+                        {item.flag}
+                      </span>
+                    ) : null}
                   </Link>
                 </li>
               );
