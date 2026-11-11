@@ -35,13 +35,14 @@ export default function FooterNote() {
     );
   }
 
+  // One template string on purpose: splitting this sentence across
+  // JSX text and a {" "} expression rendered live as "theapril 2026
+  // rules" (the space was eaten), spotted on the live site 11 Nov.
+  const rulesLabel =
+    RATES_RULES_LABEL.charAt(0).toLowerCase() + RATES_RULES_LABEL.slice(1);
   return (
     <p>
-      This site provides general guidance only, based on the{" "}
-      {RATES_RULES_LABEL.charAt(0).toLowerCase() +
-        RATES_RULES_LABEL.slice(1)}
-      . It is not affiliated with GOV.UK or HMRC. Always check the
-      official guidance on GOV.UK for your specific circumstances.
+      {`This site provides general guidance only, based on the ${rulesLabel}. It is not affiliated with GOV.UK or HMRC. Always check the official guidance on GOV.UK for your specific circumstances.`}
     </p>
   );
 }
