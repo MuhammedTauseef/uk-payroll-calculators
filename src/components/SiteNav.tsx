@@ -47,6 +47,26 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLLIElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Desktop hover (owner order 2026-11-11): the panel opens when the
+  // pointer moves onto the Calculators item and closes shortly after
+  // it leaves. The short delay forgives diagonal pointer travel, and
+  // the click toggle stays for touch laptops and keyboard users.
+  // handleEnter is bound to mouseover as well as mouseenter: mouseover
+  // bubbles from every child, so re-entering the panel after brushing
+  // the dead strip beside the button always cancels a pending close.
+  const handleEnter = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setOpen(true);
+  };
+  const handleLeave = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpen(false), 250);
+  };
 
   const itemByHref = (href: string) =>
     AppConfig.nav.find((item) => item.href === href);
@@ -144,7 +164,13 @@ export default function SiteNav() {
     <ul className="flex flex-nowrap items-center gap-0.5">
       {visible.map(renderPill)}
 
-      <li ref={panelRef} className="relative">
+      <li
+        ref={panelRef}
+        className="relative"
+        onMouseEnter={handleEnter}
+        onMouseOver={handleEnter}
+        onMouseLeave={handleLeave}
+      >
         <button
           ref={buttonRef}
           type="button"
@@ -169,11 +195,12 @@ export default function SiteNav() {
         </button>
 
         {open && (
-          <div
-            role="menu"
-            aria-label="All calculators by country"
-            className="absolute top-full right-0 z-50 mt-2 w-[min(62rem,calc(100vw-3rem))] rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900"
-          >
+          <div className="absolute top-full right-0 z-50 w-[min(62rem,calc(100vw-3rem))] pt-2">
+            <div
+              role="menu"
+              aria-label="All calculators by country"
+              className="rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900"
+            >
             <div className="grid grid-cols-4 gap-6 p-5">
               <div className="col-span-2">
                 <p className={GROUP_HEADING_CLASS}>UK Calculators 🇬🇧</p>
@@ -226,6 +253,7 @@ export default function SiteNav() {
               Every calculator is free to use — no sign-up, built on the
               April 2026 rules.
             </p>
+            </div>
           </div>
         )}
       </li>
