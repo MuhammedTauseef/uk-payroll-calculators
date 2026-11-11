@@ -13,7 +13,7 @@ export const AppConfig = {
   siteUrl: "https://uk-payroll-calculators.vercel.app",
   tagline: "Free UK employer & payroll calculators",
   description:
-    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, paternity pay, take-home pay, a payslip generator, a tax code checker, an annual leave calculator, an overtime calculator and an IR35 calculator — April 2026 rules.",
+    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, paternity pay, take-home pay, a payslip generator, a tax code checker, an annual leave calculator, an overtime calculator, an hourly rate converter and an IR35 calculator — April 2026 rules.",
   locale: "en-GB",
   nav: [
     { href: "/", label: "Home", icon: "🏠", flag: "" },
@@ -59,6 +59,12 @@ export const AppConfig = {
     { href: "/hmrc-tax-code-checker", label: "Tax Code Checker", icon: "🏷️", flag: "🇬🇧" },
     { href: "/annual-leave-calculator", label: "Annual Leave", icon: "🌴", flag: "🇬🇧" },
     { href: "/overtime-calculator", label: "Overtime", icon: "⏰", flag: "🇬🇧" },
+    {
+      href: "/hourly-rate-converter",
+      label: "Hourly Rate Converter",
+      icon: "🔁",
+      flag: "🇬🇧",
+    },
     { href: "/ir35-calculator", label: "IR35 Calculator", icon: "💼", flag: "🇬🇧" },
     {
       href: "/us/texas-paycheck-calculator",
