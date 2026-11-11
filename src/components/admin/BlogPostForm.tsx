@@ -258,7 +258,13 @@ export function BlogPostForm({ post }: { post: AdminBlogPostRow | null }) {
           <strong>**stars**</strong> would show as plain stars. Link like this: [the words to
           show](/ssp-calculator) for pages on this site, or [the words](https://example.com) for
           outside sites (they open in a new tab). Anything else that looks like a link shows as
-          plain text.
+          plain text. An image goes on a line of its own, like this:{" "}
+          <strong>![a short description](https://…/image.webp &quot;a caption&quot;)</strong>{" "}
+          — the caption in quotes is optional, and the image address must be a page on this site
+          or a full https address. A table is lines starting with{" "}
+          <strong>|</strong>, with a <strong>|---|---|</strong> separator line under the
+          headings: <strong>| Heading | Heading |</strong> first, then one{" "}
+          <strong>| cell | cell |</strong> line per row.
         </span>
       </div>
 
