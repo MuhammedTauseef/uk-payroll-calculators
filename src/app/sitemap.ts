@@ -21,6 +21,12 @@ import { listPublishedBlogSitemapEntries } from "@/lib/blog/queries";
  * static routes it always carried — publishing can only ever ADD
  * entries, never remove the existing ones.
  */
+// ISR (1h): the static routes never change between deploys, and blog
+// posts are added by admin publishes that rebuild the site anyway — an
+// hourly window keeps new entries timely without re-reading the
+// database on every crawler request (Vercel CPU cost, 2026-11-12).
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const calculatorPaths = AppConfig.nav
     .map((item) => item.href)
