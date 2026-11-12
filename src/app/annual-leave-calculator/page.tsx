@@ -165,6 +165,19 @@ export default function AnnualLeaveCalculatorPage() {
 
       <AnnualLeaveCalculator />
 
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        Managing holiday for a whole team?{" "}
+        <a
+          href="https://go.zoho.com/mxeG"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          Zoho People
+        </a>{" "}
+        tracks leave balances and approvals for you.
+      </p>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How to use this annual leave calculator
