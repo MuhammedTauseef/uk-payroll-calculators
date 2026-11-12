@@ -248,7 +248,8 @@ export default function BestHrSoftwarePage() {
           provider&apos;s site before you buy. We may earn a commission
           from some providers if you sign up after visiting them — it never
           changes the price you pay, and providers cannot pay to be ranked
-          or included. Links on this page currently go straight to the
+          or included. We compare each provider on its published pricing
+          and product information, and this page carries no links to the
           providers&apos; own websites.
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">
