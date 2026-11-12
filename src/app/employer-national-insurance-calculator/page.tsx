@@ -128,6 +128,19 @@ export default function EmployerNationalInsuranceCalculatorPage() {
 
       <EmployerNiCalculator />
 
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        Paying staff every month?{" "}
+        <a
+          href="https://go.zoho.com/tjEU"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          Zoho Payroll
+        </a>{" "}
+        runs the calculation, payslips and filings in one place.
+      </p>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How is employer National Insurance calculated?
