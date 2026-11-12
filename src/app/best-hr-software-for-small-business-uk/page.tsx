@@ -192,16 +192,6 @@ export default function BestHrSoftwarePage() {
             <span className="font-semibold">Watch out: </span>
             {p.watchOut}
           </p>
-          <p>
-            <a
-              href={p.url}
-              target="_blank"
-              rel="noopener"
-              className="text-sm font-semibold text-brand-700 dark:text-brand-300 hover:text-brand-800 dark:hover:text-brand-300"
-            >
-              Visit {p.name} →
-            </a>
-          </p>
         </section>
       ))}
 
