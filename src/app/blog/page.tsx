@@ -10,10 +10,12 @@ export const metadata = pageMetadata(
   "Plain-English guides from UK Payroll Calculators: statutory sick pay, payroll, maternity and paternity pay and employer National Insurance — April 2026 rules.",
 );
 
-// Dynamic on purpose: posts are published from the admin panel and
-// must appear here the moment they are published — a static prerender
-// would freeze whatever happened to be published at build time.
-export const dynamic = "force-dynamic";
+// ISR (1h): admin publishes fire the deploy hook, which rebuilds the
+// site, so a new post appears on publish; anything changed in the data
+// without a rebuild shows within the hour. Repeat visitors and crawlers
+// get the cached page instead of a fresh database read on every hit
+// (Vercel CPU cost, 2026-11-12).
+export const revalidate = 3600;
 
 export default async function BlogIndexPage() {
   const posts = await listPublishedBlogPosts().catch(() => []);
