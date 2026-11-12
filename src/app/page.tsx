@@ -13,11 +13,12 @@ export const metadata = pageMetadata(
   "Free UK payroll calculators: SSP, employer NI, take-home pay, payslip generator, tax code checker, annual leave, overtime and IR35 — April 2026 rules.",
 );
 
-// Dynamic on purpose (same as /blog): the "Latest from the blog"
-// section below reads published posts at request time, so a post
-// published from the admin panel appears on the front page straight
-// away — a static prerender would freeze the list at build time.
-export const dynamic = "force-dynamic";
+// ISR (1h): only the "Latest from the blog" strip reads the database;
+// admin publishes fire the deploy hook (site rebuild), so a new post
+// appears on publish — anything changed without a rebuild shows within
+// the hour. Repeat hits stop re-reading blog_posts on every request
+// (Vercel CPU cost, 2026-11-12).
+export const revalidate = 3600;
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
