@@ -150,6 +150,18 @@ export default function SspCalculatorPage() {
               entitlement has been tracked correctly across linked spells.
             </p>
           </div>
+          <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Tracking sickness absence across a team?{" "}
+            <a
+              href="https://go.zoho.com/mxeG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+            >
+              Zoho People
+            </a>{" "}
+            records leave and absence alongside employee records.
+          </p>
         </div>
       </section>
 
