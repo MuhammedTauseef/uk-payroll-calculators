@@ -11,14 +11,25 @@ export type AdminBlogPostRow = BlogPostRow;
 const ADMIN_COLUMNS =
   "id,slug,title,description,body,faqs,cover_image_url,status,published_at,created_at,updated_at";
 
+/** List rows carry no body/faqs/cover — the editor fetches the full row
+ *  via getAdminBlogPost. Keeps the /admin/blog list payload bounded. */
+export type AdminBlogPostSummary = Pick<
+  BlogPostRow,
+  "id" | "slug" | "title" | "description" | "status" | "published_at" | "created_at" | "updated_at"
+>;
+
+const ADMIN_LIST_COLUMNS =
+  "id,slug,title,description,status,published_at,created_at,updated_at";
+
 /** Every post (drafts included), most recently updated first. */
-export async function listAdminBlogPosts(supabase: SupabaseClient): Promise<AdminBlogPostRow[]> {
+export async function listAdminBlogPosts(supabase: SupabaseClient): Promise<AdminBlogPostSummary[]> {
   const { data, error } = await supabase
     .from("blog_posts")
-    .select(ADMIN_COLUMNS)
-    .order("updated_at", { ascending: false });
+    .select(ADMIN_LIST_COLUMNS)
+    .order("updated_at", { ascending: false })
+    .limit(100);
   if (error) throw new Error("ADMIN_DATA_LOAD_FAILED");
-  return (data ?? []) as unknown as AdminBlogPostRow[];
+  return (data ?? []) as unknown as AdminBlogPostSummary[];
 }
 
 /** One post by id for the editor, or null. */

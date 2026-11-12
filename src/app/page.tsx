@@ -14,10 +14,11 @@ export const metadata = pageMetadata(
 );
 
 // ISR (1h): only the "Latest from the blog" strip reads the database;
-// admin publishes fire the deploy hook (site rebuild), so a new post
-// appears on publish — anything changed without a rebuild shows within
-// the hour. Repeat hits stop re-reading blog_posts on every request
-// (Vercel CPU cost, 2026-11-12).
+// admin publishes revalidate the affected paths on save
+// (saveBlogPostAction → revalidatePath — there is no deploy hook), so a
+// new post appears on publish — anything changed without a save shows
+// within the hour. Repeat hits stop re-reading blog_posts on every
+// request (Vercel CPU cost, 2026-11-12).
 export const revalidate = 3600;
 
 const websiteJsonLd = {

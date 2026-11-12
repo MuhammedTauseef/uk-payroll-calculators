@@ -10,9 +10,10 @@ export const metadata = pageMetadata(
   "Plain-English guides from UK Payroll Calculators: statutory sick pay, payroll, maternity and paternity pay and employer National Insurance — April 2026 rules.",
 );
 
-// ISR (1h): admin publishes fire the deploy hook, which rebuilds the
-// site, so a new post appears on publish; anything changed in the data
-// without a rebuild shows within the hour. Repeat visitors and crawlers
+// ISR (1h): admin publishes revalidate the affected paths on save
+// (saveBlogPostAction → revalidatePath — there is no deploy hook), so a
+// new post appears on publish; anything changed in the data without a
+// save shows within the hour. Repeat visitors and crawlers
 // get the cached page instead of a fresh database read on every hit
 // (Vercel CPU cost, 2026-11-12).
 export const revalidate = 3600;

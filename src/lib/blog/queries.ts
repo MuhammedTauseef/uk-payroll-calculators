@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { createPublicClient } from "@/lib/supabase/public";
 
 // Public (no-login) read path for /blog — the same two guards as the
@@ -51,24 +52,29 @@ export async function listPublishedBlogPosts(): Promise<PublicBlogPostSummary[]>
     .from("blog_posts")
     .select(SUMMARY_COLUMNS)
     .eq("status", "published")
-    .order("published_at", { ascending: false });
+    .order("published_at", { ascending: false })
+    .limit(100);
   if (error) throw new Error("APP_DATA_LOAD_FAILED");
   return (data ?? []) as PublicBlogPostSummary[];
 }
 
-/** One published post by slug, or null (unknown slug and drafts alike). */
-export async function getPublishedBlogPost(slug: string): Promise<PublicBlogPost | null> {
-  const supabase = createPublicClient();
-  if (!supabase) return null;
-  const { data, error } = await supabase
-    .from("blog_posts")
-    .select(FULL_COLUMNS)
-    .eq("status", "published")
-    .eq("slug", slug)
-    .maybeSingle();
-  if (error) throw new Error("APP_DATA_LOAD_FAILED");
-  return (data as PublicBlogPost | null) ?? null;
-}
+/** One published post by slug, or null (unknown slug and drafts alike).
+ *  Wrapped in React cache(): generateMetadata and the page component both
+ *  ask for the same slug in one render — memoised to a single DB read. */
+export const getPublishedBlogPost = cache(
+  async (slug: string): Promise<PublicBlogPost | null> => {
+    const supabase = createPublicClient();
+    if (!supabase) return null;
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select(FULL_COLUMNS)
+      .eq("status", "published")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (error) throw new Error("APP_DATA_LOAD_FAILED");
+    return (data as PublicBlogPost | null) ?? null;
+  },
+);
 
 export type BlogSitemapEntry = { slug: string; lastModified: string | null };
 
@@ -80,7 +86,8 @@ export async function listPublishedBlogSitemapEntries(): Promise<BlogSitemapEntr
     .from("blog_posts")
     .select("slug,published_at,updated_at")
     .eq("status", "published")
-    .order("published_at", { ascending: false });
+    .order("published_at", { ascending: false })
+    .limit(100);
   if (error) throw new Error("APP_DATA_LOAD_FAILED");
   return (data ?? []).map((row) => ({
     slug: row.slug as string,
