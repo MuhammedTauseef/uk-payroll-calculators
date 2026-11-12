@@ -7,14 +7,22 @@ import { AppConfig } from "@/utils/AppConfig";
 import { pageMetadata } from "@/utils/metadata";
 import { formatDateGB } from "@/lib/blog/format";
 import { buildArticleJsonLd, buildFaqPageJsonLd, serializeJsonLd } from "@/lib/blog/jsonld";
-import { getPublishedBlogPost } from "@/lib/blog/queries";
+import { getPublishedBlogPost, listPublishedBlogPosts } from "@/lib/blog/queries";
 
 type RouteParams = { params: Promise<{ slug: string }> };
 
-// Dynamic on purpose: the post is read from blog_posts per request,
-// so an admin edit or a newly published post is live immediately. An
-// unknown slug — and any draft — 404s.
-export const dynamic = "force-dynamic";
+// ISR (1h): published posts are prerendered at build and re-rendered
+// at most hourly. Admin publishes and edits fire the deploy hook, which
+// rebuilds the site, so changes go live on publish; anything changed
+// in the data without a rebuild shows within the hour. An unknown slug
+// — and any draft — 404s. Repeat hits stop re-reading blog_posts on
+// every request (Vercel CPU cost, 2026-11-12).
+export const revalidate = 3600;
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const posts = await listPublishedBlogPosts().catch(() => []);
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 export async function generateMetadata({ params }: RouteParams): Promise<Metadata> {
   const { slug } = await params;
