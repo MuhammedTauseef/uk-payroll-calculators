@@ -160,6 +160,19 @@ export default function OvertimeCalculatorPage() {
 
       <OvertimeCalculator />
 
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        If overtime is a regular pattern rather than the odd busy week,
+        plan the hours before they reach payroll. Our guide to the{" "}
+        <Link
+          href="/blog/best-workforce-planning-software"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          best workforce planning software
+        </Link>{" "}
+        explains how to forecast demand, spot cover gaps and price every
+        hour.
+      </p>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How to use this overtime calculator

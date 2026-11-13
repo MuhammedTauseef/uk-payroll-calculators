@@ -117,6 +117,19 @@ export default function ProRataSalaryCalculatorPage() {
 
       <ProRataCalculator />
 
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        FTE is also the unit employers use to compare part-time patterns
+        and price future hires. Our guide to the{" "}
+        <Link
+          href="/blog/best-workforce-planning-software"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          best workforce planning software
+        </Link>{" "}
+        shows how those figures feed a practical headcount and capacity
+        plan.
+      </p>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How is a pro-rata salary calculated?

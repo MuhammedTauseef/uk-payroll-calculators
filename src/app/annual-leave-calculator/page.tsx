@@ -178,6 +178,19 @@ export default function AnnualLeaveCalculatorPage() {
         tracks leave balances and approvals for you.
       </p>
 
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        If holiday sits alongside sickness and other time off, compare
+        the{" "}
+        <Link
+          href="/blog/best-absence-management-software"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          best absence management software
+        </Link>{" "}
+        for UK teams — it covers leave balances, approvals and absence
+        patterns in one place.
+      </p>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How to use this annual leave calculator

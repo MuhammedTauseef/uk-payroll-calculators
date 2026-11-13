@@ -162,6 +162,17 @@ export default function SspCalculatorPage() {
             </a>{" "}
             records leave and absence alongside employee records.
           </p>
+          <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            For absence patterns, cover and return-to-work planning,
+            compare the{" "}
+            <Link
+              href="/blog/best-absence-management-software"
+              className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+            >
+              best absence management software
+            </Link>{" "}
+            for UK teams in our buyer guide.
+          </p>
         </div>
       </section>
 

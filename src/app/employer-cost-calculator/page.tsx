@@ -165,6 +165,25 @@ export default function EmployerCostCalculatorPage() {
         runs the calculation, payslips and filings in one place.
       </p>
 
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        Once you know the true cost of a role, compare the{" "}
+        <Link
+          href="/blog/best-hr-systems-uk"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          best HR systems for UK employers
+        </Link>{" "}
+        for the employee records behind the numbers. If you are building
+        a hiring plan, the{" "}
+        <Link
+          href="/blog/best-workforce-planning-software"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          best workforce planning software
+        </Link>{" "}
+        guide shows how to price the team before you recruit.
+      </p>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What a {fmt(30000)} salary really costs, line by line

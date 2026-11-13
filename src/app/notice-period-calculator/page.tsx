@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
+import Link from "next/link";
 import NoticeCalculator from "@/components/NoticeCalculator";
 import { MAX_EMPLOYER_STATUTORY_WEEKS } from "@/lib/notice";
 
@@ -104,6 +105,19 @@ export default function NoticePeriodCalculatorPage() {
       </section>
 
       <NoticeCalculator />
+
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+        Employers: a leaver is easier to handle when the final working
+        day, accrued leave and handover notes sit in one employee record.
+        Compare the{" "}
+        <Link
+          href="/blog/best-hr-systems-uk"
+          className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+        >
+          best HR systems for UK employers
+        </Link>{" "}
+        if you are choosing software to manage those processes.
+      </p>
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
