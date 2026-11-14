@@ -94,6 +94,25 @@ function MaternityIcon() {
   );
 }
 
+function NhsPayIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M12 8v8M8 12h8" />
+    </svg>
+  );
+}
+
+function VatIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="8" cy="8" r="2.4" />
+      <circle cx="16" cy="16" r="2.4" />
+      <path d="M17.5 5.5L6.5 18.5" />
+    </svg>
+  );
+}
+
 function PaternityIcon() {
   return (
     <svg {...iconProps}>
@@ -253,6 +272,14 @@ const CALCULATORS = [
     linkText: "Open the maternity pay calculator →",
   },
   {
+    href: "/nhs-pay-calculator",
+    icon: <NhsPayIcon />,
+    title: "NHS Pay Calculator",
+    description:
+      "NHS pay on the 2025/26 Agenda for Change scales for England: pick your band and pay step for annual, monthly, weekly and hourly pay, plus an estimated take-home after NHS pension, tax and NI.",
+    linkText: "Open the NHS pay calculator →",
+  },
+  {
     href: "/paternity-pay-calculator",
     icon: <PaternityIcon />,
     title: "Paternity Pay Calculator",
@@ -307,6 +334,14 @@ const CALCULATORS = [
     description:
       "Check whether a contract is inside or outside IR35 from eight questions about control, substitution and the other status factors, then compare inside vs outside take-home pay on your day rate.",
     linkText: "Open the IR35 calculator →",
+  },
+  {
+    href: "/vat-calculator",
+    icon: <VatIcon />,
+    title: "VAT Calculator UK",
+    description:
+      "Add VAT to a net price or strip it out of a gross price at 20%, 5% or 0% — with the UK VAT rates, the manual formulas and the VAT fraction explained.",
+    linkText: "Open the VAT calculator →",
   },
 ];
 
