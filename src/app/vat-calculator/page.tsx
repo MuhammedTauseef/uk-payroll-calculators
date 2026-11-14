@@ -233,6 +233,26 @@ export default function VatCalculatorPage() {
           return is a check rather than a reconstruction.
         </p>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          For keeping those digital records and filing the return
+          itself,{" "}
+          <a
+            href="https://go.zoho.com/aG2O"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            Zoho Books
+          </a>{" "}
+          records the VAT on every invoice as you raise it and files
+          MTD VAT returns from the same figures, so the quarterly
+          return is ready when the deadline comes.
+        </p>
+        <p className="max-w-2xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+          We may earn a commission from some providers if you sign up
+          after visiting them — it never changes the price you pay, and
+          providers cannot pay to be ranked or included.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Selling your time rather than goods? The payroll side of a
           growing business has its own maths — the{" "}
           <Link
