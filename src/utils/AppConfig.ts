@@ -8,9 +8,9 @@
  */
 export const AppConfig = {
   name: "UK Payroll Calculators",
-  // Production origin (Vercel subdomain; no custom domain). Used by the
+  // Production origin (custom domain payrollcalc.co.uk, since 15 Nov 2026). Used by the
   // sitemap and robots files — update here if the domain ever changes.
-  siteUrl: "https://uk-payroll-calculators.vercel.app",
+  siteUrl: "https://payrollcalc.co.uk",
   tagline: "Free UK employer & payroll calculators",
   description:
     "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, NHS pay, paternity pay, take-home pay, a payslip generator, a tax code checker, an annual leave calculator, an overtime calculator, an hourly rate converter, an IR35 calculator and a VAT calculator — April 2026 rules.",

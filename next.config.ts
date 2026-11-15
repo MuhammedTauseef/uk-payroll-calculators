@@ -59,6 +59,25 @@ const nextConfig: NextConfig = {
         ]
       : [],
   },
+  // Domain migration (15 Nov 2026): the site now lives at
+  // payrollcalc.co.uk. The www host and the old vercel.app host
+  // permanently redirect (308) to the apex, path preserved.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.payrollcalc.co.uk" }],
+        destination: "https://payrollcalc.co.uk/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "uk-payroll-calculators.vercel.app" }],
+        destination: "https://payrollcalc.co.uk/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
