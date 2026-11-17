@@ -275,7 +275,15 @@ export default function AnnualLeaveCalculatorPage() {
           changes: the entitlement builds up from the first day of the
           job, keeps building during sick leave and family leave, and
           bank holidays that fall on a working day usually come out of
-          the total. The pay side of working part-time is a different
+          the total. If your employer&apos;s own full-time entitlement
+          is the figure you need to pro-rate — rather than the
+          statutory minimum worked out here — the{" "}
+          <Link href="/pro-rata-holiday-calculator" className={linkClass}>
+            pro-rata holiday calculator
+          </Link>{" "}
+          starts from that contract figure, checks it against the
+          5.6-week floor, and covers mid-year starters and leavers.
+          The pay side of working part-time is a different
           calculation — our{" "}
           <Link href="/pro-rata-salary-calculator" className={linkClass}>
             pro-rata salary calculator
@@ -528,6 +536,22 @@ export default function AnnualLeaveCalculatorPage() {
             </p>
             <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
               Open the generator →
+            </span>
+          </Link>
+          <Link
+            href="/pro-rata-holiday-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Pro Rata Holiday Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              Pro-rate an employer&apos;s own full-time entitlement
+              for part-time staff and mid-year starters or leavers —
+              in days and hours, with the statutory floor checked.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
             </span>
           </Link>
         </div>

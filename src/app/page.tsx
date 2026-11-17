@@ -113,6 +113,32 @@ function VatIcon() {
   );
 }
 
+function AnnuityIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 20h16M7 20v-5M11 20v-9M15 20v-7M19 20V7" />
+    </svg>
+  );
+}
+
+function ProRataHolidayIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4M8 16h5" />
+    </svg>
+  );
+}
+
+function TermTimeIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 4L2 9l10 5 10-5-10-5z" />
+      <path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5" />
+    </svg>
+  );
+}
+
 function PaternityIcon() {
   return (
     <svg {...iconProps}>
@@ -138,6 +164,42 @@ function PayslipIcon() {
     <svg {...iconProps}>
       <rect x="5" y="3" width="14" height="18" rx="2" />
       <path d="M9 8h6M9 12h6M9 16h4" />
+    </svg>
+  );
+}
+
+function SalarySacrificeIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 3v3M12 18v3M16.5 6.5c-.8-1-2.4-1.5-4.5-1.5-3 0-5 1.6-5 4 0 5.5 10 2.5 10 7 0 2.4-2 4-5 4-2.1 0-3.7-.6-4.5-1.6" />
+    </svg>
+  );
+}
+
+function StudentLoanIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M22 9L12 4 2 9l10 5 10-5z" />
+      <path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5M22 9v5" />
+    </svg>
+  );
+}
+
+function UmbrellaIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9z" />
+      <path d="M12 12v6a2.5 2.5 0 0 0 5 0" />
+    </svg>
+  );
+}
+
+function CapitalGainsIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3 3v18h18" />
+      <path d="M7 15l4-5 3 3 5-7" />
+      <path d="M19 6h-3M19 6v3" />
     </svg>
   );
 }
@@ -342,6 +404,70 @@ const CALCULATORS = [
     description:
       "Add VAT to a net price or strip it out of a gross price at 20%, 5% or 0% — with the UK VAT rates, the manual formulas and the VAT fraction explained.",
     linkText: "Open the VAT calculator →",
+  },
+  {
+    href: "/annuity-calculator",
+    icon: <AnnuityIcon />,
+    title: "Annuity Calculator UK",
+    description:
+      "Estimate the guaranteed income a pension pot buys at 55 to 75 — single or joint life, level or rising payments, guarantee periods — with the full annuity rate table printed, not hidden.",
+    linkText: "Open the annuity calculator →",
+  },
+  {
+    href: "/pro-rata-holiday-calculator",
+    icon: <ProRataHolidayIcon />,
+    title: "Pro Rata Holiday Calculator",
+    description:
+      "Holiday entitlement for part-time staff and mid-year starters or leavers: the full-time entitlement pro-rated by days worked, checked against the statutory 5.6-week floor, in days and hours.",
+    linkText: "Open the pro-rata holiday calculator →",
+  },
+  {
+    href: "/term-time-pay-calculator",
+    icon: <TermTimeIcon />,
+    title: "Term Time Pay Calculator",
+    description:
+      "Term-time-only pay from the full-time salary — working weeks plus the statutory holiday uplift most calculators miss — per year, per month and per week.",
+    linkText: "Open the term-time pay calculator →",
+  },
+  {
+    href: "/payslip-calculator",
+    icon: <PayslipIcon />,
+    title: "Payslip Calculator",
+    description:
+      "What your monthly payslip will show: gross pay, tax from your tax code, National Insurance, pension and student loan — line by line, before payday.",
+    linkText: "Open the payslip calculator →",
+  },
+  {
+    href: "/salary-sacrifice-calculator",
+    icon: <SalarySacrificeIcon />,
+    title: "Salary Sacrifice Calculator",
+    description:
+      "What sacrificing salary into a pension saves in tax AND National Insurance — the cost per £1 in the pension, and the employer NI saving on top.",
+    linkText: "Open the salary sacrifice calculator →",
+  },
+  {
+    href: "/student-loan-repayment-calculator",
+    icon: <StudentLoanIcon />,
+    title: "Student Loan Repayment Calculator",
+    description:
+      "What you repay each month and year on Plans 1, 2, 4 and 5 and the Postgraduate Loan, at the 2026/27 GOV.UK thresholds.",
+    linkText: "Open the student loan calculator →",
+  },
+  {
+    href: "/umbrella-company-calculator",
+    icon: <UmbrellaIcon />,
+    title: "Umbrella Company Calculator",
+    description:
+      "Take-home pay from the assignment rate with every deduction shown — margin, employer NI, apprenticeship levy, holiday pay, tax and NI.",
+    linkText: "Open the umbrella calculator →",
+  },
+  {
+    href: "/capital-gains-tax-calculator",
+    icon: <CapitalGainsIcon />,
+    title: "Capital Gains Tax Calculator",
+    description:
+      "The tax on a gain at the 2026/27 rates — £3,000 allowance, 18% inside the basic-rate band, 24% above — using GOV.UK's own method and examples.",
+    linkText: "Open the capital gains calculator →",
   },
 ];
 

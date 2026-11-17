@@ -13,7 +13,7 @@ export const AppConfig = {
   siteUrl: "https://payrollcalc.co.uk",
   tagline: "Free UK employer & payroll calculators",
   description:
-    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, NHS pay, paternity pay, take-home pay, a payslip generator, a tax code checker, an annual leave calculator, an overtime calculator, an hourly rate converter, an IR35 calculator and a VAT calculator — April 2026 rules.",
+    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, NHS pay, paternity pay, take-home pay, a payslip generator, a payslip calculator, a tax code checker, an annual leave calculator, a pro-rata holiday calculator, a term-time pay calculator, a salary sacrifice calculator, a student loan repayment calculator, an umbrella company calculator, a capital gains tax calculator, an overtime calculator, an hourly rate converter, an IR35 calculator, a VAT calculator, a CMS child maintenance calculator and an annuity calculator — April 2026 rules.",
   locale: "en-GB",
   nav: [
     { href: "/", label: "Home", icon: "🏠", flag: "" },
@@ -55,6 +55,8 @@ export const AppConfig = {
       flag: "🇬🇧",
     },
     { href: "/vat-calculator", label: "VAT Calculator", icon: "🧮", flag: "🇬🇧" },
+    { href: "/cms-calculator", label: "CMS Calculator", icon: "👨‍👧", flag: "🇬🇧" },
+    { href: "/annuity-calculator", label: "Annuity Calculator", icon: "🏦", flag: "🇬🇧" },
     {
       href: "/paternity-pay-calculator",
       label: "Paternity Pay",
@@ -62,9 +64,46 @@ export const AppConfig = {
       flag: "🇬🇧",
     },
     { href: "/40k-after-tax-uk", label: "Take-Home Pay", icon: "💰", flag: "🇬🇧" },
+    { href: "/payslip-calculator", label: "Payslip Calculator", icon: "🧮", flag: "🇬🇧" },
     { href: "/payslip-generator", label: "Payslip Generator", icon: "🧾", flag: "🇬🇧" },
+    {
+      href: "/salary-sacrifice-calculator",
+      label: "Salary Sacrifice",
+      icon: "🐷",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/student-loan-repayment-calculator",
+      label: "Student Loan Repayments",
+      icon: "🎓",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/umbrella-company-calculator",
+      label: "Umbrella Company",
+      icon: "☂️",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/capital-gains-tax-calculator",
+      label: "Capital Gains Tax",
+      icon: "📈",
+      flag: "🇬🇧",
+    },
     { href: "/hmrc-tax-code-checker", label: "Tax Code Checker", icon: "🏷️", flag: "🇬🇧" },
     { href: "/annual-leave-calculator", label: "Annual Leave", icon: "🌴", flag: "🇬🇧" },
+    {
+      href: "/pro-rata-holiday-calculator",
+      label: "Pro Rata Holiday",
+      icon: "🗓️",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/term-time-pay-calculator",
+      label: "Term Time Pay",
+      icon: "🎓",
+      flag: "🇬🇧",
+    },
     { href: "/overtime-calculator", label: "Overtime", icon: "⏰", flag: "🇬🇧" },
     {
       href: "/hourly-rate-converter",
