@@ -13,7 +13,7 @@ export const AppConfig = {
   siteUrl: "https://payrollcalc.co.uk",
   tagline: "Free UK employer & payroll calculators",
   description:
-    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, NHS pay, paternity pay, take-home pay, a payslip generator, a payslip calculator, a tax code checker, an annual leave calculator, a pro-rata holiday calculator, a term-time pay calculator, a salary sacrifice calculator, a student loan repayment calculator, an umbrella company calculator, a capital gains tax calculator, an overtime calculator, an hourly rate converter, an IR35 calculator, a VAT calculator, a CMS child maintenance calculator and an annuity calculator — April 2026 rules.",
+    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, NHS pay, paternity pay, take-home pay, a payslip generator, a payslip calculator, a tax code checker, an annual leave calculator, a pro-rata holiday calculator, a term-time pay calculator, a salary sacrifice calculator, a student loan repayment calculator, an umbrella company calculator, a capital gains tax calculator, an overtime calculator, an hourly rate converter, an IR35 calculator, a VAT calculator, a CMS child maintenance calculator, an annuity calculator, and five unit converters — stone to kg, kg to stone, miles to km, cm to inches and litres to gallons — April 2026 rules.",
   locale: "en-GB",
   nav: [
     { href: "/", label: "Home", icon: "🏠", flag: "" },
@@ -109,6 +109,36 @@ export const AppConfig = {
       href: "/hourly-rate-converter",
       label: "Hourly Rate Converter",
       icon: "🔁",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/stone-to-kg-converter",
+      label: "Stone to Kg Converter",
+      icon: "⚖️",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/kg-to-stone-converter",
+      label: "Kg to Stone Converter",
+      icon: "⚖️",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/miles-to-km-converter",
+      label: "Miles to Km Converter",
+      icon: "🛣️",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/cm-to-inches-converter",
+      label: "Cm to Inches Converter",
+      icon: "📏",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/litres-to-gallons-converter",
+      label: "Litres to Gallons Converter",
+      icon: "⛽",
       flag: "🇬🇧",
     },
     { href: "/ir35-calculator", label: "IR35 Calculator", icon: "💼", flag: "🇬🇧" },

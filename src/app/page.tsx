@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroCarousel } from "@/components/HeroCarousel";
+import ToolsDirectory, { type DirectoryTool } from "@/components/ToolsDirectory";
 import { SSP_GUIDES } from "@/components/GuideSections";
 import { pageMetadata } from "@/utils/metadata";
 import { AppConfig } from "@/utils/AppConfig";
@@ -258,11 +259,30 @@ function AuIcon() {
   );
 }
 
+function CmsIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" />
+      <path d="M15.5 5.5h5M15.5 9.5h5M15.5 13.5h3" />
+    </svg>
+  );
+}
+
 function GuideIcon() {
   return (
     <svg {...iconProps}>
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z" />
       <path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5" />
+    </svg>
+  );
+}
+
+function ConverterIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 7h13M13 3.5L16.5 7 13 10.5" />
+      <path d="M20 17H7M11 13.5L7.5 17l3.5 3.5" />
     </svg>
   );
 }
@@ -471,6 +491,127 @@ const CALCULATORS = [
   },
 ];
 
+const CONVERTERS = [
+  {
+    href: "/stone-to-kg-converter",
+    icon: <ConverterIcon />,
+    title: "Stone to Kg Converter",
+    description:
+      "Stones and pounds into kilograms — enter both parts for the exact figure, with the formula and the full conversion table from 1 to 60 stone, half-stone combinations included.",
+    linkText: "Open the stone to kg converter →",
+  },
+  {
+    href: "/kg-to-stone-converter",
+    icon: <ConverterIcon />,
+    title: "Kg to Stone Converter",
+    description:
+      "Kilograms split into stones and pounds — 76 kg is 11 st 13.6 lb — with the formula and a kilogram-by-kilogram table from 40 to 150 kg.",
+    linkText: "Open the kg to stone converter →",
+  },
+  {
+    href: "/miles-to-km-converter",
+    icon: <ConverterIcon />,
+    title: "Miles to Km Converter",
+    description:
+      "Miles to kilometres and back again, with the 5K, 10K and marathon distances worked out and the full 1–100 mile table.",
+    linkText: "Open the miles to km converter →",
+  },
+  {
+    href: "/cm-to-inches-converter",
+    icon: <ConverterIcon />,
+    title: "Cm to Inches Converter",
+    description:
+      "Centimetres to inches — and to feet and inches for heights — with the formula and a full table from 1 to 200 cm.",
+    linkText: "Open the cm to inches converter →",
+  },
+  {
+    href: "/litres-to-gallons-converter",
+    icon: <ConverterIcon />,
+    title: "Litres to Gallons Converter",
+    description:
+      "Litres into UK imperial gallons for fuel and mpg figures — with US gallons shown separately, and the full 1–100 litre table.",
+    linkText: "Open the litres to gallons converter →",
+  },
+];
+
+// The all-calculators directory: every tool on the homepage in one
+// searchable, chip-filtered list (the ToolsDirectory client
+// component filters it entirely in the browser — the list is
+// rendered into the static page, no search endpoint exists).
+// Categories follow the groups the tools naturally fall into.
+const CATEGORY_BY_HREF: Record<string, string> = {
+  "/ssp-calculator": "Leave & Family",
+  "/notice-period-calculator": "Employers & Contractors",
+  "/pro-rata-salary-calculator": "Pay & Tax",
+  "/employer-national-insurance-calculator": "Employers & Contractors",
+  "/employer-cost-calculator": "Employers & Contractors",
+  "/nhs-maternity-pay-calculator": "Leave & Family",
+  "/nhs-pay-calculator": "Pay & Tax",
+  "/paternity-pay-calculator": "Leave & Family",
+  "/40k-after-tax-uk": "Pay & Tax",
+  "/payslip-calculator": "Pay & Tax",
+  "/payslip-generator": "Pay & Tax",
+  "/salary-sacrifice-calculator": "Pay & Tax",
+  "/student-loan-repayment-calculator": "Pay & Tax",
+  "/umbrella-company-calculator": "Employers & Contractors",
+  "/capital-gains-tax-calculator": "Pay & Tax",
+  "/hmrc-tax-code-checker": "Pay & Tax",
+  "/annual-leave-calculator": "Leave & Family",
+  "/pro-rata-holiday-calculator": "Leave & Family",
+  "/term-time-pay-calculator": "Leave & Family",
+  "/overtime-calculator": "Pay & Tax",
+  "/hourly-rate-converter": "Pay & Tax",
+  "/ir35-calculator": "Employers & Contractors",
+  "/vat-calculator": "Pay & Tax",
+  "/annuity-calculator": "Pay & Tax",
+};
+
+const DIRECTORY_TOOLS: DirectoryTool[] = [
+  ...CALCULATORS.map((c) => ({
+    href: c.href,
+    title: c.title,
+    description: c.description,
+    linkText: c.linkText,
+    category: CATEGORY_BY_HREF[c.href] ?? "Pay & Tax",
+    icon: c.icon,
+  })),
+  {
+    href: "/cms-calculator",
+    title: "CMS Calculator",
+    description:
+      "Child maintenance under the Child Maintenance Service: the weekly figure on the standard rates from the paying parent's gross income, for the Direct Pay and Collect & Pay arrangements.",
+    linkText: "Open the CMS calculator →",
+    category: "Leave & Family",
+    icon: <CmsIcon />,
+  },
+  ...CONVERTERS.map((c) => ({
+    href: c.href,
+    title: c.title,
+    description: c.description,
+    linkText: c.linkText,
+    category: "Converters",
+    icon: c.icon,
+  })),
+  {
+    href: "/us/texas-paycheck-calculator",
+    title: "Texas Paycheck Calculator",
+    description:
+      "Net pay on a Texas salary or hourly wage under the 2026 IRS rules: federal income tax withholding, Social Security and Medicare worked out line by line — and a Texas state income tax line of exactly $0, because Texas has none.",
+    linkText: "Open the Texas paycheck calculator →",
+    category: "US & AU",
+    icon: <TexasIcon />,
+  },
+  {
+    href: "/au/tax-rate-calculator",
+    title: "Australia Tax Rate Calculator",
+    description:
+      "Income tax and the Medicare levy on any Australian income under the ATO 2025–26 rates — your marginal and effective tax rate side by side, for residents and non-residents alike.",
+    linkText: "Open the Australia tax rate calculator →",
+    category: "US & AU",
+    icon: <AuIcon />,
+  },
+];
+
 const TRUST_POINTS = [
   "Free to use",
   "No sign-up needed",
@@ -563,113 +704,13 @@ export default async function HomePage() {
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
           The calculators 🇬🇧
         </h2>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {CALCULATORS.map((calc, i) => {
-            // Odd card out (odd counts): the last card spans the
-            // full row as a wide feature card instead of leaving a
-            // half-empty slot beside it.
-            const wide = i === CALCULATORS.length - 1 && CALCULATORS.length % 2 === 1;
-            return (
-              <Link
-                key={calc.href}
-                href={calc.href}
-                className={`group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md ${wide ? "sm:col-span-2 sm:flex sm:items-start sm:gap-5" : ""}`}
-              >
-                <span
-                  className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm ${wide ? "sm:mb-0" : ""}`}
-                >
-                  {calc.icon}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
-                    {calc.title}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    {calc.description}
-                  </p>
-                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-                    {calc.linkText}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      <section id="us-calculators" className="scroll-mt-32">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          US Calculators 🇺🇸
-        </h2>
         <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          The hub&apos;s first United States section — the same
-          shows-its-working treatment as the UK tools, run on IRS rules
-          instead of HMRC ones.
+          Every calculator and converter on the hub in one list —
+          search by name or keyword, or filter by category. The US and
+          Australia tools are in the same list, under their own chip.
         </p>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {/* Single US tool so far: the card spans the full row as a
-              wide feature card, same treatment as the odd card out in
-              the grids above. */}
-          <Link
-            href="/us/texas-paycheck-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md sm:col-span-2 sm:flex sm:items-start sm:gap-5"
-          >
-            <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm sm:mb-0">
-              <TexasIcon />
-            </span>
-            <div className="min-w-0">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
-                Texas Paycheck Calculator
-              </h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                Net pay on a Texas salary or hourly wage under the 2026
-                IRS rules: federal income tax withholding, Social
-                Security and Medicare worked out line by line — and a
-                Texas state income tax line of exactly $0, because Texas
-                has none.
-              </p>
-              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-                Open the Texas paycheck calculator →
-              </span>
-            </div>
-          </Link>
-        </div>
-      </section>
-
-      <section id="au-calculators" className="scroll-mt-32">
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          AU Calculators 🇦🇺
-        </h2>
-        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          The hub&apos;s Australia section — the same
-          shows-its-working treatment as the UK and US tools, run on
-          ATO rules instead of HMRC or IRS ones.
-        </p>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {/* Single AU tool so far: the card spans the full row as a
-              wide feature card, same treatment as the US section. */}
-          <Link
-            href="/au/tax-rate-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md sm:col-span-2 sm:flex sm:items-start sm:gap-5"
-          >
-            <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm sm:mb-0">
-              <AuIcon />
-            </span>
-            <div className="min-w-0">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
-                Australia Tax Rate Calculator
-              </h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                Income tax and the Medicare levy on any Australian
-                income under the ATO 2025–26 rates — your marginal
-                and effective tax rate side by side, for residents
-                and non-residents alike.
-              </p>
-              <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-                Open the Australia tax rate calculator →
-              </span>
-            </div>
-          </Link>
+        <div className="mt-6">
+          <ToolsDirectory tools={DIRECTORY_TOOLS} />
         </div>
       </section>
 
