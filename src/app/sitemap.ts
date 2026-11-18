@@ -21,11 +21,13 @@ import { listPublishedBlogSitemapEntries } from "@/lib/blog/queries";
  * static routes it always carried — publishing can only ever ADD
  * entries, never remove the existing ones.
  */
-// ISR (1h): the static routes never change between deploys, and blog
-// posts are added by admin publishes that rebuild the site anyway — an
-// hourly window keeps new entries timely without re-reading the
-// database on every crawler request (Vercel CPU cost, 2026-11-12).
-export const revalidate = 3600;
+// Live on every request (owner order 2026-11-18): the old hourly ISR
+// copy froze at build time and a post published on 2026-11-17 was still
+// missing a day later. Crawlers fetch the sitemap only a few times a
+// day, so one small database read per fetch costs effectively nothing
+// — and there are no ISR writes at all. New posts now appear in the
+// sitemap the moment they are published, with no deployment needed.
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const calculatorPaths = AppConfig.nav
