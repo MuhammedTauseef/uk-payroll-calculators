@@ -75,8 +75,11 @@ function Block({ block }: { block: BlogBodyBlock }) {
         {/* Mobile rule (owner-caught 2026-11-18): no fixed min-width on
             small screens — cells wrap and the table fits the phone;
             the 720px floor applies only from sm: up, and the wrapper's
-            sideways scroll remains as a fallback for very wide tables. */}
-        <table className="w-full border-collapse text-left text-[13px] leading-5 text-slate-700 sm:min-w-[720px] sm:text-sm sm:leading-6 dark:text-slate-300">
+            sideways scroll remains as a fallback for very wide tables.
+            table-fixed on mobile (2026-11-18, second pass): auto layout
+            still let 4+ column tables overflow, so below sm: the columns
+            share the screen width equally and every cell wraps. */}
+        <table className="w-full table-fixed border-collapse text-left text-[13px] leading-5 text-slate-700 sm:min-w-[720px] sm:table-auto sm:text-sm sm:leading-6 dark:text-slate-300">
           <thead>
             <tr className="bg-slate-100 dark:bg-slate-800">
               {block.headers.map((header, index) => (
