@@ -72,14 +72,18 @@ function Block({ block }: { block: BlogBodyBlock }) {
   if (block.kind === "table") {
     return (
       <div className="mt-8 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
-        <table className="w-full min-w-[720px] border-collapse text-left text-sm leading-6 text-slate-700 dark:text-slate-300">
+        {/* Mobile rule (owner-caught 2026-11-18): no fixed min-width on
+            small screens — cells wrap and the table fits the phone;
+            the 720px floor applies only from sm: up, and the wrapper's
+            sideways scroll remains as a fallback for very wide tables. */}
+        <table className="w-full border-collapse text-left text-[13px] leading-5 text-slate-700 sm:min-w-[720px] sm:text-sm sm:leading-6 dark:text-slate-300">
           <thead>
             <tr className="bg-slate-100 dark:bg-slate-800">
               {block.headers.map((header, index) => (
                 <th
                   key={index}
                   scope="col"
-                  className="border-b border-slate-200 px-4 py-3 font-semibold text-slate-900 dark:border-slate-700 dark:text-slate-50"
+                  className="border-b border-slate-200 px-3 py-2 font-semibold break-words text-slate-900 sm:px-4 sm:py-3 dark:border-slate-700 dark:text-slate-50"
                 >
                   <Segments segments={header} />
                 </th>
@@ -97,7 +101,7 @@ function Block({ block }: { block: BlogBodyBlock }) {
                 {row.map((cell, cellIndex) => (
                   <td
                     key={cellIndex}
-                    className="border-t border-slate-200 px-4 py-3 align-top dark:border-slate-800"
+                    className="border-t border-slate-200 px-3 py-2 align-top break-words sm:px-4 sm:py-3 dark:border-slate-800"
                   >
                     <Segments segments={cell} />
                   </td>
