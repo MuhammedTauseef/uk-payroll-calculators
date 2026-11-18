@@ -71,49 +71,79 @@ function Block({ block }: { block: BlogBodyBlock }) {
   }
   if (block.kind === "table") {
     return (
-      <div className="mt-8 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
-        {/* Mobile rule (owner-caught 2026-11-18): no fixed min-width on
-            small screens — cells wrap and the table fits the phone;
-            the 720px floor applies only from sm: up, and the wrapper's
-            sideways scroll remains as a fallback for very wide tables.
-            table-fixed on mobile (2026-11-18, second pass): auto layout
-            still let 4+ column tables overflow, so below sm: the columns
-            share the screen width equally and every cell wraps. */}
-        <table className="w-full table-fixed border-collapse text-left text-[13px] leading-5 text-slate-700 sm:min-w-[720px] sm:table-auto sm:text-sm sm:leading-6 dark:text-slate-300">
-          <thead>
-            <tr className="bg-slate-100 dark:bg-slate-800">
-              {block.headers.map((header, index) => (
-                <th
-                  key={index}
-                  scope="col"
-                  className="border-b border-slate-200 px-3 py-2 font-semibold break-words text-slate-900 sm:px-4 sm:py-3 dark:border-slate-700 dark:text-slate-50"
-                >
-                  <Segments segments={header} />
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {block.rows.map((row, rowIndex) => (
-              <tr
-                key={rowIndex}
-                className={
-                  rowIndex % 2 === 1 ? "bg-slate-50 dark:bg-slate-900/40" : undefined
-                }
-              >
-                {row.map((cell, cellIndex) => (
-                  <td
-                    key={cellIndex}
-                    className="border-t border-slate-200 px-3 py-2 align-top break-words sm:px-4 sm:py-3 dark:border-slate-800"
+      <>
+        {/* Desktop/tablet (sm: and up): the real table. */}
+        <div className="mt-8 hidden overflow-x-auto rounded-xl border border-slate-200 sm:block dark:border-slate-800">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm leading-6 text-slate-700 dark:text-slate-300">
+            <thead>
+              <tr className="bg-slate-100 dark:bg-slate-800">
+                {block.headers.map((header, index) => (
+                  <th
+                    key={index}
+                    scope="col"
+                    className="border-b border-slate-200 px-4 py-3 font-semibold text-slate-900 dark:border-slate-700 dark:text-slate-50"
                   >
-                    <Segments segments={cell} />
-                  </td>
+                    <Segments segments={header} />
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {block.rows.map((row, rowIndex) => (
+                <tr
+                  key={rowIndex}
+                  className={
+                    rowIndex % 2 === 1 ? "bg-slate-50 dark:bg-slate-900/40" : undefined
+                  }
+                >
+                  {row.map((cell, cellIndex) => (
+                    <td
+                      key={cellIndex}
+                      className="border-t border-slate-200 px-4 py-3 align-top dark:border-slate-800"
+                    >
+                      <Segments segments={cell} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* Mobile (below sm:): stacked cards — one card per row, the
+            first cell is the card title and every other cell is a
+            "Header: value" line (owner order 2026-11-18: squeezed
+            multi-column tables were unreadable on phones). */}
+        <div className="mt-8 space-y-4 sm:hidden">
+          {block.rows.map((row, rowIndex) => (
+            <div
+              key={rowIndex}
+              className="rounded-xl border border-slate-200 p-4 dark:border-slate-800"
+            >
+              {row.map((cell, cellIndex) =>
+                cellIndex === 0 ? (
+                  <p
+                    key={cellIndex}
+                    className="text-base leading-6 font-semibold text-slate-900 dark:text-slate-50"
+                  >
+                    <Segments segments={cell} />
+                  </p>
+                ) : (
+                  <p
+                    key={cellIndex}
+                    className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300"
+                  >
+                    <span className="font-semibold text-slate-900 dark:text-slate-50">
+                      <Segments segments={block.headers[cellIndex] ?? []} />
+                      {": "}
+                    </span>
+                    <Segments segments={cell} />
+                  </p>
+                ),
+              )}
+            </div>
+          ))}
+        </div>
+      </>
     );
   }
   if (block.kind === "list") {
