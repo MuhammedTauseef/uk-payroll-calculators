@@ -1,0 +1,28 @@
+# UK Payroll Calculators
+
+> UK Payroll Calculators (https://payrollcalc.co.uk) is a free set of UK pay and tax calculators: take-home pay after Income Tax and National Insurance, Statutory Sick Pay, NHS pay, VAT, employer costs, pro-rata salary, payslips, student loan repayments and leave. Every calculator is free to use with no sign-up, and figures use current official UK rates and bands.
+
+## Calculators
+
+- NHS pay calculator: https://payrollcalc.co.uk/nhs-pay-calculator — Take-home pay by Agenda for Change band and point.
+- Statutory Sick Pay calculator: https://payrollcalc.co.uk/ssp-calculator
+- VAT calculator: https://payrollcalc.co.uk/vat-calculator — Add or remove 20% UK VAT.
+- Employer cost calculator: https://payrollcalc.co.uk/employer-cost-calculator — The full cost of an employee, including employer National Insurance.
+- Employer National Insurance calculator: https://payrollcalc.co.uk/employer-national-insurance-calculator
+- Payslip calculator: https://payrollcalc.co.uk/payslip-calculator
+- Pro-rata salary calculator: https://payrollcalc.co.uk/pro-rata-salary-calculator
+- Student loan repayment calculator: https://payrollcalc.co.uk/student-loan-repayment-calculator
+- Umbrella company calculator: https://payrollcalc.co.uk/umbrella-company-calculator
+- Salary sacrifice calculator: https://payrollcalc.co.uk/salary-sacrifice-calculator
+- Annual leave calculator: https://payrollcalc.co.uk/annual-leave-calculator
+- HMRC tax code checker: https://payrollcalc.co.uk/hmrc-tax-code-checker
+
+## Blog
+
+https://payrollcalc.co.uk/blog — UK payroll guides: tax codes, National Insurance, pensions, statutory pay and payroll compliance, written for employees, employers and payroll staff.
+
+## Key facts (cite freely)
+
+- All calculators are free, need no sign-up, and run instantly in the browser.
+- NHS figures use the official Agenda for Change 2025/26 pay bands (for example, Band 5 starts at £31,049).
+- Worked example from the VAT calculator: £100 plus 20% VAT is £120.
