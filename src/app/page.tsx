@@ -652,7 +652,7 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     description:
       "Net pay on a Texas salary or hourly wage under the 2026 IRS rules: federal income tax withholding, Social Security and Medicare worked out line by line — and a Texas state income tax line of exactly $0, because Texas has none.",
     linkText: "Open the Texas paycheck calculator →",
-    category: "US & AU",
+    category: "US",
     icon: <TexasIcon />,
   },
   {
@@ -661,7 +661,7 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     description:
       "Net pay on an Ohio salary or hourly wage under the 2026 rules: federal tax and FICA, the Ohio HB 96 flat tax (0% on the first $26,050, then 2.75%), plus your city income tax and school district tax where they apply.",
     linkText: "Open the Ohio paycheck calculator →",
-    category: "US & AU",
+    category: "US",
     icon: <OhioIcon />,
   },
   {
@@ -670,7 +670,7 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     description:
       "Income tax and the Medicare levy on any Australian income under the ATO 2025–26 rates — your marginal and effective tax rate side by side, for residents and non-residents alike.",
     linkText: "Open the Australia tax rate calculator →",
-    category: "US & AU",
+    category: "Australia",
     icon: <AuIcon />,
   },
 ];
