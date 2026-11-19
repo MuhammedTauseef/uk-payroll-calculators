@@ -275,6 +275,16 @@ function TexasIcon() {
   );
 }
 
+function OhioIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 4v2.5M12 17.5V20M4 12h2.5M17.5 12H20" />
+    </svg>
+  );
+}
+
 function AuIcon() {
   return (
     <svg {...iconProps}>
@@ -644,6 +654,15 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     linkText: "Open the Texas paycheck calculator →",
     category: "US & AU",
     icon: <TexasIcon />,
+  },
+  {
+    href: "/us/ohio-paycheck-calculator",
+    title: "Ohio Paycheck Calculator",
+    description:
+      "Net pay on an Ohio salary or hourly wage under the 2026 rules: federal tax and FICA, the Ohio HB 96 flat tax (0% on the first $26,050, then 2.75%), plus your city income tax and school district tax where they apply.",
+    linkText: "Open the Ohio paycheck calculator →",
+    category: "US & AU",
+    icon: <OhioIcon />,
   },
   {
     href: "/au/tax-rate-calculator",
