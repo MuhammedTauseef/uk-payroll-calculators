@@ -11,14 +11,14 @@ import { getPublishedBlogPost, listPublishedBlogPosts } from "@/lib/blog/queries
 
 type RouteParams = { params: Promise<{ slug: string }> };
 
-// ISR (1h): published posts are prerendered at build and re-rendered
-// at most hourly. Admin publishes and edits revalidate the affected
+// ISR (7 days): published posts are prerendered at build and re-rendered
+// at most weekly. Admin publishes and edits revalidate the affected
 // paths on save (saveBlogPostAction → revalidatePath — there is no
 // deploy hook), so changes go live on publish; anything changed
-// in the data without a save shows within the hour. An unknown slug
+// in the data without a save shows within the week. An unknown slug
 // — and any draft — 404s. Repeat hits stop re-reading blog_posts on
 // every request (Vercel CPU cost, 2026-11-12).
-export const revalidate = 3600;
+export const revalidate = 604800;
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = await listPublishedBlogPosts().catch(() => []);
