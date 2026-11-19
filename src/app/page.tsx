@@ -129,6 +129,25 @@ function AnnuityIcon() {
   );
 }
 
+function ChildcareIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="8" r="3.2" />
+      <path d="M5.5 20c.8-3.6 3.4-5.4 6.5-5.4s5.7 1.8 6.5 5.4" />
+    </svg>
+  );
+}
+
+function DrawdownIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 5v14h16" />
+      <path d="M7 15l3.5-4 3 2.5L18 8" />
+      <path d="M15.5 8H18v2.5" />
+    </svg>
+  );
+}
+
 function ProRataHolidayIcon() {
   return (
     <svg {...iconProps}>
@@ -441,6 +460,22 @@ const CALCULATORS = [
     linkText: "Open the annuity calculator →",
   },
   {
+    href: "/childcare-calculator",
+    icon: <ChildcareIcon />,
+    title: "Childcare Calculator UK",
+    description:
+      "Work out your Tax-Free Childcare top-up per child — up to £2,000 a year, £4,000 if disabled — what to pay in each month, and whether the £100,000 rule or the minimum-earnings check stops your claim.",
+    linkText: "Open the childcare calculator →",
+  },
+  {
+    href: "/pension-drawdown-calculator",
+    icon: <DrawdownIcon />,
+    title: "Pension Drawdown Calculator UK",
+    description:
+      "See how long your pension pot lasts in drawdown, year by year, with 2026/27 tax, the 25% tax-free amount, the State Pension alongside, and the withdrawal that lasts to 95.",
+    linkText: "Open the drawdown calculator →",
+  },
+  {
     href: "/pro-rata-holiday-calculator",
     icon: <ProRataHolidayIcon />,
     title: "Pro Rata Holiday Calculator",
@@ -571,6 +606,8 @@ const CATEGORY_BY_HREF: Record<string, string> = {
   "/ir35-calculator": "Employers & Contractors",
   "/vat-calculator": "Pay & Tax",
   "/annuity-calculator": "Pay & Tax",
+  "/childcare-calculator": "Leave & Family",
+  "/pension-drawdown-calculator": "Pay & Tax",
 };
 
 const DIRECTORY_TOOLS: DirectoryTool[] = [

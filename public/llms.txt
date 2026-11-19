@@ -14,6 +14,8 @@
 - Student loan repayment calculator: https://payrollcalc.co.uk/student-loan-repayment-calculator
 - Umbrella company calculator: https://payrollcalc.co.uk/umbrella-company-calculator
 - Salary sacrifice calculator: https://payrollcalc.co.uk/salary-sacrifice-calculator
+- Childcare calculator: https://payrollcalc.co.uk/childcare-calculator — Tax-Free Childcare top-up per child (up to £2,000 a year, £4,000 if disabled), with the £100,000 eligibility check.
+- Pension drawdown calculator: https://payrollcalc.co.uk/pension-drawdown-calculator — How long a pension pot lasts in drawdown, with 2026/27 tax and the State Pension alongside.
 - Annual leave calculator: https://payrollcalc.co.uk/annual-leave-calculator
 - HMRC tax code checker: https://payrollcalc.co.uk/hmrc-tax-code-checker
 
