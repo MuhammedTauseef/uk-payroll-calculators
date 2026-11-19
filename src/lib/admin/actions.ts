@@ -101,6 +101,7 @@ export async function saveBlogPostAction(
     }
     revalidatePath("/admin/blog");
     revalidatePath(`/admin/blog/${postId}`);
+    revalidatePath("/");
     revalidatePath("/blog");
     revalidatePath(`/blog/${row.slug}`);
     revalidatePath("/sitemap.xml");
@@ -128,6 +129,7 @@ export async function saveBlogPostAction(
     return failed();
   }
   revalidatePath("/admin/blog");
+  revalidatePath("/");
   revalidatePath("/blog");
   revalidatePath(`/blog/${row.slug}`);
   revalidatePath("/sitemap.xml");
@@ -190,6 +192,7 @@ export async function deleteBlogPostAction(
   }
 
   revalidatePath("/admin/blog");
+  revalidatePath("/");
   revalidatePath("/blog");
   revalidatePath(`/blog/${existing.slug as string}`);
   revalidatePath("/sitemap.xml");
