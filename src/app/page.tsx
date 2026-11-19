@@ -29,6 +29,13 @@ const websiteJsonLd = {
   url: AppConfig.siteUrl,
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "UK Payroll Calculators",
+  url: "https://payrollcalc.co.uk",
+};
+
 
 const iconProps = {
   fill: "none",
@@ -644,6 +651,10 @@ export default async function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
       {/* Full-screen hero (owner order 9 Nov 2026, evening —
           "carousel full screen par show hon laptop"): the section
