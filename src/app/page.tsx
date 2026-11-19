@@ -701,11 +701,15 @@ export default async function HomePage() {
           on body so no horizontal scrollbar can appear), the
           negative top margin cancels <main>'s py-8/sm:py-12 so
           the hero starts directly under the sticky h-16 header,
-          and min-height fills the rest of the first screen
-          (100svh - 4rem header). No rounded card, no side
+          and min-height fills most of the first screen. Reduced
+          19 Nov 2026 (desktop/mobile-friendly audit): the hero no
+          longer stretches to the full first screen (100svh left
+          large empty bands above and below the centred copy on
+          tall screens) — it is now 78svh less the header, sized
+          to the copy it holds. No rounded card, no side
           margins: the carousel photos run edge to edge, with the
           copy centred over them in its own readable column. */}
-      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(100svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16">
+      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(78svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16">
         {/* Background photo carousel: full-screen UK photos
             crossfade behind the hero copy (see HeroCarousel). */}
         <HeroCarousel />
@@ -772,36 +776,33 @@ export default async function HomePage() {
           and how the calculation works.
         </p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {SSP_GUIDES.map((guide, i) => {
-            // Odd card out (5 guides): the last card spans the full
-            // row as a wide feature card, same treatment as the
-            // calculators grid above.
-            const wide = i === SSP_GUIDES.length - 1 && SSP_GUIDES.length % 2 === 1;
-            return (
-              <Link
-                key={guide.href}
-                href={guide.href}
-                className={`group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md ${wide ? "sm:col-span-2 sm:flex sm:items-start sm:gap-5" : ""}`}
-              >
-                <span
-                  className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm ${wide ? "sm:mb-0" : ""}`}
-                >
-                  <GuideIcon />
+          {SSP_GUIDES.map((guide) => (
+            // All five cards are equal half-width cards
+            // (friendly-fix, 19 Nov 2026): the odd fifth card
+            // used to stretch across the full row as a wide
+            // feature card; it now takes a natural half-width
+            // slot in the last row, like the other four.
+            <Link
+              key={guide.href}
+              href={guide.href}
+              className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+            >
+              <span className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm">
+                <GuideIcon />
+              </span>
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                  {guide.title}
+                </h3>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                  {guide.description}
+                </p>
+                <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                  Read the guide →
                 </span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
-                    {guide.title}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    {guide.description}
-                  </p>
-                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-                    Read the guide →
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
