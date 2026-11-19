@@ -124,8 +124,25 @@ export function HeroCarousel() {
     return () => window.clearInterval(id);
   }, [paused, reducedMotion, current]);
 
+  const firstSlide = HERO_SLIDES[0];
+
   return (
     <>
+      {/* Preload the first slide (friendly-fix, 19 Nov 2026):
+          it is the hero's largest element and was arriving late
+          enough that the hero briefly showed as a pale blank.
+          React hoists this <link> into <head>; its srcSet/sizes
+          match the first slide's <img> exactly, so the browser
+          fetches the same copy it will render. The <img> itself
+          also stays loading="eager" with fetchPriority="high". */}
+      <link
+        rel="preload"
+        as="image"
+        href={`${firstSlide.base}?auto=compress&w=1920`}
+        imageSrcSet={`${firstSlide.base}?auto=compress&w=1080 1080w, ${firstSlide.base}?auto=compress&w=1920 1920w`}
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
       <div ref={bgRef} className="hbg" aria-hidden="true">
         <div className="hbg-slides">
           {HERO_SLIDES.map((slide, i) => (
