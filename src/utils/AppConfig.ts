@@ -151,6 +151,12 @@ export const AppConfig = {
       flag: "🇺🇸",
     },
     {
+      href: "/us/ohio-paycheck-calculator",
+      label: "Ohio Paycheck",
+      icon: "🌰",
+      flag: "🇺🇸",
+    },
+    {
       href: "/au/tax-rate-calculator",
       label: "AU Tax Rate",
       icon: "🦘",
