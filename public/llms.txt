@@ -18,6 +18,7 @@
 - Texas paycheck calculator: https://payrollcalc.co.uk/us/texas-paycheck-calculator — US net pay in Texas under the 2026 IRS rules: federal income tax and FICA, with $0 state income tax.
 - Ohio paycheck calculator: https://payrollcalc.co.uk/us/ohio-paycheck-calculator — US net pay in Ohio under the 2026 rules: federal tax and FICA plus the Ohio flat tax, city income tax and school district tax.
 - Pension drawdown calculator: https://payrollcalc.co.uk/pension-drawdown-calculator — How long a pension pot lasts in drawdown, with 2026/27 tax and the State Pension alongside.
+- Annuity calculator: https://payrollcalc.co.uk/annuity-calculator — What a pension pot buys as guaranteed income for life at 55–75, single or joint life, level or rising payments, with the full November 2026 rate table printed.
 - Annual leave calculator: https://payrollcalc.co.uk/annual-leave-calculator
 - HMRC tax code checker: https://payrollcalc.co.uk/hmrc-tax-code-checker
 
