@@ -14,13 +14,13 @@ export const metadata = pageMetadata(
   "Free UK payroll calculators: SSP, employer NI, take-home pay, payslip generator, tax code checker, annual leave, overtime and IR35 — April 2026 rules.",
 );
 
-// ISR (1h): only the "Latest from the blog" strip reads the database;
+// ISR (7 days): only the "Latest from the blog" strip reads the database;
 // admin publishes revalidate the affected paths on save
 // (saveBlogPostAction → revalidatePath — there is no deploy hook), so a
 // new post appears on publish — anything changed without a save shows
-// within the hour. Repeat hits stop re-reading blog_posts on every
+// within the week. Repeat hits stop re-reading blog_posts on every
 // request (Vercel CPU cost, 2026-11-12).
-export const revalidate = 3600;
+export const revalidate = 604800;
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
