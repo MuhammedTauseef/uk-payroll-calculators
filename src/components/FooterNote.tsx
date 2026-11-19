@@ -38,8 +38,12 @@ export default function FooterNote() {
   // One template string on purpose: splitting this sentence across
   // JSX text and a {" "} expression rendered live as "theapril 2026
   // rules" (the space was eaten), spotted on the live site 11 Nov.
-  const rulesLabel =
-    RATES_RULES_LABEL.charAt(0).toLowerCase() + RATES_RULES_LABEL.slice(1);
+  // The label is used exactly as defined in rates.ts ("April
+  // 2026 rules — verified against GOV.UK"). An earlier version
+  // lowercased its first letter to sit mid-sentence, which
+  // rendered the month as "april" — month names stay capitalised
+  // (friendly-fix, 19 Nov 2026).
+  const rulesLabel = RATES_RULES_LABEL;
   return (
     <p>
       {`This site provides general guidance only, based on the ${rulesLabel}. It is not affiliated with GOV.UK or HMRC. Always check the official guidance on GOV.UK for your specific circumstances.`}
