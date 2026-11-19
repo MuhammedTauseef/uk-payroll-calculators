@@ -58,7 +58,7 @@ export const BaseTemplate = (props: {
       </main>
 
       <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-cols-[1fr_auto_auto_auto]">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:grid-flow-dense sm:grid-cols-[1fr_auto_auto]">
           <div className="max-w-xl space-y-3">
             <p className="flex items-center gap-2.5">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-700 text-base font-bold text-white">
@@ -73,13 +73,23 @@ export const BaseTemplate = (props: {
             </div>
           </div>
 
-          <nav aria-label="Calculator links">
+          {/* Calculators directory (friendly-fix, 19 Nov 2026):
+              the full tool list is 34 links — as a single column
+              it made the footer ~1,500px tall with empty space
+              beside its lower two-thirds. It now spans the full
+              width on its own row under the brand / Guides / Site
+              row (grid-flow-dense backfills those three into the
+              first row) and the list itself flows through CSS
+              columns: 2 on phones, 3 from sm, 4 from xl.
+              break-inside-avoid keeps each link whole, and every
+              link and href is unchanged. */}
+          <nav aria-label="Calculator links" className="sm:col-span-3">
             <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">Calculators</p>
-            <ul className="mt-3 space-y-1 text-sm">
+            <ul className="mt-3 columns-2 gap-x-8 text-sm sm:columns-3 xl:columns-4">
               {AppConfig.nav
                 .filter((item) => item.href !== "/")
                 .map((item) => (
-                  <li key={item.href}>
+                  <li key={item.href} className="break-inside-avoid">
                     <Link
                       href={item.href}
                       className="block py-1.5 text-slate-600 dark:text-slate-300 transition hover:text-brand-800 dark:hover:text-brand-300"
