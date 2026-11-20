@@ -20,6 +20,27 @@ export interface DonutSegment {
 const RADIUS = 52;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
+/**
+ * The ring's clear inner width: the diameter inside the stroke
+ * (2 × (52 − 15/2) = 89 units). The centre label and value are set
+ * on one line each, so their font sizes shrink to fit this width —
+ * at the base sizes a long label such as "REDUNDANCY PAY" measured
+ * ~94 units and spilled over the ring. The per-character factors
+ * are conservative averages for the weights used (600 uppercase
+ * with the letter-spacing below; 700 for the value), and a
+ * textLength cap on the rendered text is the hard guarantee.
+ */
+const SAFE_WIDTH = 84;
+const LABEL_BASE_SIZE = 9.5;
+const LABEL_CHAR_FACTOR = 0.72;
+const VALUE_BASE_SIZE = 13.5;
+const VALUE_CHAR_FACTOR = 0.58;
+
+function fitFontSize(text: string, base: number, charFactor: number): number {
+  const width = text.length * base * charFactor;
+  return width > SAFE_WIDTH ? (base * SAFE_WIDTH) / width : base;
+}
+
 function percent(part: number, total: number): string {
   const p = (part / total) * 100;
   return `${p < 10 && p % 1 !== 0 ? p.toFixed(1) : Math.round(p)}%`;
@@ -37,6 +58,26 @@ export default function ResultDonut({
   const parts = segments.filter((s) => s.value > 0);
   const total = parts.reduce((sum, s) => sum + s.value, 0);
   if (parts.length === 0 || total <= 0) return null;
+
+  const labelText = centerLabel.toUpperCase();
+  const labelFontSize = fitFontSize(
+    labelText,
+    LABEL_BASE_SIZE,
+    LABEL_CHAR_FACTOR,
+  );
+  const valueFontSize = fitFontSize(
+    centerValue,
+    VALUE_BASE_SIZE,
+    VALUE_CHAR_FACTOR,
+  );
+  const labelTextLength =
+    labelText.length * labelFontSize * LABEL_CHAR_FACTOR > SAFE_WIDTH
+      ? SAFE_WIDTH
+      : undefined;
+  const valueTextLength =
+    centerValue.length * valueFontSize * VALUE_CHAR_FACTOR > SAFE_WIDTH
+      ? SAFE_WIDTH
+      : undefined;
 
   let offsetSoFar = 0;
   const arcs = parts.map((s) => {
@@ -86,19 +127,23 @@ export default function ResultDonut({
           y="57"
           textAnchor="middle"
           className="fill-slate-500 dark:fill-slate-400"
-          fontSize="9.5"
+          fontSize={labelFontSize}
           fontWeight="600"
           letterSpacing="0.08em"
+          textLength={labelTextLength}
+          lengthAdjust="spacingAndGlyphs"
         >
-          {centerLabel.toUpperCase()}
+          {labelText}
         </text>
         <text
           x="60"
           y="73"
           textAnchor="middle"
           className="fill-slate-900 dark:fill-slate-50"
-          fontSize="13.5"
+          fontSize={valueFontSize}
           fontWeight="700"
+          textLength={valueTextLength}
+          lengthAdjust="spacingAndGlyphs"
         >
           {centerValue}
         </text>
