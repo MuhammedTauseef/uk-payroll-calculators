@@ -88,6 +88,37 @@ const c4 = calculateNhsPay({
 check("B9 top gross/yr", c4.grossAnnual, 125637);
 check("B9 top hourly (official)", c4.hourlyRate, 64.25);
 
+// Case 5 — Band 5 at every step, full time, at the pension tier the
+// calculator itself applies (added 20 Nov 2026 with the Band 5 page
+// section; hand-computed in research-2tools-2026-11-20). Entry is
+// Case 1 restated through the tier function; Intermediate keeps the
+// 8.3% tier (£33,487 ≤ £33,868); Top moves to 9.8%.
+check("B5 tier at entry", nhsPensionRateFor(31049), 8.3);
+check("B5 tier at intermediate", nhsPensionRateFor(33487), 8.3);
+check("B5 tier at top", nhsPensionRateFor(37796), 9.8);
+const b5i = calculateNhsPay({
+  bandIndex: 3, // Band 5
+  stepIndex: 1,
+  hoursPerWeek: 37.5,
+  pensionRatePercent: nhsPensionRateFor(33487),
+});
+check("B5 intermediate pension/yr", b5i.pensionAnnual, 2779.42);
+check("B5 intermediate tax/yr", b5i.incomeTax, 3627.52);
+check("B5 intermediate NI/yr", b5i.employeeNationalInsurance, 1673.36);
+check("B5 intermediate net/yr", b5i.netAnnual, 25406.7);
+check("B5 intermediate net/mo", b5i.netMonthly, 2117.23);
+const b5t = calculateNhsPay({
+  bandIndex: 3, // Band 5
+  stepIndex: 2,
+  hoursPerWeek: 37.5,
+  pensionRatePercent: nhsPensionRateFor(37796),
+});
+check("B5 top pension/yr", b5t.pensionAnnual, 3704.01);
+check("B5 top tax/yr", b5t.incomeTax, 4304.4);
+check("B5 top NI/yr", b5t.employeeNationalInsurance, 2018.08);
+check("B5 top net/yr", b5t.netAnnual, 27769.51);
+check("B5 top net/mo", b5t.netMonthly, 2314.13);
+
 if (failures > 0) {
   console.error(`\n${failures} check(s) failed`);
   process.exit(1);

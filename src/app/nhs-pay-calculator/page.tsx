@@ -9,6 +9,7 @@ import {
   AFC_SOURCE_URL,
   calculateNhsPay,
   NHS_PENSION_TIERS,
+  nhsPensionRateFor,
 } from "@/lib/nhs-pay";
 import { PAYE_RATES_LABEL } from "@/lib/rates";
 import { AppConfig } from "@/utils/AppConfig";
@@ -61,10 +62,43 @@ const FAQS: { question: string; answer: string }[] = [
   },
 ];
 
+// Band 5 section data (added 20 November 2026): every figure is
+// computed by the same calculateNhsPay the calculator runs, at the
+// pension tier the calculator itself applies to that step — nothing
+// is typed in by hand. Band 5 is index 3 of AFC_BANDS.
+const band5 = AFC_BANDS[3];
+const band5Rows = band5.steps.map((step, i) => ({
+  step,
+  pensionRate: nhsPensionRateFor(step.annual),
+  result: calculateNhsPay({
+    bandIndex: 3,
+    stepIndex: i,
+    hoursPerWeek: 37.5,
+    pensionRatePercent: nhsPensionRateFor(step.annual),
+  }),
+}));
+const band4Top = AFC_BANDS[2].steps[AFC_BANDS[2].steps.length - 1];
+const band6Entry = AFC_BANDS[4].steps[0];
+
+const BAND5_FAQS: { question: string; answer: string }[] = [
+  {
+    question: "How much is Band 5 pay in London, with HCAS?",
+    answer: `The High Cost Area Supplement is paid on top of basic pay: 20% in Inner London, 15% in Outer London and 5% in the Fringe, each subject to minimum and maximum amounts. At 20%, the Band 5 entry step of ${gbp.format(band5.steps[0].annual)} gains ${gbp.format(band5.steps[0].annual * 0.2)} of HCAS, taking it to ${gbp.format(band5.steps[0].annual * 1.2)}; at the top step the supplement is ${gbp.format(band5.steps[2].annual * 0.2)}. HCAS is pensionable and taxed like the rest of your pay. This calculator uses basic rates only, so add your zone's supplement on top of its figures.`,
+  },
+  {
+    question: "How long does it take to reach the top of Band 5?",
+    answer: `You reach the intermediate step (${gbp.format(band5.steps[1].annual)}) after 2 years in the band and the top step (${gbp.format(band5.steps[2].annual)}) after 4 or more years, subject to the pay progression rules. Entry to top is worth ${gbp.format(band5.steps[2].annual - band5.steps[0].annual)} a year more in gross pay, and about ${gbp.format(band5Rows[2].result.netMonthly - band5Rows[0].result.netMonthly)} a month more in estimated take-home pay at full time.`,
+  },
+  {
+    question: "What is the take-home pay at the top of Band 5?",
+    answer: `On the top step (${gbp.format(band5.steps[2].annual)} a year, full time), this calculator estimates take-home pay of ${gbp.format(band5Rows[2].result.netMonthly)} a month after the 9.8% NHS pension contribution (${gbp.format(band5Rows[2].result.pensionAnnual)} a year), Income Tax of ${gbp.format(band5Rows[2].result.incomeTax)} and National Insurance of ${gbp.format(band5Rows[2].result.employeeNationalInsurance)}. Unsocial-hours enhancements, overtime and HCAS would all come on top.`,
+  },
+];
+
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: FAQS.map((f) => ({
+  mainEntity: [...FAQS, ...BAND5_FAQS].map((f) => ({
     "@type": "Question",
     name: f.question,
     acceptedAnswer: { "@type": "Answer", text: f.answer },
@@ -197,6 +231,131 @@ export default function NhsPayCalculatorPage() {
           the London High Cost Area Supplement is not included, and
           Scotland, Wales and Northern Ireland set their own scales.
         </p>
+      </section>
+
+      <section id="band-5" className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Band 5 pay in detail: steps, take-home and London
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Band 5 is the band most new NHS clinicians join — it is the
+          starting band for newly qualified nurses, midwives,
+          paramedics and allied health professionals — so it earns a
+          closer look than the full table above gives it. These are
+          the three Band 5 steps at full time (37.5 hours a week),
+          with the estimated take-home pay the calculator above
+          produces for each one, at the NHS pension tier that applies
+          to that step.
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Band 5 step</th>
+                <th className={thClass}>Annual</th>
+                <th className={thClass}>Hourly</th>
+                <th className={thClass}>Pension</th>
+                <th className={thClass}>Est. take-home / month</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {band5Rows.map(({ step, pensionRate, result }) => (
+                <tr key={step.label}>
+                  <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>
+                    {step.label} ({step.yearsLabel})
+                  </td>
+                  <td className={tdClass}>{gbp.format(step.annual)}</td>
+                  <td className={tdClass}>{gbp.format(step.hourly)}</td>
+                  <td className={tdClass}>{pensionRate}%</td>
+                  <td className={tdClass}>
+                    {gbp.format(result.netMonthly)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Read the steps as a career in miniature. A newly qualified
+          nurse starts on {gbp.format(band5Rows[0].result.netMonthly)}{" "}
+          a month take-home; two years in, the intermediate step lifts
+          that to {gbp.format(band5Rows[1].result.netMonthly)}; and at
+          the top of the band it is{" "}
+          {gbp.format(band5Rows[2].result.netMonthly)} — the move from
+          entry to top is worth{" "}
+          {gbp.format(band5.steps[2].annual - band5.steps[0].annual)}{" "}
+          a year in gross pay. The steps either side of Band 5 are
+          closer than most people expect: the top of Band 4 (
+          {gbp.format(band4Top.annual)}) sits just{" "}
+          {gbp.format(band5.steps[0].annual - band4Top.annual)} below
+          the Band 5 entry step, and the top of Band 5 sits{" "}
+          {gbp.format(band6Entry.annual - band5.steps[2].annual)}{" "}
+          below the first step of Band 6 (
+          {gbp.format(band6Entry.annual)}) — which is why promotion
+          from the top of Band 5 can feel smaller than the change in
+          responsibility, while qualifying into Band 5 from Band 4
+          feels bigger than the salary gap alone.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          London changes the picture. Band 5 staff working in and
+          around the capital also receive the High Cost Area
+          Supplement on top of the basic rates in the table: 20% of
+          basic pay in Inner London, 15% in Outer London and 5% in
+          the Fringe, each subject to minimum and maximum amounts.
+          At the full 20%, the entry step gains{" "}
+          {gbp.format(band5.steps[0].annual * 0.2)} — taking{" "}
+          {gbp.format(band5.steps[0].annual)} to{" "}
+          {gbp.format(band5.steps[0].annual * 1.2)} before tax — and
+          the top step gains {gbp.format(band5.steps[2].annual * 0.2)}
+          . HCAS is pensionable pay and is taxed like the rest of
+          your salary; the calculator on this page uses basic England
+          rates only, so treat its London answers as the floor, not
+          the figure. Band 5 staff planning leave around a family can
+          price it with the{" "}
+          <Link
+            href="/nhs-maternity-pay-calculator"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            NHS maternity pay calculator
+          </Link>
+          , and time off sick is covered by the{" "}
+          <Link
+            href="/ssp-calculator"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            SSP calculator
+          </Link>{" "}
+          and our guide to{" "}
+          <Link
+            href="/how-much-is-statutory-sick-pay"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            how much statutory sick pay is
+          </Link>
+          . For the band-by-band story behind these figures, the{" "}
+          <Link
+            href="/blog/nhs-pay-calculator"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            NHS pay calculator guide
+          </Link>{" "}
+          works through every band from 2 to 9.
+        </p>
+        <div className="space-y-4">
+          {BAND5_FAQS.map((f) => (
+            <div
+              key={f.question}
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm"
+            >
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+                {f.question}
+              </h3>
+              <p className="mt-1 max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+                {f.answer}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="space-y-3">

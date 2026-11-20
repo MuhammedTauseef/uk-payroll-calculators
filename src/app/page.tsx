@@ -226,6 +226,16 @@ function PayslipIcon() {
   );
 }
 
+function PayRiseIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 20h16" />
+      <path d="M5 20v-4h4.5v-4H14V8h5" />
+      <path d="M16.5 5.5H19V8" />
+    </svg>
+  );
+}
+
 function SalarySacrificeIcon() {
   return (
     <svg {...iconProps}>
@@ -563,6 +573,14 @@ const CALCULATORS = [
     description:
       "What your monthly payslip will show: gross pay, tax from your tax code, National Insurance, pension and student loan — line by line, before payday.",
     linkText: "Open the payslip calculator →",
+  },
+  {
+    href: "/pay-rise-calculator",
+    icon: <PayRiseIcon />,
+    title: "Pay Rise Calculator",
+    description:
+      "Enter a rise as a percentage, an amount or a target salary — and see the extra take-home pay after tax, National Insurance, pension and student loan, not just the gross headline.",
+    linkText: "Open the pay rise calculator →",
   },
   {
     href: "/salary-sacrifice-calculator",

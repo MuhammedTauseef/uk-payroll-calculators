@@ -10,6 +10,7 @@
 - Employer cost calculator: https://payrollcalc.co.uk/employer-cost-calculator — The full cost of an employee, including employer National Insurance.
 - Employer National Insurance calculator: https://payrollcalc.co.uk/employer-national-insurance-calculator
 - Payslip calculator: https://payrollcalc.co.uk/payslip-calculator
+- Pay rise calculator: https://payrollcalc.co.uk/pay-rise-calculator — A pay rise by percentage, amount or target salary, with the extra take-home pay after Income Tax, National Insurance, pension and student loan.
 - Pro-rata salary calculator: https://payrollcalc.co.uk/pro-rata-salary-calculator
 - Student loan repayment calculator: https://payrollcalc.co.uk/student-loan-repayment-calculator
 - Umbrella company calculator: https://payrollcalc.co.uk/umbrella-company-calculator
