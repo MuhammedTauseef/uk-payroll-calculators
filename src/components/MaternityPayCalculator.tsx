@@ -1,9 +1,9 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import ResultActions from "@/components/ResultActions";
 import StickyResultBar from "@/components/StickyResultBar";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { calculateMaternityPay } from "@/lib/maternity-pay";
 import { MATERNITY, SMP } from "@/lib/rates";
 
@@ -37,6 +37,14 @@ export default function MaternityPayCalculator() {
   const [dueDate, setDueDate] = useState("2027-04-08");
   const [jobStart, setJobStart] = useState("2024-01-08");
   const [leaveStart, setLeaveStart] = useState("2027-03-14");
+
+  const resultRef = useRef<HTMLDivElement>(null);
+  const reset = () => {
+    setSalary("36000");
+    setDueDate("2027-04-08");
+    setJobStart("2024-01-08");
+    setLeaveStart("2027-03-14");
+  };
 
   const salaryNumber = parseAmount(salary);
 
@@ -124,7 +132,10 @@ export default function MaternityPayCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
+      <div
+        ref={resultRef}
+        className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300"
+      >
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
@@ -140,7 +151,7 @@ export default function MaternityPayCalculator() {
           </p>
         </div>
 
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+        <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {gbp.format(pay.totalPay)}
         </p>
         <p className="text-sm text-slate-600 dark:text-slate-300">
@@ -262,7 +273,11 @@ export default function MaternityPayCalculator() {
           </div>
         )}
 
-        <PrintButton />
+        <ResultActions
+          targetRef={resultRef}
+          fileName="payrollcalc-maternity-pay-result.png"
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label="Total SMP over 39 weeks"

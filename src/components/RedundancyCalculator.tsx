@@ -1,9 +1,9 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import ResultActions from "@/components/ResultActions";
 import StickyResultBar from "@/components/StickyResultBar";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { calculateRedundancy } from "@/lib/redundancy";
 import { REDUNDANCY } from "@/lib/rates";
 
@@ -27,6 +27,15 @@ export default function RedundancyCalculator() {
   const [end, setEnd] = useState("2026-11-15");
   const [weeklyPay, setWeeklyPay] = useState("600");
   const [otherPayments, setOtherPayments] = useState("0");
+
+  const resultRef = useRef<HTMLDivElement>(null);
+  const reset = () => {
+    setDob("1981-06-15");
+    setStart("2011-11-15");
+    setEnd("2026-11-15");
+    setWeeklyPay("600");
+    setOtherPayments("0");
+  };
 
   const weeklyPayNumber = parseAmount(weeklyPay);
   const otherPaymentsNumber = parseAmount(otherPayments);
@@ -129,7 +138,10 @@ export default function RedundancyCalculator() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
+      <div
+        ref={resultRef}
+        className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300"
+      >
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
@@ -146,7 +158,7 @@ export default function RedundancyCalculator() {
 
         {result.qualifies ? (
           <>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+            <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
               {gbp.format(result.statutoryPay)}
             </p>
             <p className="text-sm text-slate-600 dark:text-slate-300">
@@ -242,7 +254,7 @@ export default function RedundancyCalculator() {
           </>
         ) : (
           <>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+            <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
               £0
             </p>
             <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-300">
@@ -268,7 +280,11 @@ export default function RedundancyCalculator() {
           </>
         )}
 
-        <PrintButton />
+        <ResultActions
+          targetRef={resultRef}
+          fileName="payrollcalc-redundancy-pay-result.png"
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label="Statutory redundancy pay"

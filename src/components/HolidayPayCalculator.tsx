@@ -1,9 +1,9 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import ResultActions from "@/components/ResultActions";
 import StickyResultBar from "@/components/StickyResultBar";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   calculateHolidayPay,
   type HolidayPayMode,
@@ -34,6 +34,19 @@ export default function HolidayPayCalculator() {
   const [payForPeriod, setPayForPeriod] = useState("1000");
   const [weeksIntoYear, setWeeksIntoYear] = useState("26");
   const [leaveTakenWeeks, setLeaveTakenWeeks] = useState("1");
+
+  const resultRef = useRef<HTMLDivElement>(null);
+  const reset = () => {
+    setMode("regular");
+    setWeeklyPay("600");
+    setDaysPerWeek("5");
+    setDaysOfHoliday("10");
+    setHoursWorked("120");
+    setHourlyRate("12.50");
+    setPayForPeriod("1000");
+    setWeeksIntoYear("26");
+    setLeaveTakenWeeks("1");
+  };
 
   const result = useMemo(
     () =>
@@ -286,12 +299,15 @@ export default function HolidayPayCalculator() {
         )}
       </div>
 
-      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
+      <div
+        ref={resultRef}
+        className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300"
+      >
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
 
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+        <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {headline !== null ? gbp.format(headline) : "—"}
         </p>
 
@@ -378,7 +394,118 @@ export default function HolidayPayCalculator() {
           </div>
         )}
 
-        <PrintButton />
+        <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+          <table className="w-full text-left text-sm table-stack">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {mode === "regular" && (
+                <>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Daily rate of holiday pay</td>
+                    <td className="px-4 py-2">{gbp.format(result.dailyRate ?? 0)}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Days of holiday priced</td>
+                    <td className="px-4 py-2">{parseAmount(daysOfHoliday)} days</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Pay for those days</td>
+                    <td className="px-4 py-2">{gbp.format(result.payForDays ?? 0)}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Value of the full 5.6-week year</td>
+                    <td className="px-4 py-2">{gbp.format(result.fullYearValue ?? 0)}</td>
+                  </tr>
+                </>
+              )}
+              {mode === "irregular" && (
+                <>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Hours worked</td>
+                    <td className="px-4 py-2">{parseAmount(hoursWorked)} hours</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Accrual rate</td>
+                    <td className="px-4 py-2">{IRREGULAR_ACCRUAL_PERCENT}% of hours worked</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Holiday built up (exact)</td>
+                    <td className="px-4 py-2">{result.accruedHoursExact} hours</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Whole hours you can book</td>
+                    <td className="px-4 py-2">{result.accruedHoursBooked} hours</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Value when you take it</td>
+                    <td className="px-4 py-2">
+                      {gbp.format(result.accruedPayValue ?? 0)} at {gbp.format(parseAmount(hourlyRate))} an hour
+                    </td>
+                  </tr>
+                </>
+              )}
+              {mode === "rolledup" && (
+                <>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Pay for the work done</td>
+                    <td className="px-4 py-2">{gbp.format(parseAmount(payForPeriod))}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Rolled-up uplift ({IRREGULAR_ACCRUAL_PERCENT}%)</td>
+                    <td className="px-4 py-2">{gbp.format(result.rolledUpAmount ?? 0)}</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Total pay for the period</td>
+                    <td className="px-4 py-2">{gbp.format(result.rolledUpTotal ?? 0)}</td>
+                  </tr>
+                </>
+              )}
+              {mode === "leaving" && (
+                <>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">A — full-year entitlement</td>
+                    <td className="px-4 py-2">5.6 weeks</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">B — proportion of the year worked</td>
+                    <td className="px-4 py-2">
+                      {Math.round(
+                        Math.min(1, Math.max(0, parseAmount(weeksIntoYear) / 52)) * 100,
+                      )}
+                      %
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Built up (A × B)</td>
+                    <td className="px-4 py-2">
+                      {(
+                        5.6 *
+                        Math.min(1, Math.max(0, parseAmount(weeksIntoYear) / 52))
+                      ).toFixed(2)}{" "}
+                      weeks
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">C — holiday already taken</td>
+                    <td className="px-4 py-2">{parseAmount(leaveTakenWeeks)} weeks</td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-2 font-medium">Owed ((A × B) − C)</td>
+                    <td className="px-4 py-2">
+                      {result.weeksOwed} weeks = {gbp.format(result.paymentInLieu ?? 0)} at{" "}
+                      {gbp.format(parseAmount(weeklyPay))} a week
+                    </td>
+                  </tr>
+                </>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <ResultActions
+          targetRef={resultRef}
+          fileName="payrollcalc-holiday-pay-result.png"
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label={
