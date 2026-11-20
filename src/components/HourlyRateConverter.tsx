@@ -1,6 +1,7 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import MoneySlider from "@/components/MoneySlider";
+import ResultActions from "@/components/ResultActions";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
@@ -50,6 +51,14 @@ export default function HourlyRateConverter() {
   const [annualSalary, setAnnualSalary] = useState("30000");
   const [hoursPerWeek, setHoursPerWeek] = useState("37.5");
   const [ageBand, setAgeBand] = useState<NmwAgeBand>("over21");
+
+  const reset = () => {
+    setDirection("hourlyToSalary");
+    setHourlyRate("15");
+    setAnnualSalary("30000");
+    setHoursPerWeek("37.5");
+    setAgeBand("over21");
+  };
 
   const hourlyRateNumber = parseAmount(hourlyRate);
   const salaryNumber = parseAmount(annualSalary);
@@ -106,59 +115,37 @@ export default function HourlyRateConverter() {
         </div>
 
         {direction === "hourlyToSalary" ? (
-          <div>
-            <label htmlFor="hr-rate" className={labelClass}>
-              Hourly rate (£)
-            </label>
-            <input
-              id="hr-rate"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="0.01"
-              value={hourlyRate}
-              onChange={(e) => setHourlyRate(e.target.value)}
-              className={inputClass}
-            />
-          </div>
+          <MoneySlider
+            id="hr-rate"
+            label="Hourly rate (£)"
+            value={hourlyRate}
+            onChange={setHourlyRate}
+            min={0}
+            max={100}
+            step={0.25}
+          />
         ) : (
-          <div>
-            <label htmlFor="hr-salary" className={labelClass}>
-              Annual salary (£)
-            </label>
-            <input
-              id="hr-salary"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="100"
-              value={annualSalary}
-              onChange={(e) => setAnnualSalary(e.target.value)}
-              className={inputClass}
-            />
-          </div>
+          <MoneySlider
+            id="hr-salary"
+            label="Annual salary (£)"
+            value={annualSalary}
+            onChange={setAnnualSalary}
+            min={0}
+            max={200000}
+            step={500}
+          />
         )}
 
-        <div>
-          <label htmlFor="hr-hours" className={labelClass}>
-            Hours per week
-          </label>
-          <input
-            id="hr-hours"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.5"
-            value={hoursPerWeek}
-            onChange={(e) => setHoursPerWeek(e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            The hours the pay covers — 37.5 and 40 are the common
-            full-time weeks. The same salary is a lower hourly rate
-            over more hours.
-          </p>
-        </div>
+        <MoneySlider
+          id="hr-hours"
+          label="Hours per week"
+          value={hoursPerWeek}
+          onChange={setHoursPerWeek}
+          min={0}
+          max={60}
+          step={0.5}
+          hint="The hours the pay covers — 37.5 and 40 are the common full-time weeks. The same salary is a lower hourly rate over more hours."
+        />
 
         <div>
           <label htmlFor="hr-band" className={labelClass}>
@@ -226,7 +213,7 @@ export default function HourlyRateConverter() {
           </p>
         </div>
 
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+        <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {direction === "hourlyToSalary" ? (
             <>
               {fmtMoney(result.annualSalary)}
@@ -333,7 +320,27 @@ export default function HourlyRateConverter() {
           )}
         </dl>
 
-        <PrintButton />
+        <ResultActions
+          image={{
+            title: "Hourly Rate Converter",
+            headline:
+              direction === "hourlyToSalary"
+                ? fmtMoney(result.annualSalary)
+                : fmtRate(result.hourlyRate),
+            headlineNote:
+              direction === "hourlyToSalary"
+                ? "Gross annual salary, before tax"
+                : "Gross hourly rate, before tax",
+            rows: [
+              { label: "Hourly rate", value: fmtRate(result.hourlyRate) },
+              { label: "Weekly pay", value: fmtMoney(result.weeklyPay) },
+              { label: "Monthly pay", value: fmtMoney(result.monthlyPay) },
+              { label: "Annual salary", value: fmtMoney(result.annualSalary) },
+            ],
+            fileName: "payrollcalc-hourly-rate-result.png",
+          }}
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label={

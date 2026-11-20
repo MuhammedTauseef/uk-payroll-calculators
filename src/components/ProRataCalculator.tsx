@@ -1,6 +1,8 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import MoneySlider from "@/components/MoneySlider";
+import ResultActions from "@/components/ResultActions";
+import ResultDonut, { DONUT_COLORS } from "@/components/ResultDonut";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
@@ -28,6 +30,15 @@ export default function ProRataCalculator() {
   const [partTimeHours, setPartTimeHours] = useState("22.5");
   const [fullTimeDays, setFullTimeDays] = useState("5");
   const [partTimeDays, setPartTimeDays] = useState("3");
+
+  const reset = () => {
+    setSalary("40000");
+    setMode("hours");
+    setFullTimeHours("37.5");
+    setPartTimeHours("22.5");
+    setFullTimeDays("5");
+    setPartTimeDays("3");
+  };
 
   const salaryNumber = parseAmount(salary);
   const ftHoursNumber = parseAmount(fullTimeHours);
@@ -58,24 +69,16 @@ export default function ProRataCalculator() {
   return (
     <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
-        <div>
-          <label htmlFor="ft-salary" className={labelClass}>
-            Full-time annual salary (£)
-          </label>
-          <input
-            id="ft-salary"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.01"
-            value={salary}
-            onChange={(e) => setSalary(e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            What the job pays at 100% — the full-time equivalent salary.
-          </p>
-        </div>
+        <MoneySlider
+          id="ft-salary"
+          label="Full-time annual salary (£)"
+          value={salary}
+          onChange={setSalary}
+          min={0}
+          max={200000}
+          step={500}
+          hint="What the job pays at 100% — the full-time equivalent salary."
+        />
 
         <div>
           <label htmlFor="mode" className={labelClass}>
@@ -96,74 +99,48 @@ export default function ProRataCalculator() {
           </p>
         </div>
 
-        <div>
-          <label htmlFor="ft-hours" className={labelClass}>
-            Full-time hours per week
-          </label>
-          <input
-            id="ft-hours"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.25"
-            value={fullTimeHours}
-            onChange={(e) => setFullTimeHours(e.target.value)}
-            className={inputClass}
-            disabled={mode === "days"}
-          />
-        </div>
+        <MoneySlider
+          id="ft-hours"
+          label="Full-time hours per week"
+          value={fullTimeHours}
+          onChange={setFullTimeHours}
+          min={0}
+          max={60}
+          step={0.25}
+          disabled={mode === "days"}
+        />
 
-        <div>
-          <label htmlFor="pt-hours" className={labelClass}>
-            Part-time hours per week
-          </label>
-          <input
-            id="pt-hours"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.25"
-            value={partTimeHours}
-            onChange={(e) => setPartTimeHours(e.target.value)}
-            className={inputClass}
-            disabled={mode === "days"}
-          />
-        </div>
+        <MoneySlider
+          id="pt-hours"
+          label="Part-time hours per week"
+          value={partTimeHours}
+          onChange={setPartTimeHours}
+          min={0}
+          max={60}
+          step={0.25}
+          disabled={mode === "days"}
+        />
 
-        <div>
-          <label htmlFor="ft-days" className={labelClass}>
-            Full-time days per week
-          </label>
-          <input
-            id="ft-days"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.5"
-            value={fullTimeDays}
-            onChange={(e) => setFullTimeDays(e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            Needed for the holiday figure, whichever mode you pick.
-          </p>
-        </div>
+        <MoneySlider
+          id="ft-days"
+          label="Full-time days per week"
+          value={fullTimeDays}
+          onChange={setFullTimeDays}
+          min={0}
+          max={7}
+          step={0.5}
+          hint="Needed for the holiday figure, whichever mode you pick."
+        />
 
-        <div>
-          <label htmlFor="pt-days" className={labelClass}>
-            Part-time days per week
-          </label>
-          <input
-            id="pt-days"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.5"
-            value={partTimeDays}
-            onChange={(e) => setPartTimeDays(e.target.value)}
-            className={inputClass}
-          />
-        </div>
+        <MoneySlider
+          id="pt-days"
+          label="Part-time days per week"
+          value={partTimeDays}
+          onChange={setPartTimeDays}
+          min={0}
+          max={7}
+          step={0.5}
+        />
       </div>
 
       {overFullTime && (
@@ -194,7 +171,7 @@ export default function ProRataCalculator() {
             days a week.
           </p>
         </div>
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+        <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {gbp.format(result.annualSalary)}
           <span className="text-base font-medium text-slate-600 dark:text-slate-300">
             {" "}
@@ -231,6 +208,27 @@ export default function ProRataCalculator() {
           </div>
         </dl>
 
+        <ResultDonut
+          segments={[
+            {
+              label: "Your pro-rata pay",
+              value: result.annualSalary,
+              displayValue: gbp.format(result.annualSalary),
+              color: DONUT_COLORS.deep,
+            },
+            {
+              label: "Share of the full-time salary not worked",
+              value: Math.max(0, salaryNumber - result.annualSalary),
+              displayValue: gbp.format(
+                Math.max(0, salaryNumber - result.annualSalary),
+              ),
+              color: DONUT_COLORS.grey,
+            },
+          ]}
+          centerLabel="Pro-rata pay"
+          centerValue={gbp.format(result.annualSalary)}
+        />
+
         <div className="mt-4 border-t border-slate-200 dark:border-slate-800 pt-4">
           <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-50">
             Holiday entitlement (separate from pay)
@@ -245,7 +243,23 @@ export default function ProRataCalculator() {
           </p>
         </div>
 
-        <PrintButton />
+        <ResultActions
+          image={{
+            title: "Pro-Rata Salary Calculator",
+            headline: gbp.format(result.annualSalary),
+            headlineNote: `${ftePercent}% of the full-time salary (${result.fteFraction} FTE)`,
+            rows: [
+              { label: "Monthly pay", value: gbp.format(result.monthlySalary) },
+              { label: "Weekly pay", value: gbp.format(result.weeklySalary) },
+              {
+                label: "Holiday entitlement",
+                value: `${result.holidayDaysPerYear} days a year`,
+              },
+            ],
+            fileName: "payrollcalc-pro-rata-result.png",
+          }}
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label="Pro-rata pay"

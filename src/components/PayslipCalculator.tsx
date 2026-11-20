@@ -1,6 +1,8 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import MoneySlider from "@/components/MoneySlider";
+import ResultActions from "@/components/ResultActions";
+import ResultDonut, { DONUT_COLORS } from "@/components/ResultDonut";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
@@ -32,6 +34,14 @@ export default function PayslipCalculator() {
   const [pension, setPension] = useState("5");
   const [loan, setLoan] = useState<LoanChoice>("none");
   const [pgToo, setPgToo] = useState(false);
+
+  const reset = () => {
+    setSalary("36000");
+    setTaxCode("1257L");
+    setPension("5");
+    setLoan("none");
+    setPgToo(false);
+  };
 
   const result = useMemo(
     () =>
@@ -81,21 +91,15 @@ export default function PayslipCalculator() {
   return (
     <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
-        <div>
-          <label htmlFor="pc-salary" className={labelClass}>
-            Your gross annual salary (£)
-          </label>
-          <input
-            id="pc-salary"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="100"
-            value={salary}
-            onChange={(e) => setSalary(e.target.value)}
-            className={inputClass}
-          />
-        </div>
+        <MoneySlider
+          id="pc-salary"
+          label="Your gross annual salary (£)"
+          value={salary}
+          onChange={setSalary}
+          min={0}
+          max={200000}
+          step={500}
+        />
 
         <div>
           <label htmlFor="pc-code" className={labelClass}>
@@ -115,26 +119,16 @@ export default function PayslipCalculator() {
           </p>
         </div>
 
-        <div>
-          <label htmlFor="pc-pension" className={labelClass}>
-            Your pension contribution (% of gross pay)
-          </label>
-          <input
-            id="pc-pension"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.5"
-            value={pension}
-            onChange={(e) => setPension(e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            The auto-enrolment employee minimum is 5%. Modelled as a
-            net-pay arrangement — it reduces your tax, not your
-            National Insurance.
-          </p>
-        </div>
+        <MoneySlider
+          id="pc-pension"
+          label="Your pension contribution (% of gross pay)"
+          value={pension}
+          onChange={setPension}
+          min={0}
+          max={40}
+          step={0.5}
+          hint="The auto-enrolment employee minimum is 5%. Modelled as a net-pay arrangement — it reduces your tax, not your National Insurance."
+        />
 
         <div>
           <label htmlFor="pc-loan" className={labelClass}>
@@ -182,7 +176,7 @@ export default function PayslipCalculator() {
           Your monthly payslip
         </h2>
 
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+        <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {gbp.format(result.netMonthly)} net
         </p>
         <p className="text-sm text-slate-600 dark:text-slate-300">
@@ -205,6 +199,43 @@ export default function PayslipCalculator() {
           </table>
         </div>
 
+        <ResultDonut
+          segments={[
+            {
+              label: "Take-home pay",
+              value: result.netMonthly,
+              displayValue: gbp.format(result.netMonthly),
+              color: DONUT_COLORS.deep,
+            },
+            {
+              label: "Income Tax",
+              value: result.incomeTaxMonthly,
+              displayValue: gbp.format(result.incomeTaxMonthly),
+              color: DONUT_COLORS.accent,
+            },
+            {
+              label: "National Insurance",
+              value: result.employeeNiMonthly,
+              displayValue: gbp.format(result.employeeNiMonthly),
+              color: DONUT_COLORS.mid,
+            },
+            {
+              label: "Pension contribution",
+              value: result.pensionMonthly,
+              displayValue: gbp.format(result.pensionMonthly),
+              color: DONUT_COLORS.light,
+            },
+            {
+              label: "Student loan repayment",
+              value: result.studentLoanMonthly,
+              displayValue: gbp.format(result.studentLoanMonthly),
+              color: DONUT_COLORS.grey,
+            },
+          ]}
+          centerLabel="Net pay"
+          centerValue={gbp.format(result.netMonthly)}
+        />
+
         <div className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
           <p>
             Real PAYE is cumulative: the tax on one month depends on
@@ -214,7 +245,16 @@ export default function PayslipCalculator() {
           </p>
         </div>
 
-        <PrintButton />
+        <ResultActions
+          image={{
+            title: "Payslip Calculator",
+            headline: `${gbp.format(result.netMonthly)} net`,
+            headlineNote: `Net pay per month, from ${gbp.format(result.grossMonthly)} gross`,
+            rows: rows.map((r) => ({ label: r.label, value: r.value })),
+            fileName: "payrollcalc-payslip-result.png",
+          }}
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label="Net pay per month"

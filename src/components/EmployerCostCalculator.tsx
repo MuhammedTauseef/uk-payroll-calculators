@@ -1,6 +1,8 @@
 "use client";
 
-import PrintButton from "@/components/PrintButton";
+import MoneySlider from "@/components/MoneySlider";
+import ResultActions from "@/components/ResultActions";
+import ResultDonut, { DONUT_COLORS } from "@/components/ResultDonut";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
@@ -34,6 +36,13 @@ export default function EmployerCostCalculator() {
   const [pensionPercent, setPensionPercent] = useState("3");
   const [otherCosts, setOtherCosts] = useState("0");
 
+  const reset = () => {
+    setPeriod("annual");
+    setSalary("30000");
+    setPensionPercent("3");
+    setOtherCosts("0");
+  };
+
   const salaryNumber = parseAmount(salary);
   const annualSalary = period === "annual" ? salaryNumber : salaryNumber * 12;
   const pensionNumber = Math.min(100, Math.max(0, parseAmount(pensionPercent)));
@@ -55,21 +64,23 @@ export default function EmployerCostCalculator() {
   return (
     <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
       <div className="grid gap-4 print:hidden sm:grid-cols-2">
-        <div>
-          <label htmlFor="ec-salary" className={labelClass}>
-            Employee&apos;s gross salary (£)
-          </label>
-          <div className="flex gap-2">
-            <input
-              id="ec-salary"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="0.01"
-              value={salary}
-              onChange={(e) => setSalary(e.target.value)}
-              className={inputClass}
-            />
+        <MoneySlider
+          id="ec-salary"
+          label="Employee's gross salary (£)"
+          value={salary}
+          onChange={setSalary}
+          min={0}
+          max={period === "annual" ? 200000 : 20000}
+          step={period === "annual" ? 500 : 100}
+          hint={
+            <>
+              Gross pay before tax and National Insurance.
+              {period === "monthly"
+                ? ` That is ${gbp.format(annualSalary)} a year.`
+                : ""}
+            </>
+          }
+          trailing={
             <select
               id="ec-period"
               aria-label="Salary period"
@@ -80,58 +91,38 @@ export default function EmployerCostCalculator() {
               <option value="annual">per year</option>
               <option value="monthly">per month</option>
             </select>
-          </div>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            Gross pay before tax and National Insurance.
-            {period === "monthly"
-              ? ` That is ${gbp.format(annualSalary)} a year.`
-              : ""}
-          </p>
-        </div>
+          }
+        />
 
-        <div>
-          <label htmlFor="ec-pension" className={labelClass}>
-            Employer pension contribution (% of qualifying earnings)
-          </label>
-          <input
-            id="ec-pension"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            max="100"
-            step="0.1"
-            value={pensionPercent}
-            onChange={(e) => setPensionPercent(e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            The auto-enrolment minimum is {minimumPercent}%. Qualifying
-            earnings are the slice of the salary between{" "}
-            {gbp.format(PENSION.qualifyingEarningsLowerAnnual)} and{" "}
-            {gbp.format(PENSION.qualifyingEarningsUpperAnnual)} a year.
-          </p>
-        </div>
+        <MoneySlider
+          id="ec-pension"
+          label="Employer pension contribution (% of qualifying earnings)"
+          value={pensionPercent}
+          onChange={setPensionPercent}
+          min={0}
+          max={25}
+          step={0.5}
+          hint={
+            <>
+              The auto-enrolment minimum is {minimumPercent}%. Qualifying
+              earnings are the slice of the salary between{" "}
+              {gbp.format(PENSION.qualifyingEarningsLowerAnnual)} and{" "}
+              {gbp.format(PENSION.qualifyingEarningsUpperAnnual)} a year.
+            </>
+          }
+        />
 
-        <div className="sm:col-span-2">
-          <label htmlFor="ec-other" className={labelClass}>
-            Other employer costs (£ per year — optional)
-          </label>
-          <input
-            id="ec-other"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="0.01"
-            value={otherCosts}
-            onChange={(e) => setOtherCosts(e.target.value)}
-            className={inputClass}
-          />
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            Anything else this employee costs you each year — benefits,
-            insurance, equipment, software seats — added exactly as
-            entered.
-          </p>
-        </div>
+        <MoneySlider
+          id="ec-other"
+          label="Other employer costs (£ per year — optional)"
+          value={otherCosts}
+          onChange={setOtherCosts}
+          min={0}
+          max={50000}
+          step={100}
+          className="sm:col-span-2"
+          hint="Anything else this employee costs you each year — benefits, insurance, equipment, software seats — added exactly as entered."
+        />
       </div>
 
       <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
@@ -152,7 +143,7 @@ export default function EmployerCostCalculator() {
             costs: {gbp.format(otherNumber)} a year.
           </p>
         </div>
-        <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+        <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
           {gbp.format(result.totalCostPerYear)}
           <span className="text-base font-medium text-slate-600 dark:text-slate-300">
             {" "}
@@ -215,6 +206,37 @@ export default function EmployerCostCalculator() {
           </div>
         </dl>
 
+        <ResultDonut
+          segments={[
+            {
+              label: "Gross salary",
+              value: result.annualGrossSalary,
+              displayValue: gbp.format(result.annualGrossSalary),
+              color: DONUT_COLORS.deep,
+            },
+            {
+              label: "Employer National Insurance",
+              value: result.employerNiPerYear,
+              displayValue: gbp.format(result.employerNiPerYear),
+              color: DONUT_COLORS.accent,
+            },
+            {
+              label: "Employer pension",
+              value: result.employerPensionPerYear,
+              displayValue: gbp.format(result.employerPensionPerYear),
+              color: DONUT_COLORS.light,
+            },
+            {
+              label: "Other employer costs",
+              value: result.otherCostsPerYear,
+              displayValue: gbp.format(result.otherCostsPerYear),
+              color: DONUT_COLORS.grey,
+            },
+          ]}
+          centerLabel="Total cost"
+          centerValue={gbp.format(result.totalCostPerYear)}
+        />
+
         <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
           Rates used: employer Class 1 rate {ratePercent}% above the{" "}
           {gbp.format(EMPLOYER_NI.secondaryThresholdAnnual)}-a-year
@@ -222,7 +244,41 @@ export default function EmployerCostCalculator() {
           {PENSION_RATES_LABEL}.
         </p>
 
-        <PrintButton />
+        <ResultActions
+          image={{
+            title: "Employer Cost Calculator",
+            headline: gbp.format(result.totalCostPerYear),
+            headlineNote: "Total cost of employing, per year",
+            rows: [
+              {
+                label: "Gross salary",
+                value: gbp.format(result.annualGrossSalary),
+              },
+              {
+                label: "Employer National Insurance",
+                value: gbp.format(result.employerNiPerYear),
+              },
+              {
+                label: "Employer pension",
+                value: gbp.format(result.employerPensionPerYear),
+              },
+              ...(otherNumber > 0
+                ? [
+                    {
+                      label: "Other employer costs",
+                      value: gbp.format(result.otherCostsPerYear),
+                    },
+                  ]
+                : []),
+              {
+                label: "Total cost per month",
+                value: gbp.format(result.totalCostPerMonth),
+              },
+            ],
+            fileName: "payrollcalc-employer-cost-result.png",
+          }}
+          onReset={reset}
+        />
       </div>
       <StickyResultBar
         label="Total employer cost"
