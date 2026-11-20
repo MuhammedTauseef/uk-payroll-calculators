@@ -431,7 +431,7 @@ export default function MaternityPayCalculatorPage() {
           and your employer.
         </p>
         <p className={bodyClass}>
-          Two planning points follow from this. First, SMP counts as
+          Three planning points follow from this. First, SMP counts as
           earnings for tax and National Insurance, and your tax code
           keeps working as normal — because your income falls, many
           people find they have overpaid tax by the end of the leave
@@ -454,7 +454,15 @@ export default function MaternityPayCalculatorPage() {
           </Link>{" "}
           sets out the statutory minimum you would be owed — and note
           that SMP continues to be payable by your former employer even
-          if your employment ends after the qualifying week.
+          if your employment ends after the qualifying week. Third,
+          childcare costs usually start as leave ends: Tax-Free
+          Childcare adds £2 for every £8 you pay in, up to £2,000 a
+          year per child, and our{" "}
+          <Link href="/childcare-calculator" className={linkClass}>
+            tax-free childcare calculator
+          </Link>{" "}
+          works out the top-up on the bill you expect before you go
+          back.
         </p>
       </section>
 

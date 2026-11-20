@@ -10,8 +10,8 @@ import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/childcare-calculator",
-  "Childcare Calculator UK — Tax-Free Childcare Top-Up & Eligibility",
-  "Free UK childcare calculator: work out your Tax-Free Childcare top-up per child (up to £2,000 a year, £4,000 if disabled), what to pay in each month, the £100,000 eligibility cliff and the minimum-earnings check, with free-hours and Universal Credit comparisons.",
+  "Tax-Free Childcare Calculator UK — Top-Up & Eligibility",
+  "Free tax-free childcare calculator: work out your top-up — £2 for every £8, up to £2,000 a year per child (£4,000 if disabled) — plus the £100,000 check.",
 );
 
 const gbp = new Intl.NumberFormat("en-GB", {
@@ -45,19 +45,14 @@ const FAQS: { question: string; answer: string }[] = [
       "Each parent must usually expect to earn at least the National Minimum Wage for 16 hours a week over the next 3 months — £2,643.68 per quarter for someone aged 21 or over at April 2026 rates. Exceptions apply, for example on parental leave, or if a parent cannot work and the other does.",
   },
   {
-    question: "Until what age does Tax-Free Childcare cover a child?",
-    answer:
-      "Until 1 September after the child's 11th birthday, or after their 16th birthday if the child is disabled. The money can pay any registered provider: nurseries, childminders, nannies, breakfast clubs, after-school clubs and holiday schemes.",
-  },
-  {
     question: "Can I get Tax-Free Childcare and Universal Credit together?",
     answer:
       "No. You cannot claim Tax-Free Childcare while you get Universal Credit (or the old childcare vouchers or Working Tax Credit). Universal Credit can cover up to 85% of childcare costs and suits many lower-income households better; Tax-Free Childcare usually wins once household income is too high for Universal Credit. Compare both before you switch, because leaving Universal Credit is not easily reversed.",
   },
   {
-    question: "What happens if my childcare bill changes month to month?",
+    question: "How does the £500 quarterly cap work over a full year?",
     answer:
-      "The top-up is calculated in 3-month blocks, so what matters is the total bill in each block, not the monthly pattern. A £3,000 term-time bill in one block earns the full £500 top-up; the same spending split so one block falls below £2,500 leaves some allowance unused. Paying into the account in the same rhythm as your bills keeps every block working.",
+      "The top-up is assessed in 3-month blocks, each capped at £500 per child — so four full blocks make the £2,000 yearly maximum (£1,000 a block and £4,000 a year for a disabled child). What matters is the total bill inside each block, not the monthly pattern, and cap one block does not use never rolls into the next: a £3,000 term-time bill in one block earns the full £500, while a block under £2,500 of bills leaves some allowance behind. The quarter-by-quarter tracker in the results above shows each of your four blocks separately.",
   },
 ];
 
@@ -74,7 +69,7 @@ const faqJsonLd = {
 const webAppJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  name: "Childcare Calculator UK",
+  name: "Tax-Free Childcare Calculator UK",
   url: `${AppConfig.siteUrl}/childcare-calculator`,
   applicationCategory: "FinanceApplication",
   operatingSystem: "Any",
@@ -106,14 +101,16 @@ export default function ChildcareCalculatorPage() {
 
       <section className="space-y-3">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
-          Childcare Calculator UK
+          Tax-Free Childcare Calculator UK
         </h1>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-          Work out how much Tax-Free Childcare adds to your childcare
-          bill: £2 for every £8 you pay in, up to £2,000 per child per
-          year (£4,000 for a disabled child). The calculator checks each
-          child separately, flags the £100,000 eligibility cliff and the
-          minimum-earnings rule, and shows what to pay in each month.
+          Use this childcare calculator to work out how much Tax-Free
+          Childcare adds to your bill: £2 for every £8 you pay in, up
+          to £2,000 per child per year (£4,000 for a disabled child).
+          Enter each child&apos;s bill per week, per month or per
+          quarter; the calculator checks every child separately, tracks
+          the £500 quarterly cap across the year, and flags the
+          £100,000 eligibility cliff and the minimum-earnings rule.
         </p>
       </section>
 

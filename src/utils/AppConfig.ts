@@ -57,7 +57,7 @@ export const AppConfig = {
     { href: "/vat-calculator", label: "VAT Calculator", icon: "🧮", flag: "🇬🇧" },
     { href: "/cms-calculator", label: "CMS Calculator", icon: "👨‍👧", flag: "🇬🇧" },
     { href: "/annuity-calculator", label: "Annuity Calculator", icon: "🏦", flag: "🇬🇧" },
-    { href: "/childcare-calculator", label: "Childcare Calculator", icon: "🧸", flag: "🇬🇧" },
+    { href: "/childcare-calculator", label: "Tax-Free Childcare Calculator", icon: "🧸", flag: "🇬🇧" },
     { href: "/pension-drawdown-calculator", label: "Pension Drawdown", icon: "📉", flag: "🇬🇧" },
     {
       href: "/paternity-pay-calculator",

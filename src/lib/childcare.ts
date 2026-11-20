@@ -28,6 +28,23 @@ export interface ChildInput {
   disabled: boolean;
 }
 
+/** How a parent enters a child's bill on the page. */
+export type CostPeriod = "weekly" | "monthly" | "quarterly";
+
+/**
+ * Convert a bill entered per week, per month or per quarter into the
+ * monthly figure the calculator works in. The scheme assesses bills
+ * in 3-month blocks and a quarter holds 13 weeks (52 ÷ 4), so a
+ * weekly bill is worth amount × 13 per quarter — the same total as
+ * the monthly figure × 3 used by the maths below.
+ */
+export function costToMonthly(amount: number, period: CostPeriod): number {
+  const a = Math.max(0, amount || 0);
+  if (period === "weekly") return (a * 13) / 3;
+  if (period === "quarterly") return a / 3;
+  return a;
+}
+
 export interface ChildResult {
   monthlyCost: number;
   disabled: boolean;

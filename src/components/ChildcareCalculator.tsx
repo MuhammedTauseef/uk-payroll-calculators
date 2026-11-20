@@ -6,9 +6,17 @@ import StickyResultBar from "@/components/StickyResultBar";
 import { useMemo, useState } from "react";
 import {
   calculateChildcare,
-  type ChildInput,
+  costToMonthly,
   type ChildcareInput,
+  type CostPeriod,
 } from "@/lib/childcare";
+
+interface ChildRow {
+  /** Bill as typed by the parent, in the chosen period's pounds. */
+  amount: string;
+  period: CostPeriod;
+  disabled: boolean;
+}
 
 const gbp = new Intl.NumberFormat("en-GB", {
   style: "currency",
@@ -25,8 +33,8 @@ const inputClass =
 const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300";
 
 export default function ChildcareCalculator() {
-  const [children, setChildren] = useState<ChildInput[]>([
-    { monthlyCost: 1000, disabled: false },
+  const [rows, setRows] = useState<ChildRow[]>([
+    { amount: "1000", period: "monthly", disabled: false },
   ]);
   const [household, setHousehold] = useState<"single" | "couple">("couple");
   const [parent1Income, setParent1Income] = useState("35000");
@@ -36,17 +44,28 @@ export default function ChildcareCalculator() {
   const result = useMemo(
     () =>
       calculateChildcare({
-        children,
+        children: rows.map((r) => ({
+          monthlyCost: costToMonthly(parseAmount(r.amount), r.period),
+          disabled: r.disabled,
+        })),
         household,
         parent1Income: parseAmount(parent1Income),
         parent2Income: parseAmount(parent2Income),
         parentAgeBand: ageBand,
       }),
-    [children, household, parent1Income, parent2Income, ageBand],
+    [rows, household, parent1Income, parent2Income, ageBand],
   );
 
-  const updateChild = (idx: number, patch: Partial<ChildInput>) =>
-    setChildren((cs) => cs.map((c, i) => (i === idx ? { ...c, ...patch } : c)));
+  const updateRow = (idx: number, patch: Partial<ChildRow>) =>
+    setRows((rs) => rs.map((r, i) => (i === idx ? { ...r, ...patch } : r)));
+
+  // Quarter-by-quarter tracker: the cap is assessed per 3-month
+  // block, so the year is four identical blocks on a steady bill.
+  const quarterBill = result.perChild.reduce((s, c) => s + c.quarterlyBill, 0);
+  const quarterCap = result.perChild.reduce((s, c) => s + c.capPerQuarter, 0);
+  const yearCap = quarterCap * 4;
+  const capUsedPct =
+    yearCap > 0 ? Math.min(100, (result.totalAnnualTopUp / yearCap) * 100) : 0;
 
   return (
     <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
@@ -123,43 +142,58 @@ export default function ChildcareCalculator() {
       </div>
 
       <div className="mt-6 space-y-4 print:hidden">
-        {children.map((child, idx) => (
+        {rows.map((row, idx) => (
           <div
             key={idx}
             className="grid gap-4 rounded-xl border border-slate-200 dark:border-slate-800 p-4 sm:grid-cols-2"
           >
             <div>
               <label htmlFor={`cc-cost-${idx}`} className={labelClass}>
-                Child {idx + 1} — childcare bill per month (£)
+                Child {idx + 1} — childcare bill (£)
               </label>
-              <input
-                id={`cc-cost-${idx}`}
-                inputMode="decimal"
-                value={child.monthlyCost === 0 ? "" : String(child.monthlyCost)}
-                onChange={(e) =>
-                  updateChild(idx, { monthlyCost: parseAmount(e.target.value) })
-                }
-                className={inputClass}
-              />
+              <div className="flex gap-2">
+                <input
+                  id={`cc-cost-${idx}`}
+                  inputMode="decimal"
+                  value={row.amount}
+                  onChange={(e) => updateRow(idx, { amount: e.target.value })}
+                  className={inputClass}
+                />
+                <select
+                  id={`cc-period-${idx}`}
+                  aria-label={`Child ${idx + 1} bill period`}
+                  value={row.period}
+                  onChange={(e) =>
+                    updateRow(idx, { period: e.target.value as CostPeriod })
+                  }
+                  className="w-36 shrink-0 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-2 py-2.5 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700"
+                >
+                  <option value="weekly">per week</option>
+                  <option value="monthly">per month</option>
+                  <option value="quarterly">per 3 months</option>
+                </select>
+              </div>
               <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                 Nursery, childminder, breakfast or after-school club —
-                a registered provider.
+                a registered provider. Weekly bills are converted at
+                13 weeks per quarter, the same 3-month blocks the
+                scheme itself uses.
               </p>
             </div>
             <div className="flex items-end justify-between gap-3 pb-1">
               <label className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300">
                 <input
                   type="checkbox"
-                  checked={child.disabled}
-                  onChange={(e) => updateChild(idx, { disabled: e.target.checked })}
+                  checked={row.disabled}
+                  onChange={(e) => updateRow(idx, { disabled: e.target.checked })}
                   className="h-4 w-4 rounded border-slate-300"
                 />
                 Disabled child (cap doubles)
               </label>
-              {children.length > 1 && (
+              {rows.length > 1 && (
                 <button
                   type="button"
-                  onClick={() => setChildren((cs) => cs.filter((_, i) => i !== idx))}
+                  onClick={() => setRows((rs) => rs.filter((_, i) => i !== idx))}
                   className="text-sm font-semibold text-red-600 hover:text-red-700"
                 >
                   Remove
@@ -168,11 +202,14 @@ export default function ChildcareCalculator() {
             </div>
           </div>
         ))}
-        {children.length < 4 && (
+        {rows.length < 4 && (
           <button
             type="button"
             onClick={() =>
-              setChildren((cs) => [...cs, { monthlyCost: 800, disabled: false }])
+              setRows((rs) => [
+                ...rs,
+                { amount: "800", period: "monthly", disabled: false },
+              ])
             }
             className="rounded-lg border border-brand-700 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-50 dark:text-brand-300 dark:hover:bg-slate-800"
           >
@@ -245,6 +282,63 @@ export default function ChildcareCalculator() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="mt-5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-50">
+            Your year, quarter by quarter
+          </h3>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+            The top-up cap is set per 3-month block, so the year is
+            four blocks. On a steady bill every block looks the same:
+          </p>
+          <div className="mt-2 overflow-x-auto">
+            <table className="w-full text-left text-sm table-stack">
+              <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-700">
+                  <th className="py-2 pr-3 font-semibold">Quarter</th>
+                  <th className="py-2 pr-3 font-semibold">Bill</th>
+                  <th className="py-2 pr-3 font-semibold">Gov top-up</th>
+                  <th className="py-2 font-semibold">Cap for the quarter</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
+                {[1, 2, 3, 4].map((q) => (
+                  <tr key={q}>
+                    <td className="py-2 pr-3">Quarter {q}</td>
+                    <td className="py-2 pr-3">{gbp.format(quarterBill)}</td>
+                    <td className="py-2 pr-3">
+                      {gbp.format(result.totalQuarterlyTopUp)}
+                    </td>
+                    <td className="py-2">{gbp.format(quarterCap)}</td>
+                  </tr>
+                ))}
+                <tr className="font-semibold">
+                  <td className="py-2 pr-3">Whole year</td>
+                  <td className="py-2 pr-3">{gbp.format(result.totalAnnualBill)}</td>
+                  <td className="py-2 pr-3">{gbp.format(result.totalAnnualTopUp)}</td>
+                  <td className="py-2">{gbp.format(yearCap)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            className="mt-3 h-2.5 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+            role="img"
+            aria-label={`You use ${gbp.format(result.totalAnnualTopUp)} of the ${gbp.format(yearCap)} top-up available this year`}
+          >
+            <div
+              className="h-full rounded-full bg-brand-600"
+              style={{ width: `${capUsedPct}%` }}
+            />
+          </div>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+            You use {gbp.format(result.totalAnnualTopUp)} of the{" "}
+            {gbp.format(yearCap)} top-up available this year. Cap a
+            quarter does not use cannot move to another quarter — an
+            uneven bill, heavy in one block and light in the next,
+            leaves some of the light block&apos;s allowance behind.
+          </p>
         </div>
 
         <div className="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
