@@ -177,6 +177,35 @@ function PaternityIcon() {
   );
 }
 
+function MaternityPayIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="6.5" r="2.8" />
+      <path d="M5.5 20.5c.7-4 3.2-6 6.5-6s5.8 2 6.5 6" />
+      <path d="M12 11.2c.9 1 1.4 2 1.4 3" />
+    </svg>
+  );
+}
+
+function RedundancyIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="3" y="8" width="18" height="12" rx="2" />
+      <path d="M9 8V6a3 3 0 016 0v2M3 13h18" />
+    </svg>
+  );
+}
+
+function HolidayPayIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="8" cy="7.5" r="3" />
+      <path d="M8 2v1.5M2.5 7.5H4M3.6 3.6l1 1M12.4 3.6l-1 1" />
+      <path d="M3 20c3-2.2 6 2.2 9 0s6 2.2 9 0" />
+    </svg>
+  );
+}
+
 function TakeHomeIcon() {
   return (
     <svg {...iconProps}>
@@ -406,6 +435,30 @@ const CALCULATORS = [
     linkText: "Open the paternity pay calculator →",
   },
   {
+    href: "/maternity-pay-calculator",
+    icon: <MaternityPayIcon />,
+    title: "Maternity Pay Calculator",
+    description:
+      "Statutory Maternity Pay from your salary and due date: 6 weeks at 90% of average weekly earnings, then 33 weeks at £194.32 — £10,151.02 in total on a £36,000 salary — with eligibility checks, your key dates and a month-by-month breakdown.",
+    linkText: "Open the maternity pay calculator →",
+  },
+  {
+    href: "/redundancy-pay-calculator",
+    icon: <RedundancyIcon />,
+    title: "Redundancy Pay Calculator",
+    description:
+      "Statutory redundancy pay worked out year by year from your dates of birth and employment: the £751 weekly pay cap, the age bands, your notice pay, and how your package sits against the £30,000 tax-free limit.",
+    linkText: "Open the redundancy pay calculator →",
+  },
+  {
+    href: "/holiday-pay-calculator",
+    icon: <HolidayPayIcon />,
+    title: "Holiday Pay Calculator",
+    description:
+      "Holiday pay in pounds, not just days: a week's pay for regular staff, average pay over 52 weeks when pay varies, the 12.07% accrual for irregular-hours workers, rolled-up holiday pay, and the (A × B) − C payment owed when a job ends.",
+    linkText: "Open the holiday pay calculator →",
+  },
+  {
     href: "/40k-after-tax-uk",
     icon: <TakeHomeIcon />,
     title: "£40k After Tax UK",
@@ -600,6 +653,9 @@ const CATEGORY_BY_HREF: Record<string, string> = {
   "/nhs-maternity-pay-calculator": "Leave & Family",
   "/nhs-pay-calculator": "Pay & Tax",
   "/paternity-pay-calculator": "Leave & Family",
+  "/maternity-pay-calculator": "Leave & Family",
+  "/redundancy-pay-calculator": "Leave & Family",
+  "/holiday-pay-calculator": "Leave & Family",
   "/40k-after-tax-uk": "Pay & Tax",
   "/payslip-calculator": "Pay & Tax",
   "/payslip-generator": "Pay & Tax",

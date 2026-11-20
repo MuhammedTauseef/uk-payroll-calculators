@@ -20,6 +20,9 @@
 - Pension drawdown calculator: https://payrollcalc.co.uk/pension-drawdown-calculator — How long a pension pot lasts in drawdown, with 2026/27 tax and the State Pension alongside.
 - Annuity calculator: https://payrollcalc.co.uk/annuity-calculator — What a pension pot buys as guaranteed income for life at 55–75, single or joint life, level or rising payments, with the full November 2026 rate table printed.
 - Annual leave calculator: https://payrollcalc.co.uk/annual-leave-calculator
+- Maternity pay calculator: https://payrollcalc.co.uk/maternity-pay-calculator — Statutory Maternity Pay from salary and due date: 6 weeks at 90% of average weekly earnings, then 33 weeks at £194.32, with eligibility checks, key dates and a month-by-month breakdown.
+- Redundancy pay calculator: https://payrollcalc.co.uk/redundancy-pay-calculator — Statutory redundancy pay year by year with the £751 weekly pay cap, plus notice pay and the £30,000 tax-free limit check.
+- Holiday pay calculator: https://payrollcalc.co.uk/holiday-pay-calculator — Holiday pay in pounds: a week's pay for regular staff, the 12.07% accrual for irregular-hours workers, rolled-up holiday pay, and the (A × B) − C payment in lieu for leavers.
 - HMRC tax code checker: https://payrollcalc.co.uk/hmrc-tax-code-checker
 
 ## Blog
