@@ -175,7 +175,15 @@ export default function NhsPayCalculatorPage() {
           rate. The full-time rates below are for a 37.5-hour week — if
           you work fewer hours, your pay is pro-rata: the annual salary
           shrinks in proportion to your hours, but the hourly rate stays
-          the same.
+          the same. Leave follows its own service-based scale: our{" "}
+          <Link
+            href="/nhs-annual-leave-calculator"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            NHS annual leave calculator
+          </Link>{" "}
+          turns your length of NHS service and contracted hours into
+          your Agenda for Change leave entitlement in days and hours.
         </p>
       </section>
 
