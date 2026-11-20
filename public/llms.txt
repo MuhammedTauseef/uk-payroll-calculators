@@ -5,6 +5,7 @@
 ## Calculators
 
 - NHS pay calculator: https://payrollcalc.co.uk/nhs-pay-calculator — Take-home pay by Agenda for Change band and point.
+- NHS annual leave calculator: https://payrollcalc.co.uk/nhs-annual-leave-calculator — Agenda for Change annual leave in days and hours: 27, 29 or 33 days plus public holidays by length of service, pro-rata for part-time staff, starters and leavers, across all four UK nations.
 - Statutory Sick Pay calculator: https://payrollcalc.co.uk/ssp-calculator
 - VAT calculator: https://payrollcalc.co.uk/vat-calculator — Add or remove 20% UK VAT.
 - Employer cost calculator: https://payrollcalc.co.uk/employer-cost-calculator — The full cost of an employee, including employer National Insurance.
