@@ -10,6 +10,8 @@ import {
 } from "@/lib/annuity";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/annuity-calculator",
@@ -790,6 +792,8 @@ export default function AnnuityCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

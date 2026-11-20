@@ -13,6 +13,8 @@ import {
 } from "@/lib/rates";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/employer-cost-calculator",
@@ -498,6 +500,8 @@ export default function EmployerCostCalculatorPage() {
           National Insurance.
         </p>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

@@ -9,6 +9,8 @@ import {
 } from "@/lib/pension-drawdown";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/pension-drawdown-calculator",
@@ -351,6 +353,8 @@ export default function PensionDrawdownCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

@@ -11,6 +11,8 @@ import {
 
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata = pageMetadata(
   "/employer-national-insurance-calculator",
@@ -337,6 +339,8 @@ export default function EmployerNationalInsuranceCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

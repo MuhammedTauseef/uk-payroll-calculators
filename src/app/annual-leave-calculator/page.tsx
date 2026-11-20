@@ -6,6 +6,8 @@ import { calculateAnnualLeave } from "@/lib/annualleave";
 
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/annual-leave-calculator",
@@ -573,6 +575,8 @@ export default function AnnualLeaveCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

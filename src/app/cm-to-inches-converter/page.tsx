@@ -5,6 +5,8 @@ import CmToInchesConverter from "@/components/CmToInchesConverter";
 import { cmToFeetInches, cmToInches, fmt } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/cm-to-inches-converter",
@@ -295,6 +297,8 @@ export default function CmToInchesConverterPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

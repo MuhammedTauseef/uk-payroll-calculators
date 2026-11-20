@@ -5,6 +5,8 @@ import PayslipCalculator from "@/components/PayslipCalculator";
 import { calculatePayslipBreakdown } from "@/lib/payslip-calculator";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/payslip-calculator",
@@ -317,6 +319,8 @@ export default function PayslipCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

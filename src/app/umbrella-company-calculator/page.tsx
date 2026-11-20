@@ -5,6 +5,8 @@ import UmbrellaCalculator from "@/components/UmbrellaCalculator";
 import { calculateUmbrella } from "@/lib/umbrella";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/umbrella-company-calculator",
@@ -315,6 +317,8 @@ export default function UmbrellaCompanyCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

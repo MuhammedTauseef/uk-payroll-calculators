@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogArticleBody } from "@/components/BlogArticle";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 import { AppConfig } from "@/utils/AppConfig";
 import { pageMetadata } from "@/utils/metadata";
 import { formatDateGB } from "@/lib/blog/format";
@@ -132,6 +134,11 @@ export default async function BlogArticlePage({ params }: RouteParams) {
           </Link>
         </div>
       </section>
+
+      <div className="mt-10 space-y-6">
+        <ShareButtons />
+        <ReviewCard />
+      </div>
     </article>
   );
 }

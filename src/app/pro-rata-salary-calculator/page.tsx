@@ -7,6 +7,8 @@ import { RATES_RULES_LABEL } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata = pageMetadata(
   "/pro-rata-salary-calculator",
@@ -306,6 +308,8 @@ export default function ProRataSalaryCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

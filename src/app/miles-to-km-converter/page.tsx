@@ -5,6 +5,8 @@ import MilesToKmConverter from "@/components/MilesToKmConverter";
 import { fmt, milesToKm } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/miles-to-km-converter",
@@ -292,6 +294,8 @@ export default function MilesToKmConverterPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

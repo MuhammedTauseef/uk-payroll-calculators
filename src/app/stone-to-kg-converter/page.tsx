@@ -5,6 +5,8 @@ import StoneToKgConverter from "@/components/StoneToKgConverter";
 import { fmt, stoneToKg } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/stone-to-kg-converter",
@@ -341,6 +343,8 @@ export default function StoneToKgConverterPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

@@ -14,6 +14,8 @@ import {
 } from "@/lib/us-paycheck";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/us/texas-paycheck-calculator",
@@ -594,6 +596,8 @@ export default function TexasPaycheckCalculatorPage() {
           explains the moving parts on each side.
         </p>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

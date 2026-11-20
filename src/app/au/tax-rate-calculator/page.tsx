@@ -11,6 +11,8 @@ import {
 } from "@/lib/au-tax";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/au/tax-rate-calculator",
@@ -446,6 +448,8 @@ export default function AuTaxRateCalculatorPage() {
           explains the moving parts on each side.
         </p>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );

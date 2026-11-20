@@ -198,6 +198,8 @@ export const AppConfig = {
   ],
   siteLinks: [
     { href: "/about", label: "About" },
+    { href: "/methodology", label: "Methodology" },
+    { href: "/editorial-policy", label: "Editorial Policy" },
     { href: "/contact", label: "Contact" },
     { href: "/blog", label: "Blog" },
     { href: "/privacy-policy", label: "Privacy Policy" },

@@ -5,6 +5,8 @@ import ProRataHolidayCalculator from "@/components/ProRataHolidayCalculator";
 import { calculateProRataHoliday } from "@/lib/prorata-holiday";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
+import ReviewCard from "@/components/ReviewCard";
+import ShareButtons from "@/components/ShareButtons";
 
 export const metadata: Metadata = pageMetadata(
   "/pro-rata-holiday-calculator",
@@ -432,6 +434,8 @@ export default function ProRataHolidayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <ShareButtons />
+      <ReviewCard />
       <SubscribeBox />
     </div>
   );
