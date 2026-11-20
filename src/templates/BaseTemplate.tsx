@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SubscribeBox from "@/components/SubscribeBox";
 import { AppConfig } from "@/utils/AppConfig";
 
 /**
@@ -71,6 +72,10 @@ export const BaseTemplate = (props: {
             <div className="text-sm leading-relaxed text-slate-500 dark:text-slate-400">
               {props.footerNote}
             </div>
+            {/* Email box (UX Phase 2, 2026-11-20): the subscribe form
+                lives in the footer of every page; the component hides
+                itself on /admin and /unsubscribe. */}
+            <SubscribeBox variant="footer" />
           </div>
 
           {/* Calculators directory (friendly-fix, 19 Nov 2026):

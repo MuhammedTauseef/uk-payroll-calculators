@@ -11,6 +11,7 @@ import {
 } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/paternity-pay-calculator",
@@ -305,6 +306,7 @@ export default function PaternityPayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

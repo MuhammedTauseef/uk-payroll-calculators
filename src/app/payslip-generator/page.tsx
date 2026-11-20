@@ -12,6 +12,7 @@ import {
 } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/payslip-generator",
@@ -458,6 +459,7 @@ export default function PayslipGeneratorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

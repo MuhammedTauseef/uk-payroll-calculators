@@ -8,6 +8,7 @@ import {
   studentLoanPlan,
 } from "@/lib/student-loan";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/student-loan-repayment-calculator",
@@ -307,6 +308,7 @@ export default function StudentLoanRepaymentCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

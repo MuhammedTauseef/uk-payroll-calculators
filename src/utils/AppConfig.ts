@@ -201,6 +201,7 @@ export const AppConfig = {
     { href: "/contact", label: "Contact" },
     { href: "/blog", label: "Blog" },
     { href: "/privacy-policy", label: "Privacy Policy" },
+    { href: "/unsubscribe", label: "Unsubscribe" },
     { href: "/cookies", label: "Cookie Policy" },
     { href: "/terms", label: "Terms of Use" },
     { href: "/disclaimer", label: "Disclaimer" },

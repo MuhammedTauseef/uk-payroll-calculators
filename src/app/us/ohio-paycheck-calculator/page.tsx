@@ -17,6 +17,7 @@ import {
   type UsPaycheckInput,
 } from "@/lib/us-paycheck";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/us/ohio-paycheck-calculator",
@@ -714,6 +715,7 @@ export default function OhioPaycheckCalculatorPage() {
           explains the moving parts on each side.
         </p>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

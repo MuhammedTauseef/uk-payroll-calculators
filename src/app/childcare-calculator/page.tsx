@@ -4,6 +4,7 @@ import Link from "next/link";
 import ChildcareCalculator from "@/components/ChildcareCalculator";
 import { calculateChildcare } from "@/lib/childcare";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/childcare-calculator",
@@ -387,6 +388,7 @@ export default function ChildcareCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

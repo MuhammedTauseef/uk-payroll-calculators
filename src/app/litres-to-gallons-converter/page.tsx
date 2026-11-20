@@ -8,6 +8,7 @@ import {
   litresToUsGallons,
 } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/litres-to-gallons-converter",
@@ -301,6 +302,7 @@ export default function LitresToGallonsConverterPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

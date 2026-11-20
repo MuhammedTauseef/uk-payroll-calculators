@@ -17,10 +17,12 @@ export default function PrivacyPolicyPage() {
           The short version: this site has no accounts and no forms that
           send your figures anywhere. Every calculation happens in your
           own browser, and the numbers you type in are never collected,
-          stored or shared by this site.
+          stored or shared by this site. The one thing you can choose to
+          send us is an email address, if you join the update list —
+          that is covered in its own section below.
         </p>
         <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">
-          Last updated: 8 November 2026.
+          Last updated: 20 November 2026.
         </p>
       </section>
 
@@ -46,6 +48,27 @@ export default function PrivacyPolicyPage() {
           There is nothing to sign up for and no sign-in for visitors.
           The only sign-in on the site is the admin area used by the
           people who run it.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Email updates (only if you subscribe)
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The email box in the footer is optional. If you subscribe, we
+          store your email address — and the page you subscribed from —
+          on our database so we can send you an update a few times a
+          year when rates change or a new calculator is published. We do
+          not sell the list or share it with advertisers. Every update
+          email links to the{" "}
+          <a
+            className="font-medium text-slate-900 underline decoration-slate-400 underline-offset-4 hover:decoration-slate-900 dark:text-slate-50 dark:decoration-slate-500 dark:hover:decoration-slate-50"
+            href="/unsubscribe"
+          >
+            unsubscribe page
+          </a>
+          , where one form removes your address straight away.
         </p>
       </section>
 

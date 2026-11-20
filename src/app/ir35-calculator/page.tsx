@@ -5,6 +5,7 @@ import Ir35Calculator from "@/components/Ir35Calculator";
 import { calculateIr35 } from "@/lib/ir35";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/ir35-calculator",
@@ -484,6 +485,7 @@ export default function Ir35CalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

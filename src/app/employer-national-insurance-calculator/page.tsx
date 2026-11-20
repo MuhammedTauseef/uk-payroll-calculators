@@ -10,6 +10,7 @@ import {
 } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata = pageMetadata(
   "/employer-national-insurance-calculator",
@@ -336,6 +337,7 @@ export default function EmployerNationalInsuranceCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

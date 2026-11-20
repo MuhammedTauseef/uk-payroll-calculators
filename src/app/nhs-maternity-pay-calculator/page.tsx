@@ -11,6 +11,7 @@ import {
 } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/nhs-maternity-pay-calculator",
@@ -319,6 +320,7 @@ export default function NhsMaternityPayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

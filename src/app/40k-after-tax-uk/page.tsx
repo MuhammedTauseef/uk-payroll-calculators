@@ -11,6 +11,7 @@ import {
 } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/40k-after-tax-uk",
@@ -439,6 +440,7 @@ export default function FortyKAfterTaxPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

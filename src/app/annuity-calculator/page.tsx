@@ -9,6 +9,7 @@ import {
   LUMP_SUM_ALLOWANCE,
 } from "@/lib/annuity";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/annuity-calculator",
@@ -789,6 +790,7 @@ export default function AnnuityCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import NoticeCalculator from "@/components/NoticeCalculator";
 import { MAX_EMPLOYER_STATUTORY_WEEKS } from "@/lib/notice";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata = pageMetadata(
   "/notice-period-calculator",
@@ -281,6 +282,7 @@ export default function NoticePeriodCalculatorPage() {
           ))}
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

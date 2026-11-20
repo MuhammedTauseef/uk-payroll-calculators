@@ -4,6 +4,7 @@ import Link from "next/link";
 import StoneToKgConverter from "@/components/StoneToKgConverter";
 import { fmt, stoneToKg } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/stone-to-kg-converter",
@@ -340,6 +341,7 @@ export default function StoneToKgConverterPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

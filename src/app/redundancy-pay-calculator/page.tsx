@@ -6,6 +6,7 @@ import { calculateRedundancy } from "@/lib/redundancy";
 import { PAYE_RATES_LABEL, REDUNDANCY } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/redundancy-pay-calculator",
@@ -578,6 +579,7 @@ export default function RedundancyPayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

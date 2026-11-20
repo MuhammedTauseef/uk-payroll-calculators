@@ -4,6 +4,7 @@ import Link from "next/link";
 import PayslipCalculator from "@/components/PayslipCalculator";
 import { calculatePayslipBreakdown } from "@/lib/payslip-calculator";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/payslip-calculator",
@@ -316,6 +317,7 @@ export default function PayslipCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

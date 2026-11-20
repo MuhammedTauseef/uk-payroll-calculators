@@ -13,6 +13,7 @@ import {
   type UsPaycheckInput,
 } from "@/lib/us-paycheck";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/us/texas-paycheck-calculator",
@@ -593,6 +594,7 @@ export default function TexasPaycheckCalculatorPage() {
           explains the moving parts on each side.
         </p>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

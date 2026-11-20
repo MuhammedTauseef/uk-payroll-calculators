@@ -4,6 +4,7 @@ import Link from "next/link";
 import MilesToKmConverter from "@/components/MilesToKmConverter";
 import { fmt, milesToKm } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/miles-to-km-converter",
@@ -291,6 +292,7 @@ export default function MilesToKmConverterPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

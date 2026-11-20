@@ -6,6 +6,7 @@ import { STATUTORY_HOLIDAY_WEEKS } from "@/lib/prorata";
 import { RATES_RULES_LABEL } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata = pageMetadata(
   "/pro-rata-salary-calculator",
@@ -305,6 +306,7 @@ export default function ProRataSalaryCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

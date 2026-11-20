@@ -35,6 +35,9 @@ export default async function AdminPanelLayout({
           <Link href="/admin/blog/new" className="text-brand-800 dark:text-brand-300 hover:underline">
             New post
           </Link>
+          <Link href="/admin/subscribers" className="text-brand-800 dark:text-brand-300 hover:underline">
+            Subscribers
+          </Link>
           <Link href="/blog" className="text-brand-800 dark:text-brand-300 hover:underline">
             View blog
           </Link>

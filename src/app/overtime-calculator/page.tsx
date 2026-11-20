@@ -5,6 +5,7 @@ import OvertimeCalculator from "@/components/OvertimeCalculator";
 import { calculateOvertime, NMW_BANDS } from "@/lib/overtime";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/overtime-calculator",
@@ -515,6 +516,7 @@ export default function OvertimeCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

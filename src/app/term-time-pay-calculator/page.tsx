@@ -4,6 +4,7 @@ import Link from "next/link";
 import TermTimePayCalculator from "@/components/TermTimePayCalculator";
 import { calculateTermTime } from "@/lib/term-time";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/term-time-pay-calculator",
@@ -383,6 +384,7 @@ export default function TermTimePayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

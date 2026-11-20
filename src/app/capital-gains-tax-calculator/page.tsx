@@ -4,6 +4,7 @@ import Link from "next/link";
 import CapitalGainsCalculator from "@/components/CapitalGainsCalculator";
 import { calculateCapitalGains } from "@/lib/capital-gains";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/capital-gains-tax-calculator",
@@ -298,6 +299,7 @@ export default function CapitalGainsTaxCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

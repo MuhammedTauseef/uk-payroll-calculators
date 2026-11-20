@@ -4,6 +4,7 @@ import Link from "next/link";
 import CmToInchesConverter from "@/components/CmToInchesConverter";
 import { cmToFeetInches, cmToInches, fmt } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/cm-to-inches-converter",
@@ -294,6 +295,7 @@ export default function CmToInchesConverterPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

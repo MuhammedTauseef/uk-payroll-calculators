@@ -4,6 +4,7 @@ import Link from "next/link";
 import SalarySacrificeCalculator from "@/components/SalarySacrificeCalculator";
 import { calculateSalarySacrifice } from "@/lib/salary-sacrifice";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/salary-sacrifice-calculator",
@@ -313,6 +314,7 @@ export default function SalarySacrificeCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

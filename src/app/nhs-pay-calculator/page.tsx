@@ -12,6 +12,7 @@ import {
 } from "@/lib/nhs-pay";
 import { PAYE_RATES_LABEL } from "@/lib/rates";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/nhs-pay-calculator",
@@ -357,6 +358,7 @@ export default function NhsPayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

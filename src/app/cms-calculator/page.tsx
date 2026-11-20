@@ -15,6 +15,7 @@ import {
   CMS_SOURCE_URL,
 } from "@/lib/cms";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/cms-calculator",
@@ -546,6 +547,7 @@ export default function CmsCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

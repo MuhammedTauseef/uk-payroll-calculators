@@ -10,6 +10,7 @@ import {
   TAX_YEAR_LABEL,
 } from "@/lib/au-tax";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/au/tax-rate-calculator",
@@ -445,6 +446,7 @@ export default function AuTaxRateCalculatorPage() {
           explains the moving parts on each side.
         </p>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

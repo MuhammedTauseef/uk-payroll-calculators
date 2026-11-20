@@ -4,6 +4,7 @@ import Link from "next/link";
 import ProRataHolidayCalculator from "@/components/ProRataHolidayCalculator";
 import { calculateProRataHoliday } from "@/lib/prorata-holiday";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/pro-rata-holiday-calculator",
@@ -431,6 +432,7 @@ export default function ProRataHolidayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

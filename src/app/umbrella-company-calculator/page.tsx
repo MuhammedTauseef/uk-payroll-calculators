@@ -4,6 +4,7 @@ import Link from "next/link";
 import UmbrellaCalculator from "@/components/UmbrellaCalculator";
 import { calculateUmbrella } from "@/lib/umbrella";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/umbrella-company-calculator",
@@ -314,6 +315,7 @@ export default function UmbrellaCompanyCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

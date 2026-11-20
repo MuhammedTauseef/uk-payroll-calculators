@@ -12,6 +12,7 @@ import {
   PENSION_RATES_LABEL,
 } from "@/lib/rates";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/employer-cost-calculator",
@@ -497,6 +498,7 @@ export default function EmployerCostCalculatorPage() {
           National Insurance.
         </p>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

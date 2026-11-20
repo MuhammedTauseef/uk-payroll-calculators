@@ -6,6 +6,7 @@ import { convertHourlyRate } from "@/lib/hourly";
 import { NMW_BANDS } from "@/lib/overtime";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/hourly-rate-converter",
@@ -474,6 +475,7 @@ export default function HourlyRateConverterPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

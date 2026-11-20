@@ -8,6 +8,7 @@ import {
   DRAWDOWN_CONSTANTS,
 } from "@/lib/pension-drawdown";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/pension-drawdown-calculator",
@@ -350,6 +351,7 @@ export default function PensionDrawdownCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

@@ -11,6 +11,7 @@ import {
 } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/hmrc-tax-code-checker",
@@ -647,6 +648,7 @@ export default function TaxCodeCheckerPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

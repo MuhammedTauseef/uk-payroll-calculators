@@ -6,6 +6,7 @@ import { calculateHolidayPay } from "@/lib/holidaypay";
 import { PAYE_RATES_LABEL } from "@/lib/rates";
 
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/holiday-pay-calculator",
@@ -591,6 +592,7 @@ export default function HolidayPayCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }

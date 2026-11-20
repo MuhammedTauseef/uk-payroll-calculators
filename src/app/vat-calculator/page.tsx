@@ -4,6 +4,7 @@ import Link from "next/link";
 import VatCalculator from "@/components/VatCalculator";
 import { calculateVat } from "@/lib/vat";
 import { AppConfig } from "@/utils/AppConfig";
+import SubscribeBox from "@/components/SubscribeBox";
 
 export const metadata: Metadata = pageMetadata(
   "/vat-calculator",
@@ -362,6 +363,7 @@ export default function VatCalculatorPage() {
           </Link>
         </div>
       </section>
+      <SubscribeBox />
     </div>
   );
 }
