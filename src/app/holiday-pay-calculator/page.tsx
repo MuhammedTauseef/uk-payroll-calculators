@@ -423,6 +423,44 @@ export default function HolidayPayCalculatorPage() {
       </section>
 
       <section className="space-y-3">
+        <h2 className={h2Class}>What can you do if your holiday pay looks wrong?</h2>
+        <p className={bodyClass}>
+          Start by identifying which of the four methods on this page
+          produced the figure, because most errors are method errors,
+          not arithmetic errors: a fixed week&apos;s pay used where a
+          52-week average was due, a 12.07% accrual applied to a
+          regular-hours worker, or unpaid weeks wrongly counted into an
+          average. Then ask your employer, in writing, for the figures
+          behind the payment — the 52 weekly amounts in an average, or
+          the accrual record for irregular hours. Employers have to keep
+          pay records, and from 6 April 2026 they must also keep records
+          of annual leave and holiday pay, so the numbers exist and you
+          are entitled to see how your pay was worked out. Run the same
+          inputs through the calculator above and put the two results
+          side by side: a difference with the method named is far harder
+          to wave away than a general complaint.
+        </p>
+        <p className={bodyClass}>
+          If the shortfall is not corrected, underpaid holiday pay is
+          treated in law as an unlawful deduction from wages. A claim
+          goes to an employment tribunal, and the deadline is strict:
+          3 months less a day from the date of the deduction — or, where
+          the same error repeats each pay day, from the last deduction
+          in the series. You must contact Acas for early conciliation
+          before the tribunal will accept the claim, and the clock
+          pauses during conciliation, but it does not reset. Two
+          practical points follow. First, do not let an employer&apos;s
+          promise to “look into it” carry you past the deadline — start
+          the Acas process while the conversation continues. Second,
+          keep your own evidence from the start: contracts, rotas,
+          timesheets and payslips are what turn a disagreement about
+          method into a provable figure, and for irregular-hours work
+          the recorded hours are the whole case, because every method on
+          this page is built from them.
+        </p>
+      </section>
+
+      <section className="space-y-3">
         <h2 className={h2Class}>The key holiday pay figures at a glance</h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
           <table className="w-full text-left text-sm table-stack">
