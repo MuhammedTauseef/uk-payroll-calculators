@@ -96,12 +96,17 @@ export default function RootLayout({
               <ThemeToggle />
               <Link
                 href="/ssp-calculator"
-              className="flex min-h-11 items-center rounded-full bg-brand-700 px-4 text-sm font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800"
+              className="hidden min-h-11 items-center rounded-full bg-brand-700 px-4 text-sm font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-brand-800 min-[480px]:flex"
             >
               {/* Short label at every width: the full "Try the SSP
                   calculator" pill made the xl header row overflow
                   (logo + 8 nav pills + CTA > container). The hero
-                  button keeps the full wording. */}
+                  button keeps the full wording. Below 480px the pill
+                  yields entirely: with the Phase 3 search button the
+                  header cannot hold a one-line site name plus four
+                  44px controls on a 360–390px phone (BaseTemplate
+                  header note). The hero button and the mobile menu
+                  keep the SSP route one tap away there. */}
                 <span>Try SSP</span>
               </Link>
             </>

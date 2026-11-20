@@ -22,6 +22,12 @@ import { AppConfig } from "@/utils/AppConfig";
  * publishes — and adds every /blog/<slug> entry with a title read
  * from the slug. No search endpoint, no per-keystroke server work.
  * If the sitemap fetch fails, tool search simply carries on alone.
+ *
+ * The placeholder is deliberately short ("Search calculators…"):
+ * the original long one ("Search calculators, guides and articles…")
+ * was clipped mid-word in the ~296px of text width a 360px phone
+ * leaves the input (owner-reported 2026-11-20). The button's
+ * aria-label keeps the full description for assistive tech.
  */
 export default function SiteSearch() {
   const pathname = usePathname() ?? "";
@@ -140,7 +146,7 @@ export default function SiteSearch() {
               id="site-search-input"
               type="search"
               autoComplete="off"
-              placeholder="Search calculators, guides and articles…"
+              placeholder="Search calculators…"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               onKeyDown={(event) => {
@@ -149,7 +155,7 @@ export default function SiteSearch() {
                   router.push(results[0].href);
                 }
               }}
-              className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700"
+              className="w-full min-w-0 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700"
             />
             {query.trim().length >= 2 && (
               <div className="mt-2 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
@@ -167,7 +173,7 @@ export default function SiteSearch() {
                           onClick={() => setOpen(false)}
                           className="flex items-baseline justify-between gap-3 px-4 py-2.5 transition hover:bg-brand-50 dark:hover:bg-brand-900/30"
                         >
-                          <span className="text-sm font-medium text-slate-900 dark:text-slate-50">
+                          <span className="min-w-0 truncate text-sm font-medium text-slate-900 dark:text-slate-50">
                             {entry.title}
                           </span>
                           <span className="shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-600 dark:text-slate-300">
