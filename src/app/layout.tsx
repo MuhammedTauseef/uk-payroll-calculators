@@ -6,6 +6,8 @@ import "@/styles/global.css";
 import { BaseTemplate } from "@/templates/BaseTemplate";
 import SiteNav from "@/components/SiteNav";
 import MobileNav from "@/components/MobileNav";
+import SiteSearch from "@/components/SiteSearch";
+import ToolsSidebar from "@/components/ToolsSidebar";
 import ThemeToggle from "@/components/ThemeToggle";
 import FooterNote from "@/components/FooterNote";
 import PageSchema from "@/components/PageSchema";
@@ -87,8 +89,10 @@ export default function RootLayout({
         <BaseTemplate
           leftNav={<SiteNav />}
           mobileNav={<MobileNav />}
+          sidebar={<ToolsSidebar />}
           rightNav={
             <>
+              <SiteSearch />
               <ThemeToggle />
               <Link
                 href="/ssp-calculator"

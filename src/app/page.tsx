@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeroCarousel } from "@/components/HeroCarousel";
+import SalaryHeroBox from "@/components/SalaryHeroBox";
 import ToolsDirectory, { type DirectoryTool } from "@/components/ToolsDirectory";
 import { SSP_GUIDES } from "@/components/GuideSections";
 import { pageMetadata } from "@/utils/metadata";
 import { AppConfig } from "@/utils/AppConfig";
+import { CATEGORY_BY_HREF } from "@/lib/tools-index";
 import { formatDateGB } from "@/lib/blog/format";
 import { listPublishedBlogPosts } from "@/lib/blog/queries";
 
@@ -644,37 +646,7 @@ const CONVERTERS = [
 // component filters it entirely in the browser — the list is
 // rendered into the static page, no search endpoint exists).
 // Categories follow the groups the tools naturally fall into.
-const CATEGORY_BY_HREF: Record<string, string> = {
-  "/ssp-calculator": "Leave & Family",
-  "/notice-period-calculator": "Employers & Contractors",
-  "/pro-rata-salary-calculator": "Pay & Tax",
-  "/employer-national-insurance-calculator": "Employers & Contractors",
-  "/employer-cost-calculator": "Employers & Contractors",
-  "/nhs-maternity-pay-calculator": "Leave & Family",
-  "/nhs-pay-calculator": "Pay & Tax",
-  "/paternity-pay-calculator": "Leave & Family",
-  "/maternity-pay-calculator": "Leave & Family",
-  "/redundancy-pay-calculator": "Leave & Family",
-  "/holiday-pay-calculator": "Leave & Family",
-  "/40k-after-tax-uk": "Pay & Tax",
-  "/payslip-calculator": "Pay & Tax",
-  "/payslip-generator": "Pay & Tax",
-  "/salary-sacrifice-calculator": "Pay & Tax",
-  "/student-loan-repayment-calculator": "Pay & Tax",
-  "/umbrella-company-calculator": "Employers & Contractors",
-  "/capital-gains-tax-calculator": "Pay & Tax",
-  "/hmrc-tax-code-checker": "Pay & Tax",
-  "/annual-leave-calculator": "Leave & Family",
-  "/pro-rata-holiday-calculator": "Leave & Family",
-  "/term-time-pay-calculator": "Leave & Family",
-  "/overtime-calculator": "Pay & Tax",
-  "/hourly-rate-converter": "Pay & Tax",
-  "/ir35-calculator": "Employers & Contractors",
-  "/vat-calculator": "Pay & Tax",
-  "/annuity-calculator": "Pay & Tax",
-  "/childcare-calculator": "Leave & Family",
-  "/pension-drawdown-calculator": "Pay & Tax",
-};
+
 
 const DIRECTORY_TOOLS: DirectoryTool[] = [
   ...CALCULATORS.map((c) => ({
@@ -784,7 +756,14 @@ export default async function HomePage() {
           to the copy it holds. No rounded card, no side
           margins: the carousel photos run edge to edge, with the
           copy centred over them in its own readable column. */}
-      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(78svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16">
+      {/* Breakout maths with the Phase 3 sidebar (2026-11-20): from
+          xl the content column starts 16rem in (the sidebar) and the
+          hero should span exactly that column — width 100vw-16rem,
+          left edge at the column's left edge. While <main> is
+          narrower than its max-w-6xl (xl to 1408px) the margin is
+          just main's own px-4 (-1rem); past 1408px <main> is centred
+          with slack, and calc(43rem-50vw) lands the same left edge. */}
+      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(78svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16 xl:ml-[-1rem] xl:w-[calc(100vw-16rem)] min-[1408px]:ml-[calc(43rem-50vw)]">
         {/* Background photo carousel: full-screen UK photos
             crossfade behind the hero copy (see HeroCarousel). */}
         <HeroCarousel />
@@ -816,6 +795,7 @@ export default async function HomePage() {
             Browse all calculators
           </Link>
         </div>
+        <SalaryHeroBox />
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 pt-4 text-sm font-medium text-slate-600 dark:text-slate-300">
           {TRUST_POINTS.map((point) => (
             <li key={point} className="flex items-center gap-1.5">

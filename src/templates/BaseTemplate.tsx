@@ -14,6 +14,7 @@ export const BaseTemplate = (props: {
   leftNav: React.ReactNode;
   rightNav?: React.ReactNode;
   mobileNav?: React.ReactNode;
+  sidebar?: React.ReactNode;
   footerNote: React.ReactNode;
   children: React.ReactNode;
 }) => {
@@ -54,6 +55,13 @@ export const BaseTemplate = (props: {
         </div>
       </header>
 
+      {/* Content row (UX Phase 3, 2026-11-20): the tools sidebar
+          (xl and up; it renders nothing below xl or on /admin) sits
+          beside a column holding <main> and the footer, so both
+          shift together and the footer keeps the full column width. */}
+      <div className="flex w-full flex-1 items-start">
+        {props.sidebar}
+        <div className="flex min-w-0 flex-1 flex-col">
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:py-12">
         {props.children}
       </main>
@@ -147,6 +155,8 @@ export const BaseTemplate = (props: {
           </div>
         </div>
       </footer>
+        </div>
+      </div>
     </div>
   );
 };
