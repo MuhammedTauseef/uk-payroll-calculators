@@ -367,6 +367,22 @@ export default function ProRataHolidayCalculatorPage() {
             </span>
           </Link>
           <Link
+            href="/holiday-pay-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Holiday Pay Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              What the entitlement is worth in pounds: a week&apos;s
+              pay for each week of leave, the 12.07% accrual priced,
+              rolled-up pay, and the amount owed when a job ends.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+          <Link
             href="/pro-rata-salary-calculator"
             className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >

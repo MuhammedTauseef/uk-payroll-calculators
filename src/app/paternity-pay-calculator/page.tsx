@@ -258,6 +258,22 @@ export default function PaternityPayCalculatorPage() {
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
+            href="/maternity-pay-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Maternity Pay Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              The other half of family leave: Statutory Maternity Pay
+              from salary and due date — 6 weeks at 90% of earnings,
+              then 33 weeks at £194.32 — with eligibility and key dates.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+          <Link
             href="/nhs-maternity-pay-calculator"
             className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
           >

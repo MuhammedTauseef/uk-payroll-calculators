@@ -224,6 +224,46 @@ export default function NoticePeriodCalculatorPage() {
         </p>
       </section>
 
+      <section className="space-y-4 print:hidden">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Related calculators
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/redundancy-pay-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Redundancy Pay Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              When the notice is for redundancy: statutory redundancy
+              pay worked out year by year with the £751 cap, plus the
+              notice pay itself and the £30,000 tax-free check.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+          <Link
+            href="/holiday-pay-calculator"
+            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
+          >
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+              Holiday Pay Calculator
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              The holiday built up but not taken by the last day found
+              here is paid in final pay — this calculator prices it by
+              the statutory (A × B) − C formula.
+            </p>
+            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+              Open the calculator →
+            </span>
+          </Link>
+        </div>
+      </section>
+
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Frequently asked questions

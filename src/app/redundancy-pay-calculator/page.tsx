@@ -260,7 +260,11 @@ export default function RedundancyPayCalculatorPage() {
         <p className={bodyClass}>
           If your hours and pay are fixed, a week&apos;s pay is simply
           your contractual weekly amount — annual salary divided by 52
-          for salaried staff, a conversion our{" "}
+          for salaried staff (or the part-time equivalent from our{" "}
+          <Link href="/pro-rata-salary-calculator" className={linkClass}>
+            pro-rata salary calculator
+          </Link>
+          ), a conversion our{" "}
           <Link href="/hourly-rate-converter" className={linkClass}>
             hourly rate converter
           </Link>{" "}

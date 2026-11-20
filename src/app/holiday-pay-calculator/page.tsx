@@ -272,7 +272,11 @@ export default function HolidayPayCalculatorPage() {
           part is under 30 minutes, up if it is 30 minutes or more —
           and the total that can build up in a year is capped at 28
           days&apos; worth. When the leave is taken, it is paid at the
-          worker&apos;s average hourly rate over the last 52 paid weeks,
+          worker&apos;s{" "}
+          <Link href="/hourly-rate-converter" className={linkClass}>
+            average hourly rate
+          </Link>{" "}
+          over the last 52 paid weeks,
           not necessarily the rate for the job that earned it.
         </p>
         <p className={bodyClass}>
