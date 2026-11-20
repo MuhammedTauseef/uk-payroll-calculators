@@ -1,9 +1,10 @@
 "use client";
 
 import ResultActions from "@/components/ResultActions";
+import ResultDonut, { DONUT_COLORS } from "@/components/ResultDonut";
 import StickyResultBar from "@/components/StickyResultBar";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   calculateHolidayPay,
   type HolidayPayMode,
@@ -35,7 +36,6 @@ export default function HolidayPayCalculator() {
   const [weeksIntoYear, setWeeksIntoYear] = useState("26");
   const [leaveTakenWeeks, setLeaveTakenWeeks] = useState("1");
 
-  const resultRef = useRef<HTMLDivElement>(null);
   const reset = () => {
     setMode("regular");
     setWeeklyPay("600");
@@ -299,10 +299,7 @@ export default function HolidayPayCalculator() {
         )}
       </div>
 
-      <div
-        ref={resultRef}
-        className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300"
-      >
+      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
@@ -501,9 +498,166 @@ export default function HolidayPayCalculator() {
           </table>
         </div>
 
+        {mode === "regular" && (
+          <ResultDonut
+            segments={[
+              {
+                label: "Pay for the holiday you entered",
+                value: result.payForDays ?? 0,
+                displayValue: gbp.format(result.payForDays ?? 0),
+                color: DONUT_COLORS.deep,
+              },
+              {
+                label: "Rest of your year's entitlement",
+                value: (result.fullYearValue ?? 0) - (result.payForDays ?? 0),
+                displayValue: gbp.format(
+                  (result.fullYearValue ?? 0) - (result.payForDays ?? 0),
+                ),
+                color: DONUT_COLORS.light,
+              },
+            ]}
+            centerLabel="Full year"
+            centerValue={gbp.format(result.fullYearValue ?? 0)}
+          />
+        )}
+        {mode === "irregular" && (
+          <ResultDonut
+            segments={[
+              {
+                label: "Holiday built up (12.07% of hours)",
+                value: result.accruedPayValue ?? 0,
+                displayValue: gbp.format(result.accruedPayValue ?? 0),
+                color: DONUT_COLORS.deep,
+              },
+              {
+                label: "Pay for the hours worked",
+                value: parseAmount(hoursWorked) * parseAmount(hourlyRate),
+                displayValue: gbp.format(
+                  parseAmount(hoursWorked) * parseAmount(hourlyRate),
+                ),
+                color: DONUT_COLORS.pale,
+              },
+            ]}
+            centerLabel="Holiday value"
+            centerValue={gbp.format(result.accruedPayValue ?? 0)}
+          />
+        )}
+        {mode === "rolledup" && (
+          <ResultDonut
+            segments={[
+              {
+                label: "Rolled-up holiday pay (12.07%)",
+                value: result.rolledUpAmount ?? 0,
+                displayValue: gbp.format(result.rolledUpAmount ?? 0),
+                color: DONUT_COLORS.deep,
+              },
+              {
+                label: "Pay for the work done",
+                value: parseAmount(payForPeriod),
+                displayValue: gbp.format(parseAmount(payForPeriod)),
+                color: DONUT_COLORS.pale,
+              },
+            ]}
+            centerLabel="Pay packet"
+            centerValue={gbp.format(result.rolledUpTotal ?? 0)}
+          />
+        )}
+        {mode === "leaving" && (result.weeksOwed ?? 0) >= 0 && (
+          <ResultDonut
+            segments={[
+              {
+                label: "Still owed to you in final pay",
+                value: result.paymentInLieu ?? 0,
+                displayValue: gbp.format(result.paymentInLieu ?? 0),
+                color: DONUT_COLORS.deep,
+              },
+              {
+                label: "Holiday already taken",
+                value: parseAmount(leaveTakenWeeks) * parseAmount(weeklyPay),
+                displayValue: gbp.format(
+                  parseAmount(leaveTakenWeeks) * parseAmount(weeklyPay),
+                ),
+                color: DONUT_COLORS.light,
+              },
+            ]}
+            centerLabel="Built up"
+            centerValue={gbp.format(
+              (result.paymentInLieu ?? 0) +
+                parseAmount(leaveTakenWeeks) * parseAmount(weeklyPay),
+            )}
+          />
+        )}
+        {mode === "leaving" && (result.weeksOwed ?? 0) < 0 && (
+          <ResultDonut
+            segments={[
+              {
+                label: "Holiday you had built up",
+                value:
+                  5.6 *
+                  Math.min(1, Math.max(0, parseAmount(weeksIntoYear) / 52)) *
+                  parseAmount(weeklyPay),
+                displayValue: gbp.format(
+                  5.6 *
+                    Math.min(1, Math.max(0, parseAmount(weeksIntoYear) / 52)) *
+                    parseAmount(weeklyPay),
+                ),
+                color: DONUT_COLORS.light,
+              },
+              {
+                label: "Taken beyond what you built up",
+                value: Math.abs(result.paymentInLieu ?? 0),
+                displayValue: gbp.format(Math.abs(result.paymentInLieu ?? 0)),
+                color: DONUT_COLORS.accent,
+              },
+            ]}
+            centerLabel="Taken"
+            centerValue={gbp.format(
+              parseAmount(leaveTakenWeeks) * parseAmount(weeklyPay),
+            )}
+          />
+        )}
+
         <ResultActions
-          targetRef={resultRef}
-          fileName="payrollcalc-holiday-pay-result.png"
+          image={{
+            title: "Holiday Pay",
+            headline: headline !== null ? gbp.format(headline) : "—",
+            headlineNote:
+              mode === "regular"
+                ? `Pay for ${parseAmount(daysOfHoliday)} days of holiday`
+                : mode === "irregular"
+                  ? `Value of ${result.accruedHoursExact} hours built up`
+                  : mode === "rolledup"
+                    ? `On ${gbp.format(parseAmount(payForPeriod))} of pay for work done`
+                    : `${result.weeksOwed} weeks owed by the (A × B) − C formula`,
+            rows:
+              mode === "regular"
+                ? [
+                    { label: "Daily rate of holiday pay", value: gbp.format(result.dailyRate ?? 0) },
+                    { label: "Days of holiday priced", value: `${parseAmount(daysOfHoliday)} days` },
+                    { label: "Pay for those days", value: gbp.format(result.payForDays ?? 0) },
+                    { label: "Value of the full 5.6-week year", value: gbp.format(result.fullYearValue ?? 0) },
+                  ]
+                : mode === "irregular"
+                  ? [
+                      { label: "Hours worked", value: `${parseAmount(hoursWorked)} hours` },
+                      { label: "Holiday built up at 12.07%", value: `${result.accruedHoursExact} hours` },
+                      { label: "Whole hours you can book", value: `${result.accruedHoursBooked} hours` },
+                      { label: "Value when you take it", value: gbp.format(result.accruedPayValue ?? 0) },
+                    ]
+                  : mode === "rolledup"
+                    ? [
+                        { label: "Pay for the work done", value: gbp.format(parseAmount(payForPeriod)) },
+                        { label: "Rolled-up uplift (12.07%)", value: gbp.format(result.rolledUpAmount ?? 0) },
+                        { label: "Total pay for the period", value: gbp.format(result.rolledUpTotal ?? 0) },
+                      ]
+                    : [
+                        { label: "Built up (5.6 weeks × proportion worked)", value: `${(5.6 * Math.min(1, Math.max(0, parseAmount(weeksIntoYear) / 52))).toFixed(2)} weeks` },
+                        { label: "Holiday already taken", value: `${parseAmount(leaveTakenWeeks)} weeks` },
+                        { label: "Weeks owed", value: `${result.weeksOwed} weeks` },
+                        { label: "Payment in lieu at weekly pay", value: gbp.format(result.paymentInLieu ?? 0) },
+                      ],
+            fileName: "payrollcalc-holiday-pay-result.png",
+          }}
           onReset={reset}
         />
       </div>

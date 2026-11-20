@@ -1,9 +1,10 @@
 "use client";
 
 import ResultActions from "@/components/ResultActions";
+import ResultDonut, { DONUT_COLORS } from "@/components/ResultDonut";
 import StickyResultBar from "@/components/StickyResultBar";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { calculateMaternityPay } from "@/lib/maternity-pay";
 import { MATERNITY, SMP } from "@/lib/rates";
 
@@ -38,7 +39,6 @@ export default function MaternityPayCalculator() {
   const [jobStart, setJobStart] = useState("2024-01-08");
   const [leaveStart, setLeaveStart] = useState("2027-03-14");
 
-  const resultRef = useRef<HTMLDivElement>(null);
   const reset = () => {
     setSalary("36000");
     setDueDate("2027-04-08");
@@ -132,10 +132,7 @@ export default function MaternityPayCalculator() {
         </div>
       </div>
 
-      <div
-        ref={resultRef}
-        className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300"
-      >
+      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
@@ -188,6 +185,17 @@ export default function MaternityPayCalculator() {
             </tbody>
           </table>
         </div>
+
+        <ResultDonut
+          segments={pay.stages.map((s, i) => ({
+            label: s.label,
+            value: s.total,
+            displayValue: gbp.format(s.total),
+            color: i === 0 ? DONUT_COLORS.deep : DONUT_COLORS.light,
+          }))}
+          centerLabel="Total SMP"
+          centerValue={gbp.format(pay.totalPay)}
+        />
 
         <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
           <div>
@@ -274,8 +282,22 @@ export default function MaternityPayCalculator() {
         )}
 
         <ResultActions
-          targetRef={resultRef}
-          fileName="payrollcalc-maternity-pay-result.png"
+          image={{
+            title: "Statutory Maternity Pay",
+            headline: gbp.format(pay.totalPay),
+            headlineNote: `Total across ${pay.paidWeeks} paid weeks`,
+            rows: [
+              ...pay.stages.map((s) => ({
+                label: `${s.label} — ${s.basis}`,
+                value: gbp.format(s.total),
+              })),
+              {
+                label: "Average weekly earnings",
+                value: gbp.format(pay.averageWeeklyEarnings),
+              },
+            ],
+            fileName: "payrollcalc-maternity-pay-result.png",
+          }}
           onReset={reset}
         />
       </div>

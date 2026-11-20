@@ -1,9 +1,10 @@
 "use client";
 
 import ResultActions from "@/components/ResultActions";
+import ResultDonut, { DONUT_COLORS } from "@/components/ResultDonut";
 import StickyResultBar from "@/components/StickyResultBar";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { calculateRedundancy } from "@/lib/redundancy";
 import { REDUNDANCY } from "@/lib/rates";
 
@@ -28,7 +29,6 @@ export default function RedundancyCalculator() {
   const [weeklyPay, setWeeklyPay] = useState("600");
   const [otherPayments, setOtherPayments] = useState("0");
 
-  const resultRef = useRef<HTMLDivElement>(null);
   const reset = () => {
     setDob("1981-06-15");
     setStart("2011-11-15");
@@ -138,10 +138,7 @@ export default function RedundancyCalculator() {
         </div>
       </div>
 
-      <div
-        ref={resultRef}
-        className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300"
-      >
+      <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
           Your result
         </h2>
@@ -169,6 +166,37 @@ export default function RedundancyCalculator() {
                 : ""}
               .
             </p>
+
+            <ResultDonut
+              segments={[
+                {
+                  label: "Years aged 41 or over (1.5 weeks each)",
+                  value: result.years41plus * 1.5 * result.weeksPayUsed,
+                  displayValue: gbp.format(
+                    result.years41plus * 1.5 * result.weeksPayUsed,
+                  ),
+                  color: DONUT_COLORS.deep,
+                },
+                {
+                  label: "Years aged 22 to 40 (1 week each)",
+                  value: result.years22to40 * result.weeksPayUsed,
+                  displayValue: gbp.format(
+                    result.years22to40 * result.weeksPayUsed,
+                  ),
+                  color: DONUT_COLORS.mid,
+                },
+                {
+                  label: "Years aged under 22 (half a week each)",
+                  value: result.yearsUnder22 * 0.5 * result.weeksPayUsed,
+                  displayValue: gbp.format(
+                    result.yearsUnder22 * 0.5 * result.weeksPayUsed,
+                  ),
+                  color: DONUT_COLORS.light,
+                },
+              ]}
+              centerLabel="Redundancy pay"
+              centerValue={gbp.format(result.statutoryPay)}
+            />
 
             <dl className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
               <div>
@@ -281,8 +309,65 @@ export default function RedundancyCalculator() {
         )}
 
         <ResultActions
-          targetRef={resultRef}
-          fileName="payrollcalc-redundancy-pay-result.png"
+          image={{
+            title: "Statutory Redundancy Pay",
+            headline: gbp.format(result.statutoryPay),
+            headlineNote: result.qualifies
+              ? `${result.totalWeeks} weeks' pay for ${result.countedYears} counted years of service`
+              : "At least 2 complete years of service are needed",
+            rows: result.qualifies
+              ? [
+                  ...(result.years41plus > 0
+                    ? [
+                        {
+                          label: "Aged 41 or over — 1.5 weeks per year",
+                          value: gbp.format(
+                            result.years41plus * 1.5 * result.weeksPayUsed,
+                          ),
+                        },
+                      ]
+                    : []),
+                  ...(result.years22to40 > 0
+                    ? [
+                        {
+                          label: "Aged 22 to 40 — 1 week per year",
+                          value: gbp.format(
+                            result.years22to40 * result.weeksPayUsed,
+                          ),
+                        },
+                      ]
+                    : []),
+                  ...(result.yearsUnder22 > 0
+                    ? [
+                        {
+                          label: "Aged under 22 — half a week per year",
+                          value: gbp.format(
+                            result.yearsUnder22 * 0.5 * result.weeksPayUsed,
+                          ),
+                        },
+                      ]
+                    : []),
+                  {
+                    label: "A week's pay used (cap £751)",
+                    value: gbp.format(result.weeksPayUsed),
+                  },
+                  {
+                    label: `Statutory notice pay (${result.noticeWeeks} weeks)`,
+                    value: gbp.format(result.noticePay),
+                  },
+                  {
+                    label: "Of the £30,000 tax-free limit used",
+                    value: gbp.format(result.taxFreeUsed),
+                  },
+                ]
+              : [
+                  {
+                    label: "Of the £30,000 tax-free limit used",
+                    value: gbp.format(result.taxFreeUsed),
+                  },
+                ],
+            fileName: "payrollcalc-redundancy-pay-result.png",
+          }}
           onReset={reset}
         />
       </div>
