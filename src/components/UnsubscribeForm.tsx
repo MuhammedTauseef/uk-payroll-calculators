@@ -4,8 +4,8 @@ import { useState } from "react";
 
 /**
  * The form on /unsubscribe (UX Phase 2, 2026-11-20): the visitor
- * types the address they subscribed with and it is deleted from the
- * subscribers table by /api/unsubscribe, server-side. An address
+ * types the address they subscribed with and it is marked
+ * unsubscribed in the subscribers table by /api/unsubscribe, server-side. An address
  * that was never on the list gets a gentle answer, not an error.
  */
 export default function UnsubscribeForm() {

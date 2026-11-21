@@ -10,6 +10,14 @@ import { getServiceClient } from "@/lib/supabase/service";
 // a fallback for a deployment where an insert policy exists. A
 // duplicate email is a friendly success ("already"), never an error.
 //
+// Signup is single opt-in (email nizam, 2026-11-21): the address is
+// Confirmed the moment it is entered — no confirmation email is sent.
+// An address that previously unsubscribed is reactivated in place
+// (unsubscribed_at cleared) and also answers "ok", so the visitor is
+// simply back on the list. Until the 2026-11-21 migration adds the
+// unsubscribed_at column, the lookup below fails and the endpoint
+// falls through to the plain insert, exactly as before.
+//
 // NOTE for future email sends: every email sent to this list MUST
 // carry an unsubscribe link to /unsubscribe (AppConfig.siteUrl +
 // "/unsubscribe") — that page posts to /api/unsubscribe.
@@ -39,6 +47,26 @@ export async function POST(request: Request) {
 
   const supabase = getServiceClient() ?? createPublicClient();
   if (!supabase) {
+    return NextResponse.json({ status: "unavailable" }, { status: 503 });
+  }
+
+  // Already on the list? Active → friendly "already"; unsubscribed →
+  // clear the mark and welcome them back with "ok".
+  const { data: existing, error: lookupError } = await supabase
+    .from("subscribers")
+    .select("id,unsubscribed_at")
+    .eq("email", email)
+    .maybeSingle();
+  if (!lookupError && existing) {
+    const row = existing as unknown as { unsubscribed_at: string | null };
+    if (row.unsubscribed_at === null) {
+      return NextResponse.json({ status: "already" });
+    }
+    const { error: reactivateError } = await supabase
+      .from("subscribers")
+      .update({ unsubscribed_at: null })
+      .eq("email", email);
+    if (!reactivateError) return NextResponse.json({ status: "ok" });
     return NextResponse.json({ status: "unavailable" }, { status: 503 });
   }
 

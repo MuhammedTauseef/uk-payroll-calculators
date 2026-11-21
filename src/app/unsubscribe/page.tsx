@@ -10,7 +10,9 @@ export const metadata = pageMetadata(
 
 // /unsubscribe (UX Phase 2, 2026-11-20): the page every future
 // update email will link to. The form posts to /api/unsubscribe,
-// which deletes the address from the subscribers table server-side.
+// which marks the address unsubscribed in the subscribers table
+// server-side (email nizam, 2026-11-21: a soft mark, not a delete,
+// so the admin panel shows who left and can reactivate them).
 export default function UnsubscribePage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">

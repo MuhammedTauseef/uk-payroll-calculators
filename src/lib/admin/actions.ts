@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireAdminContext } from "@/lib/admin/guard";
 import type { AdminActionState } from "@/lib/admin/state";
+import { getServiceClient } from "@/lib/supabase/service";
 import {
   PUBLISH_FAQS_MESSAGE,
   readBlogFaqs,
@@ -197,4 +198,84 @@ export async function deleteBlogPostAction(
   revalidatePath(`/blog/${existing.slug as string}`);
   revalidatePath("/sitemap.xml");
   redirect("/admin/blog");
+}
+
+// ---------------------------------------------------------------------------
+// Email subscribers (email nizam, 2026-11-21): the admin panel has
+// FULL control of the list — unsubscribe (soft mark), reactivate and
+// delete — so no subscriber job ever needs the database console.
+// Every action re-checks requireAdminContext() first, then writes
+// through the service-role client: the subscribers table has RLS on
+// with no admin policy (write-only from the public site by design),
+// exactly like the reads in listAdminSubscribers. When the service
+// client is not configured the action refuses cleanly.
+// ---------------------------------------------------------------------------
+
+function subscriberWriteClient() {
+  return getServiceClient();
+}
+
+/** Mark one subscriber as unsubscribed (the row stays, status shows
+ *  "Unsubscribed" in the panel). */
+export async function unsubscribeSubscriberAction(
+  subscriberId: string,
+  _previous: AdminActionState,
+  _formData: FormData,
+): Promise<AdminActionState> {
+  const ctx = await requireAdminContext();
+  if (!ctx) return refused();
+  if (!UUID_PATTERN.test(subscriberId)) return failed();
+  const client = await subscriberWriteClient();
+  if (!client) return failed();
+  const { error } = await client
+    .from("subscribers")
+    .update({ unsubscribed_at: new Date().toISOString() })
+    .eq("id", subscriberId);
+  if (error) return failed();
+  revalidatePath("/admin/subscribers");
+  return { status: "success", message: "Unsubscribed — the address stays on the list as Unsubscribed." };
+}
+
+/** Bring one unsubscribed address back onto the list. */
+export async function reactivateSubscriberAction(
+  subscriberId: string,
+  _previous: AdminActionState,
+  _formData: FormData,
+): Promise<AdminActionState> {
+  const ctx = await requireAdminContext();
+  if (!ctx) return refused();
+  if (!UUID_PATTERN.test(subscriberId)) return failed();
+  const client = await subscriberWriteClient();
+  if (!client) return failed();
+  const { error } = await client
+    .from("subscribers")
+    .update({ unsubscribed_at: null })
+    .eq("id", subscriberId);
+  if (error) return failed();
+  revalidatePath("/admin/subscribers");
+  return { status: "success", message: "Reactivated — the address is back on the list as Confirmed." };
+}
+
+/** Remove one subscriber row for good. Two-step in the UI and the
+ *  explicit confirm field is re-checked here, like post deletes. */
+export async function deleteSubscriberAction(
+  subscriberId: string,
+  _previous: AdminActionState,
+  formData: FormData,
+): Promise<AdminActionState> {
+  const ctx = await requireAdminContext();
+  if (!ctx) return refused();
+  if (!UUID_PATTERN.test(subscriberId)) return failed();
+  if (String(formData.get("confirm") ?? "") !== "delete") {
+    return {
+      status: "error",
+      message: "That subscriber could not be deleted. Nothing was changed — please try again.",
+    };
+  }
+  const client = await subscriberWriteClient();
+  if (!client) return failed();
+  const { error } = await client.from("subscribers").delete().eq("id", subscriberId);
+  if (error) return failed();
+  revalidatePath("/admin/subscribers");
+  return { status: "success", message: "Deleted — the address has been removed from the list." };
 }

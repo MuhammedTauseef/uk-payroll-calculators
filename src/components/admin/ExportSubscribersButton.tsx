@@ -17,12 +17,14 @@ export function ExportSubscribersButton({
     const escape = (value: string) =>
       /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
     const lines = [
-      "email,source,subscribed_at",
+      "email,status,source,subscribed_at,unsubscribed_at",
       ...rows.map((row) =>
         [
           escape(row.email),
+          escape(row.unsubscribed_at ? "Unsubscribed" : "Confirmed"),
           escape(row.source ?? ""),
           escape(row.created_at),
+          escape(row.unsubscribed_at ?? ""),
         ].join(","),
       ),
     ];

@@ -51,9 +51,15 @@ export type AdminSubscriberRow = {
   email: string;
   source: string | null;
   created_at: string;
+  // Soft-unsubscribe mark (email nizam, 2026-11-21): NULL = on the
+  // list ("Confirmed" — signup is single opt-in), a timestamp = the
+  // address left the list ("Unsubscribed") but the row is kept so
+  // the admin can see it and reactivate it.
+  unsubscribed_at: string | null;
 };
 
-const ADMIN_SUBSCRIBER_COLUMNS = "id,email,source,created_at";
+const ADMIN_SUBSCRIBER_COLUMNS = "id,email,source,created_at,unsubscribed_at";
+const ADMIN_SUBSCRIBER_COLUMNS_LEGACY = "id,email,source,created_at";
 
 /**
  * Every email subscriber, newest first (UX Phase 2, 2026-11-20).
@@ -63,6 +69,11 @@ const ADMIN_SUBSCRIBER_COLUMNS = "id,email,source,created_at";
  * table has RLS on with no admin policy (it is write-only from the
  * public site by design), so the role gate on the page is what
  * protects this list, exactly as the panel protects everything else.
+ *
+ * Until the 2026-11-21 migration adds unsubscribed_at, the first
+ * select fails; the read then retries WITHOUT the column and reports
+ * every row as Confirmed, so the panel never crashes in the window
+ * between this code deploying and the migration being applied.
  */
 export async function listAdminSubscribers(
   supabase: SupabaseClient,
@@ -72,6 +83,15 @@ export async function listAdminSubscribers(
     .select(ADMIN_SUBSCRIBER_COLUMNS)
     .order("created_at", { ascending: false })
     .limit(1000);
-  if (error) throw new Error("ADMIN_DATA_LOAD_FAILED");
-  return (data ?? []) as unknown as AdminSubscriberRow[];
+  if (!error) return (data ?? []) as unknown as AdminSubscriberRow[];
+
+  const legacy = await supabase
+    .from("subscribers")
+    .select(ADMIN_SUBSCRIBER_COLUMNS_LEGACY)
+    .order("created_at", { ascending: false })
+    .limit(1000);
+  if (legacy.error) throw new Error("ADMIN_DATA_LOAD_FAILED");
+  return ((legacy.data ?? []) as unknown as Omit<AdminSubscriberRow, "unsubscribed_at">[]).map(
+    (row) => ({ ...row, unsubscribed_at: null }),
+  );
 }
