@@ -163,6 +163,12 @@ export const AppConfig = {
       flag: "🇬🇧",
     },
     {
+      href: "/side-hustle-tax-calculator-uk",
+      label: "Side Hustle Tax Calculator",
+      icon: "💷",
+      flag: "🇬🇧",
+    },
+    {
       href: "/stone-to-kg-converter",
       label: "Stone to Kg Converter",
       icon: "⚖️",

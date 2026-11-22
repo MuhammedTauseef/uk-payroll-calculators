@@ -55,6 +55,7 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/capital-gains-tax-calculator": "Tax & HMRC",
   "/hmrc-tax-code-checker": "Tax & HMRC",
   "/marriage-allowance-calculator": "Tax & HMRC",
+  "/side-hustle-tax-calculator-uk": "Tax & HMRC",
   "/day-rate-calculator": "Pay & Salary",
   "/free-invoice-generator-uk": "Business Tools",
   "/annual-leave-calculator": "Pay & Salary",
@@ -253,6 +254,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/vat-calculator",
     "/day-rate-calculator",
     "/employer-cost-calculator",
+    "/side-hustle-tax-calculator-uk",
   ],
   "/vat-calculator": [
     "/capital-gains-tax-calculator",
@@ -334,18 +336,26 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/hourly-rate-converter",
     "/employer-cost-calculator",
     "/free-invoice-generator-uk",
+    "/side-hustle-tax-calculator-uk",
   ],
   "/free-invoice-generator-uk": [
     "/payslip-generator",
     "/vat-calculator",
     "/day-rate-calculator",
     "/umbrella-company-calculator",
+    "/side-hustle-tax-calculator-uk",
   ],
   "/marriage-allowance-calculator": [
     "/hmrc-tax-code-checker",
     "/payslip-calculator",
     "/40k-after-tax-uk",
     "/salary-sacrifice-calculator",
+  ],
+  "/side-hustle-tax-calculator-uk": [
+    "/day-rate-calculator",
+    "/free-invoice-generator-uk",
+    "/ir35-calculator",
+    "/hmrc-tax-code-checker",
   ],
 };
 
@@ -380,6 +390,7 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/day-rate-calculator": "day rate contractor daily rate salary equivalent freelance interim",
   "/free-invoice-generator-uk": "invoice generator free uk invoice maker vat cis sole trader freelancer pdf bill",
   "/marriage-allowance-calculator": "marriage allowance married couples tax allowance transfer 1260 save 252",
+  "/side-hustle-tax-calculator-uk": "side hustle tax calculator second income trading allowance self employed extra income etsy vinted freelance self assessment",
   "/ir35-calculator": "ir35 off payroll contractor status",
   "/vat-calculator": "vat value added tax add remove 20%",
   "/annuity-calculator": "annuity pension income retirement",

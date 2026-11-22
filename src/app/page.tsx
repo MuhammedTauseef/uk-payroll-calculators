@@ -236,6 +236,16 @@ function InvoiceIcon() {
   );
 }
 
+function SideHustleIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5" />
+      <path d="M3.5 7.5h17V19a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19z" />
+      <path d="M3.5 12.5h17" />
+    </svg>
+  );
+}
+
 function PayRiseIcon() {
   return (
     <svg {...iconProps}>
@@ -553,6 +563,15 @@ const CALCULATORS = [
       "Check whether transferring £1,260 of Personal Allowance to your spouse or civil partner saves you tax — the real couple figure, both sides of the transfer worked.",
     audience: "Includes backdating to 2022/23, worth up to £1,008 on top of this year's £252.",
     linkText: "Open the marriage allowance calculator →",
+  },
+  {
+    href: "/side-hustle-tax-calculator-uk",
+    icon: <SideHustleIcon />,
+    title: "Side Hustle Tax Calculator UK",
+    description:
+      "Work out the extra tax on a second income for 2025/26 — your salary plus the side profit through the real bands, with the £1,000 trading allowance or your expenses, whichever saves more, and Class 4 NI where it applies.",
+    audience: "Shows the amount to set aside and what you keep. For Etsy, Vinted, freelancing and evening work alongside a job.",
+    linkText: "Open the side hustle tax calculator →",
   },
   {
     href: "/annual-leave-calculator",
