@@ -741,6 +741,35 @@ export default function TeachingPayCalculatorPage() {
           </Link>
         </div>
       </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
+          For schools and academy trusts: running this payroll
+        </h2>
+        <p className={bodyClass}>
+          If you are the person who has to produce these figures for
+          a whole staff — five scales, four regions, part-timers,
+          TLRs and six pension tiers — doing it in a spreadsheet is
+          where errors creep in.{" "}
+          <a
+            href="https://go.zoho.com/tjEU"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            Zoho Payroll
+          </a>{" "}
+          runs UK payroll — pay, payslips, pension contributions and
+          HMRC filings — in one place, and handles the tiered
+          pension maths this page does by hand.
+        </p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Disclosure: that is an affiliate link — if a school signs
+          up through it we may earn a commission. It costs the
+          school nothing extra, and it never changes the figures
+          this calculator gives you.
+        </p>
+      </section>
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />
