@@ -365,6 +365,15 @@ function AuIcon() {
   );
 }
 
+function SwissIcon() {
+  return (
+    <svg {...iconProps}>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <path d="M12 8v8M8 12h8" />
+    </svg>
+  );
+}
+
 function CmsIcon() {
   return (
     <svg {...iconProps}>
@@ -851,6 +860,16 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     category: "Australia",
     icon: <AuIcon />,
   },
+  {
+    href: "/salary-calculator-switzerland",
+    title: "Salary Calculator Switzerland",
+    description:
+      "Net pay on a Swiss salary under the 2026 rules for all 26 cantons: AHV/IV/EO, ALV, pension and federal, cantonal and municipal tax, line by line.",
+    audience: "For employees in Switzerland — and anyone weighing a Swiss job offer.",
+    linkText: "Open the Switzerland salary calculator →",
+    category: "Switzerland",
+    icon: <SwissIcon />,
+  },
 ];
 
 const TRUST_POINTS = [
@@ -963,8 +982,9 @@ export default async function HomePage() {
         </h2>
         <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           Every calculator and converter on the hub in one list —
-          search by name or keyword, or filter by category. The US and
-          Australia tools are in the same list, under their own chip.
+          search by name or keyword, or filter by category. The US,
+          Australia and Switzerland tools are in the same list, under
+          their own country sections.
         </p>
         <div className="mt-6">
           <ToolsDirectory tools={DIRECTORY_TOOLS} />

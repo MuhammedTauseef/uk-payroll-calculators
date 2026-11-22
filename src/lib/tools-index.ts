@@ -16,8 +16,8 @@ import { AppConfig } from "@/utils/AppConfig";
  * Categories follow the grouped layout the owner settled on
  * 22 Nov 2026 (the Tiny Calculators directory pattern): Pay &
  * Salary, Tax & HMRC, Family & Baby, Money & Finance, Business
- * Tools and Converters, then the US and Australia tools under
- * their own names.
+ * Tools and Converters, then the US, Australia and Switzerland
+ * tools under their own country names.
  */
 export const TOOL_CATEGORY_ORDER = [
   "Pay & Salary",
@@ -28,7 +28,20 @@ export const TOOL_CATEGORY_ORDER = [
   "Converters",
   "US",
   "Australia",
+  "Switzerland",
 ] as const;
+
+/**
+ * Flags shown before the country-category headings in the
+ * homepage directory (the US, Australia and Switzerland tools
+ * sit under their country names; the UK groups sit under the
+ * homepage's "The calculators 🇬🇧" heading).
+ */
+export const CATEGORY_FLAGS: Record<string, string> = {
+  US: "🇺🇸",
+  Australia: "🇦🇺",
+  Switzerland: "🇨🇭",
+};
 
 /** Shared with the homepage directory (its original home). */
 export const CATEGORY_BY_HREF: Record<string, string> = {
@@ -319,16 +332,25 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/us/ohio-paycheck-calculator",
     "/40k-after-tax-uk",
     "/au/tax-rate-calculator",
+    "/salary-calculator-switzerland",
   ],
   "/us/ohio-paycheck-calculator": [
     "/us/texas-paycheck-calculator",
     "/40k-after-tax-uk",
     "/au/tax-rate-calculator",
+    "/salary-calculator-switzerland",
   ],
   "/au/tax-rate-calculator": [
     "/40k-after-tax-uk",
     "/us/texas-paycheck-calculator",
     "/us/ohio-paycheck-calculator",
+    "/salary-calculator-switzerland",
+  ],
+  "/salary-calculator-switzerland": [
+    "/us/texas-paycheck-calculator",
+    "/us/ohio-paycheck-calculator",
+    "/au/tax-rate-calculator",
+    "/40k-after-tax-uk",
   ],
   "/day-rate-calculator": [
     "/ir35-calculator",
@@ -405,6 +427,8 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/us/texas-paycheck-calculator": "texas paycheck take home salary us",
   "/us/ohio-paycheck-calculator": "ohio paycheck take home salary us",
   "/au/tax-rate-calculator": "australia tax rate ato take home",
+  "/salary-calculator-switzerland":
+    "switzerland salary net gross tax canton zurich zug",
 };
 
 export interface ToolIndexEntry {
@@ -418,6 +442,7 @@ export interface ToolIndexEntry {
 function categoryFor(href: string, flag: string): string {
   if (flag === "🇺🇸") return "US";
   if (flag === "🇦🇺") return "Australia";
+  if (flag === "🇨🇭") return "Switzerland";
   if (CATEGORY_BY_HREF[href]) return CATEGORY_BY_HREF[href];
   if (href.includes("converter")) return "Converters";
   return "Pay & Salary";

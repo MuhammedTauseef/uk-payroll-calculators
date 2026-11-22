@@ -217,6 +217,12 @@ export const AppConfig = {
       icon: "🦘",
       flag: "🇦🇺",
     },
+    {
+      href: "/salary-calculator-switzerland",
+      label: "Switzerland Salary",
+      icon: "🏔️",
+      flag: "🇨🇭",
+    },
     { href: "/blog", label: "Blog", icon: "📰", flag: "" },
   ],
   guides: [

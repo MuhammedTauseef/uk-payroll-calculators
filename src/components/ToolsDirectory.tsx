@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState, type ReactNode } from "react";
-import { TOOL_CATEGORY_ORDER } from "@/lib/tools-index";
+import { CATEGORY_FLAGS, TOOL_CATEGORY_ORDER } from "@/lib/tools-index";
 
 export interface DirectoryTool {
   href: string;
@@ -179,6 +179,9 @@ export default function ToolsDirectory({ tools }: { tools: DirectoryTool[] }) {
         groups.map((group, gi) => (
           <section key={group.category} className={gi === 0 ? "mt-6" : "mt-10"}>
             <h3 className="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-50">
+              {CATEGORY_FLAGS[group.category]
+                ? `${CATEGORY_FLAGS[group.category]} `
+                : ""}
               {group.category}
               <span className="ml-2 text-sm font-medium text-slate-500 dark:text-slate-400">
                 {group.tools.length}{" "}
