@@ -21,6 +21,7 @@ import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import StatePaycheckCluster from "@/components/StatePaycheckCluster";
 import RelatedGuides from "@/components/RelatedGuides";
 
 export const metadata: Metadata = pageMetadata(
@@ -635,6 +636,7 @@ export default function OhioPaycheckCalculatorPage() {
         </div>
       </section>
 
+      <StatePaycheckCluster state="OH" />
       <RelatedCalculators href="/us/ohio-paycheck-calculator" />
       <RelatedGuides
         guides={[

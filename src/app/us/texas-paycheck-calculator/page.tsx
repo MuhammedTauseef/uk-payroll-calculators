@@ -17,6 +17,7 @@ import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import StatePaycheckCluster from "@/components/StatePaycheckCluster";
 import RelatedGuides from "@/components/RelatedGuides";
 
 export const metadata: Metadata = pageMetadata(
@@ -514,6 +515,7 @@ export default function TexasPaycheckCalculatorPage() {
         </div>
       </section>
 
+      <StatePaycheckCluster state="TX" />
       <RelatedCalculators href="/us/texas-paycheck-calculator" />
       <RelatedGuides
         guides={[

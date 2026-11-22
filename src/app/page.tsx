@@ -355,6 +355,77 @@ function OhioIcon() {
   );
 }
 
+function ColoradoIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3 19l6-11 4 6 3-4 5 9z" />
+      <path d="M3 21h18" />
+    </svg>
+  );
+}
+
+function ArizonaIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="13" r="4" />
+      <path d="M12 4v2M5.5 7l1.5 1.5M18.5 7L17 8.5M3 20h18M6 16.5h12" />
+    </svg>
+  );
+}
+
+function FloridaIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="8" cy="8" r="2.6" />
+      <path d="M3 16c2.5-2 5-2 7.5 0s5 2 7.5 0M3 20c2.5-2 5-2 7.5 0s5 2 7.5 0" />
+    </svg>
+  );
+}
+
+function IllinoisIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M5 21V8h5v13M10 21V4h6v17M16 21V11h3v10M3 21h18" />
+      <path d="M12.5 8h.01M12.5 12h.01M7.5 12h.01M7.5 16h.01" />
+    </svg>
+  );
+}
+
+function NorthCarolinaIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3 11l18-7-7 18-2-8z" />
+      <path d="M12 14l9-10" />
+    </svg>
+  );
+}
+
+function PennsylvaniaIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M7 4h10l2 17H5z" />
+      <path d="M9.5 9h5" />
+    </svg>
+  );
+}
+
+function NewJerseyIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3 17h18M5 17v-6M19 17v-6M5 11c4-3.5 10-3.5 14 0M9 17v-4M15 17v-4" />
+    </svg>
+  );
+}
+
+function OregonIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 3l5 8h-3l4 7H6l4-7H7z" />
+      <path d="M12 18v3" />
+    </svg>
+  );
+}
+
 function AuIcon() {
   return (
     <svg {...iconProps}>
@@ -849,6 +920,86 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     linkText: "Open the Ohio paycheck calculator →",
     category: "US",
     icon: <OhioIcon />,
+  },
+  {
+    href: "/us/colorado-paycheck-calculator",
+    title: "Colorado Paycheck Calculator",
+    description:
+      "Net pay on a Colorado salary under the 2026 rules: federal tax and FICA, the flat 4.40% state tax on federal taxable income, and the 0.44% employee FAMLI premium.",
+    audience: "Plus the Denver head tax if you work in Denver.",
+    linkText: "Open the Colorado paycheck calculator →",
+    category: "US",
+    icon: <ColoradoIcon />,
+  },
+  {
+    href: "/us/arizona-paycheck-calculator",
+    title: "Arizona Paycheck Calculator",
+    description:
+      "Net pay on an Arizona salary under the 2026 rules: federal tax and FICA plus Arizona's flat 2.5% income tax — the lowest flat rate in the country — after the state standard deduction.",
+    audience: "No city or local income tax anywhere in Arizona.",
+    linkText: "Open the Arizona paycheck calculator →",
+    category: "US",
+    icon: <ArizonaIcon />,
+  },
+  {
+    href: "/us/florida-paycheck-calculator",
+    title: "Florida Paycheck Calculator",
+    description:
+      "Net pay on a Florida salary under the 2026 rules: federal income tax, Social Security and Medicare only — Florida has no state income tax, so the state line is exactly $0.",
+    audience: "See what the missing state tax is worth against a taxed state.",
+    linkText: "Open the Florida paycheck calculator →",
+    category: "US",
+    icon: <FloridaIcon />,
+  },
+  {
+    href: "/us/illinois-paycheck-calculator",
+    title: "Illinois Paycheck Calculator",
+    description:
+      "Net pay on an Illinois salary under the 2026 rules: federal tax and FICA plus the flat 4.95% state tax after the $2,925 personal exemption — and no Chicago city tax.",
+    audience: "Set your IL-W-4 exemption count for an exact figure.",
+    linkText: "Open the Illinois paycheck calculator →",
+    category: "US",
+    icon: <IllinoisIcon />,
+  },
+  {
+    href: "/us/north-carolina-paycheck-calculator",
+    title: "North Carolina Paycheck Calculator",
+    description:
+      "Net pay on a North Carolina salary under the 2026 rules: federal tax and FICA plus the flat 3.99% state tax after NC's own standard deduction and the child deduction.",
+    audience: "Parents: the per-child deduction is modelled, not skipped.",
+    linkText: "Open the North Carolina paycheck calculator →",
+    category: "US",
+    icon: <NorthCarolinaIcon />,
+  },
+  {
+    href: "/us/pennsylvania-paycheck-calculator",
+    title: "Pennsylvania Paycheck Calculator",
+    description:
+      "Net pay on a Pennsylvania salary under the 2026 rules: federal tax and FICA, the 3.07% state tax, your local earned income tax, and the 0.07% employee UC contribution.",
+    audience: "Philadelphia wage-tax presets included — resident and non-resident.",
+    linkText: "Open the Pennsylvania paycheck calculator →",
+    category: "US",
+    icon: <PennsylvaniaIcon />,
+  },
+  {
+    href: "/us/new-jersey-paycheck-calculator",
+    title: "New Jersey Paycheck Calculator",
+    description:
+      "Net pay on a New Jersey salary under the 2026 rules: federal tax and FICA, the graduated NJ income tax, and the UI, TDI and FLI worker contributions at the official 2026 rates and caps.",
+    audience: "All eight lines of a real NJ stub, including the capped ones.",
+    linkText: "Open the New Jersey paycheck calculator →",
+    category: "US",
+    icon: <NewJerseyIcon />,
+  },
+  {
+    href: "/us/oregon-paycheck-calculator",
+    title: "Oregon Paycheck Calculator",
+    description:
+      "Net pay on an Oregon salary under the 2026 rules: federal tax and FICA, Oregon income tax with the federal tax subtraction, the 0.1% statewide transit tax and 0.6% Paid Leave Oregon.",
+    audience: "The federal subtraction most calculators skip — worth about $678 a year at $75,000.",
+    linkText: "Open the Oregon paycheck calculator →",
+    category: "US",
+    icon: <OregonIcon />,
   },
   {
     href: "/au/tax-rate-calculator",

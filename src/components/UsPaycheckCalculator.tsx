@@ -35,6 +35,38 @@ const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300
 const STATE_NAMES: Record<UsStateCode, string> = {
   TX: "Texas",
   OH: "Ohio",
+  CO: "Colorado",
+  AZ: "Arizona",
+  FL: "Florida",
+  IL: "Illinois",
+  NC: "North Carolina",
+  PA: "Pennsylvania",
+  NJ: "New Jersey",
+  OR: "Oregon",
+};
+
+const DEFAULT_SALARIES: Record<UsStateCode, string> = {
+  TX: "100000",
+  OH: "65000",
+  CO: "75000",
+  AZ: "75000",
+  FL: "80000",
+  IL: "80000",
+  NC: "70000",
+  PA: "75000",
+  NJ: "85000",
+  OR: "75000",
+};
+
+/** The state income-tax result line for the states with a single flat or graduated state tax. */
+const STATE_TAX_LABELS: Partial<Record<UsStateCode, string>> = {
+  CO: "Colorado state income tax (4.4% flat)",
+  AZ: "Arizona state income tax (2.5% flat)",
+  IL: "Illinois state income tax (4.95% flat)",
+  NC: "North Carolina state income tax (3.99% flat)",
+  PA: "Pennsylvania state income tax (3.07% flat)",
+  NJ: "New Jersey state income tax",
+  OR: "Oregon state income tax",
 };
 
 export default function UsPaycheckCalculator({
@@ -45,11 +77,16 @@ export default function UsPaycheckCalculator({
   const stateName = STATE_NAMES[state];
   const pfx = state.toLowerCase();
   const isOhio = state === "OH";
+  const isColorado = state === "CO";
+  const isIllinois = state === "IL";
+  const isNorthCarolina = state === "NC";
+  const isPennsylvania = state === "PA";
+  /** The pages added in the 22 Nov 2026 batch carry the full W-4 field set. */
+  const isFullW4 = state !== "TX" && state !== "OH";
+  const noStateTax = state === "TX" || state === "FL";
 
   const [payType, setPayType] = useState<"salary" | "hourly">("salary");
-  const [annualSalary, setAnnualSalary] = useState(
-    isOhio ? "65000" : "100000",
-  );
+  const [annualSalary, setAnnualSalary] = useState(DEFAULT_SALARIES[state]);
   const [hourlyRate, setHourlyRate] = useState("25");
   const [hoursPerWeek, setHoursPerWeek] = useState("40");
   const [overtimeHours, setOvertimeHours] = useState("0");
@@ -62,6 +99,16 @@ export default function UsPaycheckCalculator({
   const [postTax, setPostTax] = useState("0");
   const [cityRate, setCityRate] = useState("0");
   const [schoolRate, setSchoolRate] = useState("0");
+  const [hsa, setHsa] = useState("0");
+  const [otherIncome, setOtherIncome] = useState("0");
+  const [step4b, setStep4b] = useState("0");
+  const [denverOpt, setDenverOpt] = useState(false);
+  const [ilExemptions, setIlExemptions] = useState("");
+  const [ncChildren, setNcChildren] = useState("0");
+  const [paLocal, setPaLocal] = useState<
+    "none" | "eit" | "resident" | "nonresident"
+  >("eit");
+  const [paEitRate, setPaEitRate] = useState("1");
 
   const result = useMemo(
     () =>
@@ -81,6 +128,20 @@ export default function UsPaycheckCalculator({
         postTaxDeductionsPerPeriod: parseAmount(postTax),
         cityRatePercent: parseAmount(cityRate),
         schoolRatePercent: parseAmount(schoolRate),
+        hsaPerPeriod: parseAmount(hsa),
+        otherIncomeAnnual: parseAmount(otherIncome),
+        step4bDeductionsAnnual: parseAmount(step4b),
+        worksInDenver: denverOpt,
+        ilExemptionCount:
+          ilExemptions.trim() === "" ? undefined : parseAmount(ilExemptions),
+        ncChildCount: parseAmount(ncChildren),
+        paEitRatePercent: paLocal === "eit" ? parseAmount(paEitRate) : 0,
+        paPhilly:
+          paLocal === "resident"
+            ? "resident"
+            : paLocal === "nonresident"
+              ? "nonresident"
+              : "none",
       }),
     [
       state,
@@ -98,6 +159,14 @@ export default function UsPaycheckCalculator({
       postTax,
       cityRate,
       schoolRate,
+      hsa,
+      otherIncome,
+      step4b,
+      denverOpt,
+      ilExemptions,
+      ncChildren,
+      paLocal,
+      paEitRate,
     ],
   );
 
@@ -128,6 +197,15 @@ export default function UsPaycheckCalculator({
             label: "Health insurance premium (pre-tax)",
             perPeriod: -result.healthPerPeriod,
             annual: -result.healthAnnual,
+          },
+        ]
+      : []),
+    ...(result.hsaAnnual > 0
+      ? [
+          {
+            label: "HSA contribution (pre-tax)",
+            perPeriod: -result.hsaPerPeriod,
+            annual: -result.hsaAnnual,
           },
         ]
       : []),
@@ -172,13 +250,28 @@ export default function UsPaycheckCalculator({
               ]
             : []),
         ]
-      : [
-          {
-            label: "Texas state income tax",
-            perPeriod: 0,
-            annual: 0,
-          },
-        ]),
+      : noStateTax
+        ? [
+            {
+              label: `${stateName} state income tax`,
+              perPeriod: 0,
+              annual: 0,
+            },
+          ]
+        : [
+            {
+              label: STATE_TAX_LABELS[state] ?? `${stateName} state income tax`,
+              perPeriod: -result.statePerPeriod,
+              annual: -result.stateAnnual,
+            },
+            ...result.extraLines
+              .filter((line) => line.annual > 0)
+              .map((line) => ({
+                label: line.label,
+                perPeriod: -line.perPeriod,
+                annual: -line.annual,
+              })),
+          ]),
     ...(result.extraWithholdingAnnual > 0
       ? [
           {
@@ -366,6 +459,12 @@ export default function UsPaycheckCalculator({
             A traditional 401(k) lowers the federal income tax — but
             Social Security and Medicare are still figured on the
             full gross pay.
+            {isPennsylvania
+              ? " Pennsylvania is the exception on the state side: PA taxes 401(k) contributions, so the PA lines below do not come down."
+              : ""}
+            {state === "NJ"
+              ? " New Jersey follows the federal treatment for a 401(k) — it comes out of the NJ base too."
+              : ""}
           </p>
         </div>
 
@@ -387,8 +486,91 @@ export default function UsPaycheckCalculator({
             Premiums paid through a cafeteria plan reduce both the
             income-tax wages and the Social Security / Medicare
             wages.
+            {state === "NJ"
+              ? " New Jersey taxes cafeteria-plan premiums, so the NJ lines do not come down — only the federal and FICA lines do."
+              : ""}
           </p>
         </div>
+
+        {isFullW4 && (
+          <>
+            <div>
+              <label htmlFor={`${pfx}-hsa`} className={labelClass}>
+                HSA contribution ($ per pay period, pre-tax)
+              </label>
+              <input
+                id={`${pfx}-hsa`}
+                type="number"
+                inputMode="decimal"
+                min="0"
+                step="5"
+                value={hsa}
+                onChange={(e) => setHsa(e.target.value)}
+                className={inputClass}
+              />
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                Health savings account contributions paid through a
+                cafeteria plan reduce the income-tax wages and the
+                Social Security / Medicare wages.
+                {state === "NJ"
+                  ? " New Jersey does not recognise HSAs, so the NJ lines do not come down."
+                  : ""}
+                {isPennsylvania
+                  ? " Pennsylvania excludes HSA contributions routed through the employer's cafeteria plan (DOR ruling PIT-06-005)."
+                  : ""}
+              </p>
+            </div>
+
+            <div>
+              <label htmlFor={`${pfx}-other-income`} className={labelClass}>
+                Other income — W-4 Step 4(a) ($ per year)
+              </label>
+              <input
+                id={`${pfx}-other-income`}
+                type="number"
+                inputMode="decimal"
+                min="0"
+                step="100"
+                value={otherIncome}
+                onChange={(e) => setOtherIncome(e.target.value)}
+                className={inputClass}
+              />
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                Income from a second job, a side business or
+                investments that you want this paycheck to cover. It
+                raises the federal income tax — not Social Security
+                or Medicare.
+                {isColorado
+                  ? " Colorado taxes the same federal taxable income, so its line rises too."
+                  : ""}
+              </p>
+            </div>
+
+            <div>
+              <label htmlFor={`${pfx}-step4b`} className={labelClass}>
+                Extra deductions — W-4 Step 4(b) ($ per year)
+              </label>
+              <input
+                id={`${pfx}-step4b`}
+                type="number"
+                inputMode="decimal"
+                min="0"
+                step="100"
+                value={step4b}
+                onChange={(e) => setStep4b(e.target.value)}
+                className={inputClass}
+              />
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                Deductions you expect on top of the standard
+                deduction for your filing status. They lower the
+                income the federal tax is figured on.
+                {isColorado
+                  ? " Colorado taxes the same federal taxable income, so its line falls too."
+                  : ""}
+              </p>
+            </div>
+          </>
+        )}
 
         <div>
           <label htmlFor={`${pfx}-extra`} className={labelClass}>
@@ -425,6 +607,134 @@ export default function UsPaycheckCalculator({
             taken after every tax.
           </p>
         </div>
+
+        {isColorado && (
+          <div>
+            <span className={labelClass}>Work location</span>
+            <label
+              htmlFor={`${pfx}-denver`}
+              className="mt-1 flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300"
+            >
+              <input
+                id={`${pfx}-denver`}
+                type="checkbox"
+                checked={denverOpt}
+                onChange={(e) => setDenverOpt(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-brand-700 focus:ring-brand-700"
+              />
+              <span>
+                I work in Denver — add the employee occupational
+                privilege tax ($5.75 a month, owed for any month my
+                Denver earnings reach $500).
+              </span>
+            </label>
+          </div>
+        )}
+
+        {isIllinois && (
+          <div>
+            <label htmlFor={`${pfx}-il-exemptions`} className={labelClass}>
+              Illinois exemptions — IL-W-4 Line 1 (count)
+            </label>
+            <input
+              id={`${pfx}-il-exemptions`}
+              type="number"
+              inputMode="numeric"
+              min="0"
+              step="1"
+              value={ilExemptions}
+              onChange={(e) => setIlExemptions(e.target.value)}
+              placeholder={filingStatus === "mfj" ? "2" : "1"}
+              className={inputClass}
+            />
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              Leave blank for the standard count — 1, or 2 if married
+              filing jointly. Add 1 per dependent. Each exemption is
+              worth $2,925 off the Illinois base in {TAX_YEAR} — and
+              none is allowed once income passes $250,000 ($500,000
+              joint).
+            </p>
+          </div>
+        )}
+
+        {isNorthCarolina && (
+          <div>
+            <label htmlFor={`${pfx}-nc-children`} className={labelClass}>
+              Children who qualify for the federal child tax credit
+            </label>
+            <input
+              id={`${pfx}-nc-children`}
+              type="number"
+              inputMode="numeric"
+              min="0"
+              step="1"
+              value={ncChildren}
+              onChange={(e) => setNcChildren(e.target.value)}
+              className={inputClass}
+            />
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              North Carolina gives a deduction of $500–$3,000 per
+              qualifying child, banded by income — separate from the
+              federal W-4 Step 3 credit above.
+            </p>
+          </div>
+        )}
+
+        {isPennsylvania && (
+          <>
+            <div>
+              <label htmlFor={`${pfx}-pa-local`} className={labelClass}>
+                Local tax where you live / work
+              </label>
+              <select
+                id={`${pfx}-pa-local`}
+                value={paLocal}
+                onChange={(e) =>
+                  setPaLocal(
+                    e.target.value as
+                      | "none"
+                      | "eit"
+                      | "resident"
+                      | "nonresident",
+                  )
+                }
+                className={inputClass}
+              >
+                <option value="eit">Local earned income tax (EIT) — enter the rate</option>
+                <option value="resident">Philadelphia wage tax — I live in Philadelphia (3.735%)</option>
+                <option value="nonresident">Philadelphia wage tax — I work there but live elsewhere (3.425%)</option>
+                <option value="none">No local income tax</option>
+              </select>
+              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                Almost every Pennsylvania worker pays a local EIT —
+                1% is the most common total rate. Philadelphia has its
+                own wage tax instead, charged on full gross pay.
+              </p>
+            </div>
+            {paLocal === "eit" && (
+              <div>
+                <label htmlFor={`${pfx}-pa-eit`} className={labelClass}>
+                  Local EIT rate (%)
+                </label>
+                <input
+                  id={`${pfx}-pa-eit`}
+                  type="number"
+                  inputMode="decimal"
+                  min="0"
+                  step="0.1"
+                  value={paEitRate}
+                  onChange={(e) => setPaEitRate(e.target.value)}
+                  className={inputClass}
+                />
+                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                  Your resident PSD code sets the rate — your
+                  employer withholds the higher of your home and work
+                  rates under Act 32.
+                </p>
+              </div>
+            )}
+          </>
+        )}
 
         {isOhio && (
           <>
@@ -503,8 +813,27 @@ export default function UsPaycheckCalculator({
             {" · "}W-4 Step 3 credits: {fmtMoney(parseAmount(dependentsCredit))} a year
             {" · "}401(k): {parseAmount(k401Percent)}% of gross
             {" · "}Health premium: {fmtMoney(parseAmount(healthPremium))} per period
+            {isFullW4
+              ? ` · HSA: ${fmtMoney(parseAmount(hsa))} per period · W-4 Step 4(a) other income: ${fmtMoney(parseAmount(otherIncome))} a year · Step 4(b) deductions: ${fmtMoney(parseAmount(step4b))} a year`
+              : ""}
             {isOhio
               ? ` · City rate: ${parseAmount(cityRate)}% · School district rate: ${parseAmount(schoolRate)}%`
+              : ""}
+            {isColorado ? ` · Works in Denver: ${denverOpt ? "yes" : "no"}` : ""}
+            {isIllinois
+              ? ` · IL exemptions: ${ilExemptions.trim() === "" ? (filingStatus === "mfj" ? "2" : "1") : ilExemptions}`
+              : ""}
+            {isNorthCarolina ? ` · Qualifying children: ${parseAmount(ncChildren)}` : ""}
+            {isPennsylvania
+              ? ` · Local tax: ${
+                  paLocal === "eit"
+                    ? `EIT ${parseAmount(paEitRate)}%`
+                    : paLocal === "resident"
+                      ? "Philadelphia resident 3.735%"
+                      : paLocal === "nonresident"
+                        ? "Philadelphia non-resident 3.425%"
+                        : "none"
+                }`
               : ""}
             {" · "}Tax year: {TAX_YEAR}.
           </p>
@@ -530,11 +859,52 @@ export default function UsPaycheckCalculator({
               Ohio state, city and school taxes are included above at
               the rates you entered.
             </>
-          ) : (
+          ) : state === "TX" ? (
             <>
               {" "}
               Texas state income tax: <strong>$0.00</strong> — Texas has
               no state income tax.
+            </>
+          ) : state === "FL" ? (
+            <>
+              {" "}
+              Florida state income tax: <strong>$0.00</strong> — Florida
+              has no state income tax.
+            </>
+          ) : state === "CO" ? (
+            <>
+              {" "}
+              Colorado state tax at the flat 4.4% and the 0.44% FAMLI
+              employee premium are included above
+              {denverOpt
+                ? ", along with Denver's occupational privilege tax."
+                : "."}
+            </>
+          ) : state === "PA" ? (
+            <>
+              {" "}
+              Pennsylvania tax at the flat 3.07%, your local tax and
+              the 0.07% unemployment contribution are included above.
+            </>
+          ) : state === "NJ" ? (
+            <>
+              {" "}
+              New Jersey income tax and the state-plan contributions
+              (unemployment, disability and family leave) are included
+              above.
+            </>
+          ) : state === "OR" ? (
+            <>
+              {" "}
+              Oregon income tax, the 0.1% statewide transit tax and
+              the 0.6% Paid Leave Oregon contribution are included
+              above.
+            </>
+          ) : (
+            <>
+              {" "}
+              {stateName} state income tax is included above at the{" "}
+              {TAX_YEAR} rules.
             </>
           )}
         </p>
