@@ -56,6 +56,7 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/hmrc-tax-code-checker": "Tax & HMRC",
   "/marriage-allowance-calculator": "Tax & HMRC",
   "/day-rate-calculator": "Pay & Salary",
+  "/free-invoice-generator-uk": "Business Tools",
   "/annual-leave-calculator": "Pay & Salary",
   "/pro-rata-holiday-calculator": "Pay & Salary",
   "/term-time-pay-calculator": "Pay & Salary",
@@ -185,6 +186,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/employer-cost-calculator",
     "/employer-national-insurance-calculator",
     "/40k-after-tax-uk",
+    "/free-invoice-generator-uk",
   ],
   "/salary-sacrifice-calculator": [
     "/pension-drawdown-calculator",
@@ -257,6 +259,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/ir35-calculator",
     "/umbrella-company-calculator",
     "/employer-cost-calculator",
+    "/free-invoice-generator-uk",
   ],
   "/annuity-calculator": [
     "/pension-drawdown-calculator",
@@ -330,6 +333,13 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/umbrella-company-calculator",
     "/hourly-rate-converter",
     "/employer-cost-calculator",
+    "/free-invoice-generator-uk",
+  ],
+  "/free-invoice-generator-uk": [
+    "/payslip-generator",
+    "/vat-calculator",
+    "/day-rate-calculator",
+    "/umbrella-company-calculator",
   ],
   "/marriage-allowance-calculator": [
     "/hmrc-tax-code-checker",
@@ -368,6 +378,7 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/overtime-calculator": "overtime pay rate extra hours",
   "/hourly-rate-converter": "hourly rate to salary salary to hourly wage",
   "/day-rate-calculator": "day rate contractor daily rate salary equivalent freelance interim",
+  "/free-invoice-generator-uk": "invoice generator free uk invoice maker vat cis sole trader freelancer pdf bill",
   "/marriage-allowance-calculator": "marriage allowance married couples tax allowance transfer 1260 save 252",
   "/ir35-calculator": "ir35 off payroll contractor status",
   "/vat-calculator": "vat value added tax add remove 20%",

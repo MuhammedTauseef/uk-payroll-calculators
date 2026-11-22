@@ -157,6 +157,12 @@ export const AppConfig = {
       flag: "🇬🇧",
     },
     {
+      href: "/free-invoice-generator-uk",
+      label: "Free Invoice Generator UK",
+      icon: "🧾",
+      flag: "🇬🇧",
+    },
+    {
       href: "/stone-to-kg-converter",
       label: "Stone to Kg Converter",
       icon: "⚖️",

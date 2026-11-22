@@ -226,6 +226,16 @@ function PayslipIcon() {
   );
 }
 
+function InvoiceIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M6 2.5h8L18.5 7v14.5h-12.5z" />
+      <path d="M13.5 2.5V7H18.5" />
+      <path d="M9 11.5h6.5M9 15h6.5M9 18.5h4" />
+    </svg>
+  );
+}
+
 function PayRiseIcon() {
   return (
     <svg {...iconProps}>
@@ -516,6 +526,15 @@ const CALCULATORS = [
       "Create a UK payslip from an employer name, an employee name, the gross pay and a tax code, with Income Tax and employee National Insurance worked out monthly or weekly.",
     audience: "Ready to print or save as a PDF.",
     linkText: "Open the payslip generator →",
+  },
+  {
+    href: "/free-invoice-generator-uk",
+    icon: <InvoiceIcon />,
+    title: "Free Invoice Generator UK",
+    description:
+      "Build a UK invoice in your browser — your details, your client, lines with VAT at 20%, 5% or 0%, an optional discount and a CIS deduction taken from the labour only.",
+    audience: "Print it or save it as a PDF. No sign-up, and your data never leaves your browser.",
+    linkText: "Open the invoice generator →",
   },
   {
     href: "/hmrc-tax-code-checker",
