@@ -9,6 +9,7 @@ import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export const metadata: Metadata = pageMetadata(
   "/redundancy-pay-calculator",
@@ -516,71 +517,7 @@ export default function RedundancyPayCalculatorPage() {
         </div>
       </section>
 
-      <section className="space-y-4 print:hidden">
-        <h2 className={h2Class}>Related calculators</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/notice-period-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Notice Period Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Your last day and your notice entitlement, from your start
-              date, contract terms and who gave notice.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/holiday-pay-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Holiday Pay Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The holiday pay owed in your final pay packet, by the
-              statutory (A × B) − C formula — plus pay for holiday taken.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/employer-cost-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Employer Cost Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              For employers: the full cost of a role, including employer
-              National Insurance and workplace pension contributions.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/40k-after-tax-uk"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Take-Home Pay Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              What the taxable part of a leaving package leaves you after
-              Income Tax and National Insurance.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-        </div>
-      </section>
+      <RelatedCalculators href="/redundancy-pay-calculator" />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

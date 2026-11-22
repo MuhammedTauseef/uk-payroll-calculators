@@ -7,6 +7,7 @@ import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export const metadata: Metadata = pageMetadata(
   "/stone-to-kg-converter",
@@ -246,103 +247,7 @@ export default function StoneToKgConverterPage() {
         </div>
       </section>
 
-      <section className="space-y-4 print:hidden">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          Related converters and calculators
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/kg-to-stone-converter"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Kg to Stone Converter
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The same conversion in reverse — kilograms split into
-              stones and pounds, with the full kg table printed.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the converter →
-            </span>
-          </Link>
-          <Link
-            href="/cm-to-inches-converter"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Cm to Inches Converter
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Heights and lengths the other way round — centimetres to
-              inches, and to feet and inches, with a 1–200 cm table.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the converter →
-            </span>
-          </Link>
-          <Link
-            href="/miles-to-km-converter"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Miles to Km Converter
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Road and race distances converted both ways, with the
-              1–100 mile table and the 5K, 10K and marathon figures.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the converter →
-            </span>
-          </Link>
-          <Link
-            href="/litres-to-gallons-converter"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Litres to Gallons Converter
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Fuel and tank volumes in UK imperial gallons — with the
-              US gallon shown separately so the two never get mixed up.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the converter →
-            </span>
-          </Link>
-          <Link
-            href="/nhs-pay-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              NHS Pay Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Agenda for Change pay by band and step — annual, monthly
-              and hourly, with an estimated take-home.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/hourly-rate-converter"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Hourly Rate Converter
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Turn an hourly rate into a salary — or a salary into an
-              hourly rate — at your own hours and weeks.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the converter →
-            </span>
-          </Link>
-        </div>
-      </section>
+      <RelatedCalculators href="/stone-to-kg-converter" />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

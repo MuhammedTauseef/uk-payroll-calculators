@@ -15,6 +15,7 @@ import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export const metadata: Metadata = pageMetadata(
   "/payslip-generator",
@@ -372,95 +373,7 @@ export default function PayslipGeneratorPage() {
         </div>
       </section>
 
-      <section className="space-y-4 print:hidden">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          Related calculators
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/40k-after-tax-uk"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Take-Home Pay Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The same tax and National Insurance maths from the other
-              direction: enter an annual salary and see the take-home pay
-              per year, month and week.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/hmrc-tax-code-checker"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Tax Code Checker
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Every payslip carries a tax code — check what yours means:
-              the allowance it gives you, what each letter stands for, and
-              what it costs against the standard 1257L.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the checker →
-            </span>
-          </Link>
-          <Link
-            href="/employer-national-insurance-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Employer National Insurance Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Issuing the payslip costs more than the salary on it: work
-              out employer Class 1 NICs and the total cost of employing
-              someone in 2026/27.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/overtime-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Overtime Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The extra hours on the payslip: overtime pay at the rate
-              in your contract — flat, time and a quarter, time and a
-              half or double time — with a National Minimum Wage check
-              on the average over all hours worked.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/ir35-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              IR35 Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Contractors are paid differently inside IR35: check
-              whether a contract is inside or outside the off-payroll
-              rules, and compare the take-home pay either way on the
-              day rate.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-        </div>
-      </section>
+      <RelatedCalculators href="/payslip-generator" />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

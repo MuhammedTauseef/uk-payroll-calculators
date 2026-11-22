@@ -9,6 +9,7 @@ import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export const metadata: Metadata = pageMetadata(
   "/pay-rise-calculator",
@@ -541,73 +542,7 @@ export default function PayRiseCalculatorPage() {
         </div>
       </section>
 
-      <section className="space-y-4 print:hidden">
-        <h2 className={h2Class}>Related calculators</h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/40k-after-tax-uk"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Take-Home Pay Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              What any UK salary leaves after Income Tax and National
-              Insurance — the standing figure this page compares your
-              rise against.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/payslip-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Payslip Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              What your payslip will actually say on the new salary —
-              tax code, pension and student loan, month by month.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/salary-sacrifice-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Salary Sacrifice Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Trading salary for pension contributions — the route
-              that can rescue a rise caught by the £100,000 taper.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/pro-rata-salary-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Pro-Rata Salary Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Part-time pay from any full-time salary — put a new
-              offer and your current role on the same basis before
-              you compare them.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-slate-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-        </div>
-      </section>
+      <RelatedCalculators href="/pay-rise-calculator" />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

@@ -11,6 +11,7 @@ import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export const metadata: Metadata = pageMetadata(
   "/student-loan-repayment-calculator",
@@ -242,74 +243,7 @@ export default function StudentLoanRepaymentCalculatorPage() {
         </div>
       </section>
 
-      <section className="space-y-4 print:hidden">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          Related calculators
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            href="/payslip-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Payslip Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The whole monthly payslip — gross pay, tax, National
-              Insurance, pension and the student loan line together.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/40k-after-tax-uk"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Take-Home Pay Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              What a salary leaves after Income Tax and National
-              Insurance — per year, per month, per week and per day.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/salary-sacrifice-calculator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Salary Sacrifice Calculator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Sacrificing salary into a pension lowers the income your
-              repayments are charged on as well as your tax — see what
-              it saves on both.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the calculator →
-            </span>
-          </Link>
-          <Link
-            href="/payslip-generator"
-            className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md"
-          >
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
-              Payslip Generator
-            </h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Build a printable payslip from one period&apos;s pay,
-              with the deductions set out line by line.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-              Open the generator →
-            </span>
-          </Link>
-        </div>
-      </section>
+      <RelatedCalculators href="/student-loan-repayment-calculator" />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

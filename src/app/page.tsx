@@ -396,7 +396,8 @@ const CALCULATORS = [
     icon: <SspIcon />,
     title: "SSP Calculator",
     description:
-      "Work out Statutory Sick Pay under the April 2026 rules: the lower of £123.25 a week or 80% of average weekly earnings, payable from the first full day of sickness.",
+      "Work out Statutory Sick Pay under the April 2026 rules — the lower of £123.25 a week or 80% of average weekly earnings.",
+    audience: "Payable from the first full day of sickness.",
     linkText: "Open the SSP calculator →",
   },
   {
@@ -404,7 +405,8 @@ const CALCULATORS = [
     icon: <NoticeIcon />,
     title: "Notice Period Calculator",
     description:
-      "Work out the statutory minimum notice for employers and employees under the Employment Rights Act 1996, compare it with the contract period, and find the earliest last working day.",
+      "Work out the statutory minimum notice for employers and employees under the Employment Rights Act 1996, and compare it with the contract period.",
+    audience: "Finds the earliest last working day.",
     linkText: "Open the notice period calculator →",
   },
   {
@@ -412,7 +414,8 @@ const CALCULATORS = [
     icon: <ProRataIcon />,
     title: "Pro Rata Salary Calculator",
     description:
-      "Work out part-time pay from the full-time salary, by hours or days per week: pro-rata annual, monthly and weekly pay, the FTE fraction, and pro-rata holiday entitlement in days.",
+      "Work out part-time pay from the full-time salary, by hours or days per week: pro-rata annual, monthly and weekly pay, and the FTE fraction.",
+    audience: "Also works out pro-rata holiday entitlement in days.",
     linkText: "Open the pro-rata calculator →",
   },
   {
@@ -420,7 +423,8 @@ const CALCULATORS = [
     icon: <EmployerNiIcon />,
     title: "Employer National Insurance Calculator",
     description:
-      "Work out employer Class 1 NICs on a salary — 15% on earnings above the £5,000 Secondary Threshold (2026/27 rates) — with the Employment Allowance, and see the total cost of employing someone.",
+      "Work out employer Class 1 NICs on a salary — 15% on earnings above the £5,000 Secondary Threshold (2026/27 rates), with the Employment Allowance.",
+    audience: "Also shows the total cost of employing someone.",
     linkText: "Open the employer NI calculator →",
   },
   {
@@ -428,7 +432,8 @@ const CALCULATORS = [
     icon: <EmployerCostIcon />,
     title: "Employer Cost Calculator",
     description:
-      "What a salary really costs the employer: gross pay plus employer National Insurance at 15% above the £5,000 Secondary Threshold and workplace pension on qualifying earnings — the total cost of employing, per year and per month.",
+      "What a salary really costs the employer: gross pay plus employer National Insurance at 15% above the £5,000 Secondary Threshold and workplace pension on qualifying earnings.",
+    audience: "The total cost of employing, per year and per month.",
     linkText: "Open the employer cost calculator →",
   },
   {
@@ -436,7 +441,8 @@ const CALCULATORS = [
     icon: <MaternityIcon />,
     title: "NHS Maternity Pay Calculator",
     description:
-      "Maternity pay under Agenda for Change — 8 weeks at full pay, 18 weeks at half pay plus SMP, 13 weeks at SMP — or Statutory Maternity Pay only, stage by stage from your salary.",
+      "Maternity pay under Agenda for Change — 8 weeks at full pay, 18 weeks at half pay plus SMP, 13 weeks at SMP — or Statutory Maternity Pay only.",
+    audience: "Worked out stage by stage from your salary.",
     linkText: "Open the maternity pay calculator →",
   },
   {
@@ -444,7 +450,8 @@ const CALCULATORS = [
     icon: <NhsPayIcon />,
     title: "NHS Pay Calculator",
     description:
-      "NHS pay on the 2025/26 Agenda for Change scales for England: pick your band and pay step for annual, monthly, weekly and hourly pay, plus an estimated take-home after NHS pension, tax and NI.",
+      "NHS pay on the 2025/26 Agenda for Change scales for England: pick your band and pay step for annual, monthly, weekly and hourly pay.",
+    audience: "Plus an estimated take-home after NHS pension, tax and NI.",
     linkText: "Open the NHS pay calculator →",
   },
   {
@@ -452,7 +459,8 @@ const CALCULATORS = [
     icon: <TeachingIcon />,
     title: "Teaching Pay Calculator",
     description:
-      "Teacher take-home pay on the STPCD scales for England: every pay point in all four regions for 2025/26 and 2026/27, with TLR and SEN allowances, Teachers' Pension tiers, your own tax code and student loans — M1 starts at £34,069, worth £2,169.37 a month after deductions.",
+      "Teacher take-home pay on the STPCD scales for England: every pay point in all four regions for 2025/26 and 2026/27, with TLR and SEN allowances, Teachers' Pension tiers, your own tax code and student loans.",
+    audience: "M1 starts at £34,069, worth £2,169.37 a month after deductions.",
     linkText: "Open the teaching pay calculator →",
   },
   {
@@ -460,7 +468,8 @@ const CALCULATORS = [
     icon: <PaternityIcon />,
     title: "Paternity Pay Calculator",
     description:
-      "Statutory Paternity Pay for one or two weeks of leave: the lower of £194.32 a week or 90% of average weekly earnings, with the two weeks taken together or separately.",
+      "Statutory Paternity Pay for one or two weeks of leave: the lower of £194.32 a week or 90% of average weekly earnings.",
+    audience: "The two weeks can be taken together or separately.",
     linkText: "Open the paternity pay calculator →",
   },
   {
@@ -468,7 +477,8 @@ const CALCULATORS = [
     icon: <MaternityPayIcon />,
     title: "Maternity Pay Calculator",
     description:
-      "Statutory Maternity Pay from your salary and due date: 6 weeks at 90% of average weekly earnings, then 33 weeks at £194.32 — £10,151.02 in total on a £36,000 salary — with eligibility checks, your key dates and a month-by-month breakdown.",
+      "Statutory Maternity Pay from your salary and due date: 6 weeks at 90% of average weekly earnings, then 33 weeks at £194.32 — £10,151.02 in total on a £36,000 salary.",
+    audience: "With eligibility checks, your key dates and a month-by-month breakdown.",
     linkText: "Open the maternity pay calculator →",
   },
   {
@@ -476,7 +486,8 @@ const CALCULATORS = [
     icon: <RedundancyIcon />,
     title: "Redundancy Pay Calculator",
     description:
-      "Statutory redundancy pay worked out year by year from your dates of birth and employment: the £751 weekly pay cap, the age bands, your notice pay, and how your package sits against the £30,000 tax-free limit.",
+      "Statutory redundancy pay worked out year by year from your dates of birth and employment: the £751 weekly pay cap, the age bands and your notice pay.",
+    audience: "Also shows how your package sits against the £30,000 tax-free limit.",
     linkText: "Open the redundancy pay calculator →",
   },
   {
@@ -484,7 +495,8 @@ const CALCULATORS = [
     icon: <HolidayPayIcon />,
     title: "Holiday Pay Calculator",
     description:
-      "Holiday pay in pounds, not just days: a week's pay for regular staff, average pay over 52 weeks when pay varies, the 12.07% accrual for irregular-hours workers, rolled-up holiday pay, and the (A × B) − C payment owed when a job ends.",
+      "Holiday pay in pounds, not just days: a week's pay for regular staff, average pay over 52 weeks when pay varies, the 12.07% accrual for irregular-hours workers and rolled-up holiday pay.",
+    audience: "Also works out the (A × B) − C payment owed when a job ends.",
     linkText: "Open the holiday pay calculator →",
   },
   {
@@ -492,7 +504,8 @@ const CALCULATORS = [
     icon: <TakeHomeIcon />,
     title: "£40k After Tax UK",
     description:
-      "Take-home pay on a £40,000 salary in 2026/27 — £32,319.60 a year after Income Tax and National Insurance — with a calculator that works for any salary you enter.",
+      "Take-home pay on a £40,000 salary in 2026/27 — £32,319.60 a year after Income Tax and National Insurance.",
+    audience: "The calculator works for any salary you enter.",
     linkText: "Open the take-home calculator →",
   },
   {
@@ -500,7 +513,8 @@ const CALCULATORS = [
     icon: <PayslipIcon />,
     title: "Payslip Generator",
     description:
-      "Create a UK payslip from an employer name, an employee name, the gross pay and a tax code: Income Tax and employee National Insurance worked out monthly or weekly, ready to print or save as a PDF.",
+      "Create a UK payslip from an employer name, an employee name, the gross pay and a tax code, with Income Tax and employee National Insurance worked out monthly or weekly.",
+    audience: "Ready to print or save as a PDF.",
     linkText: "Open the payslip generator →",
   },
   {
@@ -508,7 +522,8 @@ const CALCULATORS = [
     icon: <TaxCodeIcon />,
     title: "Tax Code Checker",
     description:
-      "Check what your tax code means — 1257L, BR, D0, 0T, a K code or an emergency W1/M1 ending: the tax-free allowance it gives you, what each part stands for, and how much more or less tax it takes than the standard 1257L on your salary.",
+      "Check what your tax code means — 1257L, BR, D0, 0T, a K code or an emergency W1/M1 ending: the tax-free allowance it gives you and what each part stands for.",
+    audience: "Also shows how much more or less tax it takes than the standard 1257L on your salary.",
     linkText: "Open the tax code checker →",
   },
   {
@@ -516,7 +531,8 @@ const CALCULATORS = [
     icon: <AnnualLeaveIcon />,
     title: "Annual Leave Calculator",
     description:
-      "Work out statutory holiday entitlement: 5.6 weeks a year in your own working days — 28 days on a five-day week, pro-rata part-time, part-year starters, and the 12.07% accrual for irregular-hours workers — less the leave already taken.",
+      "Work out statutory holiday entitlement: 5.6 weeks a year in your own working days — 28 days on a five-day week, pro-rata part-time, part-year starters, and the 12.07% accrual for irregular-hours workers.",
+    audience: "Less the leave already taken.",
     linkText: "Open the annual leave calculator →",
   },
   {
@@ -524,7 +540,8 @@ const CALCULATORS = [
     icon: <AnnualLeaveIcon />,
     title: "NHS Annual Leave Calculator",
     description:
-      "NHS annual leave under Agenda for Change: 27, 29 or 33 days plus public holidays by length of service, in days and hours — pro-rata for part-time staff, starters and leavers, for all four nations.",
+      "NHS annual leave under Agenda for Change: 27, 29 or 33 days plus public holidays by length of service, in days and hours.",
+    audience: "Pro-rata for part-time staff, starters and leavers, for all four nations.",
     linkText: "Open the NHS annual leave calculator →",
   },
   {
@@ -532,7 +549,8 @@ const CALCULATORS = [
     icon: <OvertimeIcon />,
     title: "Overtime Calculator",
     description:
-      "Work out overtime pay at the rate in your contract — flat, time and a quarter, time and a half or double time — from an hourly rate or a salary, with a National Minimum Wage check on your average pay.",
+      "Work out overtime pay at the rate in your contract — flat, time and a quarter, time and a half or double time — from an hourly rate or a salary.",
+    audience: "Includes a National Minimum Wage check on your average pay.",
     linkText: "Open the overtime calculator →",
   },
   {
@@ -540,7 +558,8 @@ const CALCULATORS = [
     icon: <ConverterIcon />,
     title: "Hourly Rate Converter",
     description:
-      "Convert an hourly rate to a salary — and a salary back to an hourly rate — at your actual hours and weeks, with monthly and weekly figures alongside.",
+      "Convert an hourly rate to a salary — and a salary back to an hourly rate — at your actual hours and weeks.",
+    audience: "Monthly and weekly figures shown alongside.",
     linkText: "Open the hourly rate converter →",
   },
   {
@@ -548,7 +567,8 @@ const CALCULATORS = [
     icon: <Ir35Icon />,
     title: "IR35 Calculator",
     description:
-      "Check whether a contract is inside or outside IR35 from eight questions about control, substitution and the other status factors, then compare inside vs outside take-home pay on your day rate.",
+      "Check whether a contract is inside or outside IR35 from eight questions about control, substitution and the other status factors.",
+    audience: "Then compare inside vs outside take-home pay on your day rate.",
     linkText: "Open the IR35 calculator →",
   },
   {
@@ -556,7 +576,8 @@ const CALCULATORS = [
     icon: <VatIcon />,
     title: "VAT Calculator UK",
     description:
-      "Add VAT to a net price or strip it out of a gross price at 20%, 5% or 0% — with the UK VAT rates, the manual formulas and the VAT fraction explained.",
+      "Add VAT to a net price or strip it out of a gross price at 20%, 5% or 0%.",
+    audience: "The UK VAT rates, the manual formulas and the VAT fraction explained.",
     linkText: "Open the VAT calculator →",
   },
   {
@@ -564,7 +585,8 @@ const CALCULATORS = [
     icon: <AnnuityIcon />,
     title: "Annuity Calculator UK",
     description:
-      "Estimate the guaranteed income a pension pot buys at 55 to 75 — single or joint life, level or rising payments, guarantee periods — with the full annuity rate table printed, not hidden.",
+      "Estimate the guaranteed income a pension pot buys at 55 to 75 — single or joint life, level or rising payments, guarantee periods.",
+    audience: "The full annuity rate table is printed, not hidden.",
     linkText: "Open the annuity calculator →",
   },
   {
@@ -572,7 +594,8 @@ const CALCULATORS = [
     icon: <ChildcareIcon />,
     title: "Childcare Calculator UK",
     description:
-      "Work out your Tax-Free Childcare top-up per child — up to £2,000 a year, £4,000 if disabled — what to pay in each month, and whether the £100,000 rule or the minimum-earnings check stops your claim.",
+      "Work out your Tax-Free Childcare top-up per child — up to £2,000 a year, £4,000 if disabled — and what to pay in each month.",
+    audience: "Also checks whether the £100,000 rule or the minimum-earnings check stops your claim.",
     linkText: "Open the childcare calculator →",
   },
   {
@@ -580,7 +603,8 @@ const CALCULATORS = [
     icon: <DrawdownIcon />,
     title: "Pension Drawdown Calculator UK",
     description:
-      "See how long your pension pot lasts in drawdown, year by year, with 2026/27 tax, the 25% tax-free amount, the State Pension alongside, and the withdrawal that lasts to 95.",
+      "See how long your pension pot lasts in drawdown, year by year, with 2026/27 tax, the 25% tax-free amount and the State Pension alongside.",
+    audience: "Also finds the withdrawal that lasts to 95.",
     linkText: "Open the drawdown calculator →",
   },
   {
@@ -588,7 +612,8 @@ const CALCULATORS = [
     icon: <ProRataHolidayIcon />,
     title: "Pro Rata Holiday Calculator",
     description:
-      "Holiday entitlement for part-time staff and mid-year starters or leavers: the full-time entitlement pro-rated by days worked, checked against the statutory 5.6-week floor, in days and hours.",
+      "Holiday entitlement for part-time staff and mid-year starters or leavers: the full-time entitlement pro-rated by days worked, in days and hours.",
+    audience: "Checked against the statutory 5.6-week floor.",
     linkText: "Open the pro-rata holiday calculator →",
   },
   {
@@ -596,7 +621,8 @@ const CALCULATORS = [
     icon: <TermTimeIcon />,
     title: "Term Time Pay Calculator",
     description:
-      "Term-time-only pay from the full-time salary — working weeks plus the statutory holiday uplift most calculators miss — per year, per month and per week.",
+      "Term-time-only pay from the full-time salary — working weeks plus the statutory holiday uplift most calculators miss.",
+    audience: "Shown per year, per month and per week.",
     linkText: "Open the term-time pay calculator →",
   },
   {
@@ -604,7 +630,8 @@ const CALCULATORS = [
     icon: <PayslipIcon />,
     title: "Payslip Calculator",
     description:
-      "What your monthly payslip will show: gross pay, tax from your tax code, National Insurance, pension and student loan — line by line, before payday.",
+      "What your monthly payslip will show: gross pay, tax from your tax code, National Insurance, pension and student loan.",
+    audience: "Line by line, before payday.",
     linkText: "Open the payslip calculator →",
   },
   {
@@ -612,7 +639,8 @@ const CALCULATORS = [
     icon: <PayRiseIcon />,
     title: "Pay Rise Calculator",
     description:
-      "Enter a rise as a percentage, an amount or a target salary — and see the extra take-home pay after tax, National Insurance, pension and student loan, not just the gross headline.",
+      "Enter a rise as a percentage, an amount or a target salary — and see the extra take-home pay after tax, National Insurance, pension and student loan.",
+    audience: "Not just the gross headline.",
     linkText: "Open the pay rise calculator →",
   },
   {
@@ -620,7 +648,8 @@ const CALCULATORS = [
     icon: <SalarySacrificeIcon />,
     title: "Salary Sacrifice Calculator",
     description:
-      "What sacrificing salary into a pension saves in tax AND National Insurance — the cost per £1 in the pension, and the employer NI saving on top.",
+      "What sacrificing salary into a pension saves in tax AND National Insurance — the cost per £1 in the pension.",
+    audience: "The employer NI saving shown on top.",
     linkText: "Open the salary sacrifice calculator →",
   },
   {
@@ -628,7 +657,8 @@ const CALCULATORS = [
     icon: <StudentLoanIcon />,
     title: "Student Loan Repayment Calculator",
     description:
-      "What you repay each month and year on Plans 1, 2, 4 and 5 and the Postgraduate Loan, at the 2026/27 GOV.UK thresholds.",
+      "What you repay each month and year on Plans 1, 2, 4 and 5 and the Postgraduate Loan.",
+    audience: "At the 2026/27 GOV.UK thresholds.",
     linkText: "Open the student loan calculator →",
   },
   {
@@ -636,7 +666,8 @@ const CALCULATORS = [
     icon: <UmbrellaIcon />,
     title: "Umbrella Company Calculator",
     description:
-      "Take-home pay from the assignment rate with every deduction shown — margin, employer NI, apprenticeship levy, holiday pay, tax and NI.",
+      "Take-home pay from the assignment rate, with every deduction shown.",
+    audience: "Margin, employer NI, apprenticeship levy, holiday pay, tax and NI.",
     linkText: "Open the umbrella calculator →",
   },
   {
@@ -644,7 +675,8 @@ const CALCULATORS = [
     icon: <CapitalGainsIcon />,
     title: "Capital Gains Tax Calculator",
     description:
-      "The tax on a gain at the 2026/27 rates — £3,000 allowance, 18% inside the basic-rate band, 24% above — using GOV.UK's own method and examples.",
+      "The tax on a gain at the 2026/27 rates — £3,000 allowance, 18% inside the basic-rate band, 24% above.",
+    audience: "Uses GOV.UK's own method and examples.",
     linkText: "Open the capital gains calculator →",
   },
 ];
@@ -655,7 +687,8 @@ const CONVERTERS = [
     icon: <ConverterIcon />,
     title: "Stone to Kg Converter",
     description:
-      "Stones and pounds into kilograms — enter both parts for the exact figure, with the formula and the full conversion table from 1 to 60 stone, half-stone combinations included.",
+      "Stones and pounds into kilograms — enter both parts for the exact figure, with the formula.",
+    audience: "The full conversion table from 1 to 60 stone, half-stone combinations included.",
     linkText: "Open the stone to kg converter →",
   },
   {
@@ -663,7 +696,8 @@ const CONVERTERS = [
     icon: <ConverterIcon />,
     title: "Kg to Stone Converter",
     description:
-      "Kilograms split into stones and pounds — 76 kg is 11 st 13.6 lb — with the formula and a kilogram-by-kilogram table from 40 to 150 kg.",
+      "Kilograms split into stones and pounds — 76 kg is 11 st 13.6 lb — with the formula.",
+    audience: "A kilogram-by-kilogram table from 40 to 150 kg.",
     linkText: "Open the kg to stone converter →",
   },
   {
@@ -671,7 +705,8 @@ const CONVERTERS = [
     icon: <ConverterIcon />,
     title: "Miles to Km Converter",
     description:
-      "Miles to kilometres and back again, with the 5K, 10K and marathon distances worked out and the full 1–100 mile table.",
+      "Miles to kilometres and back again, with the 5K, 10K and marathon distances worked out.",
+    audience: "The full 1–100 mile table included.",
     linkText: "Open the miles to km converter →",
   },
   {
@@ -679,7 +714,8 @@ const CONVERTERS = [
     icon: <ConverterIcon />,
     title: "Cm to Inches Converter",
     description:
-      "Centimetres to inches — and to feet and inches for heights — with the formula and a full table from 1 to 200 cm.",
+      "Centimetres to inches — and to feet and inches for heights — with the formula.",
+    audience: "A full table from 1 to 200 cm.",
     linkText: "Open the cm to inches converter →",
   },
   {
@@ -687,7 +723,8 @@ const CONVERTERS = [
     icon: <ConverterIcon />,
     title: "Litres to Gallons Converter",
     description:
-      "Litres into UK imperial gallons for fuel and mpg figures — with US gallons shown separately, and the full 1–100 litre table.",
+      "Litres into UK imperial gallons for fuel and mpg figures — with US gallons shown separately.",
+    audience: "The full 1–100 litre table included.",
     linkText: "Open the litres to gallons converter →",
   },
 ];
@@ -704,23 +741,26 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     href: c.href,
     title: c.title,
     description: c.description,
+    audience: c.audience,
     linkText: c.linkText,
-    category: CATEGORY_BY_HREF[c.href] ?? "Pay & Tax",
+    category: CATEGORY_BY_HREF[c.href] ?? "Pay & Salary",
     icon: c.icon,
   })),
   {
     href: "/cms-calculator",
     title: "CMS Calculator",
     description:
-      "Child maintenance under the Child Maintenance Service: the weekly figure on the standard rates from the paying parent's gross income, for the Direct Pay and Collect & Pay arrangements.",
+      "Child maintenance under the Child Maintenance Service: the weekly figure on the standard rates from the paying parent's gross income.",
+    audience: "For the Direct Pay and Collect & Pay arrangements.",
     linkText: "Open the CMS calculator →",
-    category: "Leave & Family",
+    category: CATEGORY_BY_HREF["/cms-calculator"] ?? "Family & Baby",
     icon: <CmsIcon />,
   },
   ...CONVERTERS.map((c) => ({
     href: c.href,
     title: c.title,
     description: c.description,
+    audience: c.audience,
     linkText: c.linkText,
     category: "Converters",
     icon: c.icon,
@@ -729,7 +769,8 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     href: "/us/texas-paycheck-calculator",
     title: "Texas Paycheck Calculator",
     description:
-      "Net pay on a Texas salary or hourly wage under the 2026 IRS rules: federal income tax withholding, Social Security and Medicare worked out line by line — and a Texas state income tax line of exactly $0, because Texas has none.",
+      "Net pay on a Texas salary or hourly wage under the 2026 IRS rules: federal income tax withholding, Social Security and Medicare worked out line by line.",
+    audience: "A Texas state income tax line of exactly $0, because Texas has none.",
     linkText: "Open the Texas paycheck calculator →",
     category: "US",
     icon: <TexasIcon />,
@@ -738,7 +779,8 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     href: "/us/ohio-paycheck-calculator",
     title: "Ohio Paycheck Calculator",
     description:
-      "Net pay on an Ohio salary or hourly wage under the 2026 rules: federal tax and FICA, the Ohio HB 96 flat tax (0% on the first $26,050, then 2.75%), plus your city income tax and school district tax where they apply.",
+      "Net pay on an Ohio salary or hourly wage under the 2026 rules: federal tax and FICA, and the Ohio HB 96 flat tax (0% on the first $26,050, then 2.75%).",
+    audience: "Plus your city income tax and school district tax where they apply.",
     linkText: "Open the Ohio paycheck calculator →",
     category: "US",
     icon: <OhioIcon />,
@@ -747,7 +789,8 @@ const DIRECTORY_TOOLS: DirectoryTool[] = [
     href: "/au/tax-rate-calculator",
     title: "Australia Tax Rate Calculator",
     description:
-      "Income tax and the Medicare levy on any Australian income under the ATO 2025–26 rates — your marginal and effective tax rate side by side, for residents and non-residents alike.",
+      "Income tax and the Medicare levy on any Australian income under the ATO 2025–26 rates — your marginal and effective tax rate side by side.",
+    audience: "For residents and non-residents alike.",
     linkText: "Open the Australia tax rate calculator →",
     category: "Australia",
     icon: <AuIcon />,

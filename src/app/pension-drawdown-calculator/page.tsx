@@ -11,6 +11,7 @@ import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedCalculators from "@/components/RelatedCalculators";
 
 export const metadata: Metadata = pageMetadata(
   "/pension-drawdown-calculator",
@@ -314,45 +315,7 @@ export default function PensionDrawdownCalculatorPage() {
         </p>
       </section>
 
-      <section className="space-y-4 print:hidden">
-        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          Related calculators
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link href="/annuity-calculator" className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">Annuity Calculator</h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The guaranteed alternative: what the same pot buys as an
-              income for life, at ages 55 to 75.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">Open the calculator →</span>
-          </Link>
-          <Link href="/salary-sacrifice-calculator" className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">Salary Sacrifice Calculator</h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Still building the pot? Sacrificing salary into a pension
-              saves tax and NI on the way in.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">Open the calculator →</span>
-          </Link>
-          <Link href="/40k-after-tax-uk" className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">Take-Home Pay Calculator</h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              The same 2026/27 tax bands applied to a salary — useful
-              for comparing work income with drawdown income.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">Open the calculator →</span>
-          </Link>
-          <Link href="/capital-gains-tax-calculator" className="group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md">
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">Capital Gains Tax Calculator</h3>
-            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-              Funding retirement from investments outside the pension?
-              The tax on selling them, worked out properly.
-            </p>
-            <span className="mt-2 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">Open the calculator →</span>
-          </Link>
-        </div>
-      </section>
+      <RelatedCalculators href="/pension-drawdown-calculator" />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

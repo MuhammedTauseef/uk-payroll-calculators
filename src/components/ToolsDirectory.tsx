@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useMemo, useState, type ReactNode } from "react";
+import { TOOL_CATEGORY_ORDER } from "@/lib/tools-index";
 
 export interface DirectoryTool {
   href: string;
   title: string;
   description: string;
+  audience: string;
   linkText: string;
   category: string;
   icon: ReactNode;
@@ -16,12 +18,18 @@ const inputClass =
   "w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-base text-slate-900 dark:text-slate-50 shadow-sm transition focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700";
 
 /**
- * The all-calculators directory: search box + category chips + card
- * grid over the full tools list. 100% client-side — the list is
- * rendered into the (static) homepage and filtered in the browser as
- * the visitor types or taps a chip. No API route, no server search,
- * no extra page cost. Typing also offers dropdown suggestions that
- * jump straight to a tool; the grid below filters at the same time.
+ * The all-calculators directory: search box + category chips +
+ * the full tools list grouped under category headings (the
+ * grouped layout settled on 22 Nov 2026, following the Tiny
+ * Calculators directory: Pay & Salary, Tax & HMRC, Family & Baby,
+ * Money & Finance, Business Tools, Converters, then US and
+ * Australia). 100% client-side — the list is rendered into the
+ * (static) homepage and filtered in the browser as the visitor
+ * types or taps a chip. No API route, no server search, no extra
+ * page cost. Typing also offers dropdown suggestions that jump
+ * straight to a tool; the groups below filter at the same time.
+ * Each card carries its description in two lines: what the tool
+ * works out, then who it is for / what is special about it.
  */
 export default function ToolsDirectory({ tools }: { tools: DirectoryTool[] }) {
   const [query, setQuery] = useState("");
@@ -39,7 +47,7 @@ export default function ToolsDirectory({ tools }: { tools: DirectoryTool[] }) {
     const tokens = q.split(/\s+/);
     return tools.filter((tool) => {
       const haystack =
-        `${tool.title} ${tool.description} ${tool.category} ${tool.href}`.toLowerCase();
+        `${tool.title} ${tool.description} ${tool.audience} ${tool.category} ${tool.href}`.toLowerCase();
       return tokens.every((token) => haystack.includes(token));
     });
   }, [query, tools]);
@@ -53,6 +61,31 @@ export default function ToolsDirectory({ tools }: { tools: DirectoryTool[] }) {
   );
 
   const suggestions = query.trim().length >= 2 ? queryMatches.slice(0, 8) : [];
+
+  // The visible tools grouped under their category headings, in
+  // the canonical TOOL_CATEGORY_ORDER; a category the order does
+  // not know (none today) keeps its first-appearance place at the
+  // end rather than vanishing.
+  const groups = useMemo(() => {
+    const byCategory = new Map<string, DirectoryTool[]>();
+    for (const tool of visible) {
+      const list = byCategory.get(tool.category);
+      if (list) list.push(tool);
+      else byCategory.set(tool.category, [tool]);
+    }
+    const ordered: { category: string; tools: DirectoryTool[] }[] = [];
+    for (const c of TOOL_CATEGORY_ORDER) {
+      const list = byCategory.get(c);
+      if (list) {
+        ordered.push({ category: c, tools: list });
+        byCategory.delete(c);
+      }
+    }
+    for (const [c, list] of byCategory) {
+      ordered.push({ category: c, tools: list });
+    }
+    return ordered;
+  }, [visible]);
 
   return (
     <div>
@@ -143,37 +176,53 @@ export default function ToolsDirectory({ tools }: { tools: DirectoryTool[] }) {
           “All” to see the full list.
         </p>
       ) : (
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          {visible.map((calc, i) => {
-            // Odd card out: the last card spans the full row as a
-            // wide feature card instead of leaving a half-empty slot.
-            const wide = i === visible.length - 1 && visible.length % 2 === 1;
-            return (
-              <Link
-                key={calc.href}
-                href={calc.href}
-                className={`group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md ${wide ? "sm:col-span-2 sm:flex sm:items-start sm:gap-5" : ""}`}
-              >
-                <span
-                  className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm ${wide ? "sm:mb-0" : ""}`}
-                >
-                  {calc.icon}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
-                    {calc.title}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                    {calc.description}
-                  </p>
-                  <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
-                    {calc.linkText}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        groups.map((group, gi) => (
+          <section key={group.category} className={gi === 0 ? "mt-6" : "mt-10"}>
+            <h3 className="text-lg font-bold tracking-tight text-slate-900 dark:text-slate-50">
+              {group.category}
+              <span className="ml-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+                {group.tools.length}{" "}
+                {group.tools.length === 1 ? "calculator" : "calculators"}
+              </span>
+            </h3>
+            <div className="mt-4 grid gap-5 sm:grid-cols-2">
+              {group.tools.map((calc, i) => {
+                // Odd card out: the last card of a group spans the
+                // full row as a wide feature card instead of
+                // leaving a half-empty slot.
+                const wide =
+                  i === group.tools.length - 1 && group.tools.length % 2 === 1;
+                return (
+                  <Link
+                    key={calc.href}
+                    href={calc.href}
+                    className={`group block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-700 hover:shadow-md ${wide ? "sm:col-span-2 sm:flex sm:items-start sm:gap-5" : ""}`}
+                  >
+                    <span
+                      className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-white shadow-sm ${wide ? "sm:mb-0" : ""}`}
+                    >
+                      {calc.icon}
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">
+                        {calc.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                        {calc.description}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                        {calc.audience}
+                      </p>
+                      <span className="mt-3 inline-block text-sm font-semibold text-brand-700 dark:text-brand-300 group-hover:text-brand-800 dark:hover:text-brand-300">
+                        {calc.linkText}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        ))
       )}
     </div>
   );

@@ -13,14 +13,18 @@ import { AppConfig } from "@/utils/AppConfig";
  * database); the search box adds them client-side from the sitemap
  * the site already publishes.
  *
- * Categories are the site's own groupings, first used by the
- * homepage directory: Pay & Tax, Leave & Family, Employers &
- * Contractors, Converters, then the US and Australia tools.
+ * Categories follow the grouped layout the owner settled on
+ * 22 Nov 2026 (the Tiny Calculators directory pattern): Pay &
+ * Salary, Tax & HMRC, Family & Baby, Money & Finance, Business
+ * Tools and Converters, then the US and Australia tools under
+ * their own names.
  */
 export const TOOL_CATEGORY_ORDER = [
-  "Pay & Tax",
-  "Leave & Family",
-  "Employers & Contractors",
+  "Pay & Salary",
+  "Tax & HMRC",
+  "Family & Baby",
+  "Money & Finance",
+  "Business Tools",
   "Converters",
   "US",
   "Australia",
@@ -28,39 +32,297 @@ export const TOOL_CATEGORY_ORDER = [
 
 /** Shared with the homepage directory (its original home). */
 export const CATEGORY_BY_HREF: Record<string, string> = {
-  "/ssp-calculator": "Leave & Family",
-  "/notice-period-calculator": "Employers & Contractors",
-  "/pro-rata-salary-calculator": "Pay & Tax",
-  "/employer-national-insurance-calculator": "Employers & Contractors",
-  "/employer-cost-calculator": "Employers & Contractors",
-  "/nhs-maternity-pay-calculator": "Leave & Family",
-  "/nhs-pay-calculator": "Pay & Tax",
-  "/teaching-pay-calculator": "Pay & Tax",
-  "/nhs-annual-leave-calculator": "Leave & Family",
-  "/paternity-pay-calculator": "Leave & Family",
-  "/maternity-pay-calculator": "Leave & Family",
-  "/redundancy-pay-calculator": "Leave & Family",
-  "/holiday-pay-calculator": "Leave & Family",
-  "/40k-after-tax-uk": "Pay & Tax",
-  "/pay-rise-calculator": "Pay & Tax",
-  "/payslip-calculator": "Pay & Tax",
-  "/payslip-generator": "Pay & Tax",
-  "/salary-sacrifice-calculator": "Pay & Tax",
-  "/student-loan-repayment-calculator": "Pay & Tax",
-  "/umbrella-company-calculator": "Employers & Contractors",
-  "/capital-gains-tax-calculator": "Pay & Tax",
-  "/hmrc-tax-code-checker": "Pay & Tax",
-  "/annual-leave-calculator": "Leave & Family",
-  "/pro-rata-holiday-calculator": "Leave & Family",
-  "/term-time-pay-calculator": "Leave & Family",
-  "/overtime-calculator": "Pay & Tax",
-  "/hourly-rate-converter": "Pay & Tax",
-  "/ir35-calculator": "Employers & Contractors",
-  "/vat-calculator": "Pay & Tax",
-  "/annuity-calculator": "Pay & Tax",
-  "/childcare-calculator": "Leave & Family",
-  "/pension-drawdown-calculator": "Pay & Tax",
-  "/cms-calculator": "Leave & Family",
+  "/ssp-calculator": "Pay & Salary",
+  "/notice-period-calculator": "Business Tools",
+  "/pro-rata-salary-calculator": "Pay & Salary",
+  "/employer-national-insurance-calculator": "Business Tools",
+  "/employer-cost-calculator": "Business Tools",
+  "/nhs-maternity-pay-calculator": "Family & Baby",
+  "/nhs-pay-calculator": "Pay & Salary",
+  "/teaching-pay-calculator": "Pay & Salary",
+  "/nhs-annual-leave-calculator": "Pay & Salary",
+  "/paternity-pay-calculator": "Family & Baby",
+  "/maternity-pay-calculator": "Family & Baby",
+  "/redundancy-pay-calculator": "Pay & Salary",
+  "/holiday-pay-calculator": "Pay & Salary",
+  "/40k-after-tax-uk": "Pay & Salary",
+  "/pay-rise-calculator": "Pay & Salary",
+  "/payslip-calculator": "Pay & Salary",
+  "/payslip-generator": "Pay & Salary",
+  "/salary-sacrifice-calculator": "Pay & Salary",
+  "/student-loan-repayment-calculator": "Pay & Salary",
+  "/umbrella-company-calculator": "Business Tools",
+  "/capital-gains-tax-calculator": "Tax & HMRC",
+  "/hmrc-tax-code-checker": "Tax & HMRC",
+  "/annual-leave-calculator": "Pay & Salary",
+  "/pro-rata-holiday-calculator": "Pay & Salary",
+  "/term-time-pay-calculator": "Pay & Salary",
+  "/overtime-calculator": "Pay & Salary",
+  "/hourly-rate-converter": "Pay & Salary",
+  "/ir35-calculator": "Business Tools",
+  "/vat-calculator": "Tax & HMRC",
+  "/annuity-calculator": "Money & Finance",
+  "/childcare-calculator": "Family & Baby",
+  "/pension-drawdown-calculator": "Money & Finance",
+  "/cms-calculator": "Family & Baby",
+  "/stone-to-kg-converter": "Converters",
+  "/kg-to-stone-converter": "Converters",
+  "/miles-to-km-converter": "Converters",
+  "/cm-to-inches-converter": "Converters",
+  "/litres-to-gallons-converter": "Converters",
+};
+
+/**
+ * The related-calculators web (22 Nov 2026): every tool page ends
+ * with the standard RelatedCalculators block linking the 3–4
+ * tools a visitor to that page is most likely to need next —
+ * leave tools to leave tools, converters to converters, employer
+ * tools to employer tools. Hand-picked per tool; titles, icons
+ * and categories are read from TOOLS_INDEX at render time, so
+ * this map only ever holds hrefs.
+ */
+export const RELATED_BY_HREF: Record<string, string[]> = {
+  "/ssp-calculator": [
+    "/annual-leave-calculator",
+    "/pro-rata-salary-calculator",
+    "/holiday-pay-calculator",
+    "/employer-cost-calculator",
+  ],
+  "/notice-period-calculator": [
+    "/redundancy-pay-calculator",
+    "/employer-cost-calculator",
+    "/annual-leave-calculator",
+    "/pro-rata-salary-calculator",
+  ],
+  "/pro-rata-salary-calculator": [
+    "/pro-rata-holiday-calculator",
+    "/hourly-rate-converter",
+    "/term-time-pay-calculator",
+    "/annual-leave-calculator",
+  ],
+  "/employer-national-insurance-calculator": [
+    "/employer-cost-calculator",
+    "/payslip-generator",
+    "/ssp-calculator",
+    "/umbrella-company-calculator",
+  ],
+  "/employer-cost-calculator": [
+    "/employer-national-insurance-calculator",
+    "/ssp-calculator",
+    "/redundancy-pay-calculator",
+    "/payslip-generator",
+  ],
+  "/nhs-maternity-pay-calculator": [
+    "/maternity-pay-calculator",
+    "/nhs-pay-calculator",
+    "/nhs-annual-leave-calculator",
+    "/paternity-pay-calculator",
+  ],
+  "/nhs-pay-calculator": [
+    "/nhs-annual-leave-calculator",
+    "/nhs-maternity-pay-calculator",
+    "/teaching-pay-calculator",
+    "/pay-rise-calculator",
+  ],
+  "/teaching-pay-calculator": [
+    "/term-time-pay-calculator",
+    "/nhs-pay-calculator",
+    "/student-loan-repayment-calculator",
+    "/pay-rise-calculator",
+  ],
+  "/nhs-annual-leave-calculator": [
+    "/annual-leave-calculator",
+    "/nhs-pay-calculator",
+    "/nhs-maternity-pay-calculator",
+    "/pro-rata-holiday-calculator",
+  ],
+  "/paternity-pay-calculator": [
+    "/maternity-pay-calculator",
+    "/nhs-maternity-pay-calculator",
+    "/childcare-calculator",
+    "/cms-calculator",
+  ],
+  "/maternity-pay-calculator": [
+    "/paternity-pay-calculator",
+    "/nhs-maternity-pay-calculator",
+    "/childcare-calculator",
+    "/annual-leave-calculator",
+  ],
+  "/redundancy-pay-calculator": [
+    "/notice-period-calculator",
+    "/employer-cost-calculator",
+    "/40k-after-tax-uk",
+    "/ssp-calculator",
+  ],
+  "/holiday-pay-calculator": [
+    "/annual-leave-calculator",
+    "/pro-rata-holiday-calculator",
+    "/overtime-calculator",
+    "/ssp-calculator",
+  ],
+  "/40k-after-tax-uk": [
+    "/payslip-calculator",
+    "/pay-rise-calculator",
+    "/hmrc-tax-code-checker",
+    "/hourly-rate-converter",
+  ],
+  "/pay-rise-calculator": [
+    "/40k-after-tax-uk",
+    "/payslip-calculator",
+    "/salary-sacrifice-calculator",
+    "/overtime-calculator",
+  ],
+  "/payslip-calculator": [
+    "/payslip-generator",
+    "/40k-after-tax-uk",
+    "/hmrc-tax-code-checker",
+    "/salary-sacrifice-calculator",
+  ],
+  "/payslip-generator": [
+    "/payslip-calculator",
+    "/employer-cost-calculator",
+    "/employer-national-insurance-calculator",
+    "/40k-after-tax-uk",
+  ],
+  "/salary-sacrifice-calculator": [
+    "/pension-drawdown-calculator",
+    "/payslip-calculator",
+    "/40k-after-tax-uk",
+    "/pay-rise-calculator",
+  ],
+  "/student-loan-repayment-calculator": [
+    "/40k-after-tax-uk",
+    "/teaching-pay-calculator",
+    "/payslip-calculator",
+    "/salary-sacrifice-calculator",
+  ],
+  "/umbrella-company-calculator": [
+    "/ir35-calculator",
+    "/employer-cost-calculator",
+    "/vat-calculator",
+    "/hourly-rate-converter",
+  ],
+  "/capital-gains-tax-calculator": [
+    "/vat-calculator",
+    "/annuity-calculator",
+    "/pension-drawdown-calculator",
+    "/hmrc-tax-code-checker",
+  ],
+  "/hmrc-tax-code-checker": [
+    "/payslip-calculator",
+    "/40k-after-tax-uk",
+    "/pay-rise-calculator",
+    "/vat-calculator",
+  ],
+  "/annual-leave-calculator": [
+    "/pro-rata-holiday-calculator",
+    "/holiday-pay-calculator",
+    "/nhs-annual-leave-calculator",
+    "/ssp-calculator",
+  ],
+  "/pro-rata-holiday-calculator": [
+    "/annual-leave-calculator",
+    "/holiday-pay-calculator",
+    "/pro-rata-salary-calculator",
+    "/term-time-pay-calculator",
+  ],
+  "/term-time-pay-calculator": [
+    "/teaching-pay-calculator",
+    "/pro-rata-salary-calculator",
+    "/pro-rata-holiday-calculator",
+    "/annual-leave-calculator",
+  ],
+  "/overtime-calculator": [
+    "/hourly-rate-converter",
+    "/holiday-pay-calculator",
+    "/pay-rise-calculator",
+    "/pro-rata-salary-calculator",
+  ],
+  "/hourly-rate-converter": [
+    "/overtime-calculator",
+    "/pro-rata-salary-calculator",
+    "/40k-after-tax-uk",
+    "/pay-rise-calculator",
+  ],
+  "/ir35-calculator": [
+    "/umbrella-company-calculator",
+    "/vat-calculator",
+    "/hourly-rate-converter",
+    "/employer-cost-calculator",
+  ],
+  "/vat-calculator": [
+    "/capital-gains-tax-calculator",
+    "/ir35-calculator",
+    "/umbrella-company-calculator",
+    "/employer-cost-calculator",
+  ],
+  "/annuity-calculator": [
+    "/pension-drawdown-calculator",
+    "/salary-sacrifice-calculator",
+    "/capital-gains-tax-calculator",
+  ],
+  "/childcare-calculator": [
+    "/cms-calculator",
+    "/maternity-pay-calculator",
+    "/paternity-pay-calculator",
+    "/term-time-pay-calculator",
+  ],
+  "/pension-drawdown-calculator": [
+    "/annuity-calculator",
+    "/salary-sacrifice-calculator",
+    "/capital-gains-tax-calculator",
+  ],
+  "/cms-calculator": [
+    "/childcare-calculator",
+    "/maternity-pay-calculator",
+    "/paternity-pay-calculator",
+    "/40k-after-tax-uk",
+  ],
+  "/stone-to-kg-converter": [
+    "/kg-to-stone-converter",
+    "/cm-to-inches-converter",
+    "/miles-to-km-converter",
+    "/litres-to-gallons-converter",
+  ],
+  "/kg-to-stone-converter": [
+    "/stone-to-kg-converter",
+    "/cm-to-inches-converter",
+    "/miles-to-km-converter",
+    "/litres-to-gallons-converter",
+  ],
+  "/miles-to-km-converter": [
+    "/litres-to-gallons-converter",
+    "/cm-to-inches-converter",
+    "/kg-to-stone-converter",
+    "/stone-to-kg-converter",
+  ],
+  "/cm-to-inches-converter": [
+    "/kg-to-stone-converter",
+    "/stone-to-kg-converter",
+    "/miles-to-km-converter",
+    "/litres-to-gallons-converter",
+  ],
+  "/litres-to-gallons-converter": [
+    "/miles-to-km-converter",
+    "/cm-to-inches-converter",
+    "/stone-to-kg-converter",
+    "/kg-to-stone-converter",
+  ],
+  "/us/texas-paycheck-calculator": [
+    "/us/ohio-paycheck-calculator",
+    "/40k-after-tax-uk",
+    "/au/tax-rate-calculator",
+  ],
+  "/us/ohio-paycheck-calculator": [
+    "/us/texas-paycheck-calculator",
+    "/40k-after-tax-uk",
+    "/au/tax-rate-calculator",
+  ],
+  "/au/tax-rate-calculator": [
+    "/40k-after-tax-uk",
+    "/us/texas-paycheck-calculator",
+    "/us/ohio-paycheck-calculator",
+  ],
 };
 
 const KEYWORDS_BY_HREF: Record<string, string> = {
@@ -118,8 +380,9 @@ export interface ToolIndexEntry {
 function categoryFor(href: string, flag: string): string {
   if (flag === "🇺🇸") return "US";
   if (flag === "🇦🇺") return "Australia";
+  if (CATEGORY_BY_HREF[href]) return CATEGORY_BY_HREF[href];
   if (href.includes("converter")) return "Converters";
-  return CATEGORY_BY_HREF[href] ?? "Pay & Tax";
+  return "Pay & Salary";
 }
 
 export const TOOLS_INDEX: ToolIndexEntry[] = AppConfig.nav
