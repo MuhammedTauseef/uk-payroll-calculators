@@ -60,6 +60,12 @@ export const AppConfig = {
       icon: "🏥",
       flag: "🇬🇧",
     },
+    {
+      href: "/teaching-pay-calculator",
+      label: "Teaching Pay",
+      icon: "🍎",
+      flag: "🇬🇧",
+    },
     { href: "/vat-calculator", label: "VAT Calculator", icon: "🧮", flag: "🇬🇧" },
     { href: "/cms-calculator", label: "CMS Calculator", icon: "👨‍👧", flag: "🇬🇧" },
     { href: "/annuity-calculator", label: "Annuity Calculator", icon: "🏦", flag: "🇬🇧" },
