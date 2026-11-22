@@ -17,6 +17,7 @@ import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedGuides from "@/components/RelatedGuides";
 
 export const metadata: Metadata = pageMetadata(
   "/us/texas-paycheck-calculator",
@@ -514,6 +515,16 @@ export default function TexasPaycheckCalculatorPage() {
       </section>
 
       <RelatedCalculators href="/us/texas-paycheck-calculator" />
+      <RelatedGuides
+        guides={[
+          {
+            href: "/blog/take-home-pay",
+            title: "Take-Home Pay, Explained",
+            description:
+              "Our in-depth guide to how take-home pay is figured — what comes off before an employee is paid, and how to check a payslip line by line.",
+          },
+        ]}
+      />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

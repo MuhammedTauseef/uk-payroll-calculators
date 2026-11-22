@@ -54,6 +54,8 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/umbrella-company-calculator": "Business Tools",
   "/capital-gains-tax-calculator": "Tax & HMRC",
   "/hmrc-tax-code-checker": "Tax & HMRC",
+  "/marriage-allowance-calculator": "Tax & HMRC",
+  "/day-rate-calculator": "Pay & Salary",
   "/annual-leave-calculator": "Pay & Salary",
   "/pro-rata-holiday-calculator": "Pay & Salary",
   "/term-time-pay-calculator": "Pay & Salary",
@@ -162,7 +164,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
   ],
   "/40k-after-tax-uk": [
     "/payslip-calculator",
-    "/pay-rise-calculator",
+    "/marriage-allowance-calculator",
     "/hmrc-tax-code-checker",
     "/hourly-rate-converter",
   ],
@@ -176,7 +178,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/payslip-generator",
     "/40k-after-tax-uk",
     "/hmrc-tax-code-checker",
-    "/salary-sacrifice-calculator",
+    "/marriage-allowance-calculator",
   ],
   "/payslip-generator": [
     "/payslip-calculator",
@@ -199,7 +201,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
   "/umbrella-company-calculator": [
     "/ir35-calculator",
     "/employer-cost-calculator",
-    "/vat-calculator",
+    "/day-rate-calculator",
     "/hourly-rate-converter",
   ],
   "/capital-gains-tax-calculator": [
@@ -212,7 +214,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/payslip-calculator",
     "/40k-after-tax-uk",
     "/pay-rise-calculator",
-    "/vat-calculator",
+    "/marriage-allowance-calculator",
   ],
   "/annual-leave-calculator": [
     "/pro-rata-holiday-calculator",
@@ -242,12 +244,12 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/overtime-calculator",
     "/pro-rata-salary-calculator",
     "/40k-after-tax-uk",
-    "/pay-rise-calculator",
+    "/day-rate-calculator",
   ],
   "/ir35-calculator": [
     "/umbrella-company-calculator",
     "/vat-calculator",
-    "/hourly-rate-converter",
+    "/day-rate-calculator",
     "/employer-cost-calculator",
   ],
   "/vat-calculator": [
@@ -323,6 +325,18 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/us/texas-paycheck-calculator",
     "/us/ohio-paycheck-calculator",
   ],
+  "/day-rate-calculator": [
+    "/ir35-calculator",
+    "/umbrella-company-calculator",
+    "/hourly-rate-converter",
+    "/employer-cost-calculator",
+  ],
+  "/marriage-allowance-calculator": [
+    "/hmrc-tax-code-checker",
+    "/payslip-calculator",
+    "/40k-after-tax-uk",
+    "/salary-sacrifice-calculator",
+  ],
 };
 
 const KEYWORDS_BY_HREF: Record<string, string> = {
@@ -353,6 +367,8 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/term-time-pay-calculator": "term time only pay school staff tto",
   "/overtime-calculator": "overtime pay rate extra hours",
   "/hourly-rate-converter": "hourly rate to salary salary to hourly wage",
+  "/day-rate-calculator": "day rate contractor daily rate salary equivalent freelance interim",
+  "/marriage-allowance-calculator": "marriage allowance married couples tax allowance transfer 1260 save 252",
   "/ir35-calculator": "ir35 off payroll contractor status",
   "/vat-calculator": "vat value added tax add remove 20%",
   "/annuity-calculator": "annuity pension income retirement",

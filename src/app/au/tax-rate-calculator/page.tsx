@@ -14,6 +14,7 @@ import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedGuides from "@/components/RelatedGuides";
 
 export const metadata: Metadata = pageMetadata(
   "/au/tax-rate-calculator",
@@ -368,6 +369,16 @@ export default function AuTaxRateCalculatorPage() {
       </section>
 
       <RelatedCalculators href="/au/tax-rate-calculator" />
+      <RelatedGuides
+        guides={[
+          {
+            href: "/blog/take-home-pay",
+            title: "Take-Home Pay, Explained",
+            description:
+              "Our in-depth guide to how take-home pay is figured — what comes off before an employee is paid, and how to check a payslip line by line.",
+          },
+        ]}
+      />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

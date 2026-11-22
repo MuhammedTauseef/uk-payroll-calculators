@@ -248,6 +248,58 @@ export const EMPLOYEE_NI = {
   additionalRate: 0.02,
 } as const;
 
+/**
+ * Marriage Allowance — 2026/27.
+ *
+ * Verified against GOV.UK ("Marriage Allowance: How it works" and
+ * the Marriage Allowance application service) on 22 November 2026:
+ *   - The lower earner transfers £1,260 of their Personal
+ *     Allowance (10% of £12,570, rounded up) to their spouse or
+ *     civil partner, cutting the recipient's tax by up to £252
+ *     (20% of £1,260) in the tax year.
+ *   - The transferor's own allowance falls to £11,310, so a
+ *     transferor earning between £11,310 and £12,570 starts
+ *     paying tax on the slice above £11,310.
+ *   - Conditions: married or in a civil partnership; the
+ *     transferor's income below the Personal Allowance; the
+ *     recipient a basic-rate taxpayer — income £12,571 to
+ *     £50,270 in England, Wales and Northern Ireland, or
+ *     £12,571 to £43,662 in Scotland (starter, basic or
+ *     intermediate rate).
+ *   - Claims can be backdated to 6 April 2022 (the 2022/23 tax
+ *     year). The Personal Allowance and the £1,260 transfer were
+ *     the same in every year back to 2022/23, so each backdated
+ *     year is worth up to £252; the 2022/23 claim deadline is
+ *     5 April 2027.
+ *   - Tax codes after a claim: 1383M for the recipient, 1131N
+ *     for the transferor.
+ *   - Couples where one partner was born before 6 April 1935
+ *     may do better with Married Couple's Allowance instead;
+ *     the two cannot be claimed together.
+ */
+export const MARRIAGE_ALLOWANCE = {
+  /** Amount of Personal Allowance transferred, £/year. */
+  transferAmount: 1260,
+  /** Maximum tax saving for the recipient, £/year (20% of the transfer). */
+  maxSaving: 252,
+  /** Transferor's Personal Allowance after the transfer, £/year. */
+  transferorAllowanceAfter: 11310,
+  /** Top of the recipient's basic-rate band, England/Wales/NI, £/year. */
+  recipientLimitEWNI: 50270,
+  /** Top of the recipient's intermediate band, Scotland, £/year. */
+  recipientLimitScotland: 43662,
+  /** Tax codes HMRC issues after a successful claim. */
+  recipientTaxCode: "1383M",
+  transferorTaxCode: "1131N",
+  /** Backdatable tax years, oldest first, with each year's maximum saving. */
+  backdateYears: [
+    { label: "2022/23", maxSaving: 252, claimDeadline: "5 April 2027" },
+    { label: "2023/24", maxSaving: 252, claimDeadline: "5 April 2028" },
+    { label: "2024/25", maxSaving: 252, claimDeadline: "5 April 2029" },
+    { label: "2025/26", maxSaving: 252, claimDeadline: "5 April 2030" },
+  ],
+} as const;
+
 /** Dating label for take-home (PAYE) figures (2026/27 — GOV.UK-verified). */
 export const PAYE_RATES_LABEL = "2026/27 rates — verified against GOV.UK";
 

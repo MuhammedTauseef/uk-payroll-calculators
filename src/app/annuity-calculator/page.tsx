@@ -13,6 +13,7 @@ import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
 import ShareButtons from "@/components/ShareButtons";
 import RelatedCalculators from "@/components/RelatedCalculators";
+import RelatedGuides from "@/components/RelatedGuides";
 
 export const metadata: Metadata = pageMetadata(
   "/annuity-calculator",
@@ -708,6 +709,16 @@ export default function AnnuityCalculatorPage() {
       </section>
 
       <RelatedCalculators href="/annuity-calculator" />
+      <RelatedGuides
+        guides={[
+          {
+            href: "/blog/pension-annuity-comparison-uk",
+            title: "Pension Annuity Comparison UK",
+            description:
+              "Our full guide to comparing annuity providers and options — what changes the quote, and how to shop the open market properly.",
+          },
+        ]}
+      />
       <ShareButtons />
       <ReviewCard />
       <SubscribeBox />

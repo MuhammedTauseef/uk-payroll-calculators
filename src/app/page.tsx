@@ -527,6 +527,15 @@ const CALCULATORS = [
     linkText: "Open the tax code checker →",
   },
   {
+    href: "/marriage-allowance-calculator",
+    icon: <MaternityIcon />,
+    title: "Marriage Allowance Calculator",
+    description:
+      "Check whether transferring £1,260 of Personal Allowance to your spouse or civil partner saves you tax — the real couple figure, both sides of the transfer worked.",
+    audience: "Includes backdating to 2022/23, worth up to £1,008 on top of this year's £252.",
+    linkText: "Open the marriage allowance calculator →",
+  },
+  {
     href: "/annual-leave-calculator",
     icon: <AnnualLeaveIcon />,
     title: "Annual Leave Calculator",
@@ -561,6 +570,15 @@ const CALCULATORS = [
       "Convert an hourly rate to a salary — and a salary back to an hourly rate — at your actual hours and weeks.",
     audience: "Monthly and weekly figures shown alongside.",
     linkText: "Open the hourly rate converter →",
+  },
+  {
+    href: "/day-rate-calculator",
+    icon: <PayRiseIcon />,
+    title: "Day Rate Calculator",
+    description:
+      "Turn a contractor day rate into a yearly, monthly and hourly figure — or a salary into the day rate it needs — on your own billable days.",
+    audience: "With a take-home estimate on the 2026/27 tax rules, and the benefits uplift shown, not hidden.",
+    linkText: "Open the day rate calculator →",
   },
   {
     href: "/ir35-calculator",

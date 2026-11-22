@@ -124,6 +124,12 @@ export const AppConfig = {
       flag: "🇬🇧",
     },
     { href: "/hmrc-tax-code-checker", label: "Tax Code Checker", icon: "🏷️", flag: "🇬🇧" },
+    {
+      href: "/marriage-allowance-calculator",
+      label: "Marriage Allowance Calculator",
+      icon: "💍",
+      flag: "🇬🇧",
+    },
     { href: "/annual-leave-calculator", label: "Annual Leave", icon: "🌴", flag: "🇬🇧" },
     {
       href: "/pro-rata-holiday-calculator",
@@ -142,6 +148,12 @@ export const AppConfig = {
       href: "/hourly-rate-converter",
       label: "Hourly Rate Converter",
       icon: "🔁",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/day-rate-calculator",
+      label: "Day Rate Calculator",
+      icon: "📅",
       flag: "🇬🇧",
     },
     {
