@@ -253,6 +253,15 @@ function StudentLoanIcon() {
   );
 }
 
+function TeachingIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z" />
+      <path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5" />
+    </svg>
+  );
+}
+
 function UmbrellaIcon() {
   return (
     <svg {...iconProps}>
@@ -439,6 +448,14 @@ const CALCULATORS = [
     linkText: "Open the NHS pay calculator →",
   },
   {
+    href: "/teaching-pay-calculator",
+    icon: <TeachingIcon />,
+    title: "Teaching Pay Calculator",
+    description:
+      "Teacher take-home pay on the STPCD scales for England: every pay point in all four regions for 2025/26 and 2026/27, with TLR and SEN allowances, Teachers' Pension tiers, your own tax code and student loans — M1 starts at £34,069, worth £2,169.37 a month after deductions.",
+    linkText: "Open the teaching pay calculator →",
+  },
+  {
     href: "/paternity-pay-calculator",
     icon: <PaternityIcon />,
     title: "Paternity Pay Calculator",
@@ -503,12 +520,28 @@ const CALCULATORS = [
     linkText: "Open the annual leave calculator →",
   },
   {
+    href: "/nhs-annual-leave-calculator",
+    icon: <AnnualLeaveIcon />,
+    title: "NHS Annual Leave Calculator",
+    description:
+      "NHS annual leave under Agenda for Change: 27, 29 or 33 days plus public holidays by length of service, in days and hours — pro-rata for part-time staff, starters and leavers, for all four nations.",
+    linkText: "Open the NHS annual leave calculator →",
+  },
+  {
     href: "/overtime-calculator",
     icon: <OvertimeIcon />,
     title: "Overtime Calculator",
     description:
       "Work out overtime pay at the rate in your contract — flat, time and a quarter, time and a half or double time — from an hourly rate or a salary, with a National Minimum Wage check on your average pay.",
     linkText: "Open the overtime calculator →",
+  },
+  {
+    href: "/hourly-rate-converter",
+    icon: <ConverterIcon />,
+    title: "Hourly Rate Converter",
+    description:
+      "Convert an hourly rate to a salary — and a salary back to an hourly rate — at your actual hours and weeks, with monthly and weekly figures alongside.",
+    linkText: "Open the hourly rate converter →",
   },
   {
     href: "/ir35-calculator",
