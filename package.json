@@ -48,6 +48,7 @@
     "verify:term-time": "node scripts/verify-term-time.ts",
     "verify:salary-sacrifice": "node scripts/verify-salary-sacrifice.ts",
     "verify:payslip-calculator": "node scripts/verify-payslip-calculator.ts",
+    "verify:reverse-salary": "node scripts/verify-reverse-salary.ts",
     "verify:umbrella": "node scripts/verify-umbrella.ts",
     "verify:student-loan": "node scripts/verify-student-loan.ts",
     "verify:capital-gains": "node scripts/verify-capital-gains.ts",

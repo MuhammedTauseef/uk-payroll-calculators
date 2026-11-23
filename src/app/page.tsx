@@ -771,6 +771,15 @@ const CALCULATORS = [
     linkText: "Open the payslip calculator →",
   },
   {
+    href: "/reverse-salary-calculator",
+    icon: <TakeHomeIcon />,
+    title: "Required Salary Calculator",
+    description:
+      "The reverse salary calculator: name the take-home pay you need — or build it from your rent, bills and savings goal — and see the gross salary that produces it in 2026/27.",
+    audience: "Solved to the penny, with the full breakdown at that salary.",
+    linkText: "Open the required salary calculator →",
+  },
+  {
     href: "/pay-rise-calculator",
     icon: <PayRiseIcon />,
     title: "Pay Rise Calculator",

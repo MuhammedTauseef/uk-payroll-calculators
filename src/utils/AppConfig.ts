@@ -98,6 +98,7 @@ export const AppConfig = {
     { href: "/40k-after-tax-uk", label: "Take-Home Pay", icon: "💰", flag: "🇬🇧" },
     { href: "/pay-rise-calculator", label: "Pay Rise Calculator", icon: "📊", flag: "🇬🇧" },
     { href: "/payslip-calculator", label: "Payslip Calculator", icon: "🧮", flag: "🇬🇧" },
+    { href: "/reverse-salary-calculator", label: "Required Salary Calculator", icon: "🎯", flag: "🇬🇧" },
     { href: "/payslip-generator", label: "Payslip Generator", icon: "🧾", flag: "🇬🇧" },
     {
       href: "/salary-sacrifice-calculator",
