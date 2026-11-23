@@ -13,7 +13,7 @@ export const AppConfig = {
   siteUrl: "https://payrollcalc.co.uk",
   tagline: "Free UK employer & payroll calculators",
   description:
-    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, maternity pay, NHS pay, paternity pay, redundancy pay, holiday pay, take-home pay, a payslip generator, a payslip calculator, a tax code checker, an annual leave calculator, an NHS annual leave calculator, a pro-rata holiday calculator, a term-time pay calculator, a salary sacrifice calculator, a student loan repayment calculator, an umbrella company calculator, a capital gains tax calculator, an overtime calculator, an hourly rate converter, an IR35 calculator, a VAT calculator, a CMS child maintenance calculator, an annuity calculator, a childcare calculator, an adjusted net income calculator, a pension drawdown calculator, a pay rise calculator, and five unit converters — stone to kg, kg to stone, miles to km, cm to inches and litres to gallons — April 2026 rules.",
+    "Free UK payroll calculators: SSP, notice period, pro-rata salary, employer NI, NHS maternity pay, maternity pay, NHS pay, paternity pay, redundancy pay, holiday pay, take-home pay, a payslip generator, a payslip calculator, a tax code checker, an annual leave calculator, an NHS annual leave calculator, a pro-rata holiday calculator, a term-time pay calculator, a salary sacrifice calculator, a student loan repayment calculator, an umbrella company calculator, a capital gains tax calculator, an overtime calculator, an hourly rate converter, an IR35 calculator, a VAT calculator, a CMS child maintenance calculator, an annuity calculator, a childcare calculator, an adjusted net income calculator, a shared parental leave calculator, a pension drawdown calculator, a pay rise calculator, and five unit converters — stone to kg, kg to stone, miles to km, cm to inches and litres to gallons — April 2026 rules.",
   locale: "en-GB",
   nav: [
     { href: "/", label: "Home", icon: "🏠", flag: "" },
@@ -82,6 +82,12 @@ export const AppConfig = {
       href: "/maternity-pay-calculator",
       label: "Maternity Pay",
       icon: "🤱",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/shared-parental-leave-calculator",
+      label: "Shared Parental Leave",
+      icon: "👨‍👩‍👧",
       flag: "🇬🇧",
     },
     {

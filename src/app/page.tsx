@@ -189,6 +189,16 @@ function MaternityPayIcon() {
   );
 }
 
+function SplIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="7" cy="7" r="2.6" />
+      <circle cx="17" cy="7" r="2.6" />
+      <path d="M2.5 20c.5-3.4 2.2-5 4.5-5s4 1.6 4.5 5M13 20c.5-3.4 2.2-5 4.5-5s4 1.6 4.5 5" />
+    </svg>
+  );
+}
+
 function RedundancyIcon() {
   return (
     <svg {...iconProps}>
@@ -580,6 +590,15 @@ const CALCULATORS = [
       "Statutory Maternity Pay from your salary and due date: 6 weeks at 90% of average weekly earnings, then 33 weeks at £194.32 — £10,151.02 in total on a £36,000 salary.",
     audience: "With eligibility checks, your key dates and a month-by-month breakdown.",
     linkText: "Open the maternity pay calculator →",
+  },
+  {
+    href: "/shared-parental-leave-calculator",
+    icon: <SplIcon />,
+    title: "Shared Parental Leave Calculator",
+    description:
+      "Plan shared parental leave from your due date: both parents' blocks with real dates, the 8-week notice deadline for each block, the first-birthday cut-off, and shared parental pay at £194.32 a week in 2026/27.",
+    audience: "Shows the pool the mother creates (up to 50 weeks of leave, 37 of pay), what each parent gets, and whether sharing costs the household anything.",
+    linkText: "Open the shared parental leave calculator →",
   },
   {
     href: "/redundancy-pay-calculator",
