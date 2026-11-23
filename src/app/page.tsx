@@ -654,6 +654,15 @@ const CALCULATORS = [
     linkText: "Open the side hustle tax calculator →",
   },
   {
+    href: "/adjusted-net-income-calculator",
+    icon: <TaxCodeIcon />,
+    title: "Adjusted Net Income Calculator",
+    description:
+      "Work out your adjusted net income (ANI) — total taxable income less grossed-up pension contributions and Gift Aid — and what it does to your Child Benefit charge and Personal Allowance at the £100k tax trap.",
+    audience: "Shows where you land against the £60,000, £80,000, £100,000 and £125,140 lines, and the extra pension contribution that brings you back under £100,000.",
+    linkText: "Open the adjusted net income calculator →",
+  },
+  {
     href: "/annual-leave-calculator",
     icon: <AnnualLeaveIcon />,
     title: "Annual Leave Calculator",
