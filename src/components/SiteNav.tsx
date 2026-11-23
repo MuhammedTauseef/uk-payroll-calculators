@@ -78,8 +78,9 @@ export default function SiteNav() {
   const ukItems = AppConfig.nav.filter((item) => item.flag === "🇬🇧");
   const usItems = AppConfig.nav.filter((item) => item.flag === "🇺🇸");
   const auItems = AppConfig.nav.filter((item) => item.flag === "🇦🇺");
+  const chItems = AppConfig.nav.filter((item) => item.flag === "🇨🇭");
   const calculatorHrefs = new Set(
-    [...ukItems, ...usItems, ...auItems].map((item) => item.href),
+    [...ukItems, ...usItems, ...auItems, ...chItems].map((item) => item.href),
   );
   const panelActive = calculatorHrefs.has(pathname);
 
@@ -216,6 +217,10 @@ export default function SiteNav() {
                   AU Calculators 🇦🇺
                 </p>
                 <ul className="mt-2">{auItems.map(renderPanelLink)}</ul>
+                <p className={`${GROUP_HEADING_CLASS} mt-5`}>
+                  CH Calculators 🇨🇭
+                </p>
+                <ul className="mt-2">{chItems.map(renderPanelLink)}</ul>
                 <p className="px-2 pt-4 text-xs leading-relaxed text-slate-400 dark:text-slate-500">
                   New calculators are added as each country&apos;s rules
                   are verified.

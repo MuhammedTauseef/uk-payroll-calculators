@@ -25,10 +25,21 @@ export default function MobileNav() {
     { heading: "UK Calculators 🇬🇧", flag: "🇬🇧" },
     { heading: "US Calculators 🇺🇸", flag: "🇺🇸" },
     { heading: "AU Calculators 🇦🇺", flag: "🇦🇺" },
+    { heading: "CH Calculators 🇨🇭", flag: "🇨🇭" },
   ].map((group) => ({
     ...group,
     items: AppConfig.nav.filter((item) => item.flag === group.flag),
   }));
+
+  // Accordion: one country group open at a time, so the panel opens
+  // short instead of one long scroll. The group holding the current
+  // page starts open; on pages outside the groups, the UK group does.
+  const [openGroup, setOpenGroup] = useState<string>(() => {
+    const current = groups.find((group) =>
+      group.items.some((item) => item.href === pathname),
+    );
+    return current ? current.flag : "🇬🇧";
+  });
 
   const renderRow = (item: (typeof AppConfig.nav)[number]) => {
     const active = pathname === item.href;
@@ -121,14 +132,34 @@ export default function MobileNav() {
         >
           <ul className="mx-auto w-full max-w-6xl px-4 py-2">
             {home && renderRow(home)}
-            {groups.map((group) => (
-              <li key={group.heading}>
-                <p className="px-3 pt-4 pb-1 text-xs font-semibold tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                  {group.heading}
-                </p>
-                <ul>{group.items.map(renderRow)}</ul>
-              </li>
-            ))}
+            {groups.map((group) => {
+              const expanded = openGroup === group.flag;
+              return (
+                <li key={group.heading}>
+                  <button
+                    type="button"
+                    aria-expanded={expanded}
+                    onClick={() => setOpenGroup(expanded ? "" : group.flag)}
+                    className="flex min-h-11 w-full items-center px-3 pt-2 text-xs font-semibold tracking-wider text-slate-400 uppercase dark:text-slate-500"
+                  >
+                    {group.heading}
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`ml-auto h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.17l3.71-3.94a.75.75 0 1 1 1.08 1.04l-4.25 4.5a.75.75 0 0 1-1.08 0l-4.25-4.5a.75.75 0 0 1-.02-1.06Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {expanded && <ul>{group.items.map(renderRow)}</ul>}
+                </li>
+              );
+            })}
             {blog && renderRow(blog)}
           </ul>
         </nav>
