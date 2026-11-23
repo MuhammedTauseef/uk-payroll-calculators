@@ -59,6 +59,7 @@
     "verify:pay-rise": "node scripts/verify-pay-rise.ts",
     "verify:childcare": "node scripts/verify-childcare.ts",
     "verify:ani": "node scripts/verify-adjusted-net-income.ts",
+    "verify:taper": "node scripts/verify-tapered-annual-allowance.ts",
     "verify:spl": "node scripts/verify-shared-parental-leave.ts",
     "verify:nhs-annual-leave": "node scripts/verify-nhs-annual-leave.ts",
     "verify:teacher-pay": "node scripts/verify-teacher-pay.ts"

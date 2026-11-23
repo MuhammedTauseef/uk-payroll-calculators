@@ -83,6 +83,7 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/annuity-calculator": "Money & Finance",
   "/childcare-calculator": "Family & Baby",
   "/adjusted-net-income-calculator": "Tax & HMRC",
+  "/tapered-annual-allowance-calculator": "Tax & HMRC",
   "/pension-drawdown-calculator": "Money & Finance",
   "/cms-calculator": "Family & Baby",
   "/stone-to-kg-converter": "Converters",
@@ -309,10 +310,17 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/term-time-pay-calculator",
   ],
   "/adjusted-net-income-calculator": [
+    "/tapered-annual-allowance-calculator",
     "/childcare-calculator",
     "/salary-sacrifice-calculator",
     "/40k-after-tax-uk",
     "/pension-drawdown-calculator",
+  ],
+  "/tapered-annual-allowance-calculator": [
+    "/adjusted-net-income-calculator",
+    "/pension-drawdown-calculator",
+    "/salary-sacrifice-calculator",
+    "/annuity-calculator",
   ],
   "/pension-drawdown-calculator": [
     "/annuity-calculator",
@@ -494,6 +502,7 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/vat-calculator": "vat value added tax add remove 20%",
   "/annuity-calculator": "annuity pension income retirement",
   "/adjusted-net-income-calculator": "adjusted net income ani 100k tax trap child benefit charge personal allowance grossed up pension gift aid",
+  "/tapered-annual-allowance-calculator": "tapered annual allowance pension taper threshold income adjusted income carry forward mpaa high earner pension tax",
   "/childcare-calculator": "childcare tax free childcare hours funding",
   "/pension-drawdown-calculator": "pension drawdown flexi access income",
   "/cms-calculator": "child maintenance service cms child support",

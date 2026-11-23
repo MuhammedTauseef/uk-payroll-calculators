@@ -71,6 +71,7 @@ export const AppConfig = {
     { href: "/annuity-calculator", label: "Annuity Calculator", icon: "🏦", flag: "🇬🇧" },
     { href: "/childcare-calculator", label: "Tax-Free Childcare Calculator", icon: "🧸", flag: "🇬🇧" },
     { href: "/adjusted-net-income-calculator", label: "Adjusted Net Income Calculator", icon: "💷", flag: "🇬🇧" },
+    { href: "/tapered-annual-allowance-calculator", label: "Tapered Annual Allowance Calculator", icon: "📉", flag: "🇬🇧" },
     { href: "/pension-drawdown-calculator", label: "Pension Drawdown", icon: "📉", flag: "🇬🇧" },
     {
       href: "/paternity-pay-calculator",

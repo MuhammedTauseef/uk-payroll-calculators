@@ -682,6 +682,15 @@ const CALCULATORS = [
     linkText: "Open the adjusted net income calculator →",
   },
   {
+    href: "/tapered-annual-allowance-calculator",
+    icon: <DrawdownIcon />,
+    title: "Tapered Annual Allowance Calculator",
+    description:
+      "Work out your threshold income and adjusted income from your pay and pension inputs — then your tapered annual allowance, carry forward from the last three years, and the personal contribution that switches the taper off.",
+    audience: "For 2025/26 and 2026/27, with the £10,000 MPAA comparison if you have flexibly accessed a pension, and the tax charge on any excess.",
+    linkText: "Open the tapered annual allowance calculator →",
+  },
+  {
     href: "/annual-leave-calculator",
     icon: <AnnualLeaveIcon />,
     title: "Annual Leave Calculator",

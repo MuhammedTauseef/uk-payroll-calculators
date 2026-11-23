@@ -414,8 +414,14 @@ export default function AdjustedNetIncomeCalculatorPage() {
             £8,000, deduct £10,000), workplace net-pay contributions
             come off £1 for £1, and both restore Personal Allowance and
             childcare eligibility as well as cutting the Child Benefit
-            charge. Watch the £60,000 annual allowance — it tapers for
-            very high earners.
+            charge. Watch the £60,000 annual allowance — for very high
+            earners it tapers away between adjusted income of £260,000
+            and £360,000, and the{" "}
+            <Link href="/tapered-annual-allowance-calculator" className={linkClass}>
+              tapered annual allowance calculator
+            </Link>{" "}
+            works out your threshold and adjusted income and the
+            contribution that switches that taper off.
           </li>
           <li>
             <strong>Use salary sacrifice.</strong> Sacrificed pay never
