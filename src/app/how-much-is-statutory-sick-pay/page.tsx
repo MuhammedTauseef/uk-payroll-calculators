@@ -10,7 +10,6 @@ import {
   type GuideFaq,
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
-import { ceil2 } from "@/lib/ssp";
 
 export const metadata = pageMetadata(
   "/how-much-is-statutory-sick-pay",
@@ -100,43 +99,19 @@ export default function HowMuchIsStatutorySickPayPage() {
           How much is SSP per day?
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-          SSP is worked out as a weekly amount but paid by the day. The
+          SSP is worked out as a weekly amount but paid by the day: the
           daily rate is the weekly amount divided by your qualifying days —
-          the days of the week you normally work. At the full flat rate, the
-          daily amounts look like this:
-        </p>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
-          <table className="w-full text-left text-sm table-stack">
-            <thead>
-              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
-                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
-                  Qualifying days per week
-                </th>
-                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
-                  Daily SSP at the flat rate
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-              {[1, 2, 3, 4, 5, 6, 7].map((d) => (
-                <tr key={d}>
-                  <td className="px-4 py-2">
-                    {d} day{d > 1 ? "s" : ""} a week
-                  </td>
-                  {/* Daily rates rounded UP to the penny, matching
-                      GOV.UK's "amounts to pay" tables and the SSP
-                      calculator (audit F2): plain formatting left the
-                      3-day row a penny low (£41.09 is correct). */}
-                  <td className="px-4 py-2">{gbp.format(ceil2(SSP.weeklyCap / d))}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-          If your weekly amount is the {SSP.aweFraction * 100}%-of-earnings
-          figure rather than the flat rate, divide that amount by your
-          qualifying days instead — the method is identical.
+          the days of the week you normally work. A Monday-to-Friday worker
+          on the full flat rate gets {gbp.format(24.65)} a day. Our guide
+          to{" "}
+          <Link
+            href="/how-much-is-ssp-per-week#ssp-daily"
+            className="font-medium text-brand-800 dark:text-brand-300 underline"
+          >
+            how much SSP is daily
+          </Link>{" "}
+          has the full daily table for every working pattern, from one to
+          seven qualifying days.
         </p>
       </section>
 

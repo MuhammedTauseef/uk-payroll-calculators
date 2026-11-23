@@ -10,6 +10,7 @@ import {
   type GuideFaq,
 } from "@/components/GuideSections";
 import { SSP } from "@/lib/rates";
+import { ceil2 } from "@/lib/ssp";
 
 export const metadata = pageMetadata(
   "/how-much-is-ssp-per-week",
@@ -147,6 +148,51 @@ export default function HowMuchIsSspPerWeekPage() {
         </p>
       </section>
 
+      <section className="space-y-3" id="ssp-daily">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How much is SSP daily?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          SSP per day is the weekly amount divided by your qualifying days
+          — the days you normally work. At the full flat rate of{" "}
+          {gbp.format(SSP.weeklyCap)} a week, a Monday-to-Friday worker
+          gets {gbp.format(24.65)} a day. Fewer qualifying days means a
+          higher daily rate, paid on fewer days, as this table shows:
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Qualifying days per week
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Daily SSP at the flat rate
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {[1, 2, 3, 4, 5, 6, 7].map((d) => (
+                <tr key={d}>
+                  <td className="px-4 py-2">
+                    {d} day{d > 1 ? "s" : ""} a week
+                  </td>
+                  {/* Daily rates rounded UP to the penny, matching
+                      GOV.UK's "amounts to pay" tables and the SSP
+                      calculator (audit F2). */}
+                  <td className="px-4 py-2">{gbp.format(ceil2(SSP.weeklyCap / d))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          If your weekly amount is the {SSP.aweFraction * 100}%-of-earnings
+          figure rather than the flat rate, divide that amount by your
+          qualifying days instead — the method is identical.
+        </p>
+      </section>
+
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What if I am off for only part of a week?
@@ -160,14 +206,8 @@ export default function HowMuchIsSspPerWeekPage() {
           {gbp.format(24.65)}, so two days off sick pays{" "}
           {gbp.format(49.3)}. Days you would not normally work are never
           paid: a weekend in the middle of a spell does not add anything for
-          a Monday-to-Friday worker. Our guide to{" "}
-          <Link
-            href="/how-much-is-statutory-sick-pay"
-            className="font-medium text-brand-800 dark:text-brand-300 underline"
-          >
-            how much SSP is
-          </Link>{" "}
-          covers the daily amounts for every working pattern.
+          a Monday-to-Friday worker. The daily table above shows the rate
+          for every working pattern.
         </p>
       </section>
 

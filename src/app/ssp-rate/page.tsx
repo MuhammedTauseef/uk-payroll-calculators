@@ -137,14 +137,15 @@ export default function SspRatePage() {
           3) — a higher daily rate, but paid on fewer days, so a full week
           of sickness still comes to the same {gbp.format(SSP.weeklyCap)}.
           If the {SSP.aweFraction * 100}%-of-earnings figure is the weekly
-          amount, divide that figure by the qualifying days instead. The{" "}
+          amount, divide that figure by the qualifying days instead. The
+          full daily table for every working pattern is in our guide to{" "}
           <Link
-            href="/how-is-ssp-calculated"
+            href="/how-much-is-ssp-per-week#ssp-daily"
             className="font-medium text-brand-800 dark:text-brand-300 underline"
           >
-            step-by-step calculation guide
-          </Link>{" "}
-          shows the full method.
+            how much SSP is daily
+          </Link>
+          .
         </p>
       </section>
 
