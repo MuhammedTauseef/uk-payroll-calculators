@@ -47,6 +47,28 @@ const WEEK_ROWS = [38, 39, 40].map((weeks) => ({
   }),
 }));
 
+// "Term time only + 2 weeks" on the same £24,000 FTE: 39 term weeks
+// plus 2 extra working weeks (INSET, training and similar) = 41
+// working weeks, run through the same engine.
+const exPlusTwo = calculateTermTime({
+  fteAnnualSalary: 24000,
+  workingWeeksPerYear: 41,
+  fullTimeHoursPerWeek: 37.5,
+  contractedHoursPerWeek: 37.5,
+});
+
+// Level 3 teaching assistant example — an EXAMPLE full-time salary
+// only (schools and councils grade Level 3 posts differently, so
+// there is no single national figure to quote): £28,000 FTE,
+// 39 working weeks, 32.5 contracted hours against a 37.5-hour
+// full-time pattern.
+const exLevel3 = calculateTermTime({
+  fteAnnualSalary: 28000,
+  workingWeeksPerYear: 39,
+  fullTimeHoursPerWeek: 37.5,
+  contractedHoursPerWeek: 32.5,
+});
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How do you calculate term time pay?",
@@ -72,6 +94,21 @@ const FAQS: { question: string; answer: string }[] = [
     question: "What is the difference between term-time only and part-time?",
     answer:
       "They are different reductions. Part-time reduces the hours or days in each week, all year round. Term-time only reduces the weeks in the year, usually at full weekly hours. Some jobs are both — part-time hours in term weeks only — and then both reductions apply: the weeks calculation on this page, scaled by the hours fraction. Our pro-rata salary calculator covers the part-time side.",
+  },
+  {
+    question: "Do term-time workers get annual leave?",
+    answer:
+      "Yes. Term-time (part-year) workers are entitled to paid annual leave like everyone else — the statutory minimum is 5.6 weeks a year. For leave years beginning on or after 1 April 2024, GOV.UK's accrual method for part-year and irregular-hours workers builds that leave up at 12.07% of the hours worked, capped at 5.6 weeks: on a 39-week full-time pattern that works out at 4.71 weeks of holiday, which is the uplift built into every figure on this page. In practice the leave is taken during the school closures, because leave during term time is normally not possible under a term-time contract.",
+  },
+  {
+    question: "What does term time only + 2 weeks mean?",
+    answer:
+      "It means the contract covers the term weeks plus 2 extra working weeks — typically INSET days, training, exam or results work, or setting up and closing down around the terms. On a 39-week term that is 41 working weeks. Those weeks earn holiday in the usual way (41 weeks attract 4.95 weeks), so the paid weeks are 45.95, and on a £24,000 full-time salary the pay is £21,148.74 a year — £1,762.39 a month — still spread in twelve equal instalments. Put 41, not 39, in the calculator's working-weeks box.",
+  },
+  {
+    question: "How much does a Level 3 teaching assistant earn term-time only?",
+    answer:
+      "There is no single national answer, because schools and councils grade Level 3 posts on different NJC spinal points. As an example only: on an example full-time salary of £28,000, working 39 weeks at 32.5 hours a week against a 37.5-hour full-time pattern, the term-time pay is £20,340.62 a year — £1,695.05 a month. Read the full-time salary and the spinal point off your own contract or job advert and run those figures through the calculator above.",
   },
 ];
 
@@ -293,6 +330,130 @@ export default function TermTimePayCalculatorPage() {
           school support staff) set the exact weeks and any extra
           leave on top of the statutory minimum — the contract
           figure governs where it is more generous.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Annual leave for term-time workers
+        </h2>
+        <p className={bodyClass}>
+          Term-time workers are part-year workers, and they get paid
+          annual leave like everyone else: the statutory minimum is
+          5.6 weeks a year. The leave is almost always taken during
+          the school closures — a term-time contract normally does
+          not allow leave during term — so instead of booking
+          holiday, the worker is paid for it: the holiday weeks the
+          working weeks attract are added to the paid weeks, and the
+          total is spread over twelve months. That is the uplift in
+          the calculation above.
+        </p>
+        <p className={bodyClass}>
+          Two legal changes sit behind the numbers. In{" "}
+          <em>Harpur Trust v Brazel</em> (2022) the Supreme Court
+          held that a part-year worker on a permanent contract was
+          entitled to the full 5.6 weeks, with holiday pay worked
+          out from average pay over a reference period that ignored
+          weeks not worked — an outcome that could pay more than a
+          straight pro-rata share. The government then legislated:
+          for leave years beginning on or after 1 April 2024,
+          GOV.UK&apos;s rules accrue holiday for part-year and
+          irregular-hours workers at 12.07% of the hours actually
+          worked in each pay period, up to the 5.6-week maximum —
+          the same 12.07% this page&apos;s construction is built
+          from (5.6 ÷ 46.4). The same reforms allow employers to use
+          rolled-up holiday pay — an extra 12.07% added to each
+          payslip instead of paying holiday pay when leave is
+          taken — but only for irregular-hours and part-year
+          workers, and it must be shown as a separate item on the
+          payslip. It is an option, not a requirement, and many
+          school payrolls keep the established method used here:
+          holiday weeks added to the salary and the whole amount
+          averaged over the year.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What does &ldquo;term time only + 2 weeks&rdquo; mean?
+        </h2>
+        <p className={bodyClass}>
+          Job adverts and contracts often add a small number of
+          weeks to the term weeks: &ldquo;term time only + 2
+          weeks&rdquo; (sometimes written TTO + 2) means you work
+          the term weeks <em>plus</em> 2 extra weeks — typically
+          INSET and training days, exam or results-period work, or
+          preparing classrooms at the start and end of the year.
+          Those 2 weeks are working weeks like any other: they earn
+          holiday and they are paid. The arithmetic on a 39-week
+          term and the same £24,000 full-time salary used above:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Working weeks</th>
+                <th className={thClass}>Holiday weeks</th>
+                <th className={thClass}>Paid weeks</th>
+                <th className={thClass}>Pay per year (£24,000 FTE)</th>
+                <th className={thClass}>Pay per month</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>
+                  39 weeks (term time only)
+                </td>
+                <td className={tdClass}>{exHeadline.holidayWeeks}</td>
+                <td className={tdClass}>{exHeadline.paidWeeks}</td>
+                <td className={tdClass}>{gbp.format(exHeadline.annualPay)}</td>
+                <td className={tdClass}>{gbp.format(exHeadline.monthlyPay)}</td>
+              </tr>
+              <tr>
+                <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>
+                  41 weeks (term time only + 2)
+                </td>
+                <td className={tdClass}>{exPlusTwo.holidayWeeks}</td>
+                <td className={tdClass}>{exPlusTwo.paidWeeks}</td>
+                <td className={tdClass}>{gbp.format(exPlusTwo.annualPay)}</td>
+                <td className={tdClass}>{gbp.format(exPlusTwo.monthlyPay)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          The extra 2 weeks are worth{" "}
+          {gbp.format(exPlusTwo.annualPay - exHeadline.annualPay)} a
+          year on these figures. Either way, the salary is still
+          paid in twelve equal monthly instalments — the
+          &ldquo;+ 2&rdquo; changes the annual total, not the way it
+          is spread. When you use the calculator, enter all the
+          working weeks together: 41, not 39.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked example: a Level 3 teaching assistant
+        </h2>
+        <p className={bodyClass}>
+          Schools and councils grade Level 3 teaching assistant
+          posts on different NJC spinal points, so there is no
+          single national Level 3 salary to quote — the job advert
+          or contract states the point and the full-time-equivalent
+          salary for the post. Take an <em>example</em> full-time
+          salary of £28,000, a 39-week contract and 32.5 contracted
+          hours a week against a 37.5-hour full-time pattern, and
+          the engine on this page gives: {exLevel3.holidayWeeks}{" "}
+          holiday weeks on top of the 39 working weeks,{" "}
+          {exLevel3.paidWeeks} paid weeks, and term-time pay of{" "}
+          {gbp.format(exLevel3.annualPay)} a year —{" "}
+          {gbp.format(exLevel3.monthlyPay)} a month in twelve equal
+          instalments. Treat the £28,000 purely as an example:
+          replace it with the full-time salary on your own contract,
+          and the hours with your contracted hours, and the
+          calculator above runs the same three steps on your real
+          figures.
         </p>
       </section>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import MaternityCalculator from "@/components/MaternityCalculator";
-import { calculateMaternity } from "@/lib/maternity";
+import { calculateMaternity, spreadMonthlyAmount } from "@/lib/maternity";
 import {
   MATERNITY,
   PAYE_RATES_LABEL,
@@ -36,6 +36,8 @@ const exampleSmp = calculateMaternity({
   annualSalary: exampleSalary,
   scheme: "smp",
 });
+const exampleSpread9 = spreadMonthlyAmount(exampleNhs.totalPay, 9);
+const exampleSpread12 = spreadMonthlyAmount(exampleNhs.totalPay, 12);
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -62,6 +64,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Is maternity pay taxed?",
     answer:
       "Yes. Both NHS occupational maternity pay and SMP are treated like normal pay: Income Tax and National Insurance are deducted through payroll, and pension contributions may continue depending on your scheme and your choices.",
+  },
+  {
+    question: "Can I spread my NHS maternity pay over 9 or 12 months?",
+    answer: `You can ask to. Section 15 of the Agenda for Change handbook says that, by prior agreement with your employer, occupational maternity pay may be paid in a different way — for example as a fixed amount spread equally over your maternity leave. The total you receive does not change; only the timing does. On a salary of ${gbp.format(exampleSalary)}, for example, the total of ${gbp.format(exampleNhs.totalPay)} works out at ${gbp.format(exampleSpread9)} a month spread over nine months, or ${gbp.format(exampleSpread12)} a month over 12 months. Spreading is not automatic, so agree it with your employer and payroll before your leave starts.`,
   },
 ];
 
@@ -113,7 +119,8 @@ export default function NhsMaternityPayCalculatorPage() {
           under Agenda for Change: eight weeks at full pay, 18 weeks at
           half pay plus Statutory Maternity Pay, then 13 weeks of SMP.
           Enter your salary to see each stage, the weekly amounts and the
-          total for your leave — or switch to SMP only.
+          total for your leave — or switch to SMP only, or see the same
+          total spread evenly over 9 or 12 months.
         </p>
       </section>
 
@@ -179,6 +186,43 @@ export default function NhsMaternityPayCalculatorPage() {
           worth{" "}
           {gbp.format(exampleNhs.totalPay - exampleSmp.totalPay)} more.
           Try your own salary in the calculator above.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Spreading your pay over 9 or 12 months
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Stage-by-stage pay falls as your leave goes on — full pay, then
+          half pay plus SMP, then SMP alone, then nothing. If you would
+          rather have a level income, Section 15 of the NHS Terms and
+          Conditions of Service Handbook (Agenda for Change) says that, by
+          prior agreement with your employer, occupational maternity pay may
+          be paid in a different way — for example as a fixed amount spread
+          equally over your maternity leave. Spreading does not change the
+          total you receive; it only changes when you receive it.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          On the {gbp.format(exampleSalary)} example above, the total is{" "}
+          {gbp.format(exampleNhs.totalPay)}. Spread over nine months that
+          is {gbp.format(exampleSpread9)} a month; spread over 12 months
+          it is {gbp.format(exampleSpread12)} a month — the same total
+          either way, with the monthly figures rounded to the nearest
+          penny. Some trusts offer equal instalments as a standard option
+          on the maternity leave application form — 12 equal monthly
+          amounts is a common arrangement — but it is never automatic, so
+          agree it with your manager and payroll before your leave starts.
+          Use the spread option in the calculator above to see the figures
+          for your own salary.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Two things to check with payroll: the handbook wording covers the
+          occupational element of your pay, so confirm how your trust times
+          the SMP element inside a spread arrangement; and if you later
+          switch to shared parental leave, your employer may need to
+          recalculate the payments, because the spread was worked out on a
+          full maternity leave.
         </p>
       </section>
 

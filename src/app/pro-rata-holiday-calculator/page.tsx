@@ -37,7 +37,7 @@ function fullYear(employeeDaysPerWeek: number, ftEntitlement = 28) {
     startOrLeavingDate: "2026-01-01",
   });
 }
-const PATTERN_ROWS = [2, 3, 4].map((days) => ({
+const PATTERN_ROWS = [1, 2, 3, 4, 5].map((days) => ({
   days,
   result: fullYear(days),
 }));
@@ -77,6 +77,11 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Are bank holidays included in pro-rata entitlement?",
     answer:
       "They can be. The law does not give bank holidays on top of the 5.6 weeks, so if the full-time entitlement you start from includes bank holidays (28 days usually does), the pro-rata figure includes them too, and bank holidays that fall on the employee's working days come out of their total. If the contract gives bank holidays on top of the full-time figure, add them before you pro-rate — or check the contract, because the two treatments give different answers.",
+  },
+  {
+    question: "Do part-time workers get bank holidays off?",
+    answer:
+      "There is no separate legal right to bank holidays on top of the 5.6 weeks, for part-timers or anyone else — bank holidays are simply one of the things the entitlement can be spent on. What part-time law does require is equal treatment: if full-time staff get bank holidays that fall on their working days inside their entitlement, a part-timer's pro-rata total must work the same way, including for bank holidays that always fall on a day they do not work (the Monday problem). Most employers solve that by giving the whole entitlement in hours, as this calculator does, so every bank holiday on a working day is deducted at that day's hours.",
   },
   {
     question: "What if my hours change every week?",
@@ -244,6 +249,58 @@ export default function ProRataHolidayCalculatorPage() {
           this one pro-rates an employer&apos;s own entitlement for
           part-time staff and part-year joiners or leavers; that one
           works out the statutory entitlement from scratch.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Are bank holidays included in the 28 days?
+        </h2>
+        <p className={bodyClass}>
+          Yes — they can be, and for most UK workers they are. The
+          statutory entitlement is a single pot of 5.6 weeks (28 days
+          on a five-day week); the law does not add bank holidays on
+          top of it. An employer can count the bank holidays inside
+          the pot, and most do: the familiar full-time package of
+          &ldquo;20 days plus 8 bank holidays&rdquo; is the 28 days,
+          split. Pro-rata works the same way at every pattern: a
+          three-day worker&apos;s pot is 16.8 days in total, and bank
+          holidays that fall on one of their working days come out of
+          that 16.8 — they are not an extra allowance on top of it.
+        </p>
+        <p className={bodyClass}>
+          The one exception is a contract that genuinely gives bank
+          holidays <em>in addition to</em> a full-time entitlement
+          stated without them — &ldquo;25 days plus bank
+          holidays&rdquo;, for example. Then the bank holidays are
+          added to the full-time figure first (25 + 8 = 33) and the
+          total is pro-rated, which is why the same job can produce
+          two different answers depending on how the contract is
+          worded. Check which side of the line the full-time
+          entitlement sits on before running the calculator above:
+          the field asks for the full-time figure exactly as the
+          contract states it.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Looking for pro-rata pay instead?
+        </h2>
+        <p className={bodyClass}>
+          A large share of the people who land on this page are
+          actually asking about money, not leave: &ldquo;my job is
+          advertised at £30,000 pro rata — what will I really
+          earn?&rdquo; That is a different calculation, and it has
+          its own tool: the{" "}
+          <Link href="/pro-rata-salary-calculator" className={linkClass}>
+            pro-rata salary calculator
+          </Link>{" "}
+          turns a full-time salary into the part-time figure for
+          your days or hours, with a quick table of common salaries
+          at 0.8, 0.6, 0.5 and 0.4 of full-time. This page stays
+          with the holiday side — how much leave the same pattern
+          earns.
         </p>
       </section>
 

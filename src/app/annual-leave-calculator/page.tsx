@@ -78,6 +78,22 @@ const exIrregular30 = calculateAnnualLeave({
   hoursWorked: 30,
 });
 
+// Leaving-job example — twelfths accrual on the statutory
+// figures, then the holiday pay on a clean salary: £31,200 is
+// £600 a week, so a day of leave on a five-day week is £120.
+const LEAVER_ACCRUED_DAYS = (28 * 6) / 12;
+const LEAVER_TAKEN_DAYS = 5;
+const LEAVER_OWED_DAYS = LEAVER_ACCRUED_DAYS - LEAVER_TAKEN_DAYS;
+const LEAVER_DAY_RATE = 31200 / 52 / 5;
+const LEAVER_PAYMENT = LEAVER_OWED_DAYS * LEAVER_DAY_RATE;
+
+// Hours-to-days conversions people ask for by name — the answer
+// is simply the hours divided by the length of the working day.
+const HOURS_200_AT_75 = 200 / 7.5;
+const HOURS_2025_AT_75 = 202.5 / 7.5;
+const HOURS_200_AT_8 = 200 / 8;
+const HOURS_2025_AT_8 = 202.5 / 8;
+
 const PATTERN_ROWS = [
   { pattern: "5 days a week (full-time)", result: exFiveDay, note: "The standard full-time pattern" },
   { pattern: "4 days a week", result: exFourDay, note: "" },
@@ -112,6 +128,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "What happens if I start a job part-way through the leave year?",
     answer:
       "You get the fraction of the year's leave that matches the fraction of the year you are employed for, worked out in twelfths — and the month you start in counts as a whole month. Start a five-day job on 1 July in a January-to-December leave year and you are employed for 6 of the 12 months, so your first-year entitlement is 28 × 6/12 = 14 days. The part-year figure is rounded up to the nearest half day, and leave still builds up while you are on sick leave or family leave.",
+  },
+  {
+    question: "What happens to my holiday when I leave a job?",
+    answer: `Leave is worked out to your last day, in twelfths. Holiday you have built up but not taken must be paid in your final pay — paying for statutory leave instead of taking it is only allowed when a job ends. Leave on 30 June in a January-to-December leave year on a five-day week and you have accrued 28 × 6/12 = ${LEAVER_ACCRUED_DAYS} days; if you had taken ${LEAVER_TAKEN_DAYS}, the remaining ${LEAVER_OWED_DAYS} days are paid. The mirror image also applies: if you have taken more than you had accrued, your employer can take the excess back out of your final pay — but only if your contract or a written agreement says they can.`,
   },
 ];
 
@@ -325,6 +345,27 @@ export default function AnnualLeaveCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Turning hours of leave into days
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Entitlement quoted in hours — standard for part-time and
+          shift work — converts to days by dividing by the length of
+          your working day, and the day length is the whole answer.
+          The two totals people ask about most: 200 hours is{" "}
+          {HOURS_200_AT_75.toFixed(1)} days at 7.5 hours a day, or{" "}
+          {HOURS_200_AT_8} days at 8 hours a day. And 202.5 hours —
+          the figure on many NHS and public-sector contracts — is{" "}
+          {HOURS_2025_AT_75} days at 7.5 hours a day, or{" "}
+          {HOURS_2025_AT_8.toFixed(1)} days at 8 hours. If your days
+          are not all the same length, there is no single honest
+          conversion: keep the entitlement in hours, as the
+          calculator above does, and deduct the hours of each day
+          you take.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Do bank holidays count towards annual leave?
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
@@ -364,6 +405,52 @@ export default function AnnualLeaveCalculatorPage() {
           applies when you leave: you are owed pay for leave accrued
           but not taken, and payment in lieu of statutory leave is
           allowed only at the end of a job.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What happens to your holiday when you leave a job?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Leaving works like starting, in mirror image: entitlement
+          is worked out to your last day, in twelfths of the leave
+          year. Whatever you have built up but not taken must be
+          paid in your final pay — this payment in lieu is the one
+          situation where statutory holiday can be paid for instead
+          of taken. Work the standard example: a five-day worker in
+          a January-to-December leave year who leaves on 30 June has
+          been employed for 6 of the 12 months, so they have accrued
+          28 × 6/12 = {LEAVER_ACCRUED_DAYS} days. If they had taken{" "}
+          {LEAVER_TAKEN_DAYS} days, the remaining {LEAVER_OWED_DAYS}{" "}
+          days are owed — on a £31,200 salary (£600 a week, £
+          {LEAVER_DAY_RATE} a day on a five-day week) that is{" "}
+          {LEAVER_OWED_DAYS} × £{LEAVER_DAY_RATE} = £
+          {LEAVER_PAYMENT.toLocaleString("en-GB")} of holiday pay in
+          the final payslip, taxed like normal pay.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Two edges to know. First, the excess runs the other way
+          too: if you have taken <em>more</em> leave than you had
+          accrued by your last day, your employer can deduct the
+          overpayment from your final pay — but only where your
+          contract or a written agreement you signed allows it;
+          without that agreement, they cannot simply help themselves.
+          Second, leave keeps accruing during your notice period,
+          and your employer can ask you to use remaining leave inside
+          it — many people finish earlier that way. If your contract
+          gives more than the statutory minimum, the same
+          twelfths logic applies to the contract figure, which is
+          the calculation the{" "}
+          <Link href="/pro-rata-holiday-calculator" className={linkClass}>
+            pro-rata holiday calculator
+          </Link>{" "}
+          runs for leavers directly; and how much notice there is to
+          run it against is the{" "}
+          <Link href="/notice-period-calculator" className={linkClass}>
+            notice period calculator
+          </Link>
+          &apos;s job.
         </p>
       </section>
 

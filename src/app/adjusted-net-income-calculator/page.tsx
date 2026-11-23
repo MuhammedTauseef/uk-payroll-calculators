@@ -96,6 +96,11 @@ const FAQS: { question: string; answer: string }[] = [
     answer:
       "No. It is usually higher than take-home pay, because it is measured before income tax and National Insurance are taken off, and it is not always the same as salary: bonuses, taxable benefits, savings interest, dividends and rental income all go in, and pension contributions and Gift Aid come off. Two people on the same £75,000 salary can have adjusted net incomes thousands of pounds apart once a bonus, some interest and a pension contribution are counted.",
   },
+  {
+    question: "Is adjusted net income on my P60?",
+    answer:
+      "No. Your P60 shows your pay and the tax deducted in the year — it does not print an adjusted net income figure, and neither does a payslip. Adjusted net income only exists once it is worked out: it is calculated as part of a Self Assessment tax return, so the figure sits inside that tax calculation (the SA302 calculation and your HMRC online account), or you work it out yourself from your income, pension contributions and Gift Aid, which is what the calculator above does.",
+  },
 ];
 
 const faqJsonLd = {
@@ -267,6 +272,124 @@ export default function AdjustedNetIncomeCalculatorPage() {
           shows the full effect of an exchange on pay, tax and pension.
           And your employer&apos;s pension contributions are not your
           income at all, so they neither raise nor lower the figure.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Is adjusted net income on my P60?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          No — and this catches people out, because the name sounds
+          like something payroll would print. Your P60 shows your pay
+          for the year and the tax deducted from it; your payslips
+          show the same figures month by month. Neither document
+          prints an adjusted net income figure, because adjusted net
+          income is not a payroll number at all: it is worked out
+          afterwards, for the whole tax year, from every source of
+          taxable income you have — including things your employer
+          never sees, such as savings interest, dividends and rent.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The figure only exists once somebody calculates it. If you
+          file a Self Assessment tax return, it is worked out inside
+          that return&apos;s tax calculation — the SA302 calculation
+          you can view or print from your HMRC online account. If
+          you do not file, nobody calculates it for you: you work it
+          out yourself from your income, pension contributions and
+          Gift Aid, which is exactly what the calculator above does.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Adjusted net income vs taxable income vs take-home pay
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Three different figures get called &quot;my income&quot;,
+          and they are rarely the same number. Here they are side by
+          side:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Figure</th>
+                <th className={thClass}>What it is</th>
+                <th className={thClass}>What goes in — and what comes off</th>
+                <th className={thClass}>What it is used for</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>Adjusted net income</td>
+                <td className={tdClass}>Total taxable income for the tax year, measured before the Personal Allowance, less a short list of reliefs.</td>
+                <td className={tdClass}>In: salary, bonuses, taxable benefits, self-employment profit, pensions, savings interest, dividends and rental profit. Off: grossed-up personal pension contributions and Gift Aid donations, and reliefs such as trading losses. Tax-free income (ISAs, Premium Bond prizes) never counts.</td>
+                <td className={tdClass}>The threshold tests: the High Income Child Benefit Charge from £60,000, the Personal Allowance taper and Tax-Free Childcare / funded hours at £100,000, and the additional rate at £125,140.</td>
+              </tr>
+              <tr>
+                <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>Taxable income</td>
+                <td className={tdClass}>The income your tax bands are actually applied to — what is left after your allowances.</td>
+                <td className={tdClass}>Starts from the same total income, then the Personal Allowance (£12,570, or less after the £100,000 taper) and other allowances such as the Personal Savings Allowance and dividend allowance come off. Pension contributions and Gift Aid work differently here: they extend your basic-rate band rather than reducing the figure itself.</td>
+                <td className={tdClass}>Working out your income tax bill: the 20%, 40% and 45% bands are charged on taxable income, not on adjusted net income.</td>
+              </tr>
+              <tr>
+                <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>Net (take-home) pay</td>
+                <td className={tdClass}>What actually reaches your bank account from your employment.</td>
+                <td className={tdClass}>Salary after income tax, National Insurance, pension deductions, student loan repayments and any salary sacrifice have come off. It ignores your other income entirely — interest, dividends and rent do not appear in it.</td>
+                <td className={tdClass}>Budgeting and payslip checks. It is not used for any HMRC threshold test — which is why someone whose take-home pay looks safely under £100,000 can still be over the line on adjusted net income.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The ordering surprises people: adjusted net income is
+          usually the largest of the three, taxable income is
+          smaller once allowances come off, and take-home pay is
+          smaller still — and only the first of them decides Child
+          Benefit, childcare support and how much Personal Allowance
+          you keep.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How does a car or EV salary sacrifice affect adjusted net income?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          In two directions at once — and for an electric car, the
+          two figures are very different sizes. Salary sacrifice
+          means you give up part of your cash salary in exchange for
+          the car, so your salary — the starting point for adjusted
+          net income — is lower by the amount sacrificed, £1 for £1.
+          Sacrifice £6,000 of salary for a car and your adjusted net
+          income falls by £6,000 before anything else is counted.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          But the car itself is a taxable benefit, and benefits from
+          your job are part of your taxable income — HMRC&apos;s
+          adjusted net income guidance counts employment income
+          &quot;including any benefits you get from your job&quot;
+          at step 1. So the car&apos;s benefit-in-kind (BiK) value
+          is added back into your total income. For a fully electric
+          car that value is unusually small: the BiK rate for a
+          zero-emission car is just 4% of its list price in 2026/27
+          under the GOV.UK company car rates — a taxable benefit of
+          £1,600 on a £40,000 electric car, against the £6,000 of
+          salary given up in the example above. A petrol or diesel
+          car, taxed at a much higher percentage of its list price,
+          adds back far more.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The net effect is what matters near a threshold: adjusted
+          net income falls by the salary sacrificed, less the
+          car&apos;s BiK value. That is why an EV scheme can pull
+          someone back under the £100,000 line — or keep them under
+          it — while a high-emission car under the same arrangement
+          gives much of the benefit back. Check both figures, the
+          sacrifice and the BiK, before you assume the scheme has
+          moved your adjusted net income by the full amount of the
+          sacrifice.
         </p>
       </section>
 

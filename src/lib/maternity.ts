@@ -156,3 +156,18 @@ export function calculateMaternity(input: MaternityInput): MaternityResult {
     averageMonthlyAcrossLeave: round2((totalPay / MATERNITY.leaveWeeks) * (52 / 12)),
   };
 }
+
+/**
+ * Equal monthly instalment if a total maternity pay amount were spread
+ * evenly over a given number of months. Agenda for Change (Section 15 of
+ * the NHS Terms and Conditions of Service Handbook) allows occupational
+ * maternity pay, by prior agreement with the employer, to be paid in a
+ * different way — for example a fixed amount spread equally over the
+ * maternity leave period. Spreading changes only how the total is divided
+ * up, never the total itself. Rounded to the nearest penny, so the
+ * instalments can differ from the total by a few pence either way.
+ */
+export function spreadMonthlyAmount(totalPay: number, months: number): number {
+  if (!months || months <= 0) return 0;
+  return round2(Math.max(0, totalPay || 0) / months);
+}

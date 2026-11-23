@@ -3,6 +3,7 @@ import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import HourlyRateConverter from "@/components/HourlyRateConverter";
 import { convertHourlyRate } from "@/lib/hourly";
+import { calculateTakeHome } from "@/lib/takehome";
 import { NMW_BANDS } from "@/lib/overtime";
 
 import { AppConfig } from "@/utils/AppConfig";
@@ -76,6 +77,36 @@ const RATE_ROWS = [12.71, 13, 14, 15, 16, 18, 20, 25].map((rate) => ({
   }),
 }));
 
+// Common salaries turned into hourly rates on a 37.5-hour week by
+// the converter's own maths, with the monthly take-home from the
+// site's PAYE engine (2026/27, standard tax code, no pension or
+// student loan) — the quick table in "Common salaries as hourly
+// rates" below.
+const SALARY_ROWS = [20000, 25000, 30000, 35000, 40000, 45000, 50000, 60000].map(
+  (salary) => {
+    const conv = convertHourlyRate({
+      direction: "salaryToHourly",
+      hourlyRate: 0,
+      annualSalary: salary,
+      hoursPerWeek: 37.5,
+      ageBand: "over21",
+    });
+    const net = calculateTakeHome({ annualSalary: salary });
+    return { salary, hourly: conv.hourlyRate, netMonthly: net.netMonthly };
+  },
+);
+
+// £14 an hour, the rate readers most often ask about after tax:
+// gross figures from the converter, take-home from the PAYE engine.
+const ex14 = convertHourlyRate({
+  direction: "hourlyToSalary",
+  hourlyRate: 14,
+  annualSalary: 0,
+  hoursPerWeek: 37.5,
+  ageBand: "over21",
+});
+const ex14Net = calculateTakeHome({ annualSalary: ex14.annualSalary });
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How do I convert an hourly rate to an annual salary?",
@@ -98,6 +129,14 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Is the converted salary before or after tax?",
     answer:
       "Before tax. Every figure here is gross pay — Income Tax and National Insurance still come off in payroll, so your take-home pay will be lower than the salary shown. To see the after-tax figure for a salary, run it through the take-home pay calculator, which applies the current tax and National Insurance rules.",
+  },
+  {
+    question: "How do I convert a salary to an hourly rate in Excel?",
+    answer: `Put the salary in one cell and the weekly hours in another and divide by 52, then by the hours: with the salary in A2 and hours in B2, the formula is =A2/52/B2. For £30,000 over 37.5 hours that gives ${fmtRate(exSalary.hourlyRate)} an hour. The other way round — hourly rate in A2, hours in B2 — the annual salary is =A2*B2*52, and the monthly salary is that divided by 12. There is no honest single-cell formula for the after-tax figure, because tax bands and the personal allowance taper do not reduce to one line; use the take-home table on this page or the take-home pay calculator for that.`,
+  },
+  {
+    question: "What is £14 an hour a month, after tax?",
+    answer: `At 37.5 hours a week, £14 an hour is ${fmtMoney(ex14.annualSalary)} a year, or ${fmtMoney(ex14.monthlyPay)} a month before tax. After Income Tax and National Insurance on the 2026/27 rules (standard tax code, no pension or student loan), the take-home pay is about ${fmtMoney(ex14Net.netMonthly)} a month. Your own figure moves with your tax code, pension contributions and hours — the converter above plus the take-home pay calculator give the exact version for your inputs.`,
   },
 ];
 
@@ -229,6 +268,65 @@ export default function HourlyRateConverterPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Common salaries as hourly rates — with take-home pay
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The same conversion run the other way for the salaries
+          readers ask about most, all on a 37.5-hour week — plus the
+          monthly figure that actually lands in the bank. The
+          take-home column uses the 2026/27 Income Tax and National
+          Insurance rules with a standard tax code and no pension or
+          student loan, worked out by the same engine as the{" "}
+          <Link href="/40k-after-tax-uk" className={linkClass}>
+            take-home pay calculator
+          </Link>
+          .
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Annual salary
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Hourly rate (37.5-hour week)
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Gross per month
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Take-home per month
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {SALARY_ROWS.map((row) => (
+                <tr key={row.salary}>
+                  <td className="px-4 py-2 font-semibold text-slate-900 dark:text-slate-50">
+                    {fmtMoney(row.salary)}
+                  </td>
+                  <td className="px-4 py-2">{fmtRate(row.hourly)} an hour</td>
+                  <td className="px-4 py-2">{fmtMoney(row.salary / 12)}</td>
+                  <td className="px-4 py-2">{fmtMoney(row.netMonthly)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Two things to read off the table. First, the hourly rate
+          moves fast with the salary: £5,000 a year is about £2.56 an
+          hour on this week length, which is why a modest pay rise can
+          matter more than it sounds. Second, the gap between the gross
+          and take-home columns widens as pay rises — at £60,000 the
+          tax and National Insurance take a noticeably bigger share
+          than at £25,000.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How do you work out an hourly rate from a salary?
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
@@ -245,6 +343,29 @@ export default function HourlyRateConverterPage() {
           </Link>{" "}
           runs the same derived rate through the overtime rates in the
           contract and checks the average against the minimum wage.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          The Excel formulas for hourly rate and salary
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          In a spreadsheet the conversions are one line each. With an
+          annual salary in cell A2 and the contracted hours per week in
+          B2, the hourly rate is <code>=A2/52/B2</code> — for a £30,000
+          salary over 37.5 hours, {fmtRate(exSalary.hourlyRate)} an
+          hour. With an hourly rate in A2 instead, the annual salary is{" "}
+          <code>=A2*B2*52</code> and the monthly salary is{" "}
+          <code>=A2*B2*52/12</code>. Keep the hours in their own cell
+          rather than typing 37.5 into the formula: the hours are the
+          assumption most likely to change, and a formula that hides
+          them is how a 40-hour contract ends up priced on a 37.5-hour
+          week. One limit to know: there is no honest one-cell Excel
+          formula for the after-tax figure, because Income Tax bands,
+          the £100,000 personal allowance taper and National Insurance
+          thresholds do not compress into a single line — that is the
+          job the table above and the take-home pay calculator do.
         </p>
       </section>
 

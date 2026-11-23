@@ -397,6 +397,48 @@ export default function SalaryCalculatorSwitzerlandPage() {
         </p>
       </section>
 
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Foreign employee without a C permit? Your tax is withheld
+          at source (Quellensteuer)
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Everything on this page — including the 26-canton
+          comparison below — is the <strong>ordinary
+          assessment</strong>: the tax as it is finally calculated
+          on a return. Many foreign employees never meet that
+          calculation directly. If you live in Switzerland without
+          a C settlement permit (most B-permit holders), your
+          employer instead deducts <strong>withholding tax —
+          Quellensteuer</strong> — from every payslip, at tariffs
+          set by your canton, which vary with marital status,
+          children and church membership. The tariff is designed to
+          approximate the ordinary assessment, but it is a
+          standardised one: it does not know about your pillar 3a
+          payments, your real commuting costs or your debt
+          interest.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The bridge between the two systems is the{" "}
+          <strong>subsequent ordinary assessment</strong>{" "}
+          (nachträgliche ordentliche Veranlagung). It is{" "}
+          <strong>mandatory</strong> once your gross employment
+          income passes <strong>CHF 120,000</strong> a year — from
+          that point you file a return and the ordinary assessment,
+          exactly as modelled here, replaces the withholding.
+          Below that threshold you can <strong>request</strong> an
+          ordinary assessment instead, by 31 March of the following
+          year — usually worth it precisely when you have
+          deductions the tariff ignores, such as pillar 3a
+          contributions — but the choice is sticky: once you are
+          ordinarily assessed, you stay ordinarily assessed in
+          later years too. So read this page as the destination
+          figure — what the tax finally comes to — while a
+          source-taxed payslip can sit a little above or below it
+          month by month.
+        </p>
+      </section>
+
       <section className="space-y-5 print:hidden">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Net salary on CHF 100,000 in all 26 cantons
@@ -461,6 +503,24 @@ export default function SalaryCalculatorSwitzerlandPage() {
           title="Example 3 — CHF 85,000, single, no children, Zug"
           result={EXAMPLE_ZG}
         />
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>The monthly view.</strong> Swiss salaries are
+          usually agreed annually but paid monthly, so take
+          Example 1 by the month: the Zurich net of{" "}
+          {fmtCHF(EXAMPLE_ZH.netAnnual)} a year is{" "}
+          <strong>
+            {fmtCHF(EXAMPLE_ZH.netAnnual / 12)} a month
+          </strong>{" "}
+          across 12 salaries, from a gross of CHF 8,333.33 a month.
+          Where the contract pays a 13th monthly salary — common in
+          Switzerland — the same annual net arrives as{" "}
+          {fmtCHF(EXAMPLE_ZH.netAnnual / 13)} a month across 13
+          instalments, the extra one usually landing in November
+          or December; the annual figures, and the tax, are
+          unchanged. Paid by the hour instead? Multiply rate ×
+          hours × 52 to get the annual figure the calculator wants:
+          CHF 35 an hour at 40 hours a week is CHF 72,800 a year.
+        </p>
       </section>
 
       <section className="space-y-3 print:hidden">

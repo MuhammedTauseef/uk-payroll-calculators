@@ -259,7 +259,11 @@ export default function RedundancyPayCalculatorPage() {
           statutory calculation sees {gbp.format(REDUNDANCY.weeklyPayCap)}{" "}
           — the rest is invisible to the formula, which is why the
           maximum possible statutory payment is{" "}
-          {gbp.format(REDUNDANCY.maxStatutoryPay)}.
+          {gbp.format(REDUNDANCY.maxStatutoryPay)}: 20 years of service
+          × 1.5 weeks per year × the capped week&apos;s pay of{" "}
+          {gbp.format(REDUNDANCY.weeklyPayCap)} ={" "}
+          {gbp.format(REDUNDANCY.maxStatutoryPay)}. No statutory
+          redundancy payment can be higher than that.
         </p>
         <p className={bodyClass}>
           If your hours and pay are fixed, a week&apos;s pay is simply
@@ -329,7 +333,9 @@ export default function RedundancyPayCalculatorPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className={h2Class}>Is redundancy pay taxed?</h2>
+        <h2 className={h2Class}>
+          Is redundancy pay taxed? The £30,000 tax-free rule
+        </h2>
         <p className={bodyClass}>
           Statutory redundancy pay is never taxed. It does, however,
           count towards the £30,000 limit that applies to termination
@@ -340,8 +346,19 @@ export default function RedundancyPayCalculatorPage() {
           allowance your whole package uses and how much, if any, spills
           over into taxable territory. Above £30,000, the excess is
           taxed as earnings at your marginal rate, and since April 2020
-          employers also pay employer National Insurance on the part of
-          a termination package above £30,000.
+          employers also pay employer National Insurance (Class 1A) on
+          the part of a termination package above £30,000.
+        </p>
+        <p className={bodyClass}>
+          Enhanced redundancy pay follows exactly the same rule. If
+          your contract, staff handbook or a settlement offers more
+          than the statutory amount — a higher multiplier, uncapped
+          weekly pay, or extra weeks — that contractual or enhanced
+          element is not a separate allowance: it goes into the same
+          £30,000 pot as the statutory payment and any ex-gratia sum.
+          A generous enhanced package can therefore use up the whole
+          £30,000 on its own, and anything above it is taxed in the
+          same way.
         </p>
         <p className={bodyClass}>
           Two common misunderstandings are worth clearing up. First,

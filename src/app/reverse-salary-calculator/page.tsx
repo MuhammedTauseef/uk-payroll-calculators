@@ -61,6 +61,17 @@ const PLAIN_2000 = calculateRequiredSalary({
   ...PLAIN,
   targetNetAnnual: 2000 * 12,
 });
+// Monthly-target quick table (£2,000 / £2,800 / £3,000 / £4,000 a
+// month) shown just above the real-numbers examples — same PLAIN
+// assumptions and the same solver as everything else on this page.
+const QUICK_TABLE = [2000, 2800, 3000, 4000].map((monthly) => ({
+  monthly,
+  result: calculateRequiredSalary({
+    ...PLAIN,
+    targetNetAnnual: monthly * 12,
+  }),
+}));
+
 const TARGET_TABLE = [1800, 2200, 2600, 3000, 3500].map((monthly) => ({
   monthly,
   result: calculateRequiredSalary({
@@ -372,6 +383,45 @@ export default function ReverseSalaryCalculatorPage() {
           </Link>{" "}
           works out what the extra work leaves after its own tax.
         </p>
+      </section>
+
+      <section className="space-y-3 print:hidden">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Quick table: the salary behind four monthly targets
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The four take-home targets readers ask for most, answered
+          directly. Assumptions, stated plainly: 2026/27 England,
+          Wales and Northern Ireland rates, the standard 1257L tax
+          code, <strong>no pension contribution and no student
+          loan</strong> — the solver&apos;s plain defaults. Add a
+          pension or a loan in the calculator above and the gross
+          needed for the same target rises.
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Take-home you want, a month</th>
+                <th className={thClass}>Gross salary needed, a year</th>
+                <th className={thClass}>Gross salary needed, a month</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {QUICK_TABLE.map(({ monthly, result }) => (
+                <tr key={monthly}>
+                  <td className={tdClass}>{fmtMoney(monthly)}</td>
+                  <td className={`${tdClass} font-semibold text-slate-900 dark:text-slate-50`}>
+                    {fmtMoney(result.requiredGrossAnnual)}
+                  </td>
+                  <td className={tdClass}>
+                    {fmtMoney(result.requiredGrossMonthly)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="space-y-5 print:hidden">

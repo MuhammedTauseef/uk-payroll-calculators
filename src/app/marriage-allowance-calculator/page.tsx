@@ -78,6 +78,11 @@ const FAQS: { question: string; answer: string }[] = [
       "Up to £252 a year. The lower earner transfers £1,260 of their Personal Allowance to their partner, and the partner's tax bill falls by 20% of that amount — £252 — in every tax year the claim runs. It renews automatically each year until you cancel it or your circumstances change.",
   },
   {
+    question: "Is Marriage Allowance automatic?",
+    answer:
+      "No — and this is the point most eligible couples miss. HMRC never applies Marriage Allowance automatically, however clearly you qualify: nothing happens until the lower earner makes a claim, and couples who never claim simply never receive it, even though HMRC holds both partners' income records. What is automatic is what happens after a successful claim: the allowance then transfers every year, through the tax codes, until you cancel it, your income changes take you outside the conditions, or the marriage or civil partnership ends.",
+  },
+  {
     question: "Who can claim Marriage Allowance?",
     answer:
       "Couples who are married or in a civil partnership — living together is not enough — where one partner's income is below the £12,570 Personal Allowance and the other pays basic-rate tax: income between £12,571 and £50,270 in England, Wales and Northern Ireland, or between £12,571 and £43,662 in Scotland. Both partners must have been born on or after 6 April 1935; couples where one partner was born before that date may do better with Married Couple's Allowance instead.",
@@ -338,6 +343,21 @@ export default function MarriageAllowanceCalculatorPage() {
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           How to claim — free, through GOV.UK
         </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          On timing: you can claim at any point — there is no need
+          to wait for a new tax year — and a claim for the current
+          year takes effect through the two tax codes for the rest
+          of that year. The claim then runs on by itself: once made,
+          it continues every tax year until you cancel it or your
+          circumstances take you out of the conditions, so there is
+          nothing to renew. The backdated years work to fixed
+          deadlines instead — each year in the table above closes on
+          its own 5 April, and a year claimed in time is paid as a
+          single lump sum, separate from the tax code changes. The
+          one timescale that costs money is delay itself: every
+          5 April that passes removes the oldest year from the
+          table, £252 at a time.
+        </p>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The lower earner makes the claim, online through GOV.UK,
           and it costs nothing. You will need both partners&apos;

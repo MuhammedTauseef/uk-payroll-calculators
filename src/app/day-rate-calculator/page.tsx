@@ -82,6 +82,15 @@ const RATE_ROWS = [100, 150, 200, 250, 300, 350, 400, 450, 500, 600, 750, 1000].
   }),
 );
 
+// Employee framing — one day's pay from a salary is a different
+// calculation from a contractor day rate: no uplift, and the
+// divisor is the weekdays in a year (52 weeks × 5 days = 260),
+// because a salary is paid for holiday and bank holidays too.
+const EMPLOYEE_SALARY = 36000;
+const EMPLOYEE_DAY_PAY = EMPLOYEE_SALARY / 260;
+const EMPLOYEE_HOURLY_8H = EMPLOYEE_DAY_PAY / 8;
+const EMPLOYEE_HOURLY_75H = EMPLOYEE_DAY_PAY / 7.5;
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How do I convert a day rate into an annual salary?",
@@ -104,6 +113,14 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: `Is £300 a day the same as a ${fmtMoney(ex300.grossAnnual)} salary?`,
     answer: `No — the gross figures match, but the packages do not. A ${fmtMoney(ex300.grossAnnual)} salary comes with paid holiday, an employer pension contribution, sick pay and employer National Insurance paid on top; a day rate has to fund all of that itself. Taking the standard 30% benefits loading back out, £300 a day over ${ex300.billableDays} billable days is roughly a ${fmtMoney(ex300.equivalentSalary)} permanent salary in like-for-like terms — before the difference in how the two are taxed.`,
+  },
+  {
+    question: "How do I work out one day's pay from my monthly salary?",
+    answer: `Use the employee method, not the contractor one: annual salary ÷ 260. A salary is paid for every weekday of the year — 52 weeks × 5 days — including holidays and bank holidays, so one day's pay is the annual figure spread over those 260 days. On ${fmtMoney(EMPLOYEE_SALARY)} that is ${fmtMoney(EMPLOYEE_SALARY)} ÷ 260 = ${fmtMoney(EMPLOYEE_DAY_PAY)} a day. From a monthly figure, multiply by 12 first: ${fmtMoney(EMPLOYEE_SALARY / 12)} a month × 12 ÷ 260 gives the same ${fmtMoney(EMPLOYEE_DAY_PAY)}. This is the figure employers usually reach for when pricing a day of unpaid leave or a salary-sacrifice day — check your contract, because some use a calendar-day basis instead.`,
+  },
+  {
+    question: "How many hours is a day rate?",
+    answer: `There is no legal standard — the contract sets it. In practice a "day" in UK contracting usually means 7.5 or 8 working hours, and the difference matters: £300 a day is ${fmtMoney(300 / 7.5)} an hour on a 7.5-hour day but ${fmtMoney(300 / 8)} an hour on an 8-hour day. This calculator defaults to 7.5 hours and converts the day rate to an hourly figure on whatever hours-per-day you set, so check the hours your contract assumes before comparing a day rate with an hourly-paid role.`,
   },
 ];
 
@@ -247,6 +264,46 @@ export default function DayRateCalculatorPage() {
           </Link>{" "}
           works through the status questions and the inside/outside
           comparison on your day rate.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Employees: one day&apos;s pay from a monthly salary
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Most people who search for a day rate are not contractors
+          at all — they are employees asking what one day of their
+          salary is worth, usually to price a day of unpaid leave, a
+          salary-sacrifice day or a deduction they want to check. The
+          method is different from everything above, because a salary
+          is paid for all 260 weekdays of the year (52 weeks × 5
+          days), holidays included — there are no billable days to
+          deduct and no benefits uplift to add. So: annual salary ÷
+          260. On {fmtMoney(EMPLOYEE_SALARY)} a year —{" "}
+          {fmtMoney(EMPLOYEE_SALARY / 12)} a month — one day&apos;s
+          pay is {fmtMoney(EMPLOYEE_SALARY)} ÷ 260 ={" "}
+          {fmtMoney(EMPLOYEE_DAY_PAY)}, which is{" "}
+          {fmtMoney(EMPLOYEE_HOURLY_8H)} an hour on an 8-hour day or{" "}
+          {fmtMoney(EMPLOYEE_HOURLY_75H)} on a 7.5-hour day. If you
+          are paid weekly instead, one day&apos;s pay is simply the
+          weekly wage divided by the days you work each week. Two
+          warnings: some contracts price deductions on a calendar-day
+          basis (salary ÷ 365) instead, which produces a smaller
+          daily figure, and statutory calculations — for example a
+          week&apos;s pay for holiday or redundancy — have their own
+          rules. The divisor in your contract is the one that binds.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          And how long is the &ldquo;day&rdquo; in any of this?
+          There is no legal standard: a contractor&apos;s day is
+          whatever the contract says, most often 7.5 or 8 hours, and
+          the calculator above converts on the hours-per-day figure
+          you give it (7.5 by default). Before comparing a day rate
+          with an hourly rate — or an employee day with a contractor
+          day — line the hours up first; at £300 a day the gap
+          between a 7.5-hour and an 8-hour assumption is{" "}
+          {fmtMoney(300 / 7.5 - 300 / 8)} an hour.
         </p>
       </section>
 

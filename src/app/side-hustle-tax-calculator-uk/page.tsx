@@ -544,6 +544,37 @@ export default function SideHustleTaxCalculatorUkPage() {
 
       <section className="space-y-3 print:hidden">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Will HMRC find out about my side hustle?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Assume yes — not because HMRC is watching you personally,
+          but because the platforms are required to tell it. Since
+          1 January 2024, under the UK&apos;s reporting rules for
+          digital platforms (based on the OECD model rules), online
+          marketplaces, delivery and ride-hailing apps, and property
+          platforms such as short-let sites have had to collect
+          sellers&apos; details and report their income to HMRC each
+          year; the first reports, covering 2024, were sent by
+          31 January 2025, and the platform also sends you a copy of
+          what it reported. HMRC can match that data against tax
+          returns — and against the absence of one.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Being reported is not, by itself, a problem, and it is not
+          a tax bill. Tax only becomes due when your gross trading
+          income passes the £1,000 trading allowance in a tax year —
+          below that, the income is fully relieved whether or not a
+          platform reports it, which is why people selling their own
+          unwanted belongings occasionally, rather than trading,
+          usually have nothing to pay. Above £1,000, the answer is
+          not to hope the data does not match: register, file, and
+          use the platform&apos;s own statement as one of your
+          records when you do.
+        </p>
+      </section>
+
+      <section className="space-y-3 print:hidden">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           When do you have to register, file and pay?
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">

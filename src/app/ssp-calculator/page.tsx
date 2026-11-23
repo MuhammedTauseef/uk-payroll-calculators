@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import SspCalculator from "@/components/SspCalculator";
+import { calculateSsp } from "@/lib/ssp";
 import { SSP_GUIDES } from "@/components/GuideSections";
 import {
   EMPLOYMENT_ALLOWANCE,
@@ -34,6 +35,11 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Is there a lower earnings limit for SSP?",
     answer:
       "No. The April 2026 rules removed the lower earnings limit for Statutory Sick Pay, so an employee does not have to earn a minimum amount before SSP can be paid. The amount is still capped at the lower of £123.25 a week or 80% of average weekly earnings.",
+  },
+  {
+    question: "Is SSP 80% of your salary?",
+    answer:
+      "No — not usually. SSP is whichever of two figures is lower: the flat rate of £123.25 a week, or 80% of your average weekly earnings. The 80% figure only decides your SSP if it comes out below £123.25, which happens when average weekly earnings are under about £154. Anyone earning more than that gets the flat £123.25 a week, which for most full-time staff is far less than 80% of their pay.",
   },
   {
     question: "How much SSP will I get per week?",
@@ -81,6 +87,26 @@ const webAppJsonLd = {
 const gbp = new Intl.NumberFormat("en-GB", {
   style: "currency",
   currency: "GBP",
+});
+
+// Worked-example figures — computed by the same calculateSsp() the
+// tool above runs, so the page can never disagree with itself.
+// Full-time example: average weekly earnings of £500, five qualifying
+// days a week. Part-time example: £150 a week over three qualifying days.
+const sspFullTime2Days = calculateSsp({
+  averageWeeklyEarnings: 500,
+  qualifyingDaysPerWeek: 5,
+  daysAbsent: 2,
+});
+const sspFullTime2Weeks = calculateSsp({
+  averageWeeklyEarnings: 500,
+  qualifyingDaysPerWeek: 5,
+  daysAbsent: 10,
+});
+const sspPartTimeWeek = calculateSsp({
+  averageWeeklyEarnings: 150,
+  qualifyingDaysPerWeek: 3,
+  daysAbsent: 3,
 });
 
 export default function SspCalculatorPage() {
@@ -193,6 +219,45 @@ export default function SspCalculatorPage() {
           rate, and the daily rate is paid for each qualifying day the
           employee is absent. Nothing is held back at the start — payment runs
           from the first full day of sickness.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked examples: two days, two weeks and a part-time week
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>Two days off.</strong> Take an employee who earns{" "}
+          {gbp.format(500)} a week and normally works five qualifying
+          days. 80% of their earnings is {gbp.format(400)}, which is more
+          than the flat rate, so the weekly SSP is the flat{" "}
+          {gbp.format(sspFullTime2Days.weeklyRate)}. The daily rate is{" "}
+          {gbp.format(sspFullTime2Days.weeklyRate)} ÷ 5 ={" "}
+          {gbp.format(sspFullTime2Days.dailyRate)} per qualifying day, so
+          two days of sickness pay{" "}
+          {gbp.format(sspFullTime2Days.totalPayable)} — from the first
+          day, with no waiting days held back.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>Two weeks off.</strong> The same employee off for two
+          full weeks is absent for 10 qualifying days: 10 ×{" "}
+          {gbp.format(sspFullTime2Weeks.dailyRate)} ={" "}
+          {gbp.format(sspFullTime2Weeks.totalPayable)} of SSP in total.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>A part-time week.</strong> Part-time staff are worked
+          out exactly the same way, on their own earnings and their own
+          qualifying days. Someone who earns {gbp.format(150)} a week
+          working three days has 80% of earnings of{" "}
+          {gbp.format(sspPartTimeWeek.weeklyRate)} — below the flat rate,
+          so the 80% figure is the one that applies. Their daily rate is{" "}
+          {gbp.format(sspPartTimeWeek.weeklyRate)} ÷ 3 ={" "}
+          {gbp.format(sspPartTimeWeek.dailyRate)}, and a full week off
+          (all three qualifying days) pays{" "}
+          {gbp.format(sspPartTimeWeek.totalPayable)}. The per-day figure
+          always depends on how many qualifying days the employee works:
+          the same weekly amount spread over fewer days is worth more per
+          day.
         </p>
       </section>
 

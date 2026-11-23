@@ -29,6 +29,12 @@ const gbp = new Intl.NumberFormat("en-GB", {
 
 const exampleSalary = 31200;
 const example = calculatePaternity({ annualSalary: exampleSalary, weeks: 2 });
+// Second worked example: a lower earner, where the 90%-of-earnings
+// rule — not the flat rate — decides the amount. Same engine as the tool.
+const lowEarnerExample = calculatePaternity({
+  annualSalary: 10400,
+  weeks: 2,
+});
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -131,6 +137,39 @@ export default function PaternityPayCalculatorPage() {
           weekly earnings are {gbp.format(example.averageWeeklyEarnings)},
           so SPP is the flat rate of {gbp.format(example.weeklyAmount)} a
           week — {gbp.format(example.totalPay)} for the full two weeks.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked example: when 90% of earnings is the lower amount
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Take a part-time father earning {gbp.format(10400)} a year.
+          Step 1: his average weekly earnings are {gbp.format(10400)} ÷
+          52 = {gbp.format(lowEarnerExample.averageWeeklyEarnings)} a
+          week. Step 2: 90% of that is{" "}
+          {gbp.format(lowEarnerExample.weeklyAmount)} — less than the
+          flat rate of {gbp.format(SPP.weeklyRate)}, so the 90% figure is
+          what he gets. Step 3: for the full two weeks that is{" "}
+          {gbp.format(lowEarnerExample.totalPay)}.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Note what SPP is not: it is not two weeks at full pay. Two
+          weeks of his normal pay would be{" "}
+          {gbp.format(lowEarnerExample.averageWeeklyEarnings * 2)}; SPP
+          replaces {gbp.format(lowEarnerExample.totalPay)} of it, and the
+          rest is only made up if his employer tops SPP up under its own
+          policy. And if two weeks is not enough, paternity leave itself
+          cannot be stretched — the route to more time off is{" "}
+          <Link
+            href="/shared-parental-leave-calculator"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            shared parental leave
+          </Link>
+          , where the mother or adopter gives up some of their leave for
+          the partner to take instead.
         </p>
       </section>
 

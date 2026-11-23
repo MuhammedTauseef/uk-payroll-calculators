@@ -77,6 +77,51 @@ const exPensionLoan = calculatePayRise({
   postgraduateLoanToo: false,
 });
 
+// 2026 benchmarks — verified 23 November 2026. Inflation: ONS CPI
+// rose 3.6% in the 12 months to October 2026 (released 18 November
+// 2026). Typical awards: Brightmine's median basic pay award was
+// 3.2% in the three months to October 2026, with 2026 settlements
+// clustered around 3%.
+const CPI_LATEST_PERCENT = 3.6;
+const BENCH_SALARY = 40000;
+const benchStandStill = BENCH_SALARY * (1 + CPI_LATEST_PERCENT / 100);
+const benchThreePercent = BENCH_SALARY * 1.03;
+
+// Minimum wage from 1 April 2026 (GOV.UK rates): the National
+// Living Wage rose from £12.21 to £12.71 an hour. A full-time
+// year on 37.5 hours a week, before and after:
+const NLW_2025 = 12.21;
+const NLW_2026 = 12.71;
+const nlwAnnualBefore = NLW_2025 * 37.5 * 52;
+const nlwAnnualAfter = NLW_2026 * 37.5 * 52;
+
+const BENCHMARK_ROWS: { rise: string; verdict: string }[] = [
+  {
+    rise: "3%",
+    verdict:
+      "The typical 2026 award — but below inflation, so a small pay cut in real terms",
+  },
+  {
+    rise: "4%",
+    verdict:
+      "Just ahead of inflation — a small real rise, and about the National Living Wage increase",
+  },
+  {
+    rise: "5%",
+    verdict: "Comfortably ahead of inflation and of most other awards this year",
+  },
+  {
+    rise: "6–7%",
+    verdict:
+      "Well above the typical award — usually reflects a promotion, a market adjustment or scarce skills",
+  },
+  {
+    rise: "12%",
+    verdict:
+      "Exceptional as a pure cost-of-living rise — figures like this almost always mean a bigger job",
+  },
+];
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How do I work out my pay rise as a percentage?",
@@ -102,6 +147,14 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Is a pay rise taxed differently from a bonus?",
     answer:
       "Both are taxed as earnings through PAYE at the same Income Tax bands, so over a full year the tax on the same total pay is broadly the same. The difference is National Insurance: it is worked out pay period by pay period rather than cumulatively, so a one-off bonus month can carry more NI than the same money spread across the year as a rise. A permanent rise also lifts future percentage rises, overtime rates and pension contributions in a way a bonus does not.",
+  },
+  {
+    question: "Is a 3% pay rise good?",
+    answer: `It is typical, but in late 2026 it does not quite keep up with prices. Brightmine puts the median 2026 pay award at around 3%, so 3% is what most people got — but CPI inflation was ${CPI_LATEST_PERCENT}% in the 12 months to October 2026 (ONS), so a 3% rise is worth roughly 0.6% less in real terms. On ${gbp.format(BENCH_SALARY)}, standing still would have taken ${gbp.format(benchStandStill)}; a 3% rise pays ${gbp.format(benchThreePercent)}. A rise only starts to feel like a rise once it clears inflation — 4% and above on these figures.`,
+  },
+  {
+    question: "What pay rise do minimum wage workers get in April 2026?",
+    answer: `The statutory one. From 1 April 2026 the National Living Wage (21 and over) is ${gbp.format(NLW_2026)} an hour, up from ${gbp.format(NLW_2025)} — a 4.1% rise. The 18 to 20 rate rose 8.5% to £10.85, and the under-18 and apprentice rates rose to £8.00. On 37.5 hours a week the Living Wage rise alone is worth ${gbp.format(nlwAnnualAfter - nlwAnnualBefore)} a year before tax. If you are paid the minimum and your April 2026 payslip does not show the new rate, that is an underpayment, not a discretionary rise your employer can skip.`,
   },
 ];
 
@@ -246,6 +299,132 @@ export default function PayRiseCalculatorPage() {
           trap with real numbers. Pension contributions and student
           loan repayments then take their own percentages off the
           same rise, which the sections after that work through.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>Is my pay rise any good? The 2026 benchmarks</h2>
+        <p className={bodyClass}>
+          A percentage means nothing until it is set against two
+          numbers: what prices did, and what everyone else got.
+          Prices first: CPI inflation was {CPI_LATEST_PERCENT}% in
+          the 12 months to October 2026 (ONS, published 18 November
+          2026), so a rise below that is a pay cut in real terms,
+          however it is announced. On {gbp.format(BENCH_SALARY)} you
+          would have needed {gbp.format(benchStandStill)} just to
+          stand still; a 3% rise pays {gbp.format(benchThreePercent)}{" "}
+          — {gbp.format(benchStandStill - benchThreePercent)} a year
+          short of keeping pace. Other people second: Brightmine,
+          which tracks hundreds of UK pay settlements, puts the
+          median award for 2026 at around 3% (3.2% in the three
+          months to October 2026), with most awards landing between
+          3% and 4%. So the honest verdict on the percentages people
+          ask about most:
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Your rise
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  The verdict for 2026
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {BENCHMARK_ROWS.map((row) => (
+                <tr key={row.rise}>
+                  <td className="px-4 py-2 font-semibold text-slate-900 dark:text-slate-50">
+                    {row.rise}
+                  </td>
+                  <td className="px-4 py-2">{row.verdict}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          Two cautions before you judge your own letter against the
+          table. Real terms are measured against the inflation rate
+          over the year your rise covers, and inflation moves — the
+          figure above is the latest available, not a promise about
+          next year. And a rise below inflation is not automatically
+          a bad outcome: a smaller rise with a better pension match,
+          fewer hours or a shorter commute can still be the better
+          package, which is why the sections below work through what
+          the rise is actually worth after tax rather than stopping
+          at the percentage.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
+          April 2026: the minimum wage rise is set by law
+        </h2>
+        <p className={bodyClass}>
+          If you are paid at or near the minimum wage, your April
+          rise is not negotiated — it is the statutory uprating, and
+          it applies from the first pay period starting on or after
+          1 April 2026. The April 2026 rates (GOV.UK):
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Worker
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  To 31 March 2026
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  From 1 April 2026
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Rise
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className="px-4 py-2">21 and over (National Living Wage)</td>
+                <td className="px-4 py-2">{gbp.format(NLW_2025)}</td>
+                <td className="px-4 py-2">{gbp.format(NLW_2026)}</td>
+                <td className="px-4 py-2">4.1%</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">18 to 20</td>
+                <td className="px-4 py-2">£10.00</td>
+                <td className="px-4 py-2">£10.85</td>
+                <td className="px-4 py-2">8.5%</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">Under 18</td>
+                <td className="px-4 py-2">£7.55</td>
+                <td className="px-4 py-2">£8.00</td>
+                <td className="px-4 py-2">6.0%</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">Apprentice</td>
+                <td className="px-4 py-2">£7.55</td>
+                <td className="px-4 py-2">£8.00</td>
+                <td className="px-4 py-2">6.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          On a 37.5-hour week, the Living Wage rise alone takes
+          full-time pay from {gbp.format(nlwAnnualBefore)} to{" "}
+          {gbp.format(nlwAnnualAfter)} a year —{" "}
+          {gbp.format(nlwAnnualAfter - nlwAnnualBefore)} extra before
+          tax. Run your own hours and rate through the calculator
+          above to see what survives tax and National Insurance, and
+          if your pay did not move in April 2026 and you are on the
+          minimum, raise it: back pay is owed from the date the new
+          rate took effect.
         </p>
       </section>
 

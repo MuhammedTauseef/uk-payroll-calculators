@@ -113,6 +113,11 @@ const FAQS: { question: string; answer: string }[] = [
       "A newly qualified teacher on M1 outside London starts on £34,069 a year from September 2026, rising to £41,729 in Inner London. The top of the main pay range, M6, is £46,940 (Rest of England) to £54,131 (Inner London), and the top of the upper pay range, U3, is £52,835 to £64,684. After Teachers' Pension contributions, tax and National Insurance, M1 take-home is £2,169.37 a month outside London.",
   },
   {
+    question: "Are the 2026/27 teacher pay scales confirmed or predicted?",
+    answer:
+      "Confirmed. The School Teachers' Review Body recommended a 3.5% uplift (with 5% on the unqualified minimum), the Secretary of State accepted the recommendations in full on 1 July 2026, and the final pay points were published in the STPCD 2026 in October 2026, applying retrospectively from 1 September 2026 — maintained schools put them into pay in the autumn term, with backpay to 1 September. Every 2026/27 figure on this page is from that published document, not a forecast. The one thing that is still only an announcement is 2027/28: a further 3% uplift from September 2027 was accepted at the same time, but the 2027/28 pay points themselves will not be published until the STPCD 2027 — any site showing exact 2027/28 point values now is predicting them.",
+  },
+  {
     question: "How is teacher take-home pay worked out?",
     answer:
       "Start with gross pay, then deduct Teachers' Pension contributions first — they come off before tax under a net-pay arrangement, so they reduce your Income Tax but not your National Insurance. Then Income Tax on what is left above your personal allowance, National Insurance at 8% between £12,570 and £50,270 and 2% above that (charged on gross pay, before the pension deduction), and any student loan repayment at 9% of gross pay above your plan threshold.",
@@ -655,6 +660,32 @@ export default function TeachingPayCalculatorPage() {
             maternity pay calculator
           </Link>{" "}
           if that is the question in front of you.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
+          Are the 2026/27 scales confirmed — or still predictions?
+        </h2>
+        <p className={bodyClass}>
+          Confirmed, and in pay. Teacher pay for 2026/27 went through
+          the full statutory process: the School Teachers&apos; Review
+          Body recommended a 3.5% uplift on pay points (5% on the
+          unqualified teacher minimum), the Secretary of State
+          accepted those recommendations in full on 1 July 2026, and
+          the School Teachers&apos; Pay and Conditions Document 2026
+          was published in October 2026 with the final points,
+          backdated to 1 September 2026. Maintained schools applied
+          the new scales in the autumn term with backpay to 1
+          September, and most academies follow the same document. So
+          the 2026/27 figures throughout this page are the published
+          STPCD points — checked against the document itself — not
+          estimates built on the STRB recommendation. The distinction
+          matters for next year: a further 3% uplift for 2027/28 was
+          accepted alongside this award, but the 2027/28 pay points
+          will only exist when the STPCD 2027 is published, so treat
+          any exact 2027/28 salary figures you see before then as
+          predictions.
         </p>
       </section>
 

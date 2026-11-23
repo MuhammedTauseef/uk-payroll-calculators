@@ -600,6 +600,17 @@ export default function SharedParentalLeaveCalculatorPage() {
             answer, not the answer.
           </li>
           <li>
+            <strong>NHS staff.</strong> NHS employees may have an
+            occupational scheme that differs from the statutory
+            scheme modelled here — check your employer&apos;s policy
+            before planning around these figures. NHS maternity pay
+            itself is modelled in the{" "}
+            <Link href="/nhs-maternity-pay-calculator" className={linkClass}>
+              NHS maternity pay calculator
+            </Link>
+            .
+          </li>
+          <li>
             <strong>Northern Ireland.</strong> Shared parental leave
             and pay apply in England, Scotland and Wales only.
           </li>
@@ -627,6 +638,94 @@ export default function SharedParentalLeaveCalculatorPage() {
           </Link>{" "}
           — a baby year is exactly when the £252 transfer most often
           goes unclaimed.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Shared parental leave for teachers: using the school
+          holidays
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Teachers are the group who gain most from the block
+          structure, because school holidays fall at fixed points in
+          the year. The pattern the NEU sets out in its guidance is
+          this: the teacher ends (curtails) her maternity leave at
+          the end of a term, returns to work — on full pay — for the
+          school closure that follows, then takes her shared leave
+          in blocks during term time, returning to work again for
+          each holiday. Its worked example has a teacher curtail at
+          the end of the autumn term, return on full pay over the
+          Christmas break, and then take three blocks of continuous
+          shared leave — six weeks in the first half of the spring
+          term, returning for the half-term closure; four weeks in
+          the second half, returning for the Easter closure; and six
+          weeks in the first half of the summer term, returning for
+          the May half term before going back for good. The weeks
+          spent &ldquo;back at work&rdquo; fall in the holidays, so
+          she is paid her normal salary for them, and the shared
+          pool is only spent on the term-time blocks.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The mechanics are the same ones this page has already set
+          out: the blocks sit inside the usual limits — up to 3
+          blocks, each booked with at least 8 weeks&apos; written
+          notice, everything finished before the first birthday —
+          and a notice for a block of continuous leave cannot be
+          refused by the employer provided the teacher qualifies and
+          the notice is correct, which is why the NEU recommends
+          putting each block on a separate notice so it is not
+          mistaken for a discontinuous-leave request. The up-to-20
+          SPLIT days fit this pattern too: the NEU notes they can be
+          used for staff meetings, training, CPD and INSET days, or
+          for planning and preparation, by agreement with the
+          school, without ending the leave. Plan the dates with the
+          calculator above, and give the school the notices as early
+          as the 8-week rule allows — a block that starts in January
+          needs its notice in by early November.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          A note for employers: notices, blocks and reclaiming ShPP
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          For the employer, a shared parental leave plan arrives as
+          paperwork with deadlines attached. Expect the binding
+          notice that ends the mother&apos;s maternity leave (at
+          least 8 weeks before the end date she gives), then a
+          separate booking notice for every block each parent takes
+          — again at least 8 weeks ahead, and another 8 weeks for
+          any change to a booked block. A notice for a single
+          continuous block cannot be refused if the employee
+          qualifies and has given proper notice; a request for
+          discontinuous leave — scattered weeks in one notice — can
+          be discussed, modified or refused, and if no agreement is
+          reached within the discussion period the employee can
+          withdraw it or take the total as one continuous block.
+          Keep each parent&apos;s notices with their own employer:
+          the two employers do not exchange information, so the
+          family&apos;s plan is the only place the two halves meet.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The pay side is mostly recoverable. Employers pay ShPP
+          through the normal payroll and reclaim it from HMRC:
+          usually 92% of the ShPP paid, or 109% if the business
+          qualifies for Small Employers&apos; Relief — that is,
+          it paid £45,000 or less in Class 1 National Insurance
+          (ignoring reductions such as Employment Allowance) in the
+          last complete tax year before the qualifying week. The
+          reclaim goes through the Employer Payment Summary (EPS),
+          and an employer who cannot afford the payments can apply
+          to HMRC for advance funding, up to 4 weeks before the
+          first payment is due. The wider cost of employing someone
+          — salary, employer National Insurance and pension — is
+          worked out by the{" "}
+          <Link href="/employer-cost-calculator" className={linkClass}>
+            employer cost calculator
+          </Link>
+          .
         </p>
       </section>
 
@@ -666,7 +765,11 @@ export default function SharedParentalLeaveCalculatorPage() {
           and the worked example) and GOV.UK&apos;s rates and
           thresholds for employers (ShPP at £187.18 a week in 2025/26
           and £194.32 in 2026/27; lower earnings limit £125, then
-          £129). This calculator applies those rules and is a planning
+          £129), GOV.UK&apos;s guidance on getting financial help
+          with statutory pay (employers reclaim 92% of ShPP, or 109%
+          under Small Employers&apos; Relief), checked 23 November
+          2026, and the NEU&apos;s shared parental leave guidance
+          for the teachers&apos; pattern above. This calculator applies those rules and is a planning
           guide, not advice — your employers confirm eligibility and
           enhanced pay from your contracts, and HMRC decides any
           dispute about statutory pay.

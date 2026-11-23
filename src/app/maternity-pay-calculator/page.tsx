@@ -77,6 +77,21 @@ const FAQS: { question: string; answer: string }[] = [
     answer:
       "Yes, through Shared Parental Leave. You can end your maternity leave and pay early and convert what is left into Shared Parental Leave and Pay, which you and your partner can split in flexible blocks during the baby's first year. The first 6 weeks of SMP at 90% of earnings cannot be shared — that part always belongs to you — and Shared Parental Pay is paid at the flat rate of £194.32 a week or 90% of earnings if lower.",
   },
+  {
+    question: "Is maternity leave 9 months or 12 months?",
+    answer:
+      "Both numbers are real — they measure different things. Maternity leave lasts up to 52 weeks, which is 12 months, and every employee can take the whole year from day one of a job. Statutory Maternity Pay lasts 39 weeks, which is roughly 9 months. So a full year off means 39 paid weeks followed by 13 unpaid weeks. You do not have to take the whole year: you can return at any point after the first 2 weeks (4 weeks in a factory), as long as you give the right notice.",
+  },
+  {
+    question: "I am self-employed — can I get Statutory Maternity Pay?",
+    answer:
+      "No. SMP is paid by an employer through payroll, so if you are self-employed there is no employer to pay it. Instead you claim Maternity Allowance from the Department for Work and Pensions, using the claim form on GOV.UK. It pays up to £194.32 a week for up to 39 weeks and is tax-free; for the self-employed the amount depends on your Class 2 National Insurance record in the 66 weeks before your due week — £27 a week if no Class 2 contributions have been paid.",
+  },
+  {
+    question: "Does my employer have to pay more than SMP?",
+    answer:
+      "No — SMP is the statutory minimum, and this calculator works out that statutory amount only. Many employers offer an enhanced (occupational) maternity scheme that pays more, often linked to your length of service and sometimes to coming back to work for a set period afterwards. Your contract, staff handbook or employer's maternity policy is where the scheme is set out. NHS staff are covered by the Agenda for Change scheme instead — our NHS maternity pay calculator models it.",
+  },
 ];
 
 const faqJsonLd = {
@@ -229,6 +244,52 @@ export default function MaternityPayCalculatorPage() {
       </section>
 
       <section className="space-y-3">
+        <h2 className={h2Class}>Is maternity leave 9 months or 12 months?</h2>
+        <p className={bodyClass}>
+          Both — because leave and pay are two different
+          entitlements with two different lengths. Maternity{" "}
+          <em>leave</em> is up to 52 weeks: 12 months off work,
+          available to every employee from the first day of a job,
+          with no service test. Maternity <em>pay</em> — SMP — runs
+          for 39 of those weeks: roughly 9 months. Put the two
+          together and a full year off is 39 paid weeks followed by
+          13 unpaid weeks, which is exactly the shape the calculator
+          above prices. Nothing forces you to take the unpaid tail:
+          you can come back at any point after the compulsory first
+          2 weeks (4 weeks if you work in a factory), and many
+          people plan their return around the week the pay stops
+          rather than the week the leave ends.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
+          Enhanced maternity pay: the part this calculator leaves out
+        </h2>
+        <p className={bodyClass}>
+          Everything on this page is the statutory scheme — the
+          legal floor. A large number of employers pay more than
+          SMP under an enhanced, or occupational, maternity scheme:
+          full pay for a period, then half pay, or a longer stretch
+          at a higher rate than {gbp.format(SMP.weeklyRate)} a week.
+          Enhanced schemes usually carry their own conditions — a
+          minimum length of service before the baby is due is
+          common, and some schemes ask you to repay part of the
+          extra if you do not return to work afterwards — so the
+          figures that apply to you are the ones in your contract,
+          your staff handbook or your employer&apos;s maternity
+          policy, not on this page. Check them before you budget:
+          an enhanced scheme can change the month-by-month picture
+          completely. NHS staff do not need to guess — the Agenda
+          for Change occupational scheme is modelled in full in our{" "}
+          <Link href="/nhs-maternity-pay-calculator" className={linkClass}>
+            NHS maternity pay calculator
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section className="space-y-3">
         <h2 className={h2Class}>
           How is your average weekly earnings figure worked out?
         </h2>
@@ -377,6 +438,31 @@ export default function MaternityPayCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className={h2Class}>
+          Self-employed? Your route is Maternity Allowance
+        </h2>
+        <p className={bodyClass}>
+          If you are self-employed, SMP is not available to you at
+          all: it is paid by an employer through payroll, and there
+          is no employer in the picture. Your route is Maternity
+          Allowance, claimed from the Department for Work and
+          Pensions using the claim form on GOV.UK. It pays up to{" "}
+          {gbp.format(SMP.weeklyRate)} a week for up to 39 weeks —
+          the same maximum as the SMP flat rate — and it is
+          tax-free. For the self-employed, the amount turns on your
+          Class 2 National Insurance record in the 66 weeks before
+          your due week: with Class 2 contributions paid in at
+          least 13 of those weeks you get the full rate, and if no
+          Class 2 contributions have been paid the rate is £27 a
+          week. If HMRC tells you that you have paid too few weeks,
+          you can be offered the chance to pay voluntary Class 2
+          contributions to lift the amount — check that letter
+          carefully before deciding, because the difference over 39
+          weeks runs into thousands of pounds.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
           How does maternity pay look month by month?
         </h2>
         <p className={bodyClass}>
@@ -471,9 +557,9 @@ export default function MaternityPayCalculatorPage() {
         <h2 className={h2Class}>A note for employers</h2>
         <p className={bodyClass}>
           Employers pay SMP through the normal payroll but recover it
-          from HMRC: 92% of the SMP paid, or 103% if the employer&apos;s
+          from HMRC: 92% of the SMP paid, or 109% if the employer&apos;s
           total Class 1 National Insurance bill for the previous tax
-          year was £45,000 or less — the extra 3% is Small
+          year was £45,000 or less — the extra 17% is Small
           Employers&apos; Relief, compensating for the employer
           National Insurance due on the SMP itself. Recovery is usually
           taken by reducing the monthly PAYE payment; if the amount due

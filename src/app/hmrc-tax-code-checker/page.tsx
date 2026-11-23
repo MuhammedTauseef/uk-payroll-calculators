@@ -64,6 +64,12 @@ const COMMON_CODES: { code: string; meaning: string; effect: string }[] = [
     effect: `${gbp.format(11000)} tax-free`,
   },
   {
+    code: "1257T",
+    meaning:
+      "A T code: the allowance is the standard amount for now, but HMRC has other items in the calculation it needs to review — expect the code to be revisited once it has.",
+    effect: `${gbp.format(12570)} tax-free, under review`,
+  },
+  {
     code: "1257L W1 / 1257L M1",
     meaning:
       "An emergency code: the same allowance as 1257L, but each pay day is taxed on its own (W1 = weekly pay, M1 = monthly) instead of on the year so far. The X ending is the same idea for irregular pay dates.",
@@ -143,6 +149,16 @@ const FAQS: { question: string; answer: string }[] = [
     question: "What should I do if my tax code is wrong?",
     answer:
       "Check and update the details HMRC holds about you — that is what the code is built from. The quickest route is HMRC's Check your Income Tax service: sign in, and check your employment, pension, estimated taxable income, company benefits and expenses, correcting anything wrong or missing. HMRC then updates your code and tells you and your employer within about 15 working days; it should appear on your next or the following monthly payslip (the third weekly one). If you've overpaid, the difference is usually refunded through your pay once the new code is used. If you can't use the online service, contact HMRC's Income Tax enquiries — but if you've just started a job, wait 35 days first so HMRC has your new income details.",
+  },
+  {
+    question: "Why has my tax code changed?",
+    answer:
+      "Because something in the information HMRC holds about you changed. The usual triggers are: starting a new job (often an emergency code if there was no P45), starting or stopping a company benefit such as a car or medical cover, tax owed from an earlier year being collected through your code, a second job or pension starting (your allowance is split or moved), the State Pension or another taxable benefit starting or changing, a pay rise that takes you over £100,000 so your Personal Allowance is withdrawn, claiming Marriage Allowance or tax relief on expenses, or savings interest above your Personal Savings Allowance. A changed code is not automatically a wrong code — the section below works through the reasons, and the self-check after it helps you judge yours.",
+  },
+  {
+    question: "How do I know if my tax code is correct?",
+    answer:
+      "Run five checks. One: the code on your latest payslip matches the code in HMRC's Check your Income Tax service. Two: every job and pension on your HMRC record is one you still have — a job you left still showing can split your allowance wrongly. Three: HMRC's estimate of your pay is close to reality, because codes are built on estimates. Four: any company benefits listed are benefits you actually receive, at about the right value. Five: your Personal Allowance sits on one income only — normally your main job on 1257L, with second jobs on BR or D0. If all five hold, the code is very likely right; if one fails, that failure is what to report to HMRC.",
   },
 ];
 
@@ -496,6 +512,127 @@ export default function TaxCodeCheckerPage() {
           job, GOV.UK advises waiting 35 days before contacting HMRC, so
           your new income details have time to reach them — an emergency
           code in the first weeks of a job usually corrects itself.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Why has my tax code changed — and why is it so low?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          HMRC rebuilds your code whenever the information behind it
+          moves, and GOV.UK lists the triggers. The ones that explain
+          almost every surprise change:
+        </p>
+        <ul className="max-w-2xl list-disc space-y-1 pl-6 text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <li>
+            <strong>You started a new job</strong> — without a P45,
+            your employer starts you on an emergency code (W1, M1 or
+            X) until HMRC matches your records.
+          </li>
+          <li>
+            <strong>A company benefit started or stopped</strong> — a
+            car, fuel or private medical cover is taxed through the
+            code, so the number falls by the benefit&apos;s value in
+            tens of pounds: a £1,570 medical benefit turns 1257L into
+            1100L, the worked example in the table above.
+          </li>
+          <li>
+            <strong>Tax owed from an earlier year</strong> — an
+            underpayment is usually collected by reducing a later
+            code (&ldquo;coding out&rdquo;), spread across the year.
+          </li>
+          <li>
+            <strong>A second job or pension</strong> — your Personal
+            Allowance can only sit in one place, so the other income
+            is coded BR or D0, and the main code may change too.
+          </li>
+          <li>
+            <strong>State Pension or taxable benefits</strong> — the
+            pension is taxable but paid without tax taken off, so it
+            is collected by reducing the code on your job or private
+            pension instead.
+          </li>
+          <li>
+            <strong>Your income crossed £100,000</strong> — the
+            Personal Allowance is withdrawn at £1 for every £2 above
+            £100,000, so the number in the code shrinks — to nothing
+            at £125,140.
+          </li>
+          <li>
+            <strong>You claimed something</strong> — Marriage
+            Allowance (M and N codes) or tax relief on work expenses
+            both rewrite the code, in your favour.
+          </li>
+          <li>
+            <strong>Untaxed income grew</strong> — savings interest
+            above your Personal Savings Allowance, or untaxed
+            part-time earnings, are collected through the code.
+          </li>
+        </ul>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          And why do some codes end up <em>so</em> low? The number in
+          the code is your remaining tax-free amount in tens of
+          pounds, so every deduction above comes straight off it —
+          £3,000 of deductions turns 1257L into 957L. If the
+          deductions pass the whole £12,570 allowance, the code flips
+          into a K code, which adds an amount to taxable pay instead.
+          A low code is therefore usually arithmetic, not an error:
+          the question is whether the deductions inside it are real,
+          which is what the self-check below tests.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Is my tax code right? A five-minute self-check
+        </h2>
+        <ol className="max-w-2xl list-decimal space-y-1 pl-6 text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <li>
+            The code on your latest payslip matches the code shown in{" "}
+            <a
+              href="https://www.gov.uk/check-income-tax-current-year"
+              className={linkClass}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Check your Income Tax
+            </a>{" "}
+            — if payroll is using a different one, that is the first
+            thing to raise.
+          </li>
+          <li>
+            Every employment and pension on your HMRC record is one
+            you still have. A job you left months ago can still be
+            holding part of your allowance.
+          </li>
+          <li>
+            HMRC&apos;s estimate of your pay for the year is roughly
+            right — codes are built on estimates, and a stale estimate
+            from a previous job is a common cause of a wrong code.
+          </li>
+          <li>
+            Any company benefits listed are ones you actually receive,
+            at about the right cash value — and a benefit you no
+            longer have is not still in the code.
+          </li>
+          <li>
+            Your allowance sits on one income only: normally the main
+            job on 1257L (or a reduced version of it), with second
+            jobs and pensions on BR or D0. Two allowances on two jobs
+            means an underpayment building up.
+          </li>
+          <li>
+            If your code ends in W1, M1 or X, it should have been
+            replaced within a few weeks of starting the job — an
+            emergency suffix still there months later is worth
+            chasing.
+          </li>
+        </ol>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Pass all six and the code is very likely correct, even if it
+          looks low. Fail one and you have found what to report —
+          the fix runs through the steps in the section above.
         </p>
       </section>
 

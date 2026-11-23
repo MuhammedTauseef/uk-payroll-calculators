@@ -86,6 +86,20 @@ const exMfj = calculateUsPaycheck({
   filingStatus: "mfj",
 });
 const ex160 = calculateUsPaycheck({ ...BASE_INPUT, annualSalary: 160000 });
+// Hourly worked example: $30 an hour, 40 hours a week — the
+// calculator's hourly mode annualizes it to $62,400 and runs the
+// same Oregon maths, transit tax and Paid Leave included.
+const exHourly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  payType: "hourly",
+  hourlyRate: 30,
+  hoursPerWeek: 40,
+  overtimeHoursPerWeek: 0,
+});
+const exHourlyExtras = exHourly.extraLines.reduce(
+  (sum, l) => sum + l.annual,
+  0,
+);
 const frequencyRows = PAY_FREQUENCIES.map((f) => ({
   frequency: f,
   result: calculateUsPaycheck({ ...BASE_INPUT, frequency: f.id }),
@@ -132,6 +146,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Why is my actual Oregon paycheck slightly different?",
     answer:
       "This calculator annualizes, like the mainstream paycheck calculators; your employer withholds period by period using the Department of Revenue's computer formula and your Form OR-W-4 allowances. A mid-year start, bonuses (Oregon allows a flat 8% on supplemental wages paid separately), Portland-area local taxes (Metro Supportive Housing Services and Multnomah County Preschool for All — high incomes only, not modelled here), the hourly Workers' Benefit Fund assessment, or an employer paying your Paid Leave share all move a real stub a little. Annual totals land close.",
+  },
+  {
+    question: "How much is $30 an hour in Oregon after tax?",
+    answer: `At $30 an hour for 40 hours a week, gross pay is ${fmt(exHourly.grossAnnual)} a year. Single and paid every 2 weeks in ${TAX_YEAR}, the deductions are ${fmt(exHourly.federalAnnual)} of federal tax, ${fmt(exHourly.socialSecurityAnnual + exHourly.medicareAnnual)} of Social Security and Medicare, ${fmt(exHourly.stateAnnual)} of Oregon income tax and ${fmt(exHourlyExtras)} of statewide transit tax and Paid Leave Oregon contributions — leaving ${fmt(exHourly.netPerPeriod)} a paycheck, ${fmt(exHourly.netAnnual)} a year. The calculator above has an hourly mode for exactly this: choose "An hourly rate", and it annualizes your rate and hours and runs the same calculation, overtime at 1.5 times the rate included. (The small per-hour Workers' Benefit Fund assessment is not in these lines.)`,
   },
 ];
 
@@ -406,6 +424,67 @@ export default function OregonPaycheckCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Paid by the hour? $30 an hour, worked through
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The calculator above is not salary-only: choose &quot;An
+          hourly rate&quot;, enter the rate and your hours, and it
+          annualizes the pay (rate × hours × 52 weeks) and runs the
+          same Oregon calculation — brackets, federal-tax
+          subtraction, transit tax and Paid Leave contribution
+          included. At $30 an hour for 40 hours a week that is{" "}
+          {fmt(exHourly.grossAnnual)} a year:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Gross pay (every 2 weeks)</td>
+                <td className={tdClass}>{fmt(exHourly.grossPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.federalPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security at 6.2%</td>
+                <td className={tdClass}>
+                  −{fmt(exHourly.socialSecurityPerPeriod)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Medicare at 1.45%</td>
+                <td className={tdClass}>−{fmt(exHourly.medicarePerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Oregon income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.statePerPeriod)}</td>
+              </tr>
+              {exHourly.extraLines.map((line) => (
+                <tr key={line.id}>
+                  <td className={tdClass}>{line.label}</td>
+                  <td className={tdClass}>−{fmt(line.perPeriod)}</td>
+                </tr>
+              ))}
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>Net pay</td>
+                <td className={tdClass}>
+                  {fmt(exHourly.netPerPeriod)} every 2 weeks ·{" "}
+                  {fmt(exHourly.netAnnual)} a year
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Overtime hours are figured at 1.5 times the rate and
+          taxed as ordinary wages — Oregon applies the same
+          brackets to every dollar, hourly or salaried.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Oregon&apos;s brackets — and why the 9.9% headline misleads
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
@@ -549,6 +628,11 @@ export default function OregonPaycheckCalculatorPage() {
           {(OR_PAID_LEAVE_EMPLOYEE.rate * 100).toFixed(1)}% of wages up
           to {fmt(OR_PAID_LEAVE_EMPLOYEE.wageBase)}) are added as
           separate lines, as they appear on a real Oregon stub.
+          Those Oregon figures come straight from the Department of
+          Revenue&apos;s own published withholding tables — the
+          same official source an Oregon employer&apos;s payroll
+          is required to use — not from a generic national estimate
+          of how Oregon tax might work.
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-400">
           Sources: Oregon Department of Revenue, Withholding Tax

@@ -36,11 +36,11 @@ function fmtRate(n: number): string {
 
 // Worked example figures — computed by the same calculator functions
 // the tool above runs, so the page can never disagree with itself.
-// The running example: £12.21 an hour (the April 2025 National
+// The running example: £12.71 an hour (the April 2026 National
 // Living Wage), 40 normal hours and 10 overtime hours in the week.
 const BASE_INPUT = {
   basis: "hourly",
-  hourlyRate: 12.21,
+  hourlyRate: 12.71,
   annualSalary: 0,
   contractedHoursPerWeek: 0,
   normalHours: 40,
@@ -89,7 +89,7 @@ const exSalary = calculateOvertime({
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How is overtime pay calculated?",
-    answer: `Overtime hours × your hourly rate × the overtime rate in your contract. At £12.21 an hour with 10 overtime hours at time and a half, that is 10 × £12.21 × 1.5 = ${fmtMoney(exMain.overtimePay)} of overtime pay, on top of ${fmtMoney(exMain.normalPay)} for 40 normal hours — ${fmtMoney(exMain.totalPay)} for the week. There is no set formula in law: the multiplier comes from the contract, and flat rate or unpaid overtime are both lawful as long as the minimum wage floor below is met.`,
+    answer: `Overtime hours × your hourly rate × the overtime rate in your contract. At £12.71 an hour with 10 overtime hours at time and a half, that is 10 × £12.71 × 1.5 = ${fmtMoney(exMain.overtimePay)} of overtime pay, on top of ${fmtMoney(exMain.normalPay)} for 40 normal hours — ${fmtMoney(exMain.totalPay)} for the week. There is no set formula in law: the multiplier comes from the contract, and flat rate or unpaid overtime are both lawful as long as the minimum wage floor below is met.`,
   },
   {
     question: "Do employers have to pay extra for overtime?",
@@ -98,7 +98,7 @@ const FAQS: { question: string; answer: string }[] = [
   },
   {
     question: "What do time and a half and double time mean?",
-    answer: `Time and a half means each overtime hour is paid at 1.5 × your hourly rate — ${fmtRate(exMain.overtimeHourlyRate)} an hour on a £12.21 rate. Double time is 2 × the rate, ${fmtRate(exDouble.overtimeHourlyRate)} an hour on the same base. Time and a quarter is 1.25 ×. These are common contract rates, not legal entitlements: your contract says which, if any, applies, and many contracts pay overtime at the flat hourly rate.`,
+    answer: `Time and a half means each overtime hour is paid at 1.5 × your hourly rate — ${fmtRate(exMain.overtimeHourlyRate)} an hour on a £12.71 rate. Double time is 2 × the rate, ${fmtRate(exDouble.overtimeHourlyRate)} an hour on the same base. Time and a quarter is 1.25 ×. These are common contract rates, not legal entitlements: your contract says which, if any, applies, and many contracts pay overtime at the flat hourly rate.`,
   },
   {
     question: "Can overtime take my average pay below the minimum wage?",
@@ -201,10 +201,10 @@ export default function OvertimeCalculatorPage() {
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Overtime pay is the overtime hours × your hourly rate × the
-          contract&apos;s overtime multiplier. On £12.21 an hour, a
+          contract&apos;s overtime multiplier. On £12.71 an hour, a
           week of 40 normal hours and 10 overtime hours at time and a
-          half works out as: normal pay 40 × £12.21 ={" "}
-          {fmtMoney(exMain.normalPay)}; overtime pay 10 × £12.21 × 1.5
+          half works out as: normal pay 40 × £12.71 ={" "}
+          {fmtMoney(exMain.normalPay)}; overtime pay 10 × £12.71 × 1.5
           = {fmtMoney(exMain.overtimePay)}; total{" "}
           {fmtMoney(exMain.totalPay)} for the week — an average of{" "}
           {fmtRate(exMain.effectiveHourlyRate ?? 0)} an hour over the
@@ -244,7 +244,7 @@ export default function OvertimeCalculatorPage() {
           </table>
         </div>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-          Every row is the same week — £12.21 an hour, 40 normal hours,
+          Every row is the same week — £12.71 an hour, 40 normal hours,
           10 overtime hours. Only the contract rate changes, which is
           why two people on the same hourly rate can take home very
           different overtime pay.
@@ -266,6 +266,30 @@ export default function OvertimeCalculatorPage() {
           at their hourly rate for extra hours, with a premium only
           where full-time staff would get one. The contract — and any
           staff handbook it points to — is the document that decides.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Overtime rules in 2026: what actually changed
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          On overtime itself, nothing: 2026 brought no new statutory
+          overtime premium, and there is still no legal rate for
+          overtime in the UK — no law says time and a half, and none
+          is planned in the current GOV.UK guidance. What did change
+          on 1 April 2026 is the floor underneath it. The National
+          Living Wage for workers aged 21 and over rose to £12.71 an
+          hour (18 to 20: £10.85; under 18 and apprentices: £8.00),
+          and that is the rate your total pay, averaged over your
+          total hours, must not fall below — so unpaid or flat-rate
+          overtime that was lawful in March can breach the floor in
+          April on the same salary, which is why the worked example
+          on this page now runs on the £12.71 rate. April 2026 also
+          reformed Statutory Sick Pay (payable from the first day of
+          sickness, with the lower earnings limit removed), but that
+          affects absence, not overtime: your overtime rate in 2026
+          is still whatever your contract says it is.
         </p>
       </section>
 
@@ -344,6 +368,35 @@ export default function OvertimeCalculatorPage() {
           </Link>{" "}
           works out the part-time salary, monthly pay and FTE fraction
           from the full-time figure.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Is overtime calculated on basic pay or gross pay?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          On the basic hourly rate, in almost every contract — and
+          the difference is worth money. The multiplier applies to
+          the rate the contract names, which is normally your basic
+          rate of pay: it does not automatically include shift
+          allowances, unsocial-hours enhancements, bonuses or
+          commission, and it is not 1.5 × your average gross hourly
+          earnings unless the contract says so. For hourly-paid
+          staff the basic rate is simply the hourly rate. For
+          salaried staff there is no separate basic rate on the
+          payslip, so the overtime rate is derived from the salary
+          itself — annual salary ÷ 52 ÷ contracted hours, as this
+          calculator does — and then multiplied. Two checks settle
+          most disputes: does your contract define the overtime rate
+          as a multiple of basic pay, of the hourly rate, or as a
+          flat amount per hour (some contracts pay a set £ figure
+          rather than a multiple at all)? And are enhancements you
+          already receive for those hours — a night premium, say —
+          paid instead of the overtime multiplier, or on top of it?
+          Both answers are in the contract wording, not in the law,
+          and a payslip that quietly uses a lower base than the
+          contract names is wrong however neatly it is calculated.
         </p>
       </section>
 

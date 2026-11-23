@@ -62,6 +62,11 @@ const FAQS: { question: string; answer: string }[] = [
       "It can. Your contractual salary is genuinely lower, and that is the figure mortgage lenders, and the calculations behind statutory maternity and sick pay, redundancy pay and some state benefits, are based on. Sacrifice also cannot take your pay below the National Minimum Wage for the hours you work. Weigh a lower reference salary against the saving before you sign — especially in a year you plan to move house or take family leave.",
   },
   {
+    question: "What changes to pension salary sacrifice in April 2029?",
+    answer:
+      "From 6 April 2029, only the first £2,000 a year of pension contributions made through salary sacrifice stays exempt from National Insurance. Anything sacrificed above £2,000 is treated like an ordinary employee pension contribution: Income Tax relief is unchanged, but employee and employer National Insurance are charged on the excess. Nothing changes before that date. The change was announced at the Autumn Budget 2025 and is covered in GOV.UK's guidance 'Changes to salary sacrifice for pensions from April 2029'.",
+  },
+  {
     question: "Is there a limit to how much I can sacrifice?",
     answer:
       "Two practical limits. Your remaining pay must stay at or above the National Minimum Wage, and total pension contributions (yours plus your employer's, including the sacrificed amount) count towards the £60,000 pension annual allowance — above that, a tax charge claws the relief back. Sacrificing to bring income under £100,000 also restores Personal Allowance lost to the taper, which is the single most valuable use for many higher earners.",
@@ -184,6 +189,86 @@ export default function SalarySacrificeCalculatorPage() {
           that band. The calculator handles it automatically, because
           it runs the full take-home calculation on both salaries
           rather than applying a flat rate.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          The April 2029 change: NI relief capped at £2,000
+        </h2>
+        <p className={bodyClass}>
+          Announced at the Autumn Budget 2025: from 6 April 2029, only
+          the first £2,000 a year of pension contributions made
+          through salary sacrifice will be exempt from National
+          Insurance. Contributions sacrificed above £2,000 will be
+          treated as ordinary employee pension contributions — Income
+          Tax relief stays exactly as it is, but employee National
+          Insurance (8% in the main band, 2% above £50,270) and
+          employer National Insurance (15%) will be charged on the
+          excess. On a £5,000 sacrifice, that means NI on £3,000 from
+          April 2029. Nothing changes before that date, sacrificing
+          more than £2,000 remains allowed, and ordinary employer
+          pension contributions that are not salary sacrifice are not
+          affected. The detail is set out in GOV.UK&apos;s guidance
+          “Changes to salary sacrifice for pensions from April 2029”.
+          Until April 2029 the calculator above — full tax and NI
+          saving on the whole amount sacrificed — is the correct
+          picture.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How much should you sacrifice?
+        </h2>
+        <p className={bodyClass}>
+          Start from the legal floor: sacrifice can never take your
+          contractual pay below the National Minimum Wage for the
+          hours you actually work, so lower-paid staff have much less
+          room than the headline percentages suggest. Above that
+          floor, the usual order of value is: first, sacrifice enough
+          to get your full employer pension match, if your scheme
+          matches contributions; then look at the tax bands. Bringing
+          adjusted net income back under £100,000 is the most valuable
+          move for higher earners, because it restores the Personal
+          Allowance withdrawn between £100,000 and £125,140 (worth up
+          to 62p per £1 sacrificed, as the worked examples above
+          show), and sacrificing down towards the top of the basic-rate
+          band avoids paying 40% tax on that slice. Keep total
+          contributions — yours and your employer&apos;s — inside the
+          £60,000 pension annual allowance. Finally, ask what your
+          employer does with their 15% employer NI saving: some keep
+          it, some share it, and some pay it all into your pension on
+          top of the sacrificed amount — on the £40,000 example above
+          that is worth {gbp.format(exBasic.employerNiSaved)} a year,
+          so it is worth asking before you set the amount.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Salary sacrifice for a car — why electric cars dominate
+        </h2>
+        <p className={bodyClass}>
+          The same mechanism is widely used for cars: you give up
+          gross salary, the employer leases the car, and you save
+          Income Tax and National Insurance on the amount sacrificed.
+          In exchange the car is a taxable benefit, charged on its
+          list price (its P11D value) multiplied by a benefit-in-kind
+          (BiK) percentage set by its CO₂ emissions. That is why
+          electric cars dominate these schemes: a zero-emission car
+          is taxed at just 3% of list price in 2025/26 and 4% in
+          2026/27, while a typical petrol car sits between roughly
+          20% and the 37% maximum — so the BiK tax on an EV is a
+          fraction of the tax and NI saved on the sacrifice, and the
+          employer also saves employer NI on the sacrificed salary
+          (they pay Class 1A NI on the benefit instead). The EV rate
+          is legislated to rise — 5% in 2027/28, 7% in 2028/29 and 9%
+          in 2029/30 — so a lease that starts cheap gets a little
+          less cheap each April, but it stays far below petrol and
+          diesel rates. This calculator covers pension sacrifice
+          only; a car quote needs the lease cost, the BiK charge and
+          your tax band run together.
         </p>
       </section>
 

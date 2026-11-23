@@ -67,6 +67,16 @@ const ex401k = calculateUsPaycheck({
   annualSalary: 60000,
   preTax401kPercent: 5,
 });
+// Hourly worked example: $28 an hour, 40 hours a week, no overtime —
+// the calculator's hourly mode annualizes it to $58,240 and runs the
+// same Arizona maths.
+const exHourly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  payType: "hourly",
+  hourlyRate: 28,
+  hoursPerWeek: 40,
+  overtimeHoursPerWeek: 0,
+});
 const frequencyRows = PAY_FREQUENCIES.map((f) => ({
   frequency: f,
   result: calculateUsPaycheck({ ...BASE_INPUT, frequency: f.id }),
@@ -109,6 +119,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Why is my actual Arizona paycheck slightly different from this estimate?",
     answer:
       "This calculator works on annual figures — it figures the tax on a full year of income and divides by your pay periods, the same annualized approach the big commercial paycheck calculators use. Your employer withholds differently: federal tax period by period under IRS Publication 15-T using your exact Form W-4, and Arizona tax at the percentage you elected on Form A-4, which is a percentage of gross wages, not of taxable income. A mid-year start, a bonus, uneven hourly pay, or an A-4 percentage above or below your effective rate all move the real stub. The annual liability is what your Arizona return settles; treat any single paycheck figure here as an estimate of it.",
+  },
+  {
+    question: "How much is $28 an hour in Arizona after tax?",
+    answer: `At $28 an hour for 40 hours a week, gross pay is ${fmt(exHourly.grossAnnual)} a year. Single and paid every 2 weeks in ${TAX_YEAR}, the tax is ${fmt(exHourly.federalAnnual)} federal, ${fmt(exHourly.socialSecurityAnnual + exHourly.medicareAnnual)} of Social Security and Medicare, and ${fmt(exHourly.stateAnnual)} of Arizona tax — leaving ${fmt(exHourly.netPerPeriod)} a paycheck, ${fmt(exHourly.netAnnual)} a year, an effective tax rate of ${exHourly.effectiveTaxRatePercent.toFixed(2)}%. To run your own rate, choose "An hourly rate" in the calculator above; overtime hours are figured at 1.5 times the rate and taxed exactly like regular hours.`,
   },
 ];
 
@@ -343,6 +357,67 @@ export default function ArizonaPaycheckCalculatorPage() {
           rate has no brackets to climb. Social Security stops at the{" "}
           {fmt(SOCIAL_SECURITY_WAGE_BASE)} wage base, which is why the
           $200,000 row&apos;s FICA grows by Medicare alone.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Paid by the hour? $28 an hour, worked through
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Most Arizona paycheck searches start from an hourly rate,
+          not a salary — so here is the same maths on hourly pay.
+          The calculator above has an hourly mode: choose &quot;An
+          hourly rate&quot;, enter the rate and your hours, and it
+          annualizes the pay (rate × hours × 52 weeks) and runs the
+          identical federal, FICA and Arizona calculation. At $28 an
+          hour for 40 hours a week that is {fmt(exHourly.grossAnnual)}{" "}
+          a year:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Gross pay (every 2 weeks)</td>
+                <td className={tdClass}>{fmt(exHourly.grossPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.federalPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security at 6.2%</td>
+                <td className={tdClass}>
+                  −{fmt(exHourly.socialSecurityPerPeriod)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Medicare at 1.45%</td>
+                <td className={tdClass}>−{fmt(exHourly.medicarePerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Arizona income tax at 2.5%</td>
+                <td className={tdClass}>−{fmt(exHourly.statePerPeriod)}</td>
+              </tr>
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>Net pay</td>
+                <td className={tdClass}>
+                  {fmt(exHourly.netPerPeriod)} every 2 weeks ·{" "}
+                  {fmt(exHourly.netAnnual)} a year
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Overtime is handled the same way: add your overtime hours
+          in the calculator and they are paid — and taxed — at 1.5
+          times the rate, as ordinary wages. One Arizona wrinkle
+          applies to hourly and salaried staff alike: your employer
+          does not withhold the 2.5% figure itself, but the
+          percentage you elected on Form A-4, so an hourly stub can
+          sit a little above or below the per-check figures here
+          while the annual liability stays the same.
         </p>
       </section>
 

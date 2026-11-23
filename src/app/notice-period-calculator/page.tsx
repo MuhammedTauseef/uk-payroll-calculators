@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import NoticeCalculator from "@/components/NoticeCalculator";
-import { MAX_EMPLOYER_STATUTORY_WEEKS } from "@/lib/notice";
+import {
+  MAX_EMPLOYER_STATUTORY_WEEKS,
+  calculateNotice,
+  formatDateGB,
+} from "@/lib/notice";
 
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
@@ -15,6 +19,11 @@ export const metadata = pageMetadata(
   "Notice Period Calculator",
   "Free UK notice period calculator: the statutory minimum notice an employer or employee must give under the Employment Rights Act 1996, and the last working day.",
 );
+
+const gbpNotice = new Intl.NumberFormat("en-GB", {
+  style: "currency",
+  currency: "GBP",
+});
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -41,6 +50,21 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Does the statutory minimum apply during a probationary period?",
     answer:
       "Yes. Probation does not remove the statutory minimums: once an employee has one month's service, an employer must give at least one week's notice and the employee must give at least one week's notice, whatever the contract's probationary terms say. Many contracts set a shorter probationary notice period, but it cannot go below the statutory floor.",
+  },
+  {
+    question: "How is notice pay calculated?",
+    answer:
+      "Notice pay is your normal pay for the notice period. For a salaried employee, take a week's pay as the annual salary divided by 52 and multiply by the weeks of notice: on £41,600, a week's pay is £800, so four weeks' notice pay is £3,200 — before the usual tax and National Insurance. If your pay varies week to week, your employer works from your average weekly pay over the 12 weeks before the notice period began. You are paid the same way whether you work the notice, spend it on garden leave or are paid in lieu.",
+  },
+  {
+    question: "Can my employer reject my resignation?",
+    answer:
+      "No. As ACAS puts it, an employer cannot reject a resignation — once you have resigned clearly, the resignation stands, and you cannot be made to withdraw it or be kept in the job against your will beyond your notice. What your employer can hold you to is the notice itself: leaving before it ends without agreement is a breach of contract. If you want to go sooner, the safe route is to agree a shorter period — ideally in writing — or to take accrued holiday inside the notice period.",
+  },
+  {
+    question: "Will I still get paid if I resign?",
+    answer:
+      "Yes. Resigning does not cancel pay you have already earned: you are paid for every day worked up to your last day, notice pay for any notice you work (or payment in lieu if your contract provides for it and your employer chooses it), and a payment for holiday you have built up but not taken, which must be included in your final pay. What you are not paid for is notice you refuse to work without agreement — an employer only has to pay for the time actually worked in that case.",
   },
 ];
 
@@ -81,6 +105,36 @@ const SERVICE_TABLE: { service: string; employerMinimum: string }[] = [
     employerMinimum: `${MAX_EMPLOYER_STATUTORY_WEEKS} weeks (the maximum)`,
   },
 ];
+
+// Worked-example figures — computed by the same calculateNotice() the
+// tool above runs, so the dates on this page can never disagree with it.
+const noticeMondayExample = calculateNotice({
+  whoGivesNotice: "employer",
+  employmentStartDate: "2020-06-01",
+  noticeDate: "2026-03-02",
+  contractNoticeValue: 4,
+  contractNoticeUnit: "weeks",
+});
+const noticeThreeMonthExample = calculateNotice({
+  whoGivesNotice: "employee",
+  employmentStartDate: "2022-01-03",
+  noticeDate: "2026-01-05",
+  contractNoticeValue: 3,
+  contractNoticeUnit: "months",
+});
+const noticeSixtyDayExample = calculateNotice({
+  whoGivesNotice: "employee",
+  employmentStartDate: "2024-01-01",
+  noticeDate: "2026-01-05",
+  contractNoticeValue: 60 / 7,
+  contractNoticeUnit: "weeks",
+});
+
+// Notice-pay example — a £41,600 salary divides cleanly: a week's
+// pay is the annual salary spread over 52 weeks.
+const NOTICE_PAY_SALARY = 41600;
+const noticePayWeekly = NOTICE_PAY_SALARY / 52;
+const noticePayFourWeeks = noticePayWeekly * 4;
 
 export default function NoticePeriodCalculatorPage() {
   return (
@@ -208,6 +262,42 @@ export default function NoticePeriodCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked examples: notice handed in on a Monday
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>Employer notice after five years.</strong> An employer
+          gives notice on Monday 2 March 2026 to an employee who started
+          on 1 June 2020 — five complete years of service. The statutory
+          minimum is one week per complete year, so{" "}
+          {noticeMondayExample.statutoryWeeks} weeks; the contract says{" "}
+          {noticeMondayExample.contractWeeks} weeks, and the longer
+          figure wins. The period runs from the day after notice is
+          given, so the earliest last working day is{" "}
+          {formatDateGB(noticeMondayExample.lastWorkingDay ?? "")} — the
+          Monday five weeks later.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>Resigning on a three-month contract.</strong> An
+          employee resigns on Monday 5 January 2026. Their own statutory
+          minimum is only {noticeThreeMonthExample.statutoryWeeks} week,
+          but the contract asks for three months —{" "}
+          {noticeThreeMonthExample.contractWeeks} weeks at 52 ÷ 12 weeks
+          per month — and the contract is longer, so it applies. Their
+          last working day is{" "}
+          {formatDateGB(noticeThreeMonthExample.lastWorkingDay ?? "")}.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>A 60-day clause.</strong> Where a contract states
+          notice in days rather than weeks, divide by seven: 60 days is{" "}
+          {noticeSixtyDayExample.contractWeeks} weeks. Given on Monday 5
+          January 2026, that period ends on{" "}
+          {formatDateGB(noticeSixtyDayExample.lastWorkingDay ?? "")} —
+          exactly 60 days later.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What are payment in lieu of notice and garden leave?
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
@@ -225,6 +315,91 @@ export default function NoticePeriodCalculatorPage() {
           minimum — nothing in the statutory rules prevents a longer period
           by agreement. This page is general guidance on how the minimums
           work, not legal advice for a specific situation.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How is notice pay calculated?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          While you work your notice you are simply paid as normal — full
+          pay, on the usual pay days, with the usual deductions. The
+          calculation only becomes a question in its own right when the
+          notice is not worked (payment in lieu), when pay varies, or
+          when part of the period is spent away from work. The building
+          block is a week&apos;s pay: for a salaried employee that is the
+          annual salary divided by 52. On a salary of{" "}
+          {gbpNotice.format(NOTICE_PAY_SALARY)}, a week&apos;s pay is{" "}
+          {gbpNotice.format(noticePayWeekly)}, so four weeks of notice —
+          worked, on garden leave or paid in lieu — come to{" "}
+          {gbpNotice.format(noticePayFourWeeks)} before tax and National
+          Insurance. If your pay is different each week, your employer
+          uses your average weekly pay over the 12 weeks before the
+          notice period started, including guaranteed overtime.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>Holiday inside notice.</strong> Leave keeps building up
+          throughout the notice period, exactly as if you were not
+          leaving. Holiday you have built up but not taken by your last
+          day must be paid for in your final pay — the{" "}
+          <Link
+            href="/annual-leave-calculator"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            annual leave calculator
+          </Link>{" "}
+          works out how much has accrued by a leaving date. An employer
+          can also require you to use up remaining holiday during the
+          notice period, as long as they give you notice of at least
+          twice the length of the leave they want you to take.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>Sick leave inside notice.</strong> If your employer has
+          given you notice and your contract asks for no more than the
+          statutory minimum (or no more than a week longer), sections 87
+          to 88 of the Employment Rights Act 1996 entitle you to your
+          full normal pay for the statutory notice period even if you are
+          off sick and your sick pay has run out — any sick pay already
+          paid counts towards it. Where the contract gives noticeably
+          longer notice than the statutory minimum, the contract&apos;s
+          own sick pay terms apply instead. And a payment in lieu of
+          notice is taxed like normal pay: since April 2018 the basic pay
+          for the notice period is always taxed as earnings, even if it
+          is paid after you have left.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What happens if you leave without giving notice?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Nobody can be physically made to work a notice period — but
+          walking out without agreement has real consequences, and ACAS
+          is blunt about the main one: leaving without working your
+          notice, without agreeing it first, puts you in breach of
+          contract. You are still paid for every day you actually worked,
+          and for holiday built up but not taken — that money is yours
+          however the job ends. You are not paid for the notice you did
+          not work.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          If your sudden departure costs your employer money — the
+          classic case is paying over the odds for agency cover at short
+          notice — they may be able to deduct that cost from your final
+          pay <em>if your contract allows it</em>, or claim it back
+          through the courts. Claims are uncommon in practice, but the
+          contract wording is what decides, so check it before you go.
+          The other cost is quieter: a reference that reflects how you
+          left, which matters most in regulated industries such as
+          financial services. Two situations are different. If your
+          employer has seriously breached your contract first, you may
+          be entitled to leave without working notice at all (resigning
+          in response to a fundamental breach — constructive dismissal).
+          And either side can always agree to shorten the notice: if you
+          need to start a new job sooner, ask, and get any agreement in
+          writing.
         </p>
       </section>
 

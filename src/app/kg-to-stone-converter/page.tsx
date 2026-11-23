@@ -32,6 +32,12 @@ const KG_ROWS = Array.from({ length: 111 }, (_, i) => i + 40).map((kg) => ({
 }));
 const EX_76 = kgToStoneParts(76);
 const EX_100 = kgToStoneParts(100);
+// The weights people actually look up — including 76.3 kg, the
+// figure searchers type in by name — as stones and pounds at a
+// glance.
+const GLANCE_ROWS = [50, 57, 63.5, 70, 76.3, 80, 88.9, 90, 100, 110, 120, 127].map(
+  (kg) => ({ kg, parts: kgToStoneParts(kg) }),
+);
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -189,6 +195,56 @@ export default function KgToStoneConverterPage() {
           1 kg = 0.157473 stone and 1 stone = 14 lb, checked
           17 November 2026. Pounds are shown to one decimal place;
           whole-number scale displays may differ by a pound either way.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Common weights in stones and pounds, at a glance
+        </h2>
+        <p className={bodyClass}>
+          The full table below runs kilogram by kilogram, but most
+          lookups are one of a handful of round weights — a gym
+          target, a luggage limit, a figure from a medical letter.
+          Here they are, already split into stones and pounds:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Kilograms</th>
+                <th className={thClass}>Stones and pounds</th>
+                <th className={thClass}>Decimal stone</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {GLANCE_ROWS.map((r) => (
+                <tr key={r.kg}>
+                  <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>
+                    {fmt(r.kg, 1)} kg
+                  </td>
+                  <td className={tdClass}>
+                    {r.parts.stones} st {fmt(r.parts.pounds, 1)} lb
+                  </td>
+                  <td className={tdClass}>{fmt(r.parts.totalStone, 2)} st</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          The kilogram figure usually arrives from the NHS: GPs,
+          hospitals and NHS programmes weigh and record in
+          kilograms, so a letter or an app export quotes kg even
+          though most people in the UK still think in stones. This
+          table — and the converter above — turns that figure back
+          into the stones and pounds you would say out loud.
+          Going the other way, from a stones-and-pounds weight to
+          kilograms, use the{" "}
+          <Link href="/stone-to-kg-converter" className={linkClass}>
+            stone to kg converter
+          </Link>
+          .
         </p>
       </section>
 

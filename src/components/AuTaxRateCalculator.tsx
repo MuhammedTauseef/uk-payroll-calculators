@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import {
   calculateAuTax,
   RESIDENCY_OPTIONS,
+  roundMoney,
   TAX_YEAR_LABEL,
 } from "@/lib/au-tax";
 import type { AuResidency } from "@/lib/au-tax";
@@ -61,6 +62,12 @@ export default function AuTaxRateCalculator() {
     result.taxableIncome > 0
       ? `${fmtMoney(result.netIncome)} net per year`
       : "—";
+
+  // Australian pay is usually weekly or fortnightly, so the annual
+  // net is also shown per pay period — derived from the engine's
+  // own net figure (52 weeks / 26 fortnights), never hard-coded.
+  const weeklyNet = roundMoney(result.netIncome / 52);
+  const fortnightlyNet = roundMoney(result.netIncome / 26);
 
   return (
     <div className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm print:border-slate-300 print:shadow-none sm:p-6">
@@ -170,6 +177,12 @@ export default function AuTaxRateCalculator() {
             net income per year after {fmtMoney(result.totalTax)} of tax
           </span>
         </p>
+        {!noIncome && (
+          <p className="mt-1 text-base font-medium text-slate-700 dark:text-slate-200">
+            Take-home pay: {fmtMoney(weeklyNet)} per week ·{" "}
+            {fmtMoney(fortnightlyNet)} per fortnight
+          </p>
+        )}
         <p className="text-sm text-slate-600 dark:text-slate-300">
           Marginal tax rate: {result.marginalRatePercent.toFixed(0)}% on
           your next dollar

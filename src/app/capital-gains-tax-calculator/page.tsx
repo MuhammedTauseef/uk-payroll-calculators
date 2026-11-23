@@ -35,6 +35,13 @@ const tdClass = "px-4 py-2";
 const exOne = calculateCapitalGains({ otherIncome: 32570, totalGains: 12600 });
 const exTwo = calculateCapitalGains({ otherIncome: 32570, totalGains: 52600 });
 
+// Shares example for the worked example below: a £20,000 gain on
+// shares sold outside an ISA, in a year with a £35,000 salary.
+const exShares = calculateCapitalGains({ otherIncome: 35000, totalGains: 20000 });
+// Property example: a £60,000 gain on a second home, in a year with
+// £45,000 of other income.
+const exProperty = calculateCapitalGains({ otherIncome: 45000, totalGains: 60000 });
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How much is Capital Gains Tax in 2026/27?",
@@ -55,6 +62,11 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Do I pay Capital Gains Tax when I sell my home?",
     answer:
       "Usually not. Private Residence Relief covers your only or main home for the period you lived in it (plus the final 9 months of ownership), so most home sales are exempt. CGT can apply to a second home, a buy-to-let, or a period when the property was let out or left empty — and residential property gains must be reported and paid within 60 days of completion.",
+  },
+  {
+    question: "How can I legally reduce my Capital Gains Tax bill?",
+    answer:
+      "Use the allowances and timing the law gives you: realise gains each tax year to use the £3,000 annual exempt amount (it cannot be carried forward); split a large disposal across 5 April to use two years' allowances; transfer assets to a spouse or civil partner — transfers between spouses are treated as no gain and no loss, and each partner has their own £3,000 allowance and basic-rate band; set losses on other assets against gains in the same year (losses must be reported to HMRC to be usable later); and sell in a lower-income year where you can, so more of the gain is taxed at 18% rather than 24%. Pension contributions and Gift Aid also extend your basic-rate band, moving more of the gain down to 18%.",
   },
   {
     question: "When do I report and pay Capital Gains Tax?",
@@ -179,6 +191,99 @@ export default function CapitalGainsTaxCalculatorPage() {
           losses on other assets sold in the same year offset gains
           before the allowance is applied, provided they are reported
           to HMRC.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How to reduce Capital Gains Tax — legally
+        </h2>
+        <p className={bodyClass}>
+          Every lever below is an allowance or a timing rule written
+          into the tax law itself — using them is ordinary planning,
+          not a scheme. The allowance: the £3,000 annual exempt amount
+          renews every 6 April and cannot be carried forward, so a
+          gain realised in stages across two tax years can use two
+          allowances where one rushed sale uses one. Your spouse or
+          civil partner: assets pass between spouses and civil
+          partners on a no-gain, no-loss basis, and each partner has
+          their own £3,000 allowance and their own basic-rate band —
+          a couple selling jointly owned assets can shelter £6,000 of
+          gains a year and have twice the room at 18%. Losses: a loss
+          on another asset sold in the same year offsets gains before
+          the allowance is applied, and losses reported to HMRC can
+          be carried forward to later years — unreported losses
+          cannot, and there is a four-year window to claim them. The
+          year you choose: because the gain stacks on your income, a
+          sale completed in a low-income year — between jobs, or
+          after retirement — puts more of the gain at 18%. And the
+          band itself can be widened: pension contributions paid
+          under relief at source and Gift Aid donations extend your
+          basic-rate band by their gross amount (HMRC&apos;s Capital
+          Gains Manual, CG21204), moving that much more of the gain
+          from 24% down to 18%. Finally, shelter future growth:
+          gains inside an ISA or a pension are exempt, so where an
+          asset will keep growing, holding it inside a wrapper beats
+          trimming the bill afterwards.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Selling a second home or a buy-to-let
+        </h2>
+        <p className={bodyClass}>
+          Property uses the same 18% and 24% rates as everything
+          else — the old higher property rates ended on 30 October
+          2024 — but three property rules still catch sellers out.
+          Private Residence Relief protects only your main home (plus
+          its final 9 months of ownership); a second home or
+          buy-to-let has no relief for the periods it was let or left
+          empty, and letting relief has been restricted since April
+          2020 to periods where you lived in the property alongside
+          the tenant. The reporting clock is much faster than for
+          other assets: a UK residential property gain must be
+          reported and the tax paid within 60 days of completion,
+          through HMRC&apos;s property service. And the bill is real
+          money at ordinary incomes: a £60,000 gain on a second home,
+          in a year with £45,000 of other income, leaves{" "}
+          {gbp.format(exProperty.taxableGain)} after the allowance,
+          of which {gbp.format(exProperty.gainAtLowerRate)} is taxed
+          at 18% and {gbp.format(exProperty.gainAtHigherRate)} at
+          24% — {gbp.format(exProperty.taxDue)} to pay. The planning
+          levers above apply to property too, with one limit: the
+          60-day clock runs from completion, so the tax-year timing
+          has to be decided before you exchange, not after.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Shares and crypto: a worked example
+        </h2>
+        <p className={bodyClass}>
+          Shares and funds held outside an ISA, and cryptoassets,
+          are taxed in exactly the same way — each sale (and, for
+          crypto, each swap of one token for another) is a disposal,
+          the gains for the year are added together, the £3,000
+          allowance comes off, and the rest stacks on your income.
+          Take a £20,000 gain on shares in a year with a £35,000
+          salary. Taxable income is{" "}
+          {gbp.format(exShares.taxableIncome)} after the Personal
+          Allowance, the gain after the allowance is{" "}
+          {gbp.format(exShares.taxableGain)}, and{" "}
+          {gbp.format(exShares.gainAtLowerRate)} of it fits in the
+          basic-rate band at 18% while the remaining{" "}
+          {gbp.format(exShares.gainAtHigherRate)} is taxed at 24% —
+          a bill of {gbp.format(exShares.taxDue)}, an effective rate
+          of {exShares.effectiveRatePercent}% on the whole gain. Two
+          share-specific traps sit underneath that simple shape:
+          HMRC&apos;s share matching rules (a sale is matched first
+          with shares bought the same day, then within the following
+          30 days, before your pooled holding), which is why selling
+          and immediately rebuying the same shares does not bank the
+          allowance the way people expect; and the fact that gains
+          inside an ISA never enter this calculation at all.
         </p>
       </section>
 

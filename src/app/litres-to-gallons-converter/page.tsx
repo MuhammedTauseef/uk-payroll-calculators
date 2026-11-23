@@ -4,8 +4,10 @@ import Link from "next/link";
 import LitresToGallonsConverter from "@/components/LitresToGallonsConverter";
 import {
   fmt,
+  imperialGallonsToLitres,
   litresToImperialGallons,
   litresToUsGallons,
+  usGallonsToLitres,
 } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
@@ -37,6 +39,13 @@ const LITRE_ROWS = Array.from({ length: 100 }, (_, i) => i + 1).map((l) => ({
 }));
 const TANK_50_IMP = litresToImperialGallons(50);
 const TANK_50_US = litresToUsGallons(50);
+// The reverse direction, for the headline answers below: whole
+// gallons back into litres, both systems side by side.
+const GALLON_ROWS = [1, 2, 5, 10].map((g) => ({
+  gallons: g,
+  imperialLitres: imperialGallonsToLitres(g),
+  usLitres: usGallonsToLitres(g),
+}));
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -185,6 +194,76 @@ export default function LitresToGallonsConverterPage() {
           17 November 2026. UK figures on this site always mean the
           imperial gallon unless a US figure is labelled as such.
         </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Why are there two different gallons?
+        </h2>
+        <p className={bodyClass}>
+          Because Britain changed its mind after America had kept
+          the old measure. Before 1824, England used several
+          gallons at once — a wine gallon of 231 cubic inches, a
+          larger ale gallon, a corn gallon. The American colonies
+          used the wine gallon, and the United States kept it: to
+          this day the US gallon is exactly 231 cubic inches,{" "}
+          {fmt(usGallonsToLitres(1), 3)} litres.
+        </p>
+        <p className={bodyClass}>
+          In 1824 the British Weights and Measures Act replaced all
+          of them with a single imperial gallon, defined by physics
+          rather than by a vessel: the volume occupied by 10 pounds
+          of distilled water at 62 °F. That works out to{" "}
+          {fmt(imperialGallonsToLitres(1), 5)} litres exactly —
+          about 20% bigger than the American gallon, which is why
+          the same 50-litre tank is 11 UK gallons but 13.21 US
+          gallons. Canada, Australia and most other former imperial
+          countries have since gone fully metric, so in practice
+          the two-gallon problem is now a UK–US problem.
+        </p>
+        <p className={bodyClass}>
+          The difference runs all the way down the measures. An
+          imperial gallon is 8 imperial pints of 20 fluid ounces
+          each; a US gallon is 8 US pints of 16 fluid ounces — and
+          the fluid ounces differ slightly too (28.41 ml imperial
+          against 29.57 ml US), so an imperial pint is about 20%
+          more beer, in a glass built from a slightly smaller
+          ounce. Whenever a recipe, a fuel-economy figure or a
+          tank size crosses the Atlantic, the first question is
+          always: whose gallon?
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Gallons back into litres: the headline answers
+        </h2>
+        <p className={bodyClass}>
+          <strong>1 UK gallon = {fmt(imperialGallonsToLitres(1), 3)}{" "}
+          litres. 1 US gallon = {fmt(usGallonsToLitres(1), 3)}{" "}
+          litres.</strong> The common round numbers, both ways
+          round:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Gallons</th>
+                <th className={thClass}>UK gallons → litres</th>
+                <th className={thClass}>US gallons → litres</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {GALLON_ROWS.map((r) => (
+                <tr key={r.gallons}>
+                  <td className={tdClass}>{r.gallons}</td>
+                  <td className={tdClass}>{fmt(r.imperialLitres, 2)} L</td>
+                  <td className={tdClass}>{fmt(r.usLitres, 2)} L</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="space-y-4">

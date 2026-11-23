@@ -21,7 +21,7 @@ import RelatedCalculators from "@/components/RelatedCalculators";
 export const metadata: Metadata = pageMetadata(
   "/nhs-pay-calculator",
   "NHS Pay Calculator — Agenda for Change Bands & Take-Home Pay",
-  "NHS pay calculator on the 2025/26 Agenda for Change scales (England): pick your band and pay step for annual, monthly, weekly and hourly pay, plus an estimated take-home after NHS pension, tax and NI.",
+  "NHS pay calculator on the 2026/27 Agenda for Change scales (England): pick your band and pay step for annual, monthly, weekly and hourly pay, plus an estimated take-home after NHS pension, tax and NI.",
 );
 
 const gbp = new Intl.NumberFormat("en-GB", {
@@ -38,13 +38,17 @@ const example = calculateNhsPay({
 
 const FAQS: { question: string; answer: string }[] = [
   {
-    question: "What is the NHS Band 5 salary in 2025/26?",
+    question: "What is the NHS Band 5 salary in 2026/27?",
+    answer: `Band 5 in England pays ${gbp.format(AFC_BANDS[3].steps[0].annual)} a year at the entry step, ${gbp.format(AFC_BANDS[3].steps[1].annual)} at the intermediate step and ${gbp.format(AFC_BANDS[3].steps[2].annual)} at the top of the band, for a full-time 37.5-hour week. Band 5 is the starting band for newly qualified nurses, midwives, paramedics and allied health professionals.`,
+  },
+  {
+    question: "Has the NHS pay rise for 2026/27 been confirmed?",
     answer:
-      "Band 5 in England pays £31,049 a year at the entry step, £33,487 at the intermediate step and £37,796 at the top of the band, for a full-time 37.5-hour week. Band 5 is the starting band for newly qualified nurses, midwives, paramedics and allied health professionals.",
+      "Yes. The 2026/27 award is a 3.3% consolidated uplift on every Agenda for Change pay point in England, effective from 1 April 2026. The government accepted the NHS Pay Review Body's recommendations in full on 12 February 2026, early enough for the new rates to be in April 2026 salaries — so unlike some earlier years there was no backpay arrears payment to wait for. The scales on this page are those confirmed 2026/27 rates, published by NHS Employers.",
   },
   {
     question: "How much does a Band 5 nurse take home?",
-    answer: `On the entry step of Band 5 (£31,049 a year, full time), this calculator estimates take-home pay of about ${gbp.format(example.netMonthly)} a month after the 8.3% NHS pension contribution, Income Tax and National Insurance. Your own figure depends on your tax code, pension tier and any extra payments such as unsocial-hours enhancements.`,
+    answer: `On the entry step of Band 5 (${gbp.format(AFC_BANDS[3].steps[0].annual)} a year, full time), this calculator estimates take-home pay of about ${gbp.format(example.netMonthly)} a month after the 8.3% NHS pension contribution, Income Tax and National Insurance. Your own figure depends on your tax code, pension tier and any extra payments such as unsocial-hours enhancements.`,
   },
   {
     question: "How do NHS pay steps work?",
@@ -54,7 +58,7 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: "How much pension do NHS staff pay?",
     answer:
-      "Your NHS pension contribution is a flat percentage of all your pensionable pay, set by how much you earn: 5.2% up to £13,259, 6.5% to £27,797, 8.3% to £33,868, 9.8% to £50,845, 10.7% to £65,190 and 12.5% above that (2025/26 tiers). Most Band 5 staff pay 8.3% or 9.8%. Your employer pays a further 23.7% on top.",
+      "Your NHS pension contribution is a flat percentage of all your pensionable pay, set by how much you earn: 5.2% up to £13,259, 6.5% to £28,854, 8.3% to £35,155, 9.8% to £52,778, 10.7% to £67,668 and 12.5% above that (2026/27 tiers). Most Band 5 staff pay 8.3% or 9.8%. Your employer pays a further 23.7% on top.",
   },
   {
     question: "Does this calculator include London weighting?",
@@ -146,11 +150,12 @@ export default function NhsPayCalculatorPage() {
         </h1>
         {/* Answer-first intro (40–60 words). */}
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
-          This NHS pay calculator uses the official 2025/26 Agenda for
-          Change pay scales for England. Pick your band and pay step to
-          see your annual, monthly, weekly and hourly pay — and an
-          estimated take-home after your NHS pension contribution, Income
-          Tax and National Insurance.
+          This NHS pay calculator uses the official 2026/27 Agenda for
+          Change pay scales for England — including the confirmed 3.3%
+          pay award that took effect on 1 April 2026. Pick your band
+          and pay step to see your annual, monthly, weekly and hourly
+          pay — and an estimated take-home after your NHS pension
+          contribution, Income Tax and National Insurance.
         </p>
       </section>
 
@@ -190,7 +195,7 @@ export default function NhsPayCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          Agenda for Change pay scales 2025/26 (England)
+          Agenda for Change pay scales 2026/27 (England)
         </h2>
         <div className={tableWrapClass}>
           <table className="w-full text-left text-sm table-stack">
@@ -239,6 +244,30 @@ export default function NhsPayCalculatorPage() {
           . Last verified: {AFC_LAST_VERIFIED}. England basic rates only:
           the London High Cost Area Supplement is not included, and
           Scotland, Wales and Northern Ireland set their own scales.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          NHS pay in Scotland, Wales and Northern Ireland in 2026/27
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The table above is England only. Scotland negotiates
+          separately: its Agenda for Change staff are in the second
+          year of a two-year deal covering 2025 to 2027, under which
+          the first point of Band 5 in Scotland is £34,544 in 2026/27 —
+          and the Scottish full-time week reduced to 36 hours from
+          April 2026, so Scottish hourly rates are not directly
+          comparable with the England table. Wales applied its own
+          3.3% uplift to the Welsh scales. Northern Ireland normally
+          mirrors the England award, but the 2026/27 uplift there was
+          still not implemented by late August 2026 — if your HSC
+          payslip has not moved yet, that delay is the reason, and your
+          employer&apos;s latest pay circular will give the current
+          position. This calculator uses the England scales; if you
+          work elsewhere in the UK, find your band and step in the
+          table, then check the figure against your own nation&apos;s
+          published scale before relying on it.
         </p>
       </section>
 
@@ -369,7 +398,7 @@ export default function NhsPayCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
-          NHS pension contributions 2025/26
+          NHS pension contributions 2026/27
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           Your pension contribution is not a fixed amount: it is a flat
@@ -403,7 +432,7 @@ export default function NhsPayCalculatorPage() {
         </div>
         <p className="text-sm text-slate-500 dark:text-slate-400">
           Member contribution tiers: NHS Pension Scheme (England and
-          Wales), 2025/26 — NHSBSA. Your employer pays a further 23.7% of
+          Wales), 2026/27 — NHSBSA. Your employer pays a further 23.7% of
           pensionable pay into the scheme.
         </p>
       </section>

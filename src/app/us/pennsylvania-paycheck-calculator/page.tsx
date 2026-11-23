@@ -81,10 +81,37 @@ const phillyRows = [40000, 50000, 60000, 75000, 90000, 100000, 125000, 150000].m
     result: calculateUsPaycheck({ ...BASE_INPUT, annualSalary: s, paPhilly: "resident" }),
   }),
 );
+// The commuter side of the same table: living outside Philadelphia
+// and working in it, at the non-resident wage-tax rate.
+const exPhillyNonres = calculateUsPaycheck({
+  ...BASE_INPUT,
+  paPhilly: "nonresident",
+});
+const phillyNonresRows = [40000, 50000, 60000, 75000, 90000, 100000, 125000, 150000].map(
+  (s) => ({
+    salary: s,
+    result: calculateUsPaycheck({ ...BASE_INPUT, annualSalary: s, paPhilly: "nonresident" }),
+  }),
+);
+// Hourly worked example: $27 an hour, 40 hours a week, with the
+// default 1% local EIT — the calculator's hourly mode annualizes
+// it to $56,160 and runs the same Pennsylvania maths.
+const exHourly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  payType: "hourly",
+  hourlyRate: 27,
+  hoursPerWeek: 40,
+  overtimeHoursPerWeek: 0,
+});
+const exHourlyLocal = exHourly.extraLines.find((l) => l.id === "pa-local")!;
+const exHourlyUc = exHourly.extraLines.find((l) => l.id === "pa-uc")!;
 
 const ex75Local = ex75.extraLines.find((l) => l.id === "pa-local")!;
 const ex75Uc = ex75.extraLines.find((l) => l.id === "pa-uc")!;
 const exPhillyLocal = exPhilly.extraLines.find((l) => l.id === "pa-local")!;
+const exPhillyNonresLocal = exPhillyNonres.extraLines.find(
+  (l) => l.id === "pa-local",
+)!;
 const exMfjLocal = exMfj.extraLines.find((l) => l.id === "pa-local")!;
 
 const FAQS: { question: string; answer: string }[] = [
@@ -120,6 +147,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Does Pennsylvania have a standard deduction or a state W-4?",
     answer:
       "Neither. Pennsylvania withholds a flat 3.07% of compensation from the first dollar regardless of filing status or family size — the only common pay items that reduce the PA base are §125 health premiums and HSA contributions made through the cafeteria plan. Your filing status changes only your federal line, which is why a married couple and a single filer on the same Pennsylvania salary pay identical PA tax.",
+  },
+  {
+    question: "How much is $27 an hour in Pennsylvania after tax?",
+    answer: `At $27 an hour for 40 hours a week, gross pay is ${fmt(exHourly.grossAnnual)} a year. Single, paid every 2 weeks, with a 1% local earned income tax, in ${TAX_YEAR}: ${fmt(exHourly.federalAnnual)} of federal tax, ${fmt(exHourly.socialSecurityAnnual + exHourly.medicareAnnual)} of Social Security and Medicare, ${fmt(exHourly.stateAnnual)} of Pennsylvania tax at the flat 3.07%, ${fmt(exHourlyLocal.annual)} of local EIT and ${fmt(exHourlyUc.annual)} of employee unemployment contribution — leaving ${fmt(exHourly.netPerPeriod)} a paycheck, ${fmt(exHourly.netAnnual)} a year. The calculator above runs hourly pay directly: choose "An hourly rate" and it annualizes your rate and hours, overtime at 1.5 times the rate included. In Philadelphia, pick the resident or non-resident preset instead of the EIT — the wage tax replaces it.`,
   },
 ];
 
@@ -381,6 +412,73 @@ export default function PennsylvaniaPaycheckCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Paid by the hour? $27 an hour, worked through
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The calculator above takes hourly pay directly: choose
+          &quot;An hourly rate&quot;, enter the rate and your hours,
+          and it annualizes the pay (rate × hours × 52 weeks) and
+          runs the same Pennsylvania calculation — flat 3.07% state
+          tax, your local EIT and the 0.07% unemployment
+          contribution. At $27 an hour for 40 hours a week, with a
+          1% local EIT, that is {fmt(exHourly.grossAnnual)} a year:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Gross pay (every 2 weeks)</td>
+                <td className={tdClass}>{fmt(exHourly.grossPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.federalPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security at 6.2%</td>
+                <td className={tdClass}>
+                  −{fmt(exHourly.socialSecurityPerPeriod)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Medicare at 1.45%</td>
+                <td className={tdClass}>−{fmt(exHourly.medicarePerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Pennsylvania tax at 3.07%</td>
+                <td className={tdClass}>−{fmt(exHourly.statePerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Local EIT at 1%</td>
+                <td className={tdClass}>−{fmt(exHourlyLocal.perPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>
+                  Unemployment contribution at 0.07%
+                </td>
+                <td className={tdClass}>−{fmt(exHourlyUc.perPeriod)}</td>
+              </tr>
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>Net pay</td>
+                <td className={tdClass}>
+                  {fmt(exHourly.netPerPeriod)} every 2 weeks ·{" "}
+                  {fmt(exHourly.netAnnual)} a year
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Overtime hours are figured at 1.5 times the rate and
+          taxed like any other Pennsylvania wages — the flat rates
+          do not change with the kind of pay, only the 401(k) rule
+          does: a deferral never shrinks the Pennsylvania lines,
+          hourly or salaried.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           The same salaries in Philadelphia (resident wage tax)
         </h2>
         <div className={tableWrapClass}>
@@ -428,6 +526,71 @@ export default function PennsylvaniaPaycheckCalculatorPage() {
           EIT costs. Non-residents who work in the city pay{" "}
           {(PHILLY_NONRESIDENT_RATE * 100).toFixed(3)}% — choose
           that preset in the calculator.
+        </p>
+        <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+          Living outside the city: the non-resident rate, in figures
+        </h3>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Commuters are not a footnote in Philadelphia — the wage
+          tax reaches everyone who works there. A non-resident pays{" "}
+          {(PHILLY_NONRESIDENT_RATE * 100).toFixed(3)}% (the rate in
+          force from July 1, 2026, per the City of Philadelphia
+          Department of Revenue) on pay for work done in the city,
+          instead of the resident{" "}
+          {(PHILLY_RESIDENT_RATE * 100).toFixed(3)}%: at $75,000 that
+          is {fmt(exPhillyNonresLocal.annual)} a year against the
+          resident&apos;s {fmt(exPhillyLocal.annual)} — a saving of{" "}
+          {fmt(exPhillyLocal.annual - exPhillyNonresLocal.annual)},
+          and the reason the calculator keeps the two presets
+          separate. The same salaries, commuted in:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Salary</th>
+                <th className={thClass}>PA tax / year</th>
+                <th className={thClass}>Philadelphia wage tax (non-resident) / year</th>
+                <th className={thClass}>Net / paycheck</th>
+                <th className={thClass}>Net / year</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {phillyNonresRows.map(({ salary, result }) => (
+                <tr
+                  key={salary}
+                  className={
+                    salary === 75000
+                      ? "bg-brand-50 dark:bg-brand-900/30 font-semibold text-slate-900 dark:text-slate-50"
+                      : undefined
+                  }
+                >
+                  <td className={tdClass}>{fmt(salary)}</td>
+                  <td className={tdClass}>{fmt(result.stateAnnual)}</td>
+                  <td className={tdClass}>
+                    {fmt(
+                      result.extraLines.find((l) => l.id === "pa-local")
+                        ?.annual ?? 0,
+                    )}
+                  </td>
+                  <td className={tdClass}>{fmt(result.netPerPeriod)}</td>
+                  <td className={tdClass}>{fmt(result.netAnnual)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Two boundaries matter. Residents owe the resident rate on
+          all of their pay, wherever the work happens; non-residents
+          owe the non-resident rate only on pay for work performed
+          in Philadelphia — days worked from home or elsewhere
+          outside the city are not Philadelphia wages, and
+          non-residents can claim a refund of tax withheld on them
+          through the Philadelphia Tax Center. And unlike the Act 32
+          EIT everywhere else in Pennsylvania, the Philadelphia tax
+          is charged on full gross pay: a 401(k) deferral does not
+          shrink it.
         </p>
       </section>
 

@@ -41,6 +41,44 @@ const exampleInput = {
 const example = calculateDrawdown(exampleInput);
 const exampleSustainable = sustainableWithdrawal(exampleInput);
 
+// The £100,000 pot example below — the size readers ask about most.
+// Same assumptions as the £400,000 example (60, 5% growth, 2.5%
+// inflation, withdrawals rising with inflation, plan to 95), at the
+// 4% rule's £4,000 starting withdrawal, at 5%, and with no State
+// Pension, so the three can be compared line by line.
+const pot100Base = {
+  currentAge: 60,
+  pot: 100000,
+  taxFreeCashNow: 0,
+  annualWithdrawal: 4000,
+  indexWithdrawals: true,
+  growthPercent: 5,
+  inflationPercent: 2.5,
+  statePensionAnnual: DRAWDOWN_CONSTANTS.fullNewStatePension,
+  statePensionAge: 67,
+  otherIncomeAnnual: 0,
+  planToAge: 95,
+};
+const pot100at4 = calculateDrawdown(pot100Base);
+const pot100at5 = calculateDrawdown({ ...pot100Base, annualWithdrawal: 5000 });
+const pot100NoState = calculateDrawdown({ ...pot100Base, statePensionAnnual: 0 });
+const pot100Sustainable = sustainableWithdrawal(pot100Base);
+
+const POT100_ROWS = [
+  {
+    label: "£4,000 a year (the 4% rule), full State Pension from 67",
+    result: pot100at4,
+  },
+  {
+    label: "£5,000 a year (5%), full State Pension from 67",
+    result: pot100at5,
+  },
+  {
+    label: "£4,000 a year, no State Pension",
+    result: pot100NoState,
+  },
+];
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How long will a £400,000 pension pot last in drawdown?",
@@ -56,6 +94,15 @@ const FAQS: { question: string; answer: string }[] = [
     question: "What is the difference between UFPLS and flexi-access drawdown?",
     answer:
       "Under UFPLS, every withdrawal is a separate lump sum that is 25% tax-free and 75% taxed. Under flexi-access drawdown you normally take your 25% tax-free cash up front, move the rest into drawdown, and every later withdrawal is fully taxable. The end result is similar if you take the same total; the timing of the tax-free cash and the tax bills differs. This calculator models the UFPLS pattern, or a tax-free lump sum at the start if you choose it.",
+  },
+  {
+    question: "How long will a £100,000 pension pot last?",
+    answer: `It depends mainly on the withdrawal — and on the growth you assume. On this page's assumptions — start at 60, 5% growth, withdrawals rising with 2.5% inflation, the full State Pension from 67 — £4,000 a year ${pot100at4.lastsToPlanAge ? `lasts to 95 with ${gbp.format(pot100at4.potAtPlanAge)} still invested` : `runs out at ${pot100at4.depletionAge}`}, £5,000 a year ${pot100at5.lastsToPlanAge ? "also lasts to 95" : `runs out at ${pot100at5.depletionAge}`}, and the same £4,000 without any State Pension ${pot100NoState.lastsToPlanAge ? "still lasts to 95" : `runs out at ${pot100NoState.depletionAge}`} — in this calculator the State Pension changes the tax on the plan, not the pot's path, because the withdrawal is the amount you choose to take. The sustainable withdrawal the calculator solves for on these inputs is about ${gbp.format(pot100Sustainable)} a year. Change the growth to 3% and every one of those answers gets worse — the pot size alone never decides it.`,
+  },
+  {
+    question: "What is the 4% rule — and does it work in the UK?",
+    answer:
+      "The 4% rule comes from 1990s US research: withdraw 4% of the pot in the first year, then raise the amount with inflation each year, and a stock-and-bond portfolio historically survived 30 years of US retirement. It was never designed for the UK: it takes no account of tax on withdrawals, it assumes a 30-year horizon (a pot started at 60 and needed at 95 must last 35), and it ignores the State Pension, which in the UK arrives part-way through and takes over part of the income. Treat it as a rough first guess — £4,000 a year from £100,000 — and then test your own figures, because the sustainable withdrawal this calculator solves for your inputs is the number that reflects your tax, your State Pension and your plan age.",
   },
   {
     question: "What withdrawal rate is sustainable from a pension pot?",
@@ -168,6 +215,105 @@ export default function PensionDrawdownCalculatorPage() {
           tax is not a fixed percentage of the withdrawal: once the
           State Pension starts it fills the personal allowance first,
           and more of each withdrawal lands in the 40% band.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          A worked example: £100,000 at 60
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Most pots are nearer £100,000 than £400,000, so here is the
+          same machinery on that figure: start at 60, no tax-free lump
+          sum taken up front (the 25% tax-free amount comes out of
+          each withdrawal instead), growth of 5%, inflation of 2.5%
+          with withdrawals rising to match, and a plan that has to
+          last to 95. Three versions of the plan show what actually
+          decides the answer:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Plan (£100,000 pot at 60)</th>
+                <th className={thClass}>Outcome</th>
+                <th className={thClass}>Total tax over the plan</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {POT100_ROWS.map((row) => (
+                <tr key={row.label}>
+                  <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>
+                    {row.label}
+                  </td>
+                  <td className={tdClass}>
+                    {row.result.lastsToPlanAge
+                      ? `Lasts to 95, with ${gbp.format(row.result.potAtPlanAge)} left`
+                      : `Runs out at age ${row.result.depletionAge}`}
+                  </td>
+                  <td className={tdClass}>{gbp.format(row.result.totalTax)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Two lessons in that table. The first is how close the line
+          is: the same pot, on the same assumptions, lasts to 95 at
+          £4,000 a year and runs out at 87 at £5,000 — a £1,000
+          difference in the starting withdrawal is worth eight years
+          of income. The second is what the State Pension does and
+          does not do here. Rows one and three end with exactly the
+          same pot, because the withdrawal is the amount you choose
+          to take from the pot in both, and the State Pension is paid
+          on top of it, not into it. What the State Pension changes
+          in this model is the tax: with it filling your personal
+          allowance from 67, far more of each withdrawal is taxed —{" "}
+          {gbp.format(pot100at4.totalTax)} of tax across the plan,
+          against none without it, on these frozen-band assumptions. In real planning the
+          State Pension extends a pot a different way: it is income
+          you no longer need to draw, so you can set a lower
+          withdrawal after 67 — run the calculator with a smaller
+          withdrawal and the pot&apos;s life stretches with it.
+          Inflation is the quieter force in every row: because
+          withdrawals rise at 2.5% a year, the £4,000 first-year
+          withdrawal is over £6,000 in cash terms by the mid-70s and
+          still climbing, which is why a pot that looks comfortable
+          at 65 can be under pressure at 85. On these inputs the
+          calculator&apos;s sustainable withdrawal — the most you can
+          take, rising with inflation, and still have the pot standing
+          at 95 — is about {gbp.format(pot100Sustainable)} a year.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What is the 4% rule — and does it work in the UK?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The 4% rule is the most quoted number in drawdown: withdraw
+          4% of the pot in year one — £4,000 from £100,000 — then
+          increase the amount by inflation each year, and history says
+          the pot survives. The history is specific, though. It comes
+          from 1990s US research (William Bengen&apos;s work, later
+          the Trinity study) on US stock and bond returns over a
+          30-year retirement, before tax. Three of its assumptions do
+          not survive the crossing to the UK. Tax: UK withdrawals are
+          income, so part of every payment leaves as tax — the rule
+          spends gross. Horizon: retiring at 60 and planning to 95 is
+          35 years, not 30, and the extra five years are the expensive
+          ones. And the State Pension: a UK plan is really two plans —
+          the pot alone until State Pension age, then the pot topping
+          up a guaranteed income — a shape the US rule never had to
+          model. None of that makes 4% useless: as a first guess it
+          lands in the right area, and on the UK example above the
+          calculator&apos;s solved sustainable figure of about{" "}
+          {gbp.format(pot100Sustainable)} a year is not far from it.
+          But it is a guess calibrated on another country&apos;s
+          markets and tax system — while a single point more of
+          withdrawal, 5%, breaks the same plan eight years early. Your
+          own growth, tax and State Pension inputs move the answer by
+          more than the rule&apos;s precision is worth.
         </p>
       </section>
 

@@ -39,6 +39,14 @@ const exDay = calculateUmbrella({
   weeksPerYear: 46,
   marginPerWeek: 25,
 });
+const ex500 = calculateUmbrella({
+  rate: 500,
+  rateType: "day",
+  hoursPerDay: 7.5,
+  daysPerWeek: 5,
+  weeksPerYear: 46,
+  marginPerWeek: 25,
+});
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -195,6 +203,136 @@ export default function UmbrellaCompanyCalculatorPage() {
           one and hoping — the lines above add back up to the
           assignment income to the penny. Any illustration that cannot
           show you that reconciliation is guessing.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Is umbrella pay self-employed? No — you are an employee
+        </h2>
+        <p className={bodyClass}>
+          Working through an umbrella does not make you
+          self-employed. The umbrella company employs you: it is
+          your employer on paper and in law, it runs your payroll,
+          and your Income Tax and National Insurance are deducted
+          through PAYE before you are paid, exactly as in an ordinary
+          job. That means there is normally no Self Assessment tax
+          return to file for umbrella income — if umbrella pay is
+          your only income, you generally do not need to register as
+          self-employed or complete a return at all. (A return can
+          still be needed for other reasons — other income, or
+          because HMRC asks for one.) It also means employment
+          rights come with the arrangement: statutory sick and
+          maternity pay, auto-enrolment into a pension, and the
+          holiday pay covered above. Schemes that present umbrella
+          pay as self-employment, or route it through loans or
+          offshore payments to promise a higher take-home percentage,
+          are not ordinary umbrellas — they are the
+          disguised-remuneration arrangements HMRC pursues, and the
+          tax bill lands on the worker.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          The margin is a fixed fee, not a percentage
+        </h2>
+        <p className={bodyClass}>
+          One figure is often misunderstood: the umbrella&apos;s
+          margin is not a percentage of your rate. It is a fixed fee
+          — typically £15 to £30 a week, or the monthly equivalent —
+          agreed when you join, and it stays the same whether your
+          day rate is £200 or £600. That is why the margin is the one
+          line worth shopping on: on the same assignment rate, every
+          other deduction (employer NI, the levy, tax, your NI) is
+          set by law and comes out the same at every compliant
+          umbrella, so the only honest difference between two
+          take-home quotes is the margin and how holiday pay is
+          handled. A quote that beats another by hundreds of pounds a
+          month on the same rate has not found a cheaper margin — it
+          has left something out.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked example: £500 a day
+        </h2>
+        <p className={bodyClass}>
+          The same waterfall at a higher rate. Assumptions: £500 a
+          day, five days a week, 46 weeks a year, and the same £25 a
+          week margin the calculator uses above —{" "}
+          {gbp.format(ex500.assignmentIncome)} of assignment income
+          for the year:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Line</th>
+                <th className={thClass}>£500/day, 46 weeks</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Assignment income</td>
+                <td className={tdClass}>{gbp.format(ex500.assignmentIncome)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Umbrella margin (£25 a week)</td>
+                <td className={tdClass}>− {gbp.format(ex500.marginAnnual)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Employer NI</td>
+                <td className={tdClass}>− {gbp.format(ex500.employerNi)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Apprenticeship levy</td>
+                <td className={tdClass}>− {gbp.format(ex500.apprenticeshipLevy)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>
+                  Gross salary (including {gbp.format(ex500.holidayPayElement)} of
+                  holiday pay)
+                </td>
+                <td className={tdClass}>{gbp.format(ex500.grossSalary)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Income Tax</td>
+                <td className={tdClass}>
+                  − {gbp.format(ex500.takeHome.incomeTax)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Employee NI</td>
+                <td className={tdClass}>
+                  − {gbp.format(ex500.takeHome.employeeNationalInsurance)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Take-home pay</td>
+                <td className={tdClass}>
+                  {gbp.format(ex500.takeHome.netAnnual)} a year ·{" "}
+                  {gbp.format(ex500.netMonthly)} a month ·{" "}
+                  {gbp.format(ex500.netPerWorkedWeek)} per worked week (
+                  {ex500.shareOfAssignmentPercent}% of the assignment
+                  income)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          Note what changed with the rate: the margin did not move
+          (£25 a week at both rates), but employer NI did —{" "}
+          {gbp.format(ex500.employerNi)} here against{" "}
+          {gbp.format(exDay.employerNi)} on £300 a day — and far more
+          of the salary sits in the 40% tax band (the gross salary of{" "}
+          {gbp.format(ex500.grossSalary)} stops just short of the
+          £100,000 point where the Personal Allowance starts to
+          taper). That is why the take-home share falls from{" "}
+          {exDay.shareOfAssignmentPercent}% at £300 a day to{" "}
+          {ex500.shareOfAssignmentPercent}% at £500.
         </p>
       </section>
 

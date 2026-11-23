@@ -74,6 +74,10 @@ const FAQS: { question: string; answer: string }[] = [
     answer: `Non-residents (foreign residents for tax purposes) get no tax-free threshold: in ${TAX_YEAR_LABEL} they pay 30c on every dollar up to $135,000, then 37c and 45c at the higher brackets, and they do not pay the Medicare levy. On $100,000 of Australian income that is ${fmt(exNonRes100.incomeTax)} of tax, leaving ${fmt(exNonRes100.netIncome)} — an effective rate of ${exNonRes100.effectiveTaxRatePercent.toFixed(2)}%, far more than a resident pays on the same income. Working holiday makers are taxed under their own schedule, which is not covered here.`,
   },
   {
+    question: "Is the first $18,200 of income tax-free in Australia?",
+    answer: `Yes — if you are an Australian resident for tax purposes. In ${TAX_YEAR_LABEL} the first $18,200 of taxable income is taxed at nil: that slice is the tax-free threshold, and the figure is $18,200, not $18,000. Spread across paydays it is $350 of tax-free income a week, or $700 a fortnight. Non-residents get no threshold at all — they pay 30c from the first dollar. If you are paid by more than one payer, you generally claim the threshold from only one of them (usually the one paying you the most); the ATO settles any difference in your tax return.`,
+  },
+  {
     question: "Do these figures include tax offsets, like LITO?",
     answer:
       "No. The figures are the ATO rate tables applied directly to the income you enter — the same starting point the ATO's own published rates give. Tax offsets reduce the final bill for many people: the low income tax offset (LITO) is worth up to $700 for residents and phases out completely by $66,667 of income. HELP/HECS repayments, the Medicare levy surcharge and other assessment items are also outside the tables. Treat the result as the tax on your income before those adjustments; your notice of assessment has the final figures.",

@@ -73,6 +73,11 @@ const FAQS: { question: string; answer: string }[] = [
       "No — any business can send an invoice, but only a VAT-registered business may charge VAT or issue a VAT invoice. Registration becomes compulsory when your taxable turnover passes £90,000 in any rolling 12 months (the GOV.UK threshold), and you can also register voluntarily below that. If you are not registered, leave every line at 0% VAT and leave the VAT number box empty: showing a VAT amount or a VAT number when you are not registered is not allowed, and a client cannot reclaim VAT you never charged.",
   },
   {
+    question: "Can I send an invoice without a company?",
+    answer:
+      "Yes. You do not need a limited company — or any company — to invoice someone. Sole traders and freelancers invoice in their own name: GOV.UK requires your own name, any business name you trade under, and an address where legal documents can be delivered to you. You also do not need to be VAT registered to send an invoice; you simply may not charge VAT or show a VAT number until you are. Most first invoices in the UK are sent exactly this way, by an individual, and this generator's form is built for it — the business name field takes your own name or trading name.",
+  },
+  {
     question: "What is a CIS deduction, and how is it worked out?",
     answer:
       "A CIS deduction is tax taken off a construction subcontractor's payment by the contractor, under HMRC's Construction Industry Scheme, and paid over to HMRC against the subcontractor's own tax bill. The rate is 20% if the subcontractor is registered with HMRC, 30% if they are not, and 0% with gross payment status. Crucially, the deduction comes only from the labour part of the invoice — never from materials, and never from the VAT. That is why the generator asks you to mark each line as labour or materials: on a £2,510 invoice where £660 is labour, the 20% deduction is £132, not £502.",
@@ -329,6 +334,30 @@ export default function FreeInvoiceGeneratorUkPage() {
           We may earn a commission from some providers if you sign
           up after visiting them — it never changes the price you
           pay, and providers cannot pay to be ranked or included.
+        </p>
+      </section>
+
+      <section className="space-y-3 print:hidden">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Excel template, PDF or a generator — which should you use?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Three honest options, and the right one depends on volume.
+          An Excel or Word template costs nothing and is fine for an
+          occasional invoice, but every total, VAT line and invoice
+          number is typed by hand — the classic errors (a reused
+          number, VAT added at the wrong rate, a subtotal that does
+          not match the lines) are all manual ones. A PDF is not a
+          way of making an invoice but the format to send it in:
+          whatever you build it with, send the client a PDF, because
+          it cannot be edited after sending and prints the same
+          everywhere — this generator produces one through your
+          browser&apos;s print or save-as-PDF step, with the VAT
+          split, CIS deduction and numbering handled as you type.
+          And when invoices become a weekly system rather than an
+          occasional document, accounting software takes over the
+          sequence, the VAT totals and the chasing — that step up is
+          covered in the records section above.
         </p>
       </section>
 

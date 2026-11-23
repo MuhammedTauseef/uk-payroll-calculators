@@ -731,6 +731,15 @@ export default function TaperedAnnualAllowanceCalculatorPage() {
           The pension taper sits far higher — £200,000 and £260,000 —
           and taxes nothing directly; it removes tax relief by
           shrinking the allowance your savings are tested against.
+          To be clear: the £100,000 Personal Allowance taper is a
+          separate taper from the pension annual allowance taper on
+          this page — it is tested on adjusted net income, not on
+          threshold or adjusted income. If the £100,000 line is the
+          one affecting you, use the{" "}
+          <Link href="/adjusted-net-income-calculator" className={linkClass}>
+            adjusted net income calculator
+          </Link>{" "}
+          instead.
         </p>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           The planning moves differ too. Salary sacrifice defeats

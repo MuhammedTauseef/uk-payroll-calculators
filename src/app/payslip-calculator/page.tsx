@@ -117,6 +117,14 @@ export default function PayslipCalculatorPage() {
           Plan 2 loan, the net is {gbp.format(ex.netMonthly)} a month
           from {gbp.format(ex.grossMonthly)} gross.
         </p>
+        <p className={bodyClass}>
+          In short: this is a <strong>monthly take-home pay
+          calculator</strong>. You enter your annual salary once, and
+          the headline answer is the take-home pay that lands in your
+          account each month — with every payslip line that gets you
+          there shown underneath, and the same figures totalled over
+          the year.
+        </p>
       </section>
 
       <PayslipCalculator />
@@ -191,6 +199,29 @@ export default function PayslipCalculatorPage() {
           more than the same contribution made the ordinary way. And
           the student loan ignores the pension entirely: it is charged
           on gross pay over the threshold, pension or no pension.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          If you pay Scottish Income Tax
+        </h2>
+        <p className={bodyClass}>
+          Scottish taxpayers pay Income Tax at rates and bands set by
+          the Scottish Parliament, which differ from the rest of the
+          UK, and their tax codes start with the letter S — S1257L is
+          the Scottish standard code. To be straight about this
+          calculator: it does <strong>not</strong> apply the Scottish
+          rates. It uses the England, Wales and Northern Ireland bands
+          for every code, including an S code, so a Scottish
+          reader&apos;s monthly take-home here is an approximation,
+          not the figure their payslip will show. National Insurance
+          is the same across the UK, so that line does hold. To see
+          what the S at the front of your code means, our{" "}
+          <Link href="/hmrc-tax-code-checker" className={linkClass}>
+            tax code checker
+          </Link>{" "}
+          decodes Scottish (S) codes in full.
         </p>
       </section>
 

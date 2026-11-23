@@ -66,6 +66,16 @@ const FAQS: { question: string; answer: string }[] = [
       "Yes, on the reduced and basic rates. Overnight stays with the paying parent of 52 to 103 nights a year reduce the amount by about 14.29% (one seventh), 104 to 155 nights by 28.57%, 156 to 174 nights by 42.86%, and 175 or more nights by half, with a further £7 a week off per child. Shared care cannot take the amount below £7 a week. Stays below 52 nights a year do not change the amount.",
   },
   {
+    question: "Do I have to pay child maintenance if we share care 50/50?",
+    answer:
+      "Not if the care is genuinely equal in the CMS's eyes — but equal nights alone do not get you there. On the nights calculation, about half the year with the paying parent (175 or more nights) only halves the amount, less £7 per child, and it cannot fall below £7 a week. The route to no maintenance at all is different: where the CMS is satisfied that both parents provide equal day-to-day care for the child, as well as sharing overnight care, neither parent counts as the paying parent and no maintenance is payable. Day-to-day care is judged on evidence — who the child is registered with at school and the doctor, who arranges and provides the everyday care — not on the night count alone.",
+  },
+  {
+    question: "What happens if child maintenance is not paid?",
+    answer:
+      "The arrears stay owed and the CMS has strong collection powers. It can move the case to Collect & Pay, take the money straight from wages through a deduction from earnings order, or take it from bank accounts. If that fails, a liability order opens the way to enforcement agents, a charge on property, and — where a court finds a parent has deliberately refused to pay — removal of their driving licence or passport, or prison as a last resort. Not paying does not make the debt go away; it makes it more expensive and harder to contest.",
+  },
+  {
     question: "What are the Collect & Pay fees?",
     answer:
       "If the Child Maintenance Service collects the money itself (Collect & Pay), the paying parent pays an extra 20% on top of the maintenance and the receiving parent has 4% deducted from what they receive. Direct Pay — where the CMS works out the amount and the parents pay each other directly — has no collection fees, which is why the same weekly figure can cost one parent more and pay the other less under Collect & Pay.",
@@ -425,6 +435,94 @@ export default function CmsCalculatorPage() {
           overnight stays only matter where the paying parent receives
           benefits: at 52 or more nights, nothing is payable for a child
           who stays overnight.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          50/50 shared care: is any maintenance payable?
+        </h2>
+        <p className={bodyClass}>
+          This is the question the night bands above only half answer,
+          because two different things are both called 50/50. The
+          first is equal overnight stays. Roughly half the year with
+          the paying parent is the 175-nights band: the formula amount
+          is halved, with a further £7 a week off per child, and it
+          cannot fall below £7 a week. So on the nights calculation
+          alone, a parent whose child stays with them half the time
+          usually still pays something — and at the other end of the
+          scale, stays below 52 nights a year (the 52-night rule)
+          change nothing at all.
+        </p>
+        <p className={bodyClass}>
+          The second is equal day-to-day care, and it leads somewhere
+          entirely different. Where the Child Maintenance Service is
+          satisfied that both parents provide an equal amount of
+          day-to-day care for the child — not just equal overnight
+          stays — then neither parent is treated as the paying parent,
+          and no child maintenance is payable at all. Day-to-day care
+          is decided on the evidence of how the child&apos;s life is
+          actually organised: where the child is registered for school
+          and medical care, who arranges and pays for the everyday
+          things, who receives the Child Benefit, and how the care
+          works in practice. This calculator follows the nights route,
+          because that is the calculation that can be done from
+          figures; an equal day-to-day care case is decided by the CMS
+          on the facts of the family, and parents in that position
+          should put the evidence to the CMS rather than rely on a
+          night count.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What is child maintenance meant to pay for?
+        </h2>
+        <p className={bodyClass}>
+          Child maintenance is a contribution towards the
+          child&apos;s everyday living costs in the home they mainly
+          live in: food, clothing, and a share of the running costs
+          of that home — the rent or mortgage, heating and other
+          bills that keep a roof over the child. It is not an itemised
+          bill and it is not payment for specific items: the law does
+          not require the receiving parent to account for it item by
+          item, and the paying parent cannot direct how it is spent
+          or withhold it because they would have spent it differently.
+          The formula on this page is how the amount is set; what it
+          represents is the child&apos;s share of the cost of the
+          household they live in, split between the parents according
+          to the paying parent&apos;s income.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What happens if child maintenance is not paid?
+        </h2>
+        <p className={bodyClass}>
+          The debt does not fade: arrears stay owed, and the CMS has
+          some of the strongest collection powers of any creditor. The
+          usual ladder is this. The case can be moved to Collect &amp;
+          Pay, so the CMS collects the money itself (with the 20% and
+          4% fees described above). The CMS can take the money
+          directly from the paying parent&apos;s wages through a
+          deduction from earnings order, or from their bank account
+          through regular or lump-sum deduction orders — neither needs
+          a court first — and can deduct from certain benefits. If the
+          money still does not come, the CMS can obtain a liability
+          order, which opens the way to enforcement agents visiting to
+          take goods, a charging order on the parent&apos;s property
+          (and ultimately an order for its sale), and the debt being
+          registered in a way that affects their credit record. At the
+          top of the ladder, where a court finds a parent has wilfully
+          refused or culpably neglected to pay, it can disqualify them
+          from driving or remove their passport for up to two years,
+          and can commit them to prison as a last resort — the arrears
+          are still owed afterwards. A parent whose circumstances have
+          genuinely changed is far better served by telling the CMS
+          and asking for the calculation to be reviewed: the
+          enforcement powers are aimed at refusal, and engaging early
+          keeps the cheaper options open.
         </p>
       </section>
 

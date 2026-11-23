@@ -62,6 +62,25 @@ const exHeadline = calculateAnnuity({
 });
 const exAfterCash = potExample(100000);
 
+// Larger pots on the headline basis — exactly the same basis as
+// the £100,000 headline example (exHeadline): the whole pot
+// annuitised with NO tax-free cash taken, age 65, single life,
+// level payments, no guarantee period. Computed by the same
+// engine, so these rows scale the headline £8,100 per £100,000.
+const LARGE_POT_ROWS = [200000, 300000, 400000, 500000, 750000, 1000000].map(
+  (pot) => ({
+    pot,
+    result: calculateAnnuity({
+      pot,
+      taxFreePercent: 0,
+      age: 65,
+      jointLife: false,
+      escalation: "level",
+      guaranteeYears: 0,
+    }),
+  }),
+);
+
 // Level vs 3%-escalating crossover at 65, worked from the same rates
 // the calculator uses: the year the rising payment first passes the
 // level payment, and the year the total received catches up.
@@ -201,6 +220,13 @@ export default function AnnuityCalculatorPage() {
       </section>
 
       <AnnuityCalculator />
+
+      <p className="max-w-2xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+        No email, no sign-up: this calculator runs entirely in your
+        browser. Enter your pot and options above and the estimate
+        appears on this page — nothing asks for your email address
+        or an account before you can use it.
+      </p>
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
@@ -371,6 +397,169 @@ export default function AnnuityCalculatorPage() {
           shows how long the same pot lasts if you keep it invested
           instead, which is the comparison most buyers actually need
           before they commit.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What does a larger pot pay — £200,000 to £1 million?
+        </h2>
+        <p className={bodyClass}>
+          The table above stops at £300,000 and takes the 25%
+          tax-free cash first. This table runs the other way: bigger
+          pots on exactly the same basis as the £100,000 headline
+          example at the top of this page — the whole pot annuitised
+          with no tax-free cash taken, bought at 65, single life,
+          level payments, no guarantee period, buyer in good health,
+          on the November 2026 rates printed on this page. Because
+          the rate is a straight percentage of the pot annuitised,
+          each row is simply the headline{" "}
+          {gbp.format(exHeadline.annualIncome)} per £100,000 scaled
+          up:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Pension pot (all of it annuitised)</th>
+                <th className={thClass}>Estimated income per year</th>
+                <th className={thClass}>Estimated income per month</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {LARGE_POT_ROWS.map(({ pot, result }) => (
+                <tr key={pot}>
+                  <td
+                    className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}
+                  >
+                    {gbp.format(pot)}
+                  </td>
+                  <td className={tdClass}>{gbp.format(result.annualIncome)}</td>
+                  <td className={tdClass}>
+                    {gbp.format(result.monthlyIncome)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          Two cautions before you plan around these rows. First,
+          almost nobody annuitises a large pot in one go with no
+          tax-free cash: the 25% tax-free lump sum (capped by the{" "}
+          {gbp.format(LUMP_SUM_ALLOWANCE)} Lump Sum Allowance) usually
+          comes off first, which cuts the income by a quarter — use
+          the calculator above for that version. Second, a £1 million
+          annuity pays £81,000 a year before tax, and income that
+          size is taxed hard: most of it sits in the 40% band and the
+          top slice in the 45% band, which is why large pots are
+          often annuitised in stages or split with drawdown rather
+          than bought in a single purchase.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What are the disadvantages of an annuity?
+        </h2>
+        <p className={bodyClass}>
+          The guarantee is the selling point; these are the costs
+          that come with it, stated plainly:
+        </p>
+        <p className={bodyClass}>
+          <strong>Inflation shrinks a level income.</strong> Most
+          annuities pay the same amount every year. That feels safe
+          at 65 and much less safe at 85: at 3% inflation, a level{" "}
+          {gbp.format(rateLevel65)} a year buys what{" "}
+          {gbp.format(eroded20)} buys today after 20 years. Only an
+          escalating or index-linked annuity protects against this —
+          and it starts roughly a quarter to a third lower, so you
+          pay for the protection out of your early retirement.
+        </p>
+        <p className={bodyClass}>
+          <strong>The pot is gone.</strong> Once you buy, the money
+          belongs to the insurer. You cannot take a lump sum for a
+          house repair, help a child onto the property ladder, or
+          change your mind if your circumstances change. What stays
+          in drawdown stays reachable; what is annuitised does not.
+        </p>
+        <p className={bodyClass}>
+          <strong>Die early and the money can die with you.</strong>{" "}
+          A single-life annuity with no guarantee period stops at
+          your death, however soon that comes — buy at 65, die at
+          67, and the insurer keeps the rest. A guarantee period,
+          joint life or value protection softens this, but each one
+          is paid for with a lower income from day one.
+        </p>
+        <p className={bodyClass}>
+          <strong>Your rate is locked on the day you buy.</strong>{" "}
+          The income is set by the rate you are offered at purchase,
+          and that is the rate for life. Buy when gilt yields — and
+          therefore annuity rates — are low, and you carry that low
+          rate for decades; there is no re-pricing later if rates
+          rise. The decision is also effectively irreversible: apart
+          from a short cancellation window at the start, you cannot
+          unwind an annuity.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What is the best age to buy an annuity?
+        </h2>
+        <p className={bodyClass}>
+          There is no single best age, because two things pull in
+          opposite directions. Rates rise with age — on the rates
+          used here, a single-life, level annuity pays about{" "}
+          {gbp.format(
+            annuityRatePer100k({
+              age: 55,
+              jointLife: false,
+              escalation: "level",
+              guaranteeYears: 0,
+            }),
+          )}{" "}
+          per £100,000 at 55,{" "}
+          {gbp.format(
+            annuityRatePer100k({
+              age: 65,
+              jointLife: false,
+              escalation: "level",
+              guaranteeYears: 0,
+            }),
+          )}{" "}
+          at 65 and{" "}
+          {gbp.format(
+            annuityRatePer100k({
+              age: 75,
+              jointLife: false,
+              escalation: "level",
+              guaranteeYears: 0,
+            }),
+          )}{" "}
+          at 75 — because the insurer expects to pay a later buyer
+          for fewer years. But waiting has a price of its own: every
+          year you delay is a year of income you never receive, and
+          the higher rate later has to earn that back before you are
+          ahead in total. Waiting from 65 to 70 means giving up five
+          years at the 65 rate to gain a rate that is higher by a
+          much smaller amount each year — the catch-up takes a long
+          time, and it only pays off if you live long enough to
+          collect it.
+        </p>
+        <p className={bodyClass}>
+          In practice, most people buy somewhere between 65 and 75,
+          and the sensible trigger is usually not an age but a need:
+          when you stop work and want essential spending covered
+          whatever markets do, or when your health changes — a
+          health condition can qualify you for an enhanced annuity
+          paying more than the standard rates here at any age. Two
+          risks sit on the waiting side of the fence: annuity rates
+          themselves can fall while you wait, because they follow
+          gilt yields, and your health can change in ways that cut
+          either way. A common middle course is to buy in stages —
+          annuitise part of the pot at retirement and more later —
+          so no single day&apos;s rate decides the whole income.
         </p>
       </section>
 

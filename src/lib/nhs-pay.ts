@@ -1,21 +1,26 @@
 import { employeeNiFor, incomeTaxFor } from "./takehome.ts";
 
 /**
- * NHS Agenda for Change (AfC) pay — England, 2025/26.
+ * NHS Agenda for Change (AfC) pay — England, 2026/27.
  *
- * Pay values: NHS Employers, "Pay scales for 2025/26" (the official
- * Agenda for Change annual and hourly rates for England, inclusive of
- * the 2025/26 pay award), fetched and verified on 14 November 2026:
- *   https://www.nhsemployers.org/articles/pay-scales-202526
- * Only the basic (non-London) rates are used — the High Cost Area
- * Supplement (HCAS) tables on the same page are NOT included, and the
- * page says so. Band 1 is closed to new entrants and is not offered;
- * the scale below starts at Band 2, as the calculator spec requires.
+ * Pay values: NHS Employers, "Pay scales for 2026/27" (the official
+ * Agenda for Change annual and hourly rates for England), fetched and
+ * verified on 23 November 2026:
+ *   https://www.nhsemployers.org/articles/pay-scales-202627
+ * The 2026/27 award is a 3.3% consolidated uplift on all pay points
+ * from 1 April 2026 — the government accepted the NHS Pay Review
+ * Body's 39th report in full on 12 February 2026 (written statement
+ * HCWS1340), so the uplift was in April 2026 pay with no backpay
+ * arrears. Only the basic (non-London) rates are used — the High
+ * Cost Area Supplement (HCAS) tables on the same page are NOT
+ * included, and the page says so. Band 1 is closed to new entrants
+ * and is not offered; the scale below starts at Band 2, as the
+ * calculator spec requires.
  *
  * Pension tiers: NHS Pension Scheme member contribution rates for
- * 2025/26 (England and Wales), per NHSBSA "Cost of being in the
- * Scheme" and the NHS Pension Scheme Regulations 2015, reg. 30 table
- * for scheme years 2025/26 to 2027/28 — also fetched 14 November 2026:
+ * 2026/27 (England and Wales), per NHSBSA "Cost of being in the
+ * Scheme" — the tier thresholds are uprated by CPI from 1 April
+ * 2026 — also verified 23 November 2026:
  *   https://www.nhsbsa.nhs.uk/member-hub/cost-being-scheme
  * The rate is a FLAT percentage of all pensionable pay, set by the
  * member's actual annual pensionable pay — it is not a marginal rate.
@@ -46,10 +51,10 @@ export interface NhsBand {
 }
 
 export const AFC_PAY_LABEL =
-  "Agenda for Change pay scales 2025/26 (England) — NHS Employers";
+  "Agenda for Change pay scales 2026/27 (England) — NHS Employers";
 export const AFC_SOURCE_URL =
-  "https://www.nhsemployers.org/articles/pay-scales-202526";
-export const AFC_LAST_VERIFIED = "14 November 2026";
+  "https://www.nhsemployers.org/articles/pay-scales-202627";
+export const AFC_LAST_VERIFIED = "23 November 2026";
 export const NHS_FULL_TIME_HOURS = 37.5;
 
 export const AFC_BANDS: NhsBand[] = [
@@ -57,95 +62,95 @@ export const AFC_BANDS: NhsBand[] = [
     band: "Band 2",
     roles: "Healthcare assistants, porters, receptionists, domestic staff",
     steps: [
-      { label: "Entry", yearsLabel: "0+ years", annual: 24465, hourly: 12.51 },
+      { label: "Entry", yearsLabel: "0+ years", annual: 25272, hourly: 12.92 },
     ],
   },
   {
     band: "Band 3",
     roles: "Senior healthcare assistants, medical secretaries, admin officers",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 24937, hourly: 12.75 },
-      { label: "Top", yearsLabel: "2+ years", annual: 26598, hourly: 13.6 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 25760, hourly: 13.17 },
+      { label: "Top", yearsLabel: "2+ years", annual: 27476, hourly: 14.05 },
     ],
   },
   {
     band: "Band 4",
     roles: "Nursing associates, pharmacy technicians, associate practitioners",
     steps: [
-      { label: "Entry", yearsLabel: "0–3 years", annual: 27485, hourly: 14.06 },
-      { label: "Top", yearsLabel: "3+ years", annual: 30162, hourly: 15.43 },
+      { label: "Entry", yearsLabel: "0–3 years", annual: 28392, hourly: 14.52 },
+      { label: "Top", yearsLabel: "3+ years", annual: 31157, hourly: 15.93 },
     ],
   },
   {
     band: "Band 5",
     roles: "Newly qualified nurses, midwives, paramedics and AHPs",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 31049, hourly: 15.88 },
-      { label: "Intermediate", yearsLabel: "2–4 years", annual: 33487, hourly: 17.13 },
-      { label: "Top", yearsLabel: "4+ years", annual: 37796, hourly: 19.33 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 32073, hourly: 16.4 },
+      { label: "Intermediate", yearsLabel: "2–4 years", annual: 34592, hourly: 17.69 },
+      { label: "Top", yearsLabel: "4+ years", annual: 39043, hourly: 19.97 },
     ],
   },
   {
     band: "Band 6",
     roles: "Senior nurses, specialist practitioners, team leaders",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 38682, hourly: 19.78 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 40823, hourly: 20.88 },
-      { label: "Top", yearsLabel: "5+ years", annual: 46580, hourly: 23.82 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 39959, hourly: 20.44 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 42170, hourly: 21.57 },
+      { label: "Top", yearsLabel: "5+ years", annual: 48117, hourly: 24.61 },
     ],
   },
   {
     band: "Band 7",
     roles: "Advanced practitioners, ward managers, principal AHPs",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 47810, hourly: 24.45 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 50273, hourly: 25.71 },
-      { label: "Top", yearsLabel: "5+ years", annual: 54710, hourly: 27.98 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 49387, hourly: 25.26 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 51932, hourly: 26.56 },
+      { label: "Top", yearsLabel: "5+ years", annual: 56515, hourly: 28.9 },
     ],
   },
   {
     band: "Band 8a",
     roles: "Matrons, consultant nurses, service managers",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 55690, hourly: 28.48 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 58487, hourly: 29.91 },
-      { label: "Top", yearsLabel: "5+ years", annual: 62682, hourly: 32.06 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 57528, hourly: 29.42 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 60417, hourly: 30.9 },
+      { label: "Top", yearsLabel: "5+ years", annual: 64750, hourly: 33.11 },
     ],
   },
   {
     band: "Band 8b",
     roles: "Senior matrons, heads of service, consultant practitioners",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 64455, hourly: 32.96 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 68631, hourly: 35.1 },
-      { label: "Top", yearsLabel: "5+ years", annual: 74896, hourly: 38.3 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 66582, hourly: 34.05 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 70896, hourly: 36.26 },
+      { label: "Top", yearsLabel: "5+ years", annual: 77368, hourly: 39.57 },
     ],
   },
   {
     band: "Band 8c",
     roles: "Associate directors, heads of nursing, clinical directors",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 76965, hourly: 39.36 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 81652, hourly: 41.76 },
-      { label: "Top", yearsLabel: "5+ years", annual: 88682, hourly: 45.35 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 79504, hourly: 40.66 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 84346, hourly: 43.14 },
+      { label: "Top", yearsLabel: "5+ years", annual: 91609, hourly: 46.85 },
     ],
   },
   {
     band: "Band 8d",
     roles: "Chief nurses, divisional directors, senior executives",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 91342, hourly: 46.71 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 96941, hourly: 49.58 },
-      { label: "Top", yearsLabel: "5+ years", annual: 105337, hourly: 53.87 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 94356, hourly: 48.26 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 100140, hourly: 51.21 },
+      { label: "Top", yearsLabel: "5+ years", annual: 108814, hourly: 55.65 },
     ],
   },
   {
     band: "Band 9",
     roles: "Directors of nursing, chief officers, executive leads",
     steps: [
-      { label: "Entry", yearsLabel: "0–2 years", annual: 109179, hourly: 55.84 },
-      { label: "Intermediate", yearsLabel: "2–5 years", annual: 115763, hourly: 59.2 },
-      { label: "Top", yearsLabel: "5+ years", annual: 125637, hourly: 64.25 },
+      { label: "Entry", yearsLabel: "0–2 years", annual: 112782, hourly: 57.68 },
+      { label: "Intermediate", yearsLabel: "2–5 years", annual: 119583, hourly: 61.16 },
+      { label: "Top", yearsLabel: "5+ years", annual: 129783, hourly: 66.37 },
     ],
   },
 ];
@@ -161,11 +166,11 @@ export interface NhsPensionTier {
 
 export const NHS_PENSION_TIERS: NhsPensionTier[] = [
   { min: 0, max: 13259, ratePercent: 5.2 },
-  { min: 13260, max: 27797, ratePercent: 6.5 },
-  { min: 27798, max: 33868, ratePercent: 8.3 },
-  { min: 33869, max: 50845, ratePercent: 9.8 },
-  { min: 50846, max: 65190, ratePercent: 10.7 },
-  { min: 65191, max: Infinity, ratePercent: 12.5 },
+  { min: 13260, max: 28854, ratePercent: 6.5 },
+  { min: 28855, max: 35155, ratePercent: 8.3 },
+  { min: 35156, max: 52778, ratePercent: 9.8 },
+  { min: 52779, max: 67668, ratePercent: 10.7 },
+  { min: 67669, max: Infinity, ratePercent: 12.5 },
 ];
 
 export function nhsPensionRateFor(pensionablePay: number): number {

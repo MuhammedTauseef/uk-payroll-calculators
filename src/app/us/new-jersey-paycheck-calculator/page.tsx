@@ -99,6 +99,33 @@ const exMfj = calculateUsPaycheck({
   filingStatus: "mfj",
 });
 const ex200 = calculateUsPaycheck({ ...BASE_INPUT, annualSalary: 200000 });
+// Hourly worked example: $30 an hour, 40 hours a week — the
+// calculator's hourly mode annualizes it to $62,400 and runs the
+// same New Jersey maths, state-plan contributions included.
+const exHourly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  payType: "hourly",
+  hourlyRate: 30,
+  hoursPerWeek: 40,
+  overtimeHoursPerWeek: 0,
+});
+const exHourlyPlans = exHourly.extraLines.reduce(
+  (sum, l) => sum + l.annual,
+  0,
+);
+// The $70,000 question the search results keep asking: the same
+// salary at the three frequencies people ask about by name.
+const ex70 = calculateUsPaycheck({ ...BASE_INPUT, annualSalary: 70000 });
+const ex70Weekly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 70000,
+  frequency: "weekly",
+});
+const ex70Monthly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 70000,
+  frequency: "monthly",
+});
 const frequencyRows = PAY_FREQUENCIES.map((f) => ({
   frequency: f,
   result: calculateUsPaycheck({ ...BASE_INPUT, frequency: f.id }),
@@ -146,6 +173,14 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Why is my actual New Jersey paycheck slightly different?",
     answer:
       "This calculator annualizes — it spreads each tax over a full year. Your employer withholds period by period using the NJ-WT percentage method (Rates A–E) and your NJ-W4 allowances, and the contribution caps bite mid-year on a real stub: the UI/WF line stops once you pass $44,800 of wages, and TDI/FLI stop at $171,100, whereas the estimate spreads the same capped annual total evenly. Private TDI/FLI plans, a governmental employer's lower UI rate, and mid-year starts move a stub a little more. Annual totals land close.",
+  },
+  {
+    question: "How much is $30 an hour in New Jersey after tax?",
+    answer: `At $30 an hour for 40 hours a week, gross pay is ${fmt(exHourly.grossAnnual)} a year. Single and paid every 2 weeks in ${TAX_YEAR}, the deductions are ${fmt(exHourly.federalAnnual)} of federal tax, ${fmt(exHourly.socialSecurityAnnual + exHourly.medicareAnnual)} of Social Security and Medicare, ${fmt(exHourly.stateAnnual)} of New Jersey income tax and ${fmt(exHourlyPlans)} of state-plan contributions (unemployment, disability and family leave) — leaving ${fmt(exHourly.netPerPeriod)} a paycheck, ${fmt(exHourly.netAnnual)} a year. Hourly searches dominate for New Jersey, so the calculator above has an hourly mode: choose "An hourly rate" and it annualizes your rate and hours and runs the same calculation, overtime at 1.5 times the rate included.`,
+  },
+  {
+    question: "How much is $70,000 a year after tax in New Jersey?",
+    answer: `On $70,000, single, in ${TAX_YEAR}: take-home is ${fmt(ex70.netAnnual)} a year. Paid every 2 weeks that is ${fmt(ex70.netPerPeriod)} a paycheck; paid weekly it is ${fmt(ex70Weekly.netPerPeriod)} a week; paid monthly, ${fmt(ex70Monthly.netPerPeriod)} a month. The deductions behind those figures are ${fmt(ex70.federalAnnual)} of federal income tax, ${fmt(ex70.socialSecurityAnnual + ex70.medicareAnnual)} of Social Security and Medicare, ${fmt(ex70.stateAnnual)} of New Jersey income tax and the capped state-plan contributions — the annual tax is the same at every frequency, only the slicing changes.`,
   },
 ];
 
@@ -423,6 +458,72 @@ export default function NewJerseyPaycheckCalculatorPage() {
           earning {fmt(NJ_UI_WF.wageBase)} or more, and TDI and FLI cap
           at {fmt(NJ_TDI.max)} and {fmt(NJ_FLI.max)} once wages pass{" "}
           {fmt(NJ_TDI.wageBase)}.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Paid by the hour? $30 an hour, worked through
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Hourly searches are the most common way people arrive at
+          this page, and the calculator above handles them directly:
+          choose &quot;An hourly rate&quot;, enter the rate and your
+          hours, and it annualizes the pay (rate × hours × 52 weeks)
+          and runs the same federal, New Jersey and state-plan
+          maths. At $30 an hour for 40 hours a week that is{" "}
+          {fmt(exHourly.grossAnnual)} a year:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Gross pay (every 2 weeks)</td>
+                <td className={tdClass}>{fmt(exHourly.grossPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.federalPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security at 6.2%</td>
+                <td className={tdClass}>
+                  −{fmt(exHourly.socialSecurityPerPeriod)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Medicare at 1.45%</td>
+                <td className={tdClass}>−{fmt(exHourly.medicarePerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>New Jersey income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.statePerPeriod)}</td>
+              </tr>
+              {exHourly.extraLines.map((line) => (
+                <tr key={line.id}>
+                  <td className={tdClass}>{line.label}</td>
+                  <td className={tdClass}>−{fmt(line.perPeriod)}</td>
+                </tr>
+              ))}
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>Net pay</td>
+                <td className={tdClass}>
+                  {fmt(exHourly.netPerPeriod)} every 2 weeks ·{" "}
+                  {fmt(exHourly.netAnnual)} a year
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Overtime hours go in at 1.5 times the rate and are taxed
+          as ordinary wages. Note the three state-plan lines: unlike
+          a salary, hourly earnings that stop mid-year — a seasonal
+          job, say — may never reach the caps those contributions
+          stop at ($44,800 of wages for unemployment and workforce,
+          $171,100 for disability and family leave in {TAX_YEAR}),
+          which the calculator handles by figuring the capped
+          annual totals on your full-year earnings.
         </p>
       </section>
 

@@ -50,6 +50,15 @@ const comparison = [25000, 30000, 40000, 50000, 60000].map((s) => ({
     otherEmployerCostsAnnual: 0,
   }),
 }));
+// Second worked example, end to end for one named hire: a £20,000
+// administrator, employer pension at 5% of qualifying earnings, and
+// £1,200 a year of other costs (laptop, insurance and software).
+// Figures come from the same calculateEmployerCost() the tool runs.
+const exHire = calculateEmployerCost({
+  annualGrossSalary: 20000,
+  employerPensionPercent: 5,
+  otherEmployerCostsAnnual: 1200,
+});
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -68,6 +77,11 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: "How much does an employer have to pay into a workplace pension?",
     answer: `Under auto-enrolment the employer must pay at least ${PENSION.employerMinimumRate * 100}% of the employee's qualifying earnings — the slice of pay between ${fmt(PENSION.qualifyingEarningsLowerAnnual)} and ${fmt(PENSION.qualifyingEarningsUpperAnnual)} a year. On a ${fmt(30000)} salary the qualifying slice is ${fmt(ex30.qualifyingEarnings)}, so the minimum employer contribution is ${fmt(ex30.employerPensionPerYear)} a year. Many employers pay more than the minimum, which is why the percentage in this calculator is yours to change.`,
+  },
+  {
+    question: "Can I use these figures in a spreadsheet?",
+    answer:
+      "Yes. The calculator shows every cost as its own line — gross salary, employer National Insurance, employer pension and any other costs you add, each per year and per month — so you can copy the lines into a spreadsheet and build your own hiring model around them: change the salary or pension percentage in your sheet and the structure still holds. There is no file to download; the breakdown on screen is the figures, ready to lift across.",
   },
   {
     question:
@@ -191,6 +205,27 @@ export default function EmployerCostCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          The true cost of an employee
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The true cost of an employee is never the salary in the job
+          advert. Before the employee does a day&apos;s work, the
+          business also owes employer National Insurance on the pay
+          above the Secondary Threshold and workplace pension
+          contributions under auto-enrolment — and usually equipment,
+          insurance, software and training on top of that. On this
+          page&apos;s running example, a {fmt(30000)} salary carries{" "}
+          {fmt(ex30.onCostsPerYear)} of on-costs, so the true cost is{" "}
+          {fmt(ex30.totalCostPerYear)} a year —{" "}
+          {ex30.costUpliftPercent.toFixed(2)}% more than the headline
+          salary. Budget, price and hire against the true cost, not
+          the salary, or every hire quietly costs more than the plan
+          allowed for.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What a {fmt(30000)} salary really costs, line by line
         </h2>
         <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
@@ -301,6 +336,31 @@ export default function EmployerCostCalculatorPage() {
           no other costs, 2026/27 rates. The percentage on top rises
           with the salary because the {fmt(EMPLOYER_NI.secondaryThresholdAnnual)}{" "}
           threshold shelters a smaller share of a bigger salary.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked example: one hire, end to end
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Say you hire an administrator on {fmt(20000)} a year, pay 5%
+          of qualifying earnings into their pension — above the
+          auto-enrolment minimum — and spend {fmt(1200)} a year on their
+          laptop, insurance and software. The true cost builds up in four
+          steps. Step 1, employer National Insurance: ({fmt(20000)} −{" "}
+          {fmt(exHire.thresholdApplied)}) × {EMPLOYER_NI.rate * 100}% ={" "}
+          {fmt(exHire.employerNiPerYear)}. Step 2, pension: qualifying
+          earnings are {fmt(exHire.qualifyingEarnings)}, and 5% of that
+          is {fmt(exHire.employerPensionPerYear)}. Step 3, the other
+          costs: {fmt(exHire.otherCostsPerYear)} as entered. Step 4, the
+          total: {fmt(20000)} + {fmt(exHire.employerNiPerYear)} +{" "}
+          {fmt(exHire.employerPensionPerYear)} +{" "}
+          {fmt(exHire.otherCostsPerYear)} ={" "}
+          {fmt(exHire.totalCostPerYear)} a year —{" "}
+          {fmt(exHire.totalCostPerMonth)} a month, or{" "}
+          {exHire.costUpliftPercent.toFixed(2)}% on top of the salary
+          the job was advertised at.
         </p>
       </section>
 

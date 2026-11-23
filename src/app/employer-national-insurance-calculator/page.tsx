@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import EmployerNiCalculator from "@/components/EmployerNiCalculator";
+import { calculateEmployerNi } from "@/lib/employerNi";
+import { calculateTakeHome } from "@/lib/takehome";
 import {
   EMPLOYER_NI,
   EMPLOYER_NI_RATES_LABEL,
@@ -43,6 +45,11 @@ const FAQS: { question: string; answer: string }[] = [
       "No — they are two separate charges on the same pay. The employee pays primary Class 1 contributions, deducted from their wages; the employer pays secondary Class 1 contributions on top of the wages, which is an extra cost of employing someone and never comes out of the employee's pay. This calculator covers only the employer's contributions.",
   },
   {
+    question: "Do employers pay National Insurance for veterans or Freeport staff?",
+    answer:
+      "Usually not, up to a limit. For a veteran in their first civilian job after leaving the regular armed forces, the employer rate is 0% on earnings up to £50,270 a year for the first 12 months of that employment, claimed through payroll with National Insurance category letter V. For eligible new employees who work in a Freeport or Investment Zone tax site, the rate is 0% on earnings up to £25,000 a year. The same £50,270 zero-rate band covers employees under 21 and apprentices under 25. Above each limit, the standard 15% applies to the excess.",
+  },
+  {
     question: "When do employer NI rates change?",
     answer:
       "Employer National Insurance rates and thresholds are set by the government and normally change at the start of a tax year in April — most recently in April 2025, when the rate rose to 15% and the Secondary Threshold fell to £5,000 a year; those figures stayed the same for 2026/27. Always check the current figures on GOV.UK before running payroll, because a Budget can change them with effect from the next April.",
@@ -79,6 +86,36 @@ const gbp = new Intl.NumberFormat("en-GB", {
   style: "currency",
   currency: "GBP",
 });
+
+// Worked-example figures — computed by the same calculateEmployerNi()
+// the tool above runs, so the page can never disagree with itself.
+// The running example: one standard employee on a £42,000 salary.
+const ex42 = calculateEmployerNi({
+  annualGrossSalary: 42000,
+  reducedRateCategory: false,
+  employmentAllowanceEligible: false,
+});
+const ex42WithAllowance = calculateEmployerNi({
+  annualGrossSalary: 42000,
+  reducedRateCategory: false,
+  employmentAllowanceEligible: true,
+});
+
+// Employee vs employer NI on the same salaries — employee figures
+// from the site's PAYE engine, employer figures from this page's
+// own calculator, so the two columns can never disagree with the
+// tools they describe.
+const SIDE_BY_SIDE_SALARIES = [25000, 30000, 42000, 60000];
+const SIDE_BY_SIDE = SIDE_BY_SIDE_SALARIES.map((salary) => ({
+  salary,
+  employeeNi: calculateTakeHome({ annualSalary: salary })
+    .employeeNationalInsurance,
+  employer: calculateEmployerNi({
+    annualGrossSalary: salary,
+    reducedRateCategory: false,
+    employmentAllowanceEligible: false,
+  }),
+}));
 
 const RATES_TABLE: { item: string; amount: string }[] = [
   {
@@ -185,6 +222,97 @@ export default function EmployerNationalInsuranceCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Employee NI vs employer NI, side by side
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The same salary carries two separate National Insurance
+          charges, paid by different people on different slices of the
+          pay. The employee&apos;s (primary) contributions come out of
+          the salary: 8% on earnings between £12,570 and £50,270, and
+          2% above that. The employer&apos;s (secondary) contributions
+          are paid on top of the salary and never touch the
+          employee&apos;s pay: 15% on everything above £5,000, with no
+          upper limit. On the same salaries, for a standard employee
+          with no Employment Allowance:
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Gross salary
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Employee NI (deducted from pay)
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Employer NI (paid on top)
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Total cost of employing
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {SIDE_BY_SIDE.map((row) => (
+                <tr key={row.salary}>
+                  <td className="px-4 py-2 font-semibold text-slate-900 dark:text-slate-50">
+                    {gbp.format(row.salary)}
+                  </td>
+                  <td className="px-4 py-2">{gbp.format(row.employeeNi)}</td>
+                  <td className="px-4 py-2">
+                    {gbp.format(row.employer.employerNiPerYear)}
+                  </td>
+                  <td className="px-4 py-2">
+                    {gbp.format(row.employer.totalCostPerYear)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Two things stand out. The employer&apos;s charge is the
+          bigger of the two at every salary here, because its
+          threshold is far lower and its rate higher — and it is the
+          employer&apos;s charge, not the employee&apos;s, that the{" "}
+          {gbp.format(EMPLOYMENT_ALLOWANCE.annualAmount)} Employment
+          Allowance reduces. The employee sees only their own line on
+          the payslip; the employer&apos;s line is the reason the cost
+          of a hire is never the salary alone.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked example: one employee on a £42,000 salary
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Step 1: take the salary above the Secondary Threshold —{" "}
+          {gbp.format(42000)} − {gbp.format(ex42.thresholdApplied)} ={" "}
+          {gbp.format(ex42.earningsAboveThreshold)}. Step 2: charge the
+          main rate on that slice —{" "}
+          {gbp.format(ex42.earningsAboveThreshold)} ×{" "}
+          {EMPLOYER_NI.rate * 100}% = {gbp.format(ex42.employerNiPerYear)}{" "}
+          a year, which is {gbp.format(ex42.employerNiPerMonth)} a month.
+          Step 3: add it to the salary — employing this person costs{" "}
+          {gbp.format(ex42.totalCostPerYear)} a year before pension
+          contributions and any other costs.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          If the employer claims the Employment Allowance, the picture
+          changes completely at this salary: the allowance covers the
+          whole {gbp.format(ex42WithAllowance.employmentAllowanceApplied)}{" "}
+          bill, so the employer NICs payable are{" "}
+          {gbp.format(ex42WithAllowance.employerNiPerYear)} and the total
+          cost is the {gbp.format(ex42WithAllowance.totalCostPerYear)}{" "}
+          salary itself — until the allowance is used up across the
+          payroll as a whole.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           What are the employer NI rates for 2026/27?
         </h2>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
@@ -261,6 +389,35 @@ export default function EmployerNationalInsuranceCalculatorPage() {
           {EMPLOYER_NI.rate * 100}% = {gbp.format(1459.5)} a year, compared
           with {gbp.format(8250)} for a standard employee at the same
           salary.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Who pays no employer NI — and how the relief is claimed
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Four groups attract a 0% employer rate on a slice of their
+          pay. Employees under 21 and apprentices under 25: 0% up to{" "}
+          {gbp.format(EMPLOYER_NI.youngWorkerUpperThresholdAnnual)} a
+          year, as the section above shows. Veterans: 0% up to the
+          same {gbp.format(EMPLOYER_NI.youngWorkerUpperThresholdAnnual)}{" "}
+          on earnings in the first 12 months of their first civilian
+          job after leaving the regular armed forces. And eligible new
+          employees working in a Freeport or Investment Zone tax site:
+          0% up to {gbp.format(25000)} a year. None of these is an
+          exemption you apply for separately or a refund you wait for:
+          each relief is given through payroll in real time, by putting
+          the employee on the right National Insurance category letter
+          (H for apprentices under 25, M for under-21s, V for
+          veterans), so the NICs are simply never charged. The
+          Employment Allowance works the other way round — it is a
+          claim, made through your payroll software each tax year, and
+          it reduces the bill for the NICs that are charged. If you
+          discover an employee was on the wrong category letter and
+          NICs were overpaid, the correction is also made through
+          payroll, and HMRC refunds or offsets the overpayment once
+          the corrected figures are submitted.
         </p>
       </section>
 

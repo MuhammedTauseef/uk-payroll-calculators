@@ -149,6 +149,33 @@ export default function ChildcareCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How much should I put in?
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Work backwards from the top-up you want. The government adds
+          £2 for every £8 you pay in, so the deposit that earns the
+          full £500 quarterly top-up is £2,000 in the quarter — a
+          £2,500 quarterly bill, split £2,000 from you and £500 from
+          the government. Pay in less and the top-up falls in
+          proportion: £800 paid in earns £200. For a disabled child
+          the cap doubles, so the full £1,000 quarterly top-up needs a
+          £4,000 deposit in the quarter (a £5,000 bill). Over a full
+          year that is £8,000 of deposits for the £2,000 maximum, or
+          £16,000 for the £4,000 disabled-child maximum — per child,
+          because every child has their own account and their own cap.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          There is no benefit in paying in more than the bill needs:
+          money above the cap earns no extra top-up, and the top-up
+          itself can only be spent on approved childcare. The results
+          above show the deposit for your own figures — the quarterly
+          deposit line is the amount to pay in each 3-month block to
+          cover the bill and collect every pound of top-up it earns.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
           Who can claim: the eligibility rules
         </h2>
         <div className={tableWrapClass}>
@@ -284,6 +311,28 @@ export default function ChildcareCalculatorPage() {
             pro-rata salary calculator
           </Link>{" "}
           shows what a move to part-time hours does to pay when you go back.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Scotland and Northern Ireland: same top-up, different funded
+          hours
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Tax-Free Childcare itself is UK-wide — the account, the £2
+          for every £8 and the caps in this calculator work identically
+          in Scotland and Northern Ireland. What differs is the funded
+          hours alongside it, because early-years funding is devolved.
+          Scotland funds 1,140 hours a year of early learning and
+          childcare for all 3 and 4 year olds, and for eligible 2 year
+          olds. Northern Ireland has no equivalent of England&apos;s
+          30-hours scheme: its funded offer is a pre-school place in
+          the final year before primary school, usually 12.5 hours a
+          week (2.5 hours a day) over the school year. In both nations
+          the Tax-Free Childcare top-up can still cover the hours and
+          costs the funding does not — but check the funded offer where
+          you live before assuming the English 30 hours applies.
         </p>
       </section>
 

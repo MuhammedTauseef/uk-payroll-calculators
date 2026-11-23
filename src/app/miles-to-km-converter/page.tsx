@@ -32,6 +32,12 @@ const MILE_ROWS = Array.from({ length: 100 }, (_, i) => i + 1).map((mi) => ({
 }));
 const MARATHON_KM = milesToKm(26.2);
 const TEN_MILES_KM = milesToKm(10);
+// Speed limits and cruising speeds use the same factor — one mile
+// per hour is 1.60934 kilometres per hour.
+const SPEED_ROWS = [20, 30, 40, 50, 60, 70, 100].map((mph) => ({
+  mph,
+  kmh: milesToKm(mph),
+}));
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -174,6 +180,63 @@ export default function MilesToKmConverterPage() {
           mile is exactly 1.609344 km; figures here use 1.60934, the
           value in general use, checked 17 November 2026). The same
           factor converts mph to km/h.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Speeds: mph to km/h — the limits you actually drive at
+        </h2>
+        <p className={bodyClass}>
+          Speed converts with the same factor as distance: 1 mph is
+          1.60934 km/h. These are the numbers that matter when a UK
+          driver meets a European speed limit, or a European driver
+          reads a UK speedometer:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Miles per hour</th>
+                <th className={thClass}>Kilometres per hour</th>
+                <th className={thClass}>Where you see it</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {SPEED_ROWS.map((r) => (
+                <tr key={r.mph}>
+                  <td className={tdClass}>{r.mph} mph</td>
+                  <td className={tdClass}>{fmt(r.kmh, 2)} km/h</td>
+                  <td className={tdClass}>
+                    {r.mph === 20
+                      ? "UK built-up areas and 20 mph zones"
+                      : r.mph === 30
+                        ? "The standard UK town limit — 50 km/h abroad"
+                        : r.mph === 40
+                          ? "UK urban dual carriageways"
+                          : r.mph === 50
+                            ? "≈ 80 km/h — a common European rural limit"
+                            : r.mph === 60
+                              ? "UK single-carriageway limit — ≈ 100 km/h abroad"
+                              : r.mph === 70
+                                ? "UK motorway limit — 130 km/h French autoroutes sit just above it"
+                                : "≈ 160 km/h — German autobahn territory"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          <strong>The mental shortcut:</strong> multiply by 8, then
+          divide by 5. That is ×1.6, within half a percent of the
+          exact 1.60934 — 50 mph → 50 × 8 = 400 → ÷ 5 = 80 km/h,
+          against the exact {fmt(milesToKm(50), 2)} km/h. It works
+          because the mile-to-km ratio sits close to the Fibonacci
+          ratio, which is also why consecutive Fibonacci numbers
+          convert almost exactly: 5 miles ≈ 8 km, 8 miles ≈ 13 km,
+          13 miles ≈ 21 km. Good enough for any road sign; use the
+          converter above for anything that needs to be exact.
         </p>
       </section>
 

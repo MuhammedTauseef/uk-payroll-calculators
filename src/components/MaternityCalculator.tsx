@@ -4,7 +4,11 @@ import PrintButton from "@/components/PrintButton";
 import StickyResultBar from "@/components/StickyResultBar";
 
 import { useMemo, useState } from "react";
-import { calculateMaternity, type MaternityScheme } from "@/lib/maternity";
+import {
+  calculateMaternity,
+  spreadMonthlyAmount,
+  type MaternityScheme,
+} from "@/lib/maternity";
 import { MATERNITY, SMP } from "@/lib/rates";
 
 const gbp = new Intl.NumberFormat("en-GB", {
@@ -24,6 +28,7 @@ const labelClass = "block text-sm font-medium text-slate-700 dark:text-slate-300
 export default function MaternityCalculator() {
   const [salary, setSalary] = useState("31200");
   const [scheme, setScheme] = useState<MaternityScheme>("nhs");
+  const [spread, setSpread] = useState<"staged" | "9" | "12">("staged");
 
   const salaryNumber = parseAmount(salary);
 
@@ -31,6 +36,14 @@ export default function MaternityCalculator() {
     () => calculateMaternity({ annualSalary: salaryNumber, scheme }),
     [salaryNumber, scheme],
   );
+
+  // Spreading applies to NHS occupational pay (Agenda for Change, by prior
+  // agreement with the employer) — it is not an option on SMP alone.
+  const spreadActive = scheme === "nhs" && spread !== "staged";
+  const spreadMonths = spreadActive ? Number(spread) : 0;
+  const spreadMonthly = spreadActive
+    ? spreadMonthlyAmount(result.totalPay, spreadMonths)
+    : 0;
 
   const schemeLabel =
     scheme === "nhs" ? "NHS occupational maternity pay" : "Statutory Maternity Pay only";
@@ -78,6 +91,29 @@ export default function MaternityCalculator() {
             otherwise choose the statutory scheme every employer pays.
           </p>
         </div>
+
+        {scheme === "nhs" && (
+          <div>
+            <label htmlFor="mat-spread" className={labelClass}>
+              Spread the pay evenly?
+            </label>
+            <select
+              id="mat-spread"
+              value={spread}
+              onChange={(e) => setSpread(e.target.value as "staged" | "9" | "12")}
+              className={inputClass}
+            >
+              <option value="staged">No — pay stage by stage (standard)</option>
+              <option value="9">Yes — equal amounts over 9 months</option>
+              <option value="12">Yes — equal amounts over 12 months</option>
+            </select>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              Agenda for Change lets you agree with your employer to spread
+              occupational pay evenly instead of in stages. The total you
+              receive is exactly the same.
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="mt-6 rounded-xl border border-brand-100 dark:border-brand-900 bg-brand-50 dark:bg-brand-900/30 p-5 print:mt-0 print:border-slate-300">
@@ -94,6 +130,12 @@ export default function MaternityCalculator() {
             Annual salary: {gbp.format(salaryNumber)} · Scheme: {schemeLabel}
             .
           </p>
+          {spreadActive && (
+            <p>
+              Pay spread: equal monthly amounts over {spreadMonths} months (
+              {gbp.format(spreadMonthly)} a month).
+            </p>
+          )}
         </div>
 
         <p className="mt-2 text-3xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
@@ -102,6 +144,25 @@ export default function MaternityCalculator() {
         <p className="text-sm text-slate-600 dark:text-slate-300">
           Total maternity pay over the full leave ({schemeLabel})
         </p>
+
+        {spreadActive && (
+          <div className="mt-4 rounded-lg border border-brand-200 dark:border-brand-800 bg-white/70 dark:bg-slate-900/40 p-4">
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
+              Spread evenly over {spreadMonths} months
+            </p>
+            <p className="mt-1 text-2xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
+              {gbp.format(spreadMonthly)}{" "}
+              <span className="text-sm font-medium">a month</span>
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+              The same {gbp.format(result.totalPay)} total, paid in equal
+              monthly amounts instead of stage by stage (figures rounded to
+              the nearest penny). Spreading is not automatic — it has to be
+              agreed with your employer in advance, so ask payroll before
+              your leave starts.
+            </p>
+          </div>
+        )}
 
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
@@ -143,13 +204,15 @@ export default function MaternityCalculator() {
               paid; the rest is unpaid.
             </dd>
           </div>
-          <div>
-            <dt className="inline font-medium">Averaged over the year: </dt>
-            <dd className="inline">
-              {gbp.format(result.averageMonthlyAcrossLeave)} a month across
-              the full 52 weeks of leave.
-            </dd>
-          </div>
+          {!spreadActive && (
+            <div>
+              <dt className="inline font-medium">Averaged over the year: </dt>
+              <dd className="inline">
+                {gbp.format(result.averageMonthlyAcrossLeave)} a month across
+                the full 52 weeks of leave.
+              </dd>
+            </div>
+          )}
           <div>
             <dt className="inline font-medium">Weekly pay used: </dt>
             <dd className="inline">

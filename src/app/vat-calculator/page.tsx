@@ -26,6 +26,13 @@ const removeExample = calculateVat({
   ratePercent: 20,
   mode: "remove",
 });
+// Claim-back example — the VAT inside a £600 VAT-inclusive
+// business purchase is the input tax its buyer reclaims.
+const claimExample = calculateVat({
+  amount: 600,
+  ratePercent: 20,
+  mode: "remove",
+});
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -57,6 +64,15 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Is a calculator enough to do my VAT return?",
     answer:
       "A calculator gives you the VAT on a single price. A VAT return needs every sale and purchase recorded through the quarter, and under Making Tax Digital for VAT those records must be kept digitally and the return filed through compatible software — HMRC no longer accepts returns typed into its old online form.",
+  },
+  {
+    question: "How do I claim VAT back on my business purchases?",
+    answer: `You do not claim it item by item — you net it off on your VAT return. The VAT on things you buy for the business (input tax) is subtracted from the VAT you charged customers (output tax), and if input tax is bigger, HMRC repays the difference. A laptop bought for ${gbp.format(claimExample.gross)} including VAT contains ${gbp.format(claimExample.vat)} of input tax to set against your bill. You need a valid VAT invoice from the supplier — a card receipt is not enough — and some costs are blocked entirely: business entertainment, and cars that are available for private use (a leased car is capped at 50%). Missed a claim? You can usually add it to a later return within four years.`,
+  },
+  {
+    question: "What is the Excel formula for VAT?",
+    answer:
+      "To add 20% VAT to a net price in cell A1: =A1*1.2. To take VAT back out of a VAT-inclusive price: =A1/1.2 gives the net, and =A1/6 gives the VAT itself (at 20% the VAT inside a gross price is exactly 1/6 of it; at the 5% reduced rate it is 1/21, so =A1/21). The same formulas work in Google Sheets. Keep the gross, net and VAT in separate columns if the figures feed a VAT return — HMRC's Making Tax Digital rules want the underlying records kept digitally, not retyped.",
   },
 ];
 
@@ -218,6 +234,84 @@ export default function VatCalculatorPage() {
           maths runs over your totals: VAT charged on sales (output tax)
           minus VAT you paid on business purchases (input tax) is the
           amount on the return.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How to claim VAT back on what you buy
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          &ldquo;Claiming VAT back&rdquo; is not a separate claim to
+          HMRC — it happens inside your VAT return. The walk-through:
+        </p>
+        <ol className="max-w-2xl list-decimal space-y-1 pl-6 text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <li>
+            <strong>Be VAT-registered.</strong> Only a registered
+            business can reclaim; registration is compulsory once
+            taxable turnover passes £90,000 in 12 months, and
+            voluntary below it.
+          </li>
+          <li>
+            <strong>Buy for the business, for taxable sales.</strong>{" "}
+            The purchase must be for the business and relate to
+            taxable supplies. Anything partly private is claimed in
+            the same proportion — the business share only.
+          </li>
+          <li>
+            <strong>Get a proper VAT invoice.</strong> It must show
+            the supplier&apos;s VAT number and the VAT charged. A
+            card receipt is not a VAT invoice; for small retail
+            purchases up to £250 a simplified invoice will do.
+          </li>
+          <li>
+            <strong>Record the VAT as input tax.</strong> A laptop at{" "}
+            {gbp.format(claimExample.gross)} including VAT contains{" "}
+            {gbp.format(claimExample.vat)} of input tax — the VAT
+            fraction, 1/6 of the gross at 20%, does that sum for you.
+          </li>
+          <li>
+            <strong>Net it off on the return.</strong> Total input tax
+            comes off the VAT you charged on sales (output tax). Pay
+            HMRC the difference — or, if input tax is bigger, HMRC
+            repays you the difference.
+          </li>
+        </ol>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Some costs are blocked no matter how businesslike they are:
+          entertaining clients or suppliers, and a car that is
+          available for private use (on a leased car, only 50% of
+          the VAT can be reclaimed). Costs that relate to exempt
+          sales generally cannot be reclaimed either. Two timing
+          rules catch people out. A claim you missed can go on a
+          later return, but only within four years. And purchases
+          from before you registered are not lost: VAT on goods
+          bought up to four years before registration can be
+          reclaimed if you still have them, and on services bought
+          in the six months before. One scheme is different — on the
+          Flat Rate Scheme you normally cannot reclaim VAT on
+          purchases at all, except single capital items costing
+          £2,000 or more including VAT. The rates behind all of this
+          are unchanged for 2026/27: the standard rate remains 20%.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          VAT formulas for Excel and Google Sheets
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          With a price in cell A1: add 20% VAT with{" "}
+          <code>=A1*1.2</code>; get the net back with{" "}
+          <code>=A1/1.2</code>; and extract just the VAT from a
+          VAT-inclusive price with <code>=A1/6</code> — at 20% the
+          VAT is exactly 1/6 of the gross. At the 5% reduced rate
+          the formulas are <code>=A1*1.05</code>,{" "}
+          <code>=A1/1.05</code> and <code>=A1/21</code>. If the
+          spreadsheet feeds your VAT return, keep gross, net and VAT
+          as separate recorded figures rather than retyping results —
+          Making Tax Digital requires the underlying records to stay
+          digital.
         </p>
       </section>
 

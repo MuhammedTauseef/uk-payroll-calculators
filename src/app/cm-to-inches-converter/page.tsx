@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import CmToInchesConverter from "@/components/CmToInchesConverter";
-import { cmToFeetInches, cmToInches, fmt } from "@/lib/converters";
+import { cmToFeetInches, cmToInches, fmt, inchesToCm } from "@/lib/converters";
 import { AppConfig } from "@/utils/AppConfig";
 import SubscribeBox from "@/components/SubscribeBox";
 import ReviewCard from "@/components/ReviewCard";
@@ -33,6 +33,43 @@ const CM_ROWS = Array.from({ length: 200 }, (_, i) => i + 1).map((cm) => ({
 }));
 const HEIGHT_170 = cmToFeetInches(170);
 const HEIGHT_100_IN = cmToInches(100);
+// "How big is that, really?" — everyday objects at their standard
+// sizes: the credit card to the ISO/IEC 7810 standard, the £20
+// note to the Bank of England's published polymer dimensions, the
+// golf and tennis balls to their governing-body minimum/standard
+// diameters, the AA battery to its standard 50.5 mm length, and
+// A4 to ISO 216.
+const EVERYDAY_ROWS = [
+  { cm: 4.27, label: "A golf ball — the minimum diameter the rules allow" },
+  { cm: 5.05, label: "An AA battery, end to end" },
+  { cm: 6.7, label: "A tennis ball's diameter" },
+  { cm: 8.56, label: "A credit or debit card, long edge" },
+  { cm: 13.9, label: "A Bank of England £20 note, long edge" },
+  { cm: 21, label: "An A4 sheet, short edge" },
+  { cm: 29.7, label: "An A4 sheet, long edge" },
+].map((r) => ({ ...r, inches: cmToInches(r.cm) }));
+// The reverse direction: heights quoted in feet and inches, back
+// in centimetres, and the photo/print sizes sold in inches.
+const HEIGHT_ROWS = [
+  { feet: 4, inches: 6 },
+  { feet: 5, inches: 0 },
+  { feet: 5, inches: 3 },
+  { feet: 5, inches: 6 },
+  { feet: 5, inches: 9 },
+  { feet: 6, inches: 0 },
+  { feet: 6, inches: 3 },
+  { feet: 6, inches: 6 },
+].map((r) => ({ ...r, cm: inchesToCm(r.feet * 12 + r.inches) }));
+const FRAME_ROWS = [
+  { w: 4, h: 6, sold: "10 × 15 cm" },
+  { w: 5, h: 7, sold: "13 × 18 cm" },
+  { w: 8, h: 10, sold: "20 × 25 cm" },
+  { w: 10, h: 12, sold: "25 × 30 cm" },
+].map((r) => ({
+  ...r,
+  wCm: inchesToCm(r.w),
+  hCm: inchesToCm(r.h),
+}));
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -177,6 +214,100 @@ export default function CmToInchesConverterPage() {
           inch, agreed in 1959), checked 17 November 2026. Inches are
           shown to two decimal places and the feet-and-inches split to
           one decimal place.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How big is that in real life?
+        </h2>
+        <p className={bodyClass}>
+          Centimetres are hard to picture until they are attached
+          to something in your pocket or your desk. These are
+          everyday objects at their standard sizes — the card and
+          the banknote to their official published dimensions, the
+          balls to the minimum or standard diameters their rules
+          set:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Object</th>
+                <th className={thClass}>Centimetres</th>
+                <th className={thClass}>Inches</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {EVERYDAY_ROWS.map((r) => (
+                <tr key={r.label}>
+                  <td className={tdClass}>{r.label}</td>
+                  <td className={tdClass}>{fmt(r.cm, 2)} cm</td>
+                  <td className={tdClass}>{fmt(r.inches, 2)} in</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          So when a listing says a case is 15 cm wide, picture a
+          school ruler; at 10 cm, think of the long edge of a
+          credit card plus a finger&apos;s width; and a 5 cm part
+          is an AA battery. For a person, the anchors are heights:
+          170 cm is 5 ft 6.9 in, and 183 cm is 6 ft.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          The other way round: feet, inches and photo sizes in cm
+        </h2>
+        <p className={bodyClass}>
+          Heights are still quoted in feet and inches across the
+          UK, and photo prints are still sold in inches — here are
+          both, converted back (multiply inches by 2.54):
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Height</th>
+                <th className={thClass}>Centimetres</th>
+                <th className={thClass}>Photo / print size</th>
+                <th className={thClass}>Exact cm</th>
+                <th className={thClass}>Sold as</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {HEIGHT_ROWS.map((r, i) => (
+                <tr key={`${r.feet}-${r.inches}`}>
+                  <td className={tdClass}>
+                    {r.feet} ft {r.inches} in
+                  </td>
+                  <td className={tdClass}>{fmt(r.cm, 1)} cm</td>
+                  <td className={tdClass}>
+                    {FRAME_ROWS[i]
+                      ? `${FRAME_ROWS[i].w} × ${FRAME_ROWS[i].h} in`
+                      : "—"}
+                  </td>
+                  <td className={tdClass}>
+                    {FRAME_ROWS[i]
+                      ? `${fmt(FRAME_ROWS[i].wCm, 1)} × ${fmt(FRAME_ROWS[i].hCm, 1)} cm`
+                      : "—"}
+                  </td>
+                  <td className={tdClass}>
+                    {FRAME_ROWS[i] ? FRAME_ROWS[i].sold : "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          Print sizes are nominal: an 8 × 10 in print is exactly
+          20.32 × 25.4 cm, but it is sold across Europe as a
+          20 × 25 cm print — the small trim is why a borderless
+          print sometimes crops a millimetre or two at the edges.
         </p>
       </section>
 

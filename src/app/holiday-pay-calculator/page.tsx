@@ -76,12 +76,23 @@ const leaving = calculateHolidayPay({
   proportionOfYearWorked: 0.75,
   leaveTakenWeeks: 2.4,
 });
+// One day of holiday for a zero-hours worker: the hours the shift
+// would have run (8) at the 52-week average hourly rate from the
+// irregular example above (£12) — plain multiplication, shown in
+// the copy so the reader can repeat it with their own figures.
+const zeroHoursDayHours = 8;
+const zeroHoursDayPay = zeroHoursDayHours * 12;
 
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How is holiday pay calculated?",
     answer:
       "Holiday pay is based on a week's pay. If your pay is fixed, a week of holiday pays your normal weekly pay, and one day pays that divided by the days you work each week — £600 a week over 5 days is £120 a day. If your pay varies, a week's pay is your average weekly pay across the last 52 weeks in which you were paid.",
+  },
+  {
+    question: "How much is one day's holiday pay?",
+    answer:
+      "For regular hours, one day pays your weekly pay divided by the days you work in a week: £600 a week over 5 days is £120 for one day. If your pay varies, the same division is applied to your average weekly pay over the last 52 paid weeks. For zero-hours and irregular-hours workers there is no fixed day rate — a day of holiday pays the hours you would have worked that day at your average hourly rate over the last 52 paid weeks, so an 8-hour day at a £12 average rate pays £96, drawn from the holiday hours you have built up at 12.07% of hours worked.",
   },
   {
     question: "How much holiday pay do zero-hours and irregular-hours workers get?",
@@ -221,6 +232,30 @@ export default function HolidayPayCalculatorPage() {
       </section>
 
       <section className="space-y-3">
+        <h2 className={h2Class}>How much is one day&apos;s holiday pay?</h2>
+        <p className={bodyClass}>
+          One day of holiday pays one day&apos;s worth of a
+          week&apos;s pay — and the working is short enough to do on
+          any payslip. Regular hours: divide the weekly pay by the
+          days worked in the week. £600 over 5 days is{" "}
+          {gbp.format(regular.dailyRate ?? 0)} for one day, which is
+          why a week&apos;s holiday pays exactly a normal week&apos;s
+          wages. Variable pay: the same division, applied to the
+          52-week average week instead — an average week of £512.40
+          over 5 days is £102.48 a day. Zero-hours and irregular
+          hours: there is no set day rate, because there is no set
+          day. A day of holiday pays the hours that day&apos;s shift
+          would have run, at your average hourly rate over the last
+          52 paid weeks — an 8-hour shift at a £12 average is{" "}
+          {gbp.format(zeroHoursDayPay)} — and the time comes out of
+          the holiday hours you have accrued at 12.07% of hours
+          worked. If a single day&apos;s holiday pay on your payslip
+          does not match one of those three workings, the method —
+          not the arithmetic — is the first thing to question.
+        </p>
+      </section>
+
+      <section className="space-y-3">
         <h2 className={h2Class}>How does the 52-week reference period work?</h2>
         <p className={bodyClass}>
           When pay varies, a week&apos;s pay is the average of your last
@@ -261,7 +296,7 @@ export default function HolidayPayCalculatorPage() {
 
       <section className="space-y-3">
         <h2 className={h2Class}>
-          How do irregular-hours and part-year workers build up holiday pay?
+          Zero-hours and irregular-hours workers: how holiday pay builds up
         </h2>
         <p className={bodyClass}>
           For leave years beginning on or after 1 April 2024, irregular-
@@ -423,6 +458,44 @@ export default function HolidayPayCalculatorPage() {
           must be able to show A, B and C, and most errors are in B
           (the proportion of the year) or in leave taken that was
           recorded twice.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
+          Why is my holiday pay less than my normal pay?
+        </h2>
+        <p className={bodyClass}>
+          Sometimes it should be, and sometimes it is a warning sign.
+          The legitimate reasons come first. A 52-week average lags
+          behind you: if your pay rose two months ago, most of the
+          weeks in the average are still at the old rate, so holiday
+          pay is lower than this month&apos;s normal pay — correct in
+          law, and it catches up over the year. The average also
+          includes your quieter weeks: a variable-pay worker whose
+          strong months are balanced by weak ones is paid the
+          average, not the strong month. The first-4-weeks rule cuts
+          the other way for some: only the first 4 weeks of statutory
+          leave each year must be paid at full normal remuneration
+          including regular overtime and commission — the remaining
+          1.6 weeks can lawfully be paid at basic pay only, so a
+          fifth week of holiday can genuinely pay less than the
+          first four. And check you are comparing like with like:
+          holiday pay is taxed and charged National Insurance like
+          any other pay, so a gross holiday figure set against a net
+          normal week always looks short.
+        </p>
+        <p className={bodyClass}>
+          The warning signs are different. Unpaid weeks counted into
+          a 52-week average drag it down unlawfully — weeks with no
+          pay must be skipped, reaching further back. A fixed
+          week&apos;s pay used for a worker whose pay varies, or a
+          12.07% accrual applied to a regular-hours worker, are
+          method errors, not judgement calls. And if your hourly rate
+          has risen but the average your employer uses has not moved
+          at all in a year, the reference period is probably stale.
+          The next section sets out how to challenge a figure that
+          falls on the wrong side of that line.
         </p>
       </section>
 

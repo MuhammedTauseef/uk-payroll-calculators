@@ -148,7 +148,7 @@ export default function NhsPayCalculator() {
             className={inputClass}
           />
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            Set automatically from the 2025/26 contribution tiers for
+            Set automatically from the 2026/27 contribution tiers for
             your pay — change it if yours differs.
           </p>
         </div>

@@ -37,6 +37,23 @@ const RATE_ROWS = [250, 400, 500, 600, 800].map((rate) => ({
   result: calculateIr35({ dayRate: rate, daysPerWeek: 5, weeksPerYear: 46 }),
 }));
 
+// Named day rates readers ask for by name — same assumptions as the
+// running example (5 days a week, 46 weeks a year). £400 is shown on
+// the outside (limited company) route, £500 and £750 inside IR35.
+const NAMED_ROWS = [
+  { rate: 400, route: "outside" as const },
+  { rate: 500, route: "inside" as const },
+  { rate: 750, route: "inside" as const },
+].map(({ rate, route }) => {
+  const result = calculateIr35({
+    dayRate: rate,
+    daysPerWeek: 5,
+    weeksPerYear: 46,
+  });
+  const annual = route === "inside" ? result.insideTakeHome : result.outsideTakeHome;
+  return { rate, route, result, annual, monthly: Math.round((annual / 12) * 100) / 100 };
+});
+
 const FAQS: { question: string; answer: string }[] = [
   {
     question: "How do I know if my contract is inside IR35?",
@@ -112,6 +129,36 @@ export default function Ir35CalculatorPage() {
           compare inside-IR35 take-home pay against the simplified
           limited-company route on your day rate. Free, with nothing
           to sign up for.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          IR35 in plain English
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          IR35 is a tax rule about disguised employment. If you work
+          for a client through your own limited company, HMRC asks one
+          question: if the company were not there, would you really be
+          the client&apos;s employee? If the honest answer is yes —
+          the client controls your work, you cannot send a substitute,
+          you are treated like staff — the contract is “inside IR35”,
+          and the fees are taxed like a salary: Income Tax and
+          National Insurance come off before you see the money, just
+          as they would for an employee. If the answer is genuinely
+          no — you run a real business, with other clients, your own
+          equipment and your own risk — the contract is “outside
+          IR35”, and your company is paid gross and taxed as a
+          company instead. Nothing about the work itself changes; what
+          changes is who deducts the tax, and how much of the day rate
+          you keep. Many contractors inside IR35 skip the limited
+          company altogether and are paid through an{" "}
+          <Link href="/umbrella-company-calculator" className={linkClass}>
+            umbrella company
+          </Link>{" "}
+          instead — the umbrella employs them and runs PAYE, which is
+          why the umbrella route is the usual comparison for an inside
+          contract.
         </p>
       </section>
 
@@ -266,6 +313,81 @@ export default function Ir35CalculatorPage() {
           count pension contributions, keeping money in the company,
           or the cost of running a company, all of which can change
           the answer in real life.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Take-home at three named day rates
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The three rates readers ask for by name, on exactly the
+          same assumptions as the worked example above — 5 days a
+          week, 46 weeks a year — with the monthly figure alongside
+          the annual one, because most contractors budget monthly:
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Day rate and route
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Contract value
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Take-home a year
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Take-home a month
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {NAMED_ROWS.map((row) => (
+                <tr key={row.rate}>
+                  <td className="px-4 py-2 font-semibold text-slate-900 dark:text-slate-50">
+                    {fmtMoney(row.rate)} a day —{" "}
+                    {row.route === "inside" ? "inside IR35" : "outside IR35"}
+                  </td>
+                  <td className="px-4 py-2">{fmtMoney(row.result.grossAnnual)}</td>
+                  <td className="px-4 py-2">{fmtMoney(row.annual)}</td>
+                  <td className="px-4 py-2">{fmtMoney(row.monthly)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Inside IR35, the monthly figure is the deemed salary after
+          tax and employee NI — if you are paid that route through an{" "}
+          <Link href="/umbrella-company-calculator" className={linkClass}>
+            umbrella company
+          </Link>
+          , its margin and the employer costs come out of the rate
+          before that salary is set, so run the same rate through the
+          umbrella calculator before comparing offers. Outside IR35,
+          the figures are the simplified limited-company route (a
+          £12,570 salary, the rest as dividends); a director running
+          that company has to keep its books, file its accounts and
+          take the dividends in the right order, and{" "}
+          <a
+            href="https://go.zoho.com/aG2O"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            Zoho Books
+          </a>{" "}
+          is the accounting software this site&apos;s other
+          contractor and payroll guides point to for keeping those
+          company finances recorded.
+        </p>
+        <p className="max-w-2xl text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+          We may earn a commission from some providers if you sign up
+          after visiting them — it never changes the price you pay,
+          and providers cannot pay to be ranked or included.
         </p>
       </section>
 

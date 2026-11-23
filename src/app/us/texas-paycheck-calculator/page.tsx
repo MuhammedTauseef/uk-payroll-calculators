@@ -57,6 +57,17 @@ const BASE_INPUT: UsPaycheckInput = {
 // the tool above runs, so the page can never disagree with itself.
 // The running example: $100,000 a year, single, paid every 2 weeks.
 const ex100 = calculateUsPaycheck(BASE_INPUT);
+// Commission worked example: a $60,000 base salary with $20,000 of
+// commission on top, against the same base with no commission —
+// the difference is what the commission actually costs in tax.
+const exBase60 = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 60000,
+});
+const exWithCommission = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 80000,
+});
 const frequencyRows = PAY_FREQUENCIES.map((f) => ({
   frequency: f,
   result: calculateUsPaycheck({ ...BASE_INPUT, frequency: f.id }),
@@ -108,6 +119,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "If Texas has no income tax, how does the state pay for things?",
     answer:
       "Mainly through consumption and property taxes instead. The state sales tax is 6.25%, and cities, counties and transit authorities can add up to 2% more, for a combined rate of up to 8.25% in much of the state. Property taxes are the other big leg: Texas has no state property tax, but local taxing units — counties, cities, school districts and special districts — set rates that produce some of the highest property tax bills in the country, commonly around 1.5% or more of a home's value each year. The paycheck is untouched; the trade-off arrives in the tax bill on the house and at the register.",
+  },
+  {
+    question: "How is commission pay taxed in Texas?",
+    answer: `Commission is ordinary wages for tax — there is no special commission rate, and Texas takes nothing at any level. On a $60,000 base salary with $20,000 of commission, single in ${TAX_YEAR}, the year's federal tax rises from ${fmt(exBase60.federalAnnual)} to ${fmt(exWithCommission.federalAnnual)} and Social Security and Medicare take ${fmt(exWithCommission.socialSecurityAnnual + exWithCommission.medicareAnnual - exBase60.socialSecurityAnnual - exBase60.medicareAnnual)} of the commission — so ${fmt(exWithCommission.netAnnual - exBase60.netAnnual)} of the $20,000 is kept over the year. What surprises people is the check itself: commission paid separately from regular wages is usually withheld at the IRS flat supplemental rate of 22% for federal tax, whatever your bracket — the difference is settled on your tax return. Enter your base plus expected commission as one salary in the calculator above to see the annual picture.`,
   },
 ];
 
@@ -338,6 +353,56 @@ export default function TexasPaycheckCalculatorPage() {
           the $200,000 row the FICA column grows by Medicare alone,
           which is why the effective rate climbs more slowly at the
           top.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Commission pay: the Texas treatment, worked through
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          A large share of Texas pay is commission — car sales,
+          real estate, oilfield services, tech sales — and it is
+          taxed as what it is: ordinary wages. There is no special
+          commission rate at any level of government, and Texas
+          adds nothing: no state income tax, and no city income tax
+          either — not in Houston, Dallas, Austin or anywhere else
+          in the state. What changes is only the federal handling,
+          in two different senses that are easy to confuse:
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>What the commission costs over the year.</strong>{" "}
+          Take a $60,000 base salary, single, and add $20,000 of
+          commission. The year&apos;s federal income tax rises from{" "}
+          {fmt(exBase60.federalAnnual)} to{" "}
+          {fmt(exWithCommission.federalAnnual)}, and Social
+          Security and Medicare take{" "}
+          {fmt(
+            exWithCommission.socialSecurityAnnual +
+              exWithCommission.medicareAnnual -
+              exBase60.socialSecurityAnnual -
+              exBase60.medicareAnnual,
+          )}{" "}
+          of the commission — so of the $20,000,{" "}
+          {fmt(exWithCommission.netAnnual - exBase60.netAnnual)} is
+          kept. The calculator above works on exactly this annual
+          view: enter base salary plus expected commission as one
+          figure.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>What comes out of the commission check itself.</strong>{" "}
+          Commission is &quot;supplemental wages&quot; in IRS
+          terms. When it is paid in a separate check, or separately
+          identified on a combined one, the employer may withhold
+          federal income tax at the flat supplemental rate of 22%
+          (IRS Publication 15) — on top of the same 6.2% Social
+          Security and 1.45% Medicare as any wages. That 22% is a
+          withholding rate, not a tax rate: if your actual bracket
+          is lower, the difference comes back on your return; if
+          the commission pushes you into a higher bracket, you can
+          owe more. Paid together with regular wages and not
+          identified separately, it is simply withheld as regular
+          wages instead.
         </p>
       </section>
 

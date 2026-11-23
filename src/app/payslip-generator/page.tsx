@@ -59,6 +59,11 @@ const FAQS: { question: string; answer: string }[] = [
       "It is completely free, with no sign-up. The calculation runs entirely in your browser: the names, pay and tax code you type are never sent to a server, stored or tracked. Close the tab and everything is gone. If you want to keep the payslip, use the Print / Save as PDF button.",
   },
   {
+    question: "Can I add my company logo to the payslip?",
+    answer:
+      "This generator has no logo upload, and a payslip does not need one: a company logo is not among the things a UK payslip must show by law. What the law does require — gross pay, each deduction and its purpose, any fixed deductions, net pay and, where pay varies with time worked, the hours — is listed in the 'What a UK payslip must show' section above, and this generator covers the standard tax and National Insurance lines. Branding is a presentational extra, not a legal requirement.",
+  },
+  {
     question: "Can I use a generated payslip as proof of income?",
     answer:
       "No. This generator produces an estimate from the figures you enter, for checking your pay, testing a tax code or preparing your own records. A lender, landlord or agency will ask for the payslip issued by your employer's payroll, because that is the document backed by the employer's HMRC reporting. Never present a self-made payslip as if an employer had issued it.",
@@ -115,6 +120,11 @@ export default function PayslipGeneratorPage() {
           National Insurance and net pay on a clean payslip you can print
           or save as a PDF.
         </p>
+        <p className="max-w-2xl text-base font-medium leading-relaxed text-slate-900 dark:text-slate-50">
+          Completely free, with no sign-up and no account: nothing to
+          register for, nothing to pay, and nothing you type leaves your
+          browser.
+        </p>
       </section>
 
       <PayslipGenerator />
@@ -152,6 +162,23 @@ export default function PayslipGeneratorPage() {
           decodes it). Fourth, check the payslip, then use the Print / Save as
           PDF button to keep a copy. Nothing leaves your browser at any
           point.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          How to save your payslip as a PDF
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          There is no separate PDF download button, because the PDF is
+          made by your browser. Under the payslip, click the{" "}
+          <strong>Print / save this payslip</strong> button: it opens
+          your browser&apos;s print view with the payslip on its own,
+          without the form or the rest of the page. In the print view,
+          choose <strong>Save as PDF</strong> as the destination (Chrome
+          and Edge) or the PDF option in the print dialog (Safari and
+          Firefox), then save — the file is the payslip itself, ready to
+          keep, email or attach wherever a copy is needed.
         </p>
       </section>
 

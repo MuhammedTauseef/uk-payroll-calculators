@@ -60,6 +60,19 @@ const niStarter = calculateNhsAnnualLeave({
   contractedHours: 37.5,
 });
 const reckonerHours = [37.5, 30, 25, 22.5, 20, 15];
+// The named conversion readers ask for by number: the full-time
+// England pot at 10+ years' service, and the same service at 30
+// contracted hours — both from the calculator's own engine.
+const tenPlusFullTime = calculateNhsAnnualLeave({
+  nation: "england",
+  serviceBand: "10-plus",
+  contractedHours: 37.5,
+});
+const tenPlus30Hours = calculateNhsAnnualLeave({
+  nation: "england",
+  serviceBand: "10-plus",
+  contractedHours: 30,
+});
 const reckoner = reckonerHours.map((h) => ({
   hours: h,
   under5: calculateNhsAnnualLeave({
@@ -84,6 +97,16 @@ const FAQS: { question: string; answer: string }[] = [
     question: "How much annual leave do NHS staff get?",
     answer:
       "Under Agenda for Change, full-time staff get 27 days of annual leave plus 8 public holidays on appointment — 35 days, or 262.5 hours, in total. After 5 years of NHS service it rises to 29 plus 8 (37 days, 277.5 hours), and after 10 years to 33 plus 8 (41 days, 307.5 hours). Wales adds one day at every stage, Northern Ireland has 10 public holidays instead of 8, and Scotland counts the same days on a 36-hour week.",
+  },
+  {
+    question: "What is the NHS annual leave entitlement for 2026?",
+    answer:
+      "The same as the year before — Agenda for Change leave is set by Section 13 of the NHS Terms and Conditions of Service Handbook, not re-decided each calendar year, so the 27, 29 and 33 days plus public holidays apply throughout 2026 and the 2026/27 leave year (1 April 2026 to 31 March 2027). The change that did take effect in 2026 was on the Scottish working week: Scotland's full-time week fell to 36 hours from 1 April 2026, which makes a Scottish day of leave worth 7.2 hours instead of 7.5 — the days are unchanged.",
+  },
+  {
+    question: "How many days is 307.5 hours of NHS annual leave?",
+    answer:
+      "41 days, at the standard 7.5-hour day. 307.5 hours is the full-time England entitlement after 10 years of service: 247.5 hours of annual leave (33 days) plus 60 hours of public holidays (8 days). On 12-hour shifts the same pot is 307.5 ÷ 12 = about 25.6 shifts. Part-time staff hold a smaller pot in hours — at 30 hours a week with the same service it is 246 hours, which is 32.8 days of 7.5 hours.",
   },
   {
     question: "How is NHS annual leave worked out for part-time staff?",
@@ -241,7 +264,11 @@ export default function NhsAnnualLeaveCalculatorPage() {
           Employers&apos; Agenda for Change guidance, 20 November 2026.
         </p>
         <p className={bodyClass}>
-          Two facts in that table are worth quoting exactly. First,
+          For 2026 and the 2026/27 leave year, those are the current
+          figures: the entitlement is fixed by the handbook rather
+          than set year by year, so it does not change each April —
+          what changed in 2026 was Scotland&apos;s full-time week,
+          covered below. Two facts in that table are worth quoting exactly. First,
           the entitlement is stated in days but administered in
           hours: a full-time new starter&apos;s 35 days are 262.5
           hours, and it is the hours figure — not the days — that
@@ -441,6 +468,40 @@ export default function NhsAnnualLeaveCalculatorPage() {
           hours up to the change and the new hours after it — the
           same split-year treatment that applies when you cross a
           service anniversary, covered next.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className={h2Class}>
+          What is 307.5 hours of annual leave in days?
+        </h2>
+        <p className={bodyClass}>
+          It is {tenPlusFullTime.totalDays} days — and it is the
+          balance long-serving full-time staff most often ask about,
+          because 307.5 hours is the largest standard pot in England:{" "}
+          {tenPlusFullTime.leaveHours} hours of annual leave (33 days
+          after 10 years of reckonable service) plus{" "}
+          {tenPlusFullTime.publicHolidayHours} hours of public
+          holidays (8 days), {tenPlusFullTime.totalHours} hours in
+          total. The conversion is always the same one line: hours
+          divided by the length of your day. At the standard 7.5-hour
+          day, {tenPlusFullTime.totalHours} ÷ 7.5 ={" "}
+          {tenPlusFullTime.totalDays} days. On 12-hour shifts the same
+          pot is {tenPlusFullTime.totalHours} ÷ 12 = about 25.6 shifts
+          — fewer, longer days off, exactly the same leave.
+        </p>
+        <p className={bodyClass}>
+          Part-time pots convert the same way. At 30 contracted hours
+          a week with the same 10 years of service, the pot is{" "}
+          {tenPlus30Hours.totalHours} hours, and {tenPlus30Hours.totalHours}{" "}
+          ÷ 7.5 = {tenPlus30Hours.totalDays} days. If your ESR balance
+          is shown in hours and you want the days figure your manager
+          is quoting, divide by your own day length — 7.5 for standard
+          days, your shift length if you work shifts — and if the two
+          figures still do not agree, the difference is usually the
+          public holiday element: some balances show leave and public
+          holidays separately, so check whether the 60 hours (full-time)
+          is inside the number you were given or still to be added.
         </p>
       </section>
 

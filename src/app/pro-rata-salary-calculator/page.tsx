@@ -76,6 +76,14 @@ const gbp = new Intl.NumberFormat("en-GB", {
   currency: "GBP",
 });
 
+const PRO_RATA_TABLE: { salary: number; amounts: number[] }[] = [
+  { salary: 25000, amounts: [20000, 15000, 12500, 10000] },
+  { salary: 30000, amounts: [24000, 18000, 15000, 12000] },
+  { salary: 35000, amounts: [28000, 21000, 17500, 14000] },
+  { salary: 40000, amounts: [32000, 24000, 20000, 16000] },
+  { salary: 50000, amounts: [40000, 30000, 25000, 20000] },
+];
+
 const RULES_TABLE: { item: string; rule: string }[] = [
   {
     item: "FTE fraction",
@@ -148,6 +156,65 @@ export default function ProRataSalaryCalculatorPage() {
           37.5-hour full-time week is {gbp.format(40000)} × (22.5 ÷ 37.5) ={" "}
           {gbp.format(40000)} × 0.6 = {gbp.format(24000)} a year —{" "}
           {gbp.format(2000)} a month.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What does a pro-rata salary actually pay? Quick table
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Pro-rata salary = full-time salary × (your hours ÷ full-time
+          hours) — or, where the pattern is set in days, your days ÷
+          full-time days. The table below applies that formula to the
+          salaries job adverts quote most often. The figure in your column
+          is the actual salary you are paid (before tax) — the full-time
+          figure is only the starting point.
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Full-time salary
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  4 days a week (0.8)
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  3 days a week (0.6)
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  2.5 days a week (0.5)
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  2 days a week (0.4)
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {PRO_RATA_TABLE.map((row) => (
+                <tr key={row.salary}>
+                  <td className="px-4 py-2 font-medium text-slate-900 dark:text-slate-50">
+                    {gbp.format(row.salary)}
+                  </td>
+                  {row.amounts.map((amount) => (
+                    <td key={amount} className="px-4 py-2">
+                      {gbp.format(amount)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Worked example — a {gbp.format(32000)} full-time salary, worked
+          3 days a week. Step 1: the fraction is 3 ÷ 5 = 0.6 FTE. Step 2:{" "}
+          {gbp.format(32000)} × 0.6 = {gbp.format(19200)} a year. Step 3:{" "}
+          {gbp.format(19200)} ÷ 12 = {gbp.format(1600)} a month. The same
+          fraction comes out in hours: 22.5 hours a week against a
+          37.5-hour full-time week is 22.5 ÷ 37.5 = 0.6.
         </p>
       </section>
 

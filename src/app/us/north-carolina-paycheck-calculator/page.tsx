@@ -72,6 +72,16 @@ const exKids = calculateUsPaycheck({
   filingStatus: "mfj",
   ncChildCount: 2,
 });
+// Hourly worked example: $25 an hour, 40 hours a week — the
+// calculator's hourly mode annualizes it to $52,000 and runs the
+// same North Carolina maths.
+const exHourly = calculateUsPaycheck({
+  ...BASE_INPUT,
+  payType: "hourly",
+  hourlyRate: 25,
+  hoursPerWeek: 40,
+  overtimeHoursPerWeek: 0,
+});
 const frequencyRows = PAY_FREQUENCIES.map((f) => ({
   frequency: f,
   result: calculateUsPaycheck({ ...BASE_INPUT, frequency: f.id }),
@@ -116,6 +126,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Why is my actual North Carolina paycheck still slightly different?",
     answer:
       "This calculator annualizes — tax on a full year of wages, divided by pay periods. Your employer withholds period by period under the NC-30 tables and IRS Publication 15-T, using your NC-4 allowances and your exact Form W-4. A Step 2 multiple-jobs box, a mid-year start, and bonuses withheld at the flat supplemental rates (22% federal, 4.09% NC) all move a single stub. The annual totals land close.",
+  },
+  {
+    question: "How much is $25 an hour in North Carolina after tax?",
+    answer: `At $25 an hour for 40 hours a week, gross pay is ${fmt(exHourly.grossAnnual)} a year. Single and paid every 2 weeks in ${TAX_YEAR}, the tax is ${fmt(exHourly.federalAnnual)} federal, ${fmt(exHourly.socialSecurityAnnual + exHourly.medicareAnnual)} of Social Security and Medicare, and ${fmt(exHourly.stateAnnual)} of North Carolina tax at the flat 3.99% — leaving ${fmt(exHourly.netPerPeriod)} a paycheck, ${fmt(exHourly.netAnnual)} a year. Most searches for this calculator are hourly ones, so the calculator above has an hourly mode: choose "An hourly rate", and it annualizes your rate and hours and runs the same calculation, with overtime figured at 1.5 times the rate.`,
   },
 ];
 
@@ -368,6 +382,62 @@ export default function NorthCarolinaPaycheckCalculatorPage() {
           calculator, the working is the same — and every row would
           lose a little more under last year&apos;s 4.25% rate, which
           is the figure some rival pages still show for {TAX_YEAR}.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Paid by the hour? $25 an hour, worked through
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Four of the eight searches Google suggests for this
+          calculator are hourly ones — and the calculator above
+          answers them directly. Choose &quot;An hourly rate&quot;,
+          enter the rate and your hours, and it annualizes the pay
+          (rate × hours × 52 weeks) and runs the same federal, FICA
+          and North Carolina calculation. At $25 an hour for 40
+          hours a week that is {fmt(exHourly.grossAnnual)} a year:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Gross pay (every 2 weeks)</td>
+                <td className={tdClass}>{fmt(exHourly.grossPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>−{fmt(exHourly.federalPerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security at 6.2%</td>
+                <td className={tdClass}>
+                  −{fmt(exHourly.socialSecurityPerPeriod)}
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Medicare at 1.45%</td>
+                <td className={tdClass}>−{fmt(exHourly.medicarePerPeriod)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>North Carolina tax at 3.99%</td>
+                <td className={tdClass}>−{fmt(exHourly.statePerPeriod)}</td>
+              </tr>
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>Net pay</td>
+                <td className={tdClass}>
+                  {fmt(exHourly.netPerPeriod)} every 2 weeks ·{" "}
+                  {fmt(exHourly.netAnnual)} a year
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          Overtime hours are figured at 1.5 times the rate and
+          taxed as ordinary wages — North Carolina has no separate
+          overtime or hourly rate of tax, just the one flat 3.99%
+          on whatever you earn above the standard deduction.
         </p>
       </section>
 

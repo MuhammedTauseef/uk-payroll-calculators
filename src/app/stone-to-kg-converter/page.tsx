@@ -33,6 +33,14 @@ const STONE_ROWS = Array.from({ length: 60 }, (_, i) => i + 1).map((st) => ({
 const COMBO_ROWS = Array.from({ length: 14 }, (_, i) => i + 7).flatMap((st) =>
   [0, 7].map((lb) => ({ stone: st, pounds: lb, kg: stoneToKg(st, lb) })),
 );
+// Every single pound, for the three stones people most often sit
+// between: 10, 11 and 12 stone, 0 to 13 lb each.
+const FULL_POUND_ROWS = Array.from({ length: 14 }, (_, lb) => ({
+  pounds: lb,
+  kg10: stoneToKg(10, lb),
+  kg11: stoneToKg(11, lb),
+  kg12: stoneToKg(12, lb),
+}));
 const EX_12 = stoneToKg(12, 0);
 const EX_10_7 = stoneToKg(10, 7);
 
@@ -223,6 +231,54 @@ export default function StoneToKgConverterPage() {
           1 lb = 0.45359237 kg and 1 stone = 14 lb = 6.35029 kg,
           checked 17 November 2026. Results are rounded to two decimal
           places for display; the underlying calculation is not rounded.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Every pound: 10, 11 and 12 stone, pound by pound
+        </h2>
+        <p className={bodyClass}>
+          Half-stone steps are not fine enough when you are tracking
+          a real weight — a pound is 0.45 kg, and the combinations
+          in between are the ones that come up. Here are the three
+          stones people most often sit between, at every pound:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Pounds</th>
+                <th className={thClass}>10 stone</th>
+                <th className={thClass}>11 stone</th>
+                <th className={thClass}>12 stone</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {FULL_POUND_ROWS.map((r) => (
+                <tr key={r.pounds}>
+                  <td className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}>
+                    {r.pounds} lb
+                  </td>
+                  <td className={tdClass}>{fmt(r.kg10, 2)} kg</td>
+                  <td className={tdClass}>{fmt(r.kg11, 2)} kg</td>
+                  <td className={tdClass}>{fmt(r.kg12, 2)} kg</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          One place the kilogram figure is not optional: the NHS.
+          GPs, hospitals and NHS weight programmes record your
+          weight in kilograms, and medical letters quote it that
+          way — so the number a surgery gives you will be the kg
+          column, not the stones you use at home. If a letter&apos;s
+          figure needs turning back into stones and pounds, the{" "}
+          <Link href="/kg-to-stone-converter" className={linkClass}>
+            kg to stone converter
+          </Link>{" "}
+          does the split for you.
         </p>
       </section>
 

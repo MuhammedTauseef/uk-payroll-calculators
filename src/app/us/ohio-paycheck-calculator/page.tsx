@@ -66,6 +66,19 @@ const ex65Columbus = calculateUsPaycheck({
   ...BASE_INPUT,
   cityRatePercent: 2.5,
 });
+// The $70,000 figure the search results ask for by name, with and
+// without a 2.5% city tax.
+const ex70 = calculateUsPaycheck({ ...BASE_INPUT, annualSalary: 70000 });
+const ex70Columbus = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 70000,
+  cityRatePercent: 2.5,
+});
+// Shares of gross pay, for the "where does it all go" explainer.
+const shareOf = (
+  r: ReturnType<typeof calculateUsPaycheck>,
+  n: number,
+): string => ((n / r.grossAnnual) * 100).toFixed(1);
 const frequencyRows = PAY_FREQUENCIES.map((f) => ({
   frequency: f,
   result: calculateUsPaycheck({ ...BASE_INPUT, frequency: f.id }),
@@ -125,6 +138,15 @@ const FAQS: { question: string; answer: string }[] = [
     question: "I live in Ohio but work in another state. Which state taxes me?",
     answer:
       "For wages, probably only Ohio. Ohio has reciprocity agreements with Indiana, Kentucky, Michigan, Pennsylvania and West Virginia: residents of those states who work in Ohio owe no Ohio tax on their wages, and Ohio residents working there owe no tax to the work state either — you file a withholding exemption (form IT 4NR with an Ohio employer) and the tax is taken only by your home state. Reciprocity covers wages and salary only, not business or rental income, and it does not exist with other states — work in New York or Illinois and both states are in play, with a credit for the tax paid to the work state on your Ohio return.",
+  },
+  {
+    question: "How much is $70,000 a year after tax in Ohio?",
+    answer: `On $70,000, single and paid every 2 weeks in ${TAX_YEAR}, take-home is ${fmt(ex70.netPerPeriod)} a paycheck — ${fmt(ex70.netAnnual)} a year — with no city tax: ${fmt(ex70.federalAnnual)} federal, ${fmt(ex70.socialSecurityAnnual + ex70.medicareAnnual)} of Social Security and Medicare, and ${fmt(ex70.stateAnnual)} of Ohio tax under the flat tax. Add a typical 2.5% city tax (Columbus, Cleveland, Toledo) and the same salary nets ${fmt(ex70Columbus.netPerPeriod)} a paycheck, ${fmt(ex70Columbus.netAnnual)} a year. Married filing jointly, or a school-district tax on top, moves both figures — run your own combination in the calculator above.`,
+  },
+  {
+    question: "Does claiming 0 or 1 withhold more?",
+    answer:
+      "Claiming 0 withholds more — that has always been the direction: fewer exemptions or allowances on the form, more tax taken from each check, and a bigger refund (or smaller bill) at the end of the year. The tax you actually owe does not change; only the timing does. Two updates matter in 2026. The federal Form W-4 has had no allowances since its 2020 redesign — the modern federal levers are the Step 3 dependent credits, which cut withholding dollar for dollar, and Step 4, where you add other income, extra deductions, or a flat extra amount per check. Ohio's Form IT 4 still works the old way, with a count of personal exemptions: claiming fewer than you are entitled to — 0 included — raises your Ohio withholding, and claiming more lowers it, with penalties possible if you claim exemptions you are not entitled to. If a full year of claiming 0 leaves you a large refund, you have lent the tax authorities money at no interest; if claiming your real number leaves you owing, Step 4(c) extra withholding is the precise fix.",
   },
 ];
 
@@ -494,6 +516,113 @@ export default function OhioPaycheckCalculatorPage() {
           Ohio return (form SD 100). Enter the rate in the calculator
           above and it is applied to your Ohio taxable income, the
           same base the state uses.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Why does it feel like 30%? Where a paycheck actually goes
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          &quot;Why is 30% of my paycheck going to taxes?&quot; is
+          one of the most common Ohio paycheck questions — and the
+          honest answer is that the stack is real, but the 30%
+          figure usually mixes two different things. Here is the
+          running example from this page — $65,000, single, with
+          Columbus&apos;s 2.5% city tax — as shares of gross pay:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Line</th>
+                <th className={thClass}>Per year</th>
+                <th className={thClass}>Share of gross pay</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>{fmt(ex65Columbus.federalAnnual)}</td>
+                <td className={tdClass}>
+                  {shareOf(ex65Columbus, ex65Columbus.federalAnnual)}%
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security (6.2%) and Medicare (1.45%)</td>
+                <td className={tdClass}>
+                  {fmt(
+                    ex65Columbus.socialSecurityAnnual +
+                      ex65Columbus.medicareAnnual,
+                  )}
+                </td>
+                <td className={tdClass}>
+                  {shareOf(
+                    ex65Columbus,
+                    ex65Columbus.socialSecurityAnnual +
+                      ex65Columbus.medicareAnnual,
+                  )}
+                  %
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Ohio state tax</td>
+                <td className={tdClass}>{fmt(ex65Columbus.stateAnnual)}</td>
+                <td className={tdClass}>
+                  {shareOf(ex65Columbus, ex65Columbus.stateAnnual)}%
+                </td>
+              </tr>
+              <tr>
+                <td className={tdClass}>City tax at 2.5%</td>
+                <td className={tdClass}>{fmt(ex65Columbus.cityAnnual)}</td>
+                <td className={tdClass}>
+                  {shareOf(ex65Columbus, ex65Columbus.cityAnnual)}%
+                </td>
+              </tr>
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>All tax lines together</td>
+                <td className={tdClass}>
+                  {fmt(
+                    ex65Columbus.federalAnnual +
+                      ex65Columbus.socialSecurityAnnual +
+                      ex65Columbus.medicareAnnual +
+                      ex65Columbus.stateAnnual +
+                      ex65Columbus.cityAnnual,
+                  )}
+                </td>
+                <td className={tdClass}>
+                  {ex65Columbus.effectiveTaxRatePercent.toFixed(1)}%
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          So the whole tax stack on $65,000 is about a fifth of
+          gross pay, not 30%. Three things push a real stub toward
+          the bigger number. First, the <em>marginal</em> stack —
+          what the next dollar loses — is much higher than the
+          average: at this salary it is{" "}
+          {(
+            ex65Columbus.marginalFederalRatePercent +
+            6.2 +
+            1.45 +
+            2.75 +
+            2.5
+          ).toFixed(1)}
+          % (the {ex65Columbus.marginalFederalRatePercent.toFixed(0)}%
+          federal bracket, 7.65% FICA, 2.75% Ohio and 2.5% city),
+          which is the rate a raise, overtime or a bonus actually
+          feels. Second, many Ohioans also pay a school-district
+          income tax of 0.25–2% on top. Third, the stub&apos;s
+          total-deductions line is not all tax: a 401(k)
+          contribution and health premiums come off in the same
+          column, and they are the usual reason a check that is
+          taxed at ~21% arrives ~30% lighter. The withholding
+          settings decide none of this — claiming 0 or 1 on the old
+          forms, or Steps 3 and 4 on today&apos;s W-4 and Ohio IT
+          4, only moves tax between your checks and your refund;
+          the FAQ below works through it.
         </p>
       </section>
 

@@ -65,6 +65,13 @@ const exDenver = calculateUsPaycheck({
   annualSalary: 60000,
   worksInDenver: true,
 });
+// Bonus worked example: the running $75,000 salary with a $5,000
+// bonus on top — the difference between the two runs is what the
+// bonus actually costs.
+const exBonus = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 80000,
+});
 const famliOf = (r: ReturnType<typeof calculateUsPaycheck>) =>
   r.extraLines.find((l) => l.id === "famli")?.annual ?? 0;
 const famliPerPeriodOf = (r: ReturnType<typeof calculateUsPaycheck>) =>
@@ -114,6 +121,15 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Why is my actual Colorado paycheck slightly different from this estimate?",
     answer:
       "This calculator works on annual figures — it figures the tax on a full year of income and divides by your pay periods, the same annualized approach the big commercial paycheck calculators use. Your employer withholds period by period: federal tax under IRS Publication 15-T using your exact Form W-4, and Colorado tax under the DR 1098 worksheet. A Step 2 box checked for multiple jobs, Step 4 adjustments, a mid-year start, or bonuses withheld at the flat 22% federal supplemental rate all move the real stub a little. The annual totals land close; treat any single paycheck as an estimate.",
+  },
+  {
+    question: "How is a bonus taxed in Colorado?",
+    answer: `A bonus is supplemental wages: taxed exactly like salary, but often withheld differently. Over the year, a $5,000 bonus on this page's $75,000 salary costs ${fmt(exBonus.federalAnnual - ex75.federalAnnual)} of extra federal tax, ${fmt(exBonus.stateAnnual - ex75.stateAnnual)} of Colorado tax at the flat 4.4%, ${fmt(exBonus.socialSecurityAnnual + exBonus.medicareAnnual - ex75.socialSecurityAnnual - ex75.medicareAnnual)} of Social Security and Medicare and ${fmt(famliOf(exBonus) - famliOf(ex75))} of FAMLI premium — ${fmt(exBonus.netAnnual - ex75.netAnnual)} of the $5,000 is kept. On the check itself, a bonus paid separately is usually withheld at the IRS flat 22% supplemental rate for federal tax, which is a withholding choice, not the tax: your return settles the difference. Colorado has no separate bonus rate — the same 4.4% applies.`,
+  },
+  {
+    question: "I work for a Colorado public employer in PERA — does this calculator apply?",
+    answer:
+      "Only partly. Members of Colorado PERA — state, school-district, local-government and judicial employees — pay a PERA contribution instead of Social Security on most PERA-covered jobs: 11% of PERA-includable salary in the State, School and DPS divisions (13% for safety officers, 9% in the Local Government division, per Colorado PERA's published member rates), taken pre-tax. Medicare at 1.45% still applies, and the federal and Colorado income-tax maths is unchanged, but this calculator models the 6.2% Social Security line, not PERA — so if your stub shows a PERA line and no Social Security line, swap those two lines mentally: your PERA contribution replaces the Social Security figure here, and it is larger.",
   },
 ];
 
@@ -360,6 +376,70 @@ export default function ColoradoPaycheckCalculatorPage() {
           capped there, like Social Security — while the Colorado tax
           column keeps climbing in a straight 4.4% line, because a flat
           tax on federal taxable income has no brackets to climb.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Bonuses: taxed as wages, withheld at 22%
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          A bonus is supplemental wages — the same taxes as salary,
+          at the same rates, with one wrinkle in how it is withheld.
+          Over the year, a $5,000 bonus on this page&apos;s $75,000
+          salary costs {fmt(exBonus.federalAnnual - ex75.federalAnnual)}{" "}
+          of extra federal tax,{" "}
+          {fmt(exBonus.stateAnnual - ex75.stateAnnual)} of Colorado
+          tax at the flat 4.4% (Colorado has no separate bonus
+          rate),{" "}
+          {fmt(
+            exBonus.socialSecurityAnnual +
+              exBonus.medicareAnnual -
+              ex75.socialSecurityAnnual -
+              ex75.medicareAnnual,
+          )}{" "}
+          of Social Security and Medicare and{" "}
+          {fmt(famliOf(exBonus) - famliOf(ex75))} of FAMLI premium —
+          so {fmt(exBonus.netAnnual - ex75.netAnnual)} of the $5,000
+          is kept. To run a bonus through the calculator, add it to
+          the salary for the year, exactly as this example does.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The wrinkle: when a bonus is paid in a separate check (or
+          separately identified), the employer may withhold federal
+          income tax at the IRS flat supplemental rate of 22% —
+          which is why a bonus check often looks taxed harder than
+          a salary check. The 22% is a withholding rate, not the
+          tax itself: your annual return settles the difference, up
+          or down.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Public employee? The PERA difference
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          One large group of Colorado paychecks does not work the
+          way this calculator models. Members of Colorado PERA —
+          state employees, school-district staff, many
+          local-government and judicial employees — generally do
+          not pay Social Security on their PERA-covered job.
+          Instead, a PERA contribution comes out of every check:
+          11% of PERA-includable salary in the State, School and
+          DPS divisions, 13% for safety officers and 9% in the
+          Local Government division, per Colorado PERA&apos;s
+          published member contribution rates, deducted before
+          income tax. Medicare at 1.45% still applies, and the
+          federal and Colorado income-tax maths is the same.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          This calculator does not model PERA — it shows the 6.2%
+          Social Security line of a private-sector paycheck. If
+          your stub shows a PERA line and no Social Security line,
+          read the estimate with that one swap in mind: your PERA
+          contribution replaces the Social Security figure here,
+          and at 9–13% it is the bigger deduction of the two.
         </p>
       </section>
 

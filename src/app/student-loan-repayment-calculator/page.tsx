@@ -40,6 +40,19 @@ const exHeadline = calculateStudentLoan({
   undergraduatePlan: "plan2",
   hasPostgraduateLoan: false,
 });
+const SALARY_ROWS = [30000, 40000, 50000].map((salary) => ({
+  salary,
+  plan2: calculateStudentLoan({
+    annualIncome: salary,
+    undergraduatePlan: "plan2",
+    hasPostgraduateLoan: false,
+  }),
+  plan5: calculateStudentLoan({
+    annualIncome: salary,
+    undergraduatePlan: "plan5",
+    hasPostgraduateLoan: false,
+  }),
+}));
 const PLAN_ROWS = STUDENT_LOAN_PLANS.map((plan) => ({
   plan,
   result: calculateStudentLoan({
@@ -186,6 +199,102 @@ export default function StudentLoanRepaymentCalculatorPage() {
           from two jobs are worked out job by job, never on combined
           income, so two part-time salaries under the threshold repay
           nothing between them.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          What you repay on common salaries: Plan 2 vs Plan 5
+        </h2>
+        <p className={bodyClass}>
+          Plan 5 starts repaying sooner — its £25,000 threshold is
+          the lowest of the undergraduate plans — so at the same
+          salary a Plan 5 borrower pays more each month than a Plan 2
+          borrower, even though both repay at 9%. At the 2026/27
+          thresholds in the table above:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Salary</th>
+                <th className={thClass}>Plan 2 — a year</th>
+                <th className={thClass}>Plan 2 — a month</th>
+                <th className={thClass}>Plan 5 — a year</th>
+                <th className={thClass}>Plan 5 — a month</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {SALARY_ROWS.map((row) => (
+                <tr key={row.salary}>
+                  <td
+                    className={`${tdClass} font-medium text-slate-900 dark:text-slate-50`}
+                  >
+                    {gbp.format(row.salary)}
+                  </td>
+                  <td className={tdClass}>{gbp.format(row.plan2.totalAnnual)}</td>
+                  <td className={tdClass}>{gbp.format(row.plan2.totalMonthly)}</td>
+                  <td className={tdClass}>{gbp.format(row.plan5.totalAnnual)}</td>
+                  <td className={tdClass}>{gbp.format(row.plan5.totalMonthly)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          On £30,000 the difference is stark: Plan 2 repays just{" "}
+          {gbp.format(SALARY_ROWS[0].plan2.totalAnnual)} a year
+          because the salary sits barely above its threshold, while
+          Plan 5 repays {gbp.format(SALARY_ROWS[0].plan5.totalAnnual)}.
+          The gap stays the same in pounds at every salary — it is
+          9% of the £4,385 difference between the two thresholds.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          When each plan is written off
+        </h2>
+        <p className={bodyClass}>
+          Whatever you still owe is cancelled at the end of your
+          plan&apos;s write-off period, which runs from the April you
+          were first due to repay (normally the April after you left
+          your course). The periods, from GOV.UK&apos;s “When your
+          student loan gets written off” guidance: Plan 1 — 25 years
+          (loans first paid before 1 September 2006 are written off
+          at age 65 instead). Plan 2 — 30 years. Plan 4 — 30 years
+          (loans first paid before 1 August 2007: at age 65, or 30
+          years, whichever comes first). Plan 5 — 40 years, the
+          longest of any plan, which combined with its lower
+          threshold is why Plan 5 borrowers repay more in total over
+          a career. Postgraduate Loan — 30 years. Because most
+          borrowers never clear the balance before write-off, the
+          balance and its interest decide very little for them: what
+          they actually pay is the income-based repayment, year by
+          year, until the write-off date.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Repaying from abroad
+        </h2>
+        <p className={bodyClass}>
+          Moving abroad does not pause the loan. If you will be
+          outside the UK for more than three months you must tell
+          the Student Loans Company, which moves you off PAYE and
+          onto an overseas income assessment: you provide evidence
+          of your income, and the SLC sets a fixed monthly repayment
+          for the year. The repayment is still your plan&apos;s rate
+          (9%, or 6% for a Postgraduate Loan) on income over a
+          threshold — but the threshold is specific to the country
+          you live in, adjusted for its cost of living, so the same
+          salary can produce a repayment in one country and none in
+          another. If you do not provide the information the SLC
+          asks for, it charges a fixed repayment at the highest band
+          instead, so the assessment form is always worth filing.
+          GOV.UK publishes the overseas thresholds for every country
+          and plan.
         </p>
       </section>
 

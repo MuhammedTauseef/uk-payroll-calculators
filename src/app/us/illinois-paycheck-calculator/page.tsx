@@ -55,6 +55,12 @@ const BASE_INPUT: UsPaycheckInput = {
 // the tool above runs, so the page can never disagree with itself.
 // The running example: $80,000 a year, single, paid every 2 weeks.
 const ex80 = calculateUsPaycheck(BASE_INPUT);
+// Bonus worked example: the same $80,000 salary with a $5,000
+// bonus on top — the difference is what the bonus costs.
+const exBonus = calculateUsPaycheck({
+  ...BASE_INPUT,
+  annualSalary: 85000,
+});
 const exMfj = calculateUsPaycheck({
   ...BASE_INPUT,
   annualSalary: 110000,
@@ -108,6 +114,10 @@ const FAQS: { question: string; answer: string }[] = [
     question: "Why is my actual Illinois paycheck slightly different from this estimate?",
     answer:
       "This calculator annualizes — it figures the tax on a full year of income and divides by your pay periods, the method the mainstream paycheck calculators use. Your employer withholds per period under IRS Publication 15-T and IDOR's IL-700-T tables and formula, using your actual W-4 and IL-W-4. A Step 2 multiple-jobs box, a mid-year start, bonuses withheld at the flat 22% supplemental rate, or uneven hours move a single stub a little. The annual totals land close.",
+  },
+  {
+    question: "How is a bonus taxed in Illinois?",
+    answer: `A bonus is supplemental wages — taxed as ordinary pay at every level, and Illinois charges its flat 4.95% on it just as on salary; Chicago and Cook County add no city income tax on top. Over the year, a $5,000 bonus on this page's $80,000 salary costs ${fmt(exBonus.federalAnnual - ex80.federalAnnual)} of extra federal tax, ${fmt(exBonus.stateAnnual - ex80.stateAnnual)} of Illinois tax and ${fmt(exBonus.socialSecurityAnnual + exBonus.medicareAnnual - ex80.socialSecurityAnnual - ex80.medicareAnnual)} of Social Security and Medicare — ${fmt(exBonus.netAnnual - ex80.netAnnual)} of the $5,000 is kept. On the check itself, a bonus paid separately is usually withheld at the IRS flat 22% supplemental rate for federal tax; that is a withholding rate, not the tax rate, and your return settles the difference. To model a bonus here, add it to the salary for the year.`,
   },
 ];
 
@@ -341,6 +351,42 @@ export default function IllinoisPaycheckCalculatorPage() {
           are no brackets. Whether you searched for an Illinois
           paycheck calculator or a paycheck calculator for Illinois,
           the working is the same.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Bonuses in Illinois: same flat tax, different withholding
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          A bonus is supplemental wages: taxed exactly like salary
+          at every level. Illinois charges its flat 4.95% on a
+          bonus just as on regular pay — there is no separate
+          Illinois bonus rate, and no city income tax in Chicago or
+          anywhere else in the state on top. Over the year, a
+          $5,000 bonus on this page&apos;s $80,000 salary costs{" "}
+          {fmt(exBonus.federalAnnual - ex80.federalAnnual)} of extra
+          federal tax, {fmt(exBonus.stateAnnual - ex80.stateAnnual)}{" "}
+          of Illinois tax and{" "}
+          {fmt(
+            exBonus.socialSecurityAnnual +
+              exBonus.medicareAnnual -
+              ex80.socialSecurityAnnual -
+              ex80.medicareAnnual,
+          )}{" "}
+          of Social Security and Medicare —{" "}
+          {fmt(exBonus.netAnnual - ex80.netAnnual)} of the $5,000 is
+          kept. To model a bonus in the calculator, add it to the
+          salary for the year, as this example does.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          What makes a bonus check <em>look</em> over-taxed is
+          withholding: paid separately from regular wages, a bonus
+          is usually withheld at the IRS flat supplemental rate of
+          22% for federal tax, whatever your bracket. That rate is
+          a deposit, not the tax — the annual return settles the
+          difference, and a bonus taxed at a lower real bracket
+          comes partly back as a refund.
         </p>
       </section>
 

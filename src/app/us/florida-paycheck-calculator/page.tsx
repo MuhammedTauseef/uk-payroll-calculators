@@ -55,6 +55,14 @@ const BASE_INPUT: UsPaycheckInput = {
 // the tool above runs, so the page can never disagree with itself.
 // The running example: $80,000 a year, single, paid every 2 weeks.
 const ex80 = calculateUsPaycheck(BASE_INPUT);
+// 401(k) worked example: the same $80,000 salary deferring 6% of
+// pay — the deferral leaves the income-tax lines alone and cuts
+// the federal tax, but Social Security and Medicare are still
+// charged on the full salary.
+const ex401k = calculateUsPaycheck({
+  ...BASE_INPUT,
+  preTax401kPercent: 6,
+});
 const exMfj = calculateUsPaycheck({
   ...BASE_INPUT,
   annualSalary: 120000,
@@ -110,6 +118,10 @@ const FAQS: { question: string; answer: string }[] = [
   {
     question: "What are the Social Security and Medicare rates in Florida in 2026?",
     answer: `The federal rates, identical nationwide: Social Security 6.2% of wages up to the ${fmt(SOCIAL_SECURITY_WAGE_BASE)} wage base, Medicare 1.45% of all wages, plus 0.9% Additional Medicare Tax on wages over $200,000 single / $250,000 married filing jointly / $125,000 married filing separately. Your employer matches 6.2% and 1.45% on top — that never comes out of your pay. Florida's one payroll tax, the reemployment tax, is also employer-only (new employers pay 2.7% on the first $7,000 of wages); by law it cannot be deducted from your wages, so an employee's FICA lines are the last tax lines on the stub.`,
+  },
+  {
+    question: "How does a 401(k) change a Florida paycheck?",
+    answer: `A traditional 401(k) deferral comes out before federal income tax but not before Social Security and Medicare — and with no Florida tax, those are the only lines it can touch. On this page's $80,000 salary, single and paid every 2 weeks, deferring 6% (${fmt(ex401k.preTax401kAnnual)} a year) cuts the federal tax from ${fmt(ex80.federalAnnual)} to ${fmt(ex401k.federalAnnual)} — a saving of ${fmt(ex80.federalAnnual - ex401k.federalAnnual)} — while Social Security and Medicare stay at ${fmt(ex401k.socialSecurityAnnual + ex401k.medicareAnnual)}, charged on the full salary. Take-home falls by ${fmt(ex80.netAnnual - ex401k.netAnnual)}: the deferral itself, minus the tax it saved. A Roth 401(k) deferral works the other way — taxed now, so nothing is saved on this year's checks. Set the 401(k) percentage in the calculator above to run your own rate.`,
   },
 ];
 
@@ -230,6 +242,72 @@ export default function FloridaPaycheckCalculatorPage() {
           searched for a Florida paycheck calculator or a paycheck
           calculator for Florida, the working is the same — and the
           state line is always zero.
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Adding a 401(k): what actually changes on the check
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The most common Florida paycheck question after the tax
+          itself is what a retirement deferral does to take-home
+          pay. A traditional 401(k) contribution is taken out
+          before federal income tax is figured, but Social Security
+          and Medicare are still charged on the full salary — and
+          since Florida has no income tax of its own, the federal
+          line is the only tax line that moves. The same $80,000
+          salary, deferring 6%:
+        </p>
+        <div className={tableWrapClass}>
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className={thClass}>Line</th>
+                <th className={thClass}>No 401(k)</th>
+                <th className={thClass}>Deferring 6%</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className={tdClass}>401(k) deferral</td>
+                <td className={tdClass}>$0</td>
+                <td className={tdClass}>{fmt(ex401k.preTax401kAnnual)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Federal income tax</td>
+                <td className={tdClass}>{fmt(ex80.federalAnnual)}</td>
+                <td className={tdClass}>{fmt(ex401k.federalAnnual)}</td>
+              </tr>
+              <tr>
+                <td className={tdClass}>Social Security and Medicare</td>
+                <td className={tdClass}>
+                  {fmt(ex80.socialSecurityAnnual + ex80.medicareAnnual)}
+                </td>
+                <td className={tdClass}>
+                  {fmt(
+                    ex401k.socialSecurityAnnual + ex401k.medicareAnnual,
+                  )}{" "}
+                  — unchanged
+                </td>
+              </tr>
+              <tr className="bg-slate-50 dark:bg-slate-800 font-semibold text-slate-900 dark:text-slate-50">
+                <td className={tdClass}>Take-home per year</td>
+                <td className={tdClass}>{fmt(ex80.netAnnual)}</td>
+                <td className={tdClass}>{fmt(ex401k.netAnnual)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          The deferral is {fmt(ex401k.preTax401kAnnual)} but
+          take-home only falls by{" "}
+          {fmt(ex80.netAnnual - ex401k.netAnnual)} — the difference
+          is the {fmt(ex80.federalAnnual - ex401k.federalAnnual)} of
+          federal tax the deferral removed. In a state with an
+          income tax there would usually be a second saving on the
+          state line; in Florida there is no state line to save on,
+          which is the whole Florida story in one table.
         </p>
       </section>
 

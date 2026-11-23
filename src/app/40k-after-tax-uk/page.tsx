@@ -3,6 +3,7 @@ import { pageMetadata } from "@/utils/metadata";
 import Link from "next/link";
 import TakeHomeCalculator from "@/components/TakeHomeCalculator";
 import { calculateTakeHome } from "@/lib/takehome";
+import { calculatePayslipBreakdown } from "@/lib/payslip-calculator";
 import {
   EMPLOYEE_NI,
   INCOME_TAX,
@@ -32,6 +33,25 @@ const comparison = [30000, 40000, 50000, 60000].map((s) => ({
   salary: s,
   result: calculateTakeHome({ annualSalary: s }),
 }));
+// Worked-example variants — computed by the site's payslip engine
+// (the same one the payslip calculator runs), so the figures agree
+// with the rest of the site. Pension case: a 5% employee contribution
+// under a net-pay arrangement. Loan case: a Plan 2 student loan,
+// worked out the way payroll does, on the monthly threshold.
+const at40kWithPension = calculatePayslipBreakdown({
+  annualSalary: 40000,
+  taxCode: "1257L",
+  pensionPercent: 5,
+  studentLoanPlan: null,
+  postgraduateLoanToo: false,
+});
+const at40kWithPlan2 = calculatePayslipBreakdown({
+  annualSalary: 40000,
+  taxCode: "1257L",
+  pensionPercent: 0,
+  studentLoanPlan: "plan2",
+  postgraduateLoanToo: false,
+});
 
 const FAQS: { question: string; answer: string }[] = [
   {
@@ -256,6 +276,41 @@ export default function FortyKAfterTaxPage() {
             employer National Insurance calculator
           </Link>
           .
+        </p>
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">
+          Worked example: £40,000 with a pension, and with a student loan
+        </h2>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>With a 5% pension.</strong> Say Amara earns{" "}
+          {gbp.format(40000)} and pays 5% of her salary into a workplace
+          pension under a net-pay arrangement. Her contribution is{" "}
+          {gbp.format(at40kWithPension.pensionAnnual)} a year, and
+          because it comes off before tax, her Income Tax falls from{" "}
+          {gbp.format(at40k.incomeTax)} to{" "}
+          {gbp.format(at40kWithPension.incomeTaxAnnual)} — a saving of{" "}
+          {gbp.format(at40k.incomeTax - at40kWithPension.incomeTaxAnnual)}.
+          National Insurance does not change: a net-pay pension does not
+          reduce it, so it stays at{" "}
+          {gbp.format(at40kWithPension.employeeNiAnnual)}. Her take-home
+          is {gbp.format(at40kWithPension.netAnnual)} a year —{" "}
+          {gbp.format(at40kWithPension.netMonthly)} a month — with{" "}
+          {gbp.format(at40kWithPension.pensionAnnual)} a year also going
+          into her pension.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          <strong>With a Plan 2 student loan.</strong> Say Ben earns the
+          same {gbp.format(40000)} and repays a Plan 2 loan. Payroll
+          works on the plan&apos;s monthly threshold: his monthly pay of{" "}
+          {gbp.format(at40kWithPlan2.grossMonthly)} less the threshold
+          leaves a slice charged at 9%, which is{" "}
+          {gbp.format(at40kWithPlan2.studentLoanMonthly)} a month —{" "}
+          {gbp.format(at40kWithPlan2.studentLoanAnnual)} a year. His tax
+          and National Insurance are the standard figures above, so his
+          take-home is {gbp.format(at40kWithPlan2.netAnnual)} a year —{" "}
+          {gbp.format(at40kWithPlan2.netMonthly)} a month.
         </p>
       </section>
 
