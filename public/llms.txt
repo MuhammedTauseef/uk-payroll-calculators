@@ -17,6 +17,7 @@
 - Umbrella company calculator: https://payrollcalc.co.uk/umbrella-company-calculator
 - Salary sacrifice calculator: https://payrollcalc.co.uk/salary-sacrifice-calculator
 - Tax-Free Childcare calculator: https://payrollcalc.co.uk/childcare-calculator — Tax-Free Childcare top-up per child (up to £2,000 a year, £4,000 if disabled), tracked quarter by quarter, with the £100,000 eligibility check.
+- Adjusted net income calculator: https://payrollcalc.co.uk/adjusted-net-income-calculator — Adjusted net income for 2025/26 and 2026/27 with the Child Benefit charge percentage, the Personal Allowance taper, the £100,000 childcare line and the pension contribution needed to get back under each threshold.
 - Texas paycheck calculator: https://payrollcalc.co.uk/us/texas-paycheck-calculator — US net pay in Texas under the 2026 IRS rules: federal income tax and FICA, with $0 state income tax.
 - Ohio paycheck calculator: https://payrollcalc.co.uk/us/ohio-paycheck-calculator — US net pay in Ohio under the 2026 rules: federal tax and FICA plus the Ohio flat tax, city income tax and school district tax.
 - Pension drawdown calculator: https://payrollcalc.co.uk/pension-drawdown-calculator — How long a pension pot lasts in drawdown, with 2026/27 tax and the State Pension alongside.

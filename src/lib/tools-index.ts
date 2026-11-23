@@ -81,6 +81,7 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/vat-calculator": "Tax & HMRC",
   "/annuity-calculator": "Money & Finance",
   "/childcare-calculator": "Family & Baby",
+  "/adjusted-net-income-calculator": "Tax & HMRC",
   "/pension-drawdown-calculator": "Money & Finance",
   "/cms-calculator": "Family & Baby",
   "/stone-to-kg-converter": "Converters",
@@ -298,6 +299,12 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/paternity-pay-calculator",
     "/term-time-pay-calculator",
   ],
+  "/adjusted-net-income-calculator": [
+    "/childcare-calculator",
+    "/salary-sacrifice-calculator",
+    "/40k-after-tax-uk",
+    "/pension-drawdown-calculator",
+  ],
   "/pension-drawdown-calculator": [
     "/annuity-calculator",
     "/salary-sacrifice-calculator",
@@ -476,6 +483,7 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/ir35-calculator": "ir35 off payroll contractor status",
   "/vat-calculator": "vat value added tax add remove 20%",
   "/annuity-calculator": "annuity pension income retirement",
+  "/adjusted-net-income-calculator": "adjusted net income ani 100k tax trap child benefit charge personal allowance grossed up pension gift aid",
   "/childcare-calculator": "childcare tax free childcare hours funding",
   "/pension-drawdown-calculator": "pension drawdown flexi access income",
   "/cms-calculator": "child maintenance service cms child support",

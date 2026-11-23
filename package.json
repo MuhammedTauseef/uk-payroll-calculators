@@ -58,6 +58,7 @@
     "verify:holiday-pay": "node scripts/verify-holiday-pay.ts",
     "verify:pay-rise": "node scripts/verify-pay-rise.ts",
     "verify:childcare": "node scripts/verify-childcare.ts",
+    "verify:ani": "node scripts/verify-adjusted-net-income.ts",
     "verify:nhs-annual-leave": "node scripts/verify-nhs-annual-leave.ts",
     "verify:teacher-pay": "node scripts/verify-teacher-pay.ts"
   },
