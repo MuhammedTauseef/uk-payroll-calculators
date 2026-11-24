@@ -56,6 +56,7 @@ const noDates = { birthDate: "", careStartDate: "", employmentStart: "" };
   check("A", "weeksEntitled", r.weeksEntitled, 9);
   check("A", "weeklyAmount", r.weeklyAmount, 194.32);
   check("A", "totalPay", r.totalPay, 1748.88);
+  check("A", "payableTotal", r.payableTotal, 1748.88);
   checkBool("A", "eligible", r.eligible, true);
 }
 
@@ -133,6 +134,8 @@ const noDates = { birthDate: "", careStartDate: "", employmentStart: "" };
   checkBool("F", "eligible", r.eligible, false);
   check("F", "weeklyAmount", r.weeklyAmount, 108);
   check("F", "totalPay", r.totalPay, 216);
+  check("F", "payableTotal", r.payableTotal, 0);
+  check("F", "employerRecoveryStandard", r.employerRecoveryStandard, 0);
 }
 
 // Case G — service test dates. Baby born and admitted Monday
@@ -150,6 +153,7 @@ const noDates = { birthDate: "", careStartDate: "", employmentStart: "" };
     careStartDate: "2026-10-05",
   };
   const pass = calculateNeonatal({ ...base, employmentStart: "2026-04-04" });
+  checkStr("G", "leaveDeadline", pass.leaveDeadline, "2028-01-24");
   checkStr("G", "qualifyingWeekEnd", pass.qualifyingWeekEnd, "2026-10-03");
   checkStr("G", "latestEmploymentStart", pass.latestEmploymentStart, "2026-04-04");
   checkBool("G", "serviceTestMet(pass)", pass.serviceTestMet, true);
@@ -183,6 +187,24 @@ const noDates = { birthDate: "", careStartDate: "", employmentStart: "" };
   });
   checkBool("H", "bornInScheme", early.bornInScheme, false);
   checkBool("H", "eligible", early.eligible, false);
+}
+
+// Case I — the page's below-LEL worked example: 2026/27, AWE
+// £120 (below the £129 limit), 28 days = 4 weeks earned. The
+// entitlement would be 90% of £120 = £108 a week, £432 in total,
+// but the amount payable is £0 and the case is not eligible.
+{
+  const r = calculateNeonatal({
+    taxYear: "2026-27",
+    averageWeeklyEarnings: 120,
+    daysInCare: 28,
+    ...noDates,
+  });
+  check("I", "weeksEntitled", r.weeksEntitled, 4);
+  check("I", "weeklyAmount", r.weeklyAmount, 108);
+  check("I", "totalPay", r.totalPay, 432);
+  check("I", "payableTotal", r.payableTotal, 0);
+  checkBool("I", "eligible", r.eligible, false);
 }
 
 if (failures > 0) {

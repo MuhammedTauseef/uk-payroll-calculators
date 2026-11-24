@@ -53,6 +53,14 @@ const exampleC = calculateNeonatal({
   employmentStart: "",
 });
 
+const exampleD = calculateNeonatal({
+  taxYear: "2026-27",
+  averageWeeklyEarnings: 120,
+  daysInCare: 28,
+  birthDate: "",
+  careStartDate: "",
+  employmentStart: "",
+});
 const exampleMax = calculateNeonatal({
   taxYear: "2026-27",
   averageWeeklyEarnings: 1000,
@@ -237,6 +245,20 @@ export default function NeonatalCarePayCalculatorPage() {
                   {gbp.format(exampleC.totalPay)}
                 </td>
               </tr>
+              <tr>
+                <td className="px-4 py-2">
+                  Earnings £120 a week (2026/27) — below the £129
+                  earnings limit
+                </td>
+                <td className="px-4 py-2">28</td>
+                <td className="px-4 py-2">{exampleD.weeksEntitled}</td>
+                <td className="px-4 py-2">
+                  {gbp.format(exampleD.payableTotal)}
+                </td>
+                <td className="px-4 py-2">
+                  {gbp.format(exampleD.payableTotal)}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -256,6 +278,21 @@ export default function NeonatalCarePayCalculatorPage() {
           more than that and the flat rate caps your pay; earn less
           and you receive 90% of what you earn.
         </p>
+        <p className={bodyClass}>
+          The last row of the table is the one to watch. A parent
+          earning £120 a week whose baby spends 28 days in care has
+          earned 4 weeks of leave, and the pay on those weeks would
+          notionally be 90% of earnings — £108 a week,{" "}
+          {gbp.format(exampleD.totalPay)} in total. But £120 is below
+          the 2026/27 Lower Earnings Limit of £129, so the earnings
+          test fails and the amount actually payable is{" "}
+          {gbp.format(exampleD.payableTotal)}: nothing. The leave
+          itself is unaffected — it has no earnings test — so those 4
+          weeks can still be taken, just unpaid. This is why the
+          calculator asks for your earnings before it shows you a
+          total, and why a result of £0 on this page always comes
+          with the failed test named underneath it.
+        </p>
       </section>
 
       <section className="space-y-3">
@@ -274,6 +311,50 @@ export default function NeonatalCarePayCalculatorPage() {
           total is simply the weekly amount times the weeks earned.
           The calculator above does all three steps and runs the
           eligibility tests at the same time.
+        </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Consecutive days in neonatal care
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Weeks of leave and pay earned
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className="px-4 py-2">6 or fewer</td>
+                <td className="px-4 py-2">None — the 7-day minimum is not met</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">7 to 13</td>
+                <td className="px-4 py-2">1 week</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">14 to 20</td>
+                <td className="px-4 py-2">2 weeks</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">56</td>
+                <td className="px-4 py-2">8 weeks</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">84 or more</td>
+                <td className="px-4 py-2">12 weeks — the maximum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className={bodyClass}>
+          One counting rule catches people out: the qualifying period
+          of care is counted in full days starting from the day after
+          care begins, so it is the completed days of care that earn
+          weeks, not the calendar days since admission. If your baby
+          is still in care, the weeks keep accruing as each further
+          block of 7 days completes.
         </p>
         <p className={bodyClass}>
           Your average weekly earnings are worked out by your employer
@@ -335,6 +416,55 @@ export default function NeonatalCarePayCalculatorPage() {
           because the pay follows tax employment status rather than
           employment-law status.
         </p>
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+          <table className="w-full text-left text-sm table-stack">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800">
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Test
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Neonatal Care Leave
+                </th>
+                <th className="px-4 py-2 font-semibold text-slate-700 dark:text-slate-300">
+                  Statutory Neonatal Care Pay
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tr>
+                <td className="px-4 py-2">Minimum service</td>
+                <td className="px-4 py-2">None — day-one right</td>
+                <td className="px-4 py-2">
+                  26 weeks, ending with the qualifying week
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">Minimum earnings</td>
+                <td className="px-4 py-2">None</td>
+                <td className="px-4 py-2">
+                  At least the Lower Earnings Limit (£125 a week in
+                  2025/26, £129 in 2026/27) on average
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">Still employed</td>
+                <td className="px-4 py-2">Must be an employee when the leave is taken</td>
+                <td className="px-4 py-2">
+                  Must still be employed in the week before the pay starts
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2">If the test is failed</td>
+                <td className="px-4 py-2">No leave under this scheme</td>
+                <td className="px-4 py-2">
+                  Leave can still be taken, unpaid; employer must
+                  explain in writing within 28 days
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="space-y-3">
@@ -480,6 +610,21 @@ export default function NeonatalCarePayCalculatorPage() {
           parental leave, with the remaining neonatal weeks tagged on
           immediately afterwards. What you cannot do is be on two
           kinds of statutory leave in the same week.
+        </p>
+        <p className={bodyClass}>
+          A worked sequence, with real dates: a baby born on Monday
+          5 October 2026 spends 35 days in neonatal care — 5 full
+          weeks, so 5 weeks of neonatal leave are earned. The mother
+          takes her full 52 weeks of maternity leave first. Her 5
+          weeks of neonatal care leave then run straight afterwards,
+          taking her to 57 weeks after the birth, and her SNCP for
+          those weeks is paid at the same weekly rate the calculator
+          works out. The deadline check passes comfortably: all leave
+          must be taken within 68 weeks of the birth, which for this
+          baby is 24 January 2028 — the calculator prints that
+          deadline from the birth date you enter, so you can see the
+          last day the leave can be taken, not just the number of
+          weeks.
         </p>
       </section>
 

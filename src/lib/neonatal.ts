@@ -74,8 +74,13 @@ export interface NeonatalResult {
   rateBasis: "statutory-cap" | "ninety-percent";
   /** Whole weeks of leave/pay earned (days ÷ 7, capped at 12). */
   weeksEntitled: number;
-  /** Total SNCP across the entitled weeks, £. */
+  /** Total SNCP across the entitled weeks, £ — the entitlement on
+   * these figures, before the eligibility tests are applied. */
   totalPay: number;
+  /** Total actually payable, £: totalPay when eligible, else £0. */
+  payableTotal: number;
+  /** Last day leave can be taken (birth + 68 weeks), ISO, or null. */
+  leaveDeadline: string | null;
   /** Week-by-week amounts with a running total. */
   weekByWeek: NeonatalWeekRow[];
   /** Baby born on or after 6 April 2025 (null: no birth date given). */
@@ -231,6 +236,12 @@ export function calculateNeonatal(input: NeonatalInput): NeonatalResult {
     serviceTestMet !== false &&
     earningsTestMet;
 
+  const payableTotal = eligible ? totalPay : 0;
+
+  const leaveDeadline = birth
+    ? toIso(fromMs(toMs(birth) + NEONATAL.leaveWindowWeeks * WEEK_MS))
+    : null;
+
   return {
     taxYear: input.taxYear,
     flatRate: year.weeklyRate,
@@ -240,6 +251,8 @@ export function calculateNeonatal(input: NeonatalInput): NeonatalResult {
     rateBasis: ninetyPercent < year.weeklyRate ? "ninety-percent" : "statutory-cap",
     weeksEntitled,
     totalPay,
+    payableTotal,
+    leaveDeadline,
     weekByWeek,
     bornInScheme,
     careWithinWindow,
@@ -249,7 +262,7 @@ export function calculateNeonatal(input: NeonatalInput): NeonatalResult {
     earningsTestMet,
     eligible,
     failedReasons,
-    employerRecoveryStandard: round2(totalPay * NEONATAL.standardRecovery),
-    employerRecoverySmall: round2(totalPay * year.smallEmployerRecovery),
+    employerRecoveryStandard: round2(payableTotal * NEONATAL.standardRecovery),
+    employerRecoverySmall: round2(payableTotal * year.smallEmployerRecovery),
   };
 }

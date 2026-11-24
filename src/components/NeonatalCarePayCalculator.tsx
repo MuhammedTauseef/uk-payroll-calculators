@@ -187,15 +187,25 @@ export default function NeonatalCarePayCalculator() {
         </div>
 
         <p className="mt-2 text-4xl font-bold tracking-tight text-brand-800 dark:text-brand-300">
-          {gbp.format(result.totalPay)}
+          {gbp.format(result.payableTotal)}
         </p>
         <p className="text-sm text-slate-600 dark:text-slate-300">
-          Total Statutory Neonatal Care Pay across{" "}
-          {result.weeksEntitled}{" "}
-          {result.weeksEntitled === 1 ? "week" : "weeks"} —{" "}
-          {gbp.format(result.weeklyAmount)} a week, before tax and
-          National Insurance, which are taken off in the same way as
-          wages.
+          {result.eligible ? (
+            <>
+              Total Statutory Neonatal Care Pay across{" "}
+              {result.weeksEntitled}{" "}
+              {result.weeksEntitled === 1 ? "week" : "weeks"} —{" "}
+              {gbp.format(result.weeklyAmount)} a week, before tax and
+              National Insurance, which are taken off in the same way
+              as wages.
+            </>
+          ) : (
+            <>
+              Statutory Neonatal Care Pay payable on these figures —
+              the tests below explain why. The leave itself may still
+              be available unpaid.
+            </>
+          )}
         </p>
 
         {!result.eligible && (
@@ -209,6 +219,14 @@ export default function NeonatalCarePayCalculator() {
                 <li key={reason}>{reason}.</li>
               ))}
             </ul>
+            {result.totalPay > 0 && (
+              <p className="mt-2">
+                The {result.weeksEntitled}{" "}
+                {result.weeksEntitled === 1 ? "week" : "weeks"} earned
+                would have been worth {gbp.format(result.totalPay)} if
+                the tests had been passed.
+              </p>
+            )}
             <p className="mt-2">
               Neonatal Care Leave itself is a day-one right, so the
               time off may still be available unpaid. If your employer
@@ -218,7 +236,7 @@ export default function NeonatalCarePayCalculator() {
           </div>
         )}
 
-        {result.weekByWeek.length > 0 && (
+        {result.eligible && result.weekByWeek.length > 0 && (
           <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
             <table className="w-full text-left text-sm table-stack">
               <thead>
@@ -296,6 +314,16 @@ export default function NeonatalCarePayCalculator() {
               </dd>
             </div>
           )}
+          {result.leaveDeadline && (
+            <div>
+              <dt className="inline font-medium">Leave deadline: </dt>
+              <dd className="inline">
+                all neonatal care leave must be taken by{" "}
+                {formatDateGB(result.leaveDeadline)} — 68 weeks after
+                the birth.
+              </dd>
+            </div>
+          )}
           <div>
             <dt className="inline font-medium">Employer reclaim: </dt>
             <dd className="inline">
@@ -311,7 +339,7 @@ export default function NeonatalCarePayCalculator() {
         <ResultActions
           image={{
             title: "Statutory Neonatal Care Pay",
-            headline: gbp.format(result.totalPay),
+            headline: gbp.format(result.payableTotal),
             headlineNote: `Total across ${result.weeksEntitled} weeks at ${gbp.format(result.weeklyAmount)} a week`,
             rows: [
               {
@@ -338,7 +366,7 @@ export default function NeonatalCarePayCalculator() {
       </div>
       <StickyResultBar
         label={`Total SNCP over ${result.weeksEntitled} weeks`}
-        value={gbp.format(result.totalPay)}
+        value={gbp.format(result.payableTotal)}
       />
     </div>
   );
