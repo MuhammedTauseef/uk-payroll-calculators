@@ -200,6 +200,14 @@ function SplIcon() {
   );
 }
 
+function NeonatalIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6 3.5 7 5.4 5 7.7 5c1.7 0 3.3.9 4.3 2.4C13 5.9 14.6 5 16.3 5c2.3 0 4.2 2 4.2 4.6 0 3.7-3.5 6.9-8.5 10.9z" />
+    </svg>
+  );
+}
+
 function RedundancyIcon() {
   return (
     <svg {...iconProps}>
@@ -642,6 +650,15 @@ const CALCULATORS = [
       "Plan shared parental leave from your due date: both parents' blocks with real dates, the 8-week notice deadline for each block, the first-birthday cut-off, and shared parental pay at £194.32 a week in 2026/27.",
     audience: "Shows the pool the mother creates (up to 50 weeks of leave, 37 of pay), what each parent gets, and whether sharing costs the household anything.",
     linkText: "Open the shared parental leave calculator →",
+  },
+  {
+    href: "/neonatal-care-pay-calculator",
+    icon: <NeonatalIcon />,
+    title: "Neonatal Care Pay Calculator",
+    description:
+      "Statutory Neonatal Care Pay for babies born on or after 6 April 2025: one week of leave and pay for every full week in neonatal care, up to 12 weeks, at £194.32 a week or 90% of earnings if lower.",
+    audience: "With the 26-week service and earnings tests, your 68-week deadline and what your employer can reclaim.",
+    linkText: "Open the neonatal care pay calculator →",
   },
   {
     href: "/redundancy-pay-calculator",
