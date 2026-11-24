@@ -1200,14 +1200,7 @@ export default async function HomePage() {
           to the copy it holds. No rounded card, no side
           margins: the carousel photos run edge to edge, with the
           copy centred over them in its own readable column. */}
-      {/* Breakout maths with the Phase 3 sidebar (2026-11-20): from
-          xl the content column starts 16rem in (the sidebar) and the
-          hero should span exactly that column — width 100vw-16rem,
-          left edge at the column's left edge. While <main> is
-          narrower than its max-w-6xl (xl to 1408px) the margin is
-          just main's own px-4 (-1rem); past 1408px <main> is centred
-          with slack, and calc(43rem-50vw) lands the same left edge. */}
-      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(78svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16 xl:ml-[-1rem] xl:w-[calc(100vw-16rem)] min-[1408px]:ml-[calc(43rem-50vw)]">
+      <section className="relative -mt-8 ml-[calc(50%-50vw)] flex min-h-[calc(78svh-4rem)] w-[100vw] flex-col justify-center overflow-hidden px-4 py-12 text-center sm:-mt-12 sm:px-8 sm:py-16">
         {/* Background photo carousel: full-screen UK photos
             crossfade behind the hero copy (see HeroCarousel). */}
         <HeroCarousel />
