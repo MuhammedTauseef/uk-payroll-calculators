@@ -354,3 +354,65 @@ export const DIVIDEND_TAX = {
 
 /** Date the dividend tax figures above were verified against GOV.UK. */
 export const DIVIDEND_TAX_RATES_VERIFIED = "9 November 2026";
+
+/**
+ * Statutory Neonatal Care Pay (SNCP) — Neonatal Care (Leave and
+ * Pay) Act 2023, in force for babies born on or after 6 April 2025.
+ *
+ * Verified against GOV.UK on 24 November 2026 ("Statutory Neonatal
+ * Care Pay and Leave: employer guide", "Manually calculate
+ * Statutory Neonatal Care Pay", and "Rates and thresholds for
+ * employers 2025 to 2026" / "2026 to 2027"):
+ *   - One week of leave and pay for every 7 consecutive full days
+ *     the baby spends in neonatal care (care starting within 28
+ *     days of birth), up to 12 weeks, taken within 68 weeks of the
+ *     birth. Leave is a day-one right.
+ *   - Every week of pay is the LOWER of the tax year's flat rate
+ *     or 90% of average weekly earnings — there is NO higher-rate
+ *     opening stage, unlike SMP.
+ *   - Pay needs 26 weeks' continuous service ending with the
+ *     qualifying week, and average weekly earnings at or above
+ *     the Lower Earnings Limit (£125 a week in 2025/26, £129 in
+ *     2026/27).
+ *   - Employers recover SNCP from HMRC: 92%, or with Small
+ *     Employers' Relief (total Class 1 NICs of £45,000 or less in
+ *     the previous tax year) 108.5% in 2025/26 and 109% in 2026/27
+ *     — the compensation rate rose from 8.5% to 9% on 6 April 2026.
+ */
+export const NEONATAL = {
+  /** Maximum weeks of leave and pay. */
+  maxWeeks: 12,
+  /** Earnings fraction used in every week. */
+  aweFraction: 0.9,
+  /** Minimum consecutive days in neonatal care to earn a week. */
+  minDaysInCare: 7,
+  /** Care must start within this many days of the birth. */
+  careStartWindowDays: 28,
+  /** Scheme applies to babies born on or after this date, ISO. */
+  schemeStartDate: "2025-04-06",
+  /** All leave must be taken within this many weeks of the birth. */
+  leaveWindowWeeks: 68,
+  /** Standard employer recovery rate from HMRC. */
+  standardRecovery: 0.92,
+  years: {
+    "2025-26": {
+      /** Flat statutory weekly rate, £/week. */
+      weeklyRate: 187.18,
+      /** Lower Earnings Limit, £/week. */
+      lowerEarningsLimitWeekly: 125,
+      /** Recovery with Small Employers' Relief (100% + 8.5%). */
+      smallEmployerRecovery: 1.085,
+    },
+    "2026-27": {
+      /** Flat statutory weekly rate, £/week. */
+      weeklyRate: 194.32,
+      /** Lower Earnings Limit, £/week. */
+      lowerEarningsLimitWeekly: 129,
+      /** Recovery with Small Employers' Relief (100% + 9%). */
+      smallEmployerRecovery: 1.09,
+    },
+  },
+} as const;
+
+/** Tax years the neonatal calculator supports. */
+export type NeonatalTaxYear = keyof typeof NEONATAL.years;

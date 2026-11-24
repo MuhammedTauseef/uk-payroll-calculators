@@ -57,6 +57,7 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/paternity-pay-calculator": "Family & Baby",
   "/maternity-pay-calculator": "Family & Baby",
   "/shared-parental-leave-calculator": "Family & Baby",
+  "/neonatal-care-pay-calculator": "Family & Baby",
   "/redundancy-pay-calculator": "Pay & Salary",
   "/holiday-pay-calculator": "Pay & Salary",
   "/40k-after-tax-uk": "Pay & Salary",
@@ -112,6 +113,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/pro-rata-salary-calculator",
     "/holiday-pay-calculator",
     "/employer-cost-calculator",
+    "/neonatal-care-pay-calculator",
   ],
   "/notice-period-calculator": [
     "/redundancy-pay-calculator",
@@ -167,6 +169,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/nhs-maternity-pay-calculator",
     "/childcare-calculator",
     "/cms-calculator",
+    "/neonatal-care-pay-calculator",
   ],
   "/maternity-pay-calculator": [
     "/paternity-pay-calculator",
@@ -174,12 +177,20 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/nhs-maternity-pay-calculator",
     "/childcare-calculator",
     "/annual-leave-calculator",
+    "/neonatal-care-pay-calculator",
   ],
   "/shared-parental-leave-calculator": [
     "/maternity-pay-calculator",
     "/paternity-pay-calculator",
     "/childcare-calculator",
     "/adjusted-net-income-calculator",
+    "/neonatal-care-pay-calculator",
+  ],
+  "/neonatal-care-pay-calculator": [
+    "/maternity-pay-calculator",
+    "/paternity-pay-calculator",
+    "/shared-parental-leave-calculator",
+    "/ssp-calculator",
   ],
   "/redundancy-pay-calculator": [
     "/notice-period-calculator",
@@ -522,6 +533,7 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/paternity-pay-calculator": "statutory paternity pay spp partner leave",
   "/maternity-pay-calculator": "statutory maternity pay smp maternity leave",
   "/shared-parental-leave-calculator": "shared parental leave shpp shared parental pay spl blocks partner curtail maternity split leave",
+  "/neonatal-care-pay-calculator": "statutory neonatal care pay sncp neonatal care leave nicu baby hospital neonatal pay",
   "/redundancy-pay-calculator": "statutory redundancy pay severance laid off",
   "/holiday-pay-calculator": "holiday pay rolled up accrued leave pay",
   "/40k-after-tax-uk": "take home pay after tax net salary 40k after tax",
