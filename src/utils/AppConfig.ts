@@ -178,6 +178,30 @@ export const AppConfig = {
       flag: "🇬🇧",
     },
     {
+      href: "/second-job-tax-calculator",
+      label: "Second Job Tax Calculator",
+      icon: "💼",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/salary-comparison-calculator",
+      label: "Salary Comparison Calculator",
+      icon: "📊",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/dividend-tax-calculator",
+      label: "Dividend Tax Calculator",
+      icon: "💰",
+      flag: "🇬🇧",
+    },
+    {
+      href: "/corporation-tax-calculator",
+      label: "Corporation Tax Calculator",
+      icon: "🏢",
+      flag: "🇬🇧",
+    },
+    {
       href: "/stone-to-kg-converter",
       label: "Stone to Kg Converter",
       icon: "⚖️",

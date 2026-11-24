@@ -329,7 +329,7 @@ export const CORPORATION_TAX = {
 } as const;
 
 /** Date the Corporation Tax figures above were verified against GOV.UK. */
-export const CORPORATION_TAX_RATES_VERIFIED = "9 November 2026";
+export const CORPORATION_TAX_RATES_VERIFIED = "23 November 2026";
 
 /**
  * Tax on dividends — 2026/27.

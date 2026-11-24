@@ -256,6 +256,48 @@ function SideHustleIcon() {
   );
 }
 
+function SecondJobIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5" />
+      <path d="M3.5 7.5h17V19a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19z" />
+      <path d="M3.5 12.5h17" />
+      <path d="M12 10.8v3.4M10.3 12.5h3.4" />
+    </svg>
+  );
+}
+
+function SalaryComparisonIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3.5 20.5h17" />
+      <path d="M6.5 20.5v-6" />
+      <path d="M12 20.5V6.5" />
+      <path d="M17.5 20.5v-9.5" />
+    </svg>
+  );
+}
+
+function DividendTaxIcon() {
+  return (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 6.8v10.4M15 8.6c-.6-.8-1.7-1.2-3-1.2-1.9 0-3.2 1-3.2 2.3 0 3 6.4 1.7 6.4 4.6 0 1.3-1.4 2.3-3.2 2.3-1.4 0-2.6-.5-3.3-1.4" />
+    </svg>
+  );
+}
+
+function CorporationTaxIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 20.5h16.5" />
+      <path d="M5.5 20.5V5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15.5" />
+      <path d="M14.5 9.5h4a1 1 0 0 1 1 1v10" />
+      <path d="M8 8h3.5M8 11.5h3.5M8 15h3.5" />
+    </svg>
+  );
+}
+
 function PayRiseIcon() {
   return (
     <svg {...iconProps}>
@@ -671,6 +713,42 @@ const CALCULATORS = [
       "Work out the extra tax on a second income for 2025/26 — your salary plus the side profit through the real bands, with the £1,000 trading allowance or your expenses, whichever saves more, and Class 4 NI where it applies.",
     audience: "Shows the amount to set aside and what you keep. For Etsy, Vinted, freelancing and evening work alongside a job.",
     linkText: "Open the side hustle tax calculator →",
+  },
+  {
+    href: "/second-job-tax-calculator",
+    icon: <SecondJobIcon />,
+    title: "Second Job Tax Calculator",
+    description:
+      "Two PAYE jobs taxed the way HMRC does it for 2026/27 — Income Tax on the two salaries added together with one Personal Allowance, National Insurance worked out per job, and a payslip view showing what BR and D0 codes really deduct.",
+    audience: "Leads with what you keep from the second job — per £100 and per month — plus any refund the payslips are heading for.",
+    linkText: "Open the second job tax calculator →",
+  },
+  {
+    href: "/salary-comparison-calculator",
+    icon: <SalaryComparisonIcon />,
+    title: "Salary Comparison Calculator",
+    description:
+      "Compare two salaries after tax for 2026/27, side by side — take-home a year, a month, a week and an hour, how much of the rise you actually keep, and the marginal rate at the new salary.",
+    audience: "Compares total reward too — employer pension included — and names the £100,000–£125,140 60% tax trap when a salary lands in it.",
+    linkText: "Open the salary comparison calculator →",
+  },
+  {
+    href: "/dividend-tax-calculator",
+    icon: <DividendTaxIcon />,
+    title: "Dividend Tax Calculator",
+    description:
+      "Work out the tax on your dividends for 2026/27 the way HMRC stacks it — Personal Allowance first, the £500 dividend allowance inside the bands, then 10.75%, 35.75% and 39.35% slice by slice, with the full breakdown shown.",
+    audience: "Includes the salary-and-dividend optimiser: give it the company profit and it finds the split that leaves the most in your pocket, Corporation Tax included.",
+    linkText: "Open the dividend tax calculator →",
+  },
+  {
+    href: "/corporation-tax-calculator",
+    icon: <CorporationTaxIcon />,
+    title: "Corporation Tax Calculator",
+    description:
+      "Work out your company's Corporation Tax for 2026/27 — 19% up to £50,000, 25% from £250,000 and Marginal Relief in between with the (upper limit − profit) × 3/200 formula shown on your own numbers, limits divided by your associated companies.",
+    audience: "Builds taxable profit from the accounts figure, then gives the bill, the effective rate, the profit after tax, your pay and CT600 filing deadlines and the monthly amount to set aside. It is also the limited company tax calculator — the same tax, one page.",
+    linkText: "Open the corporation tax calculator →",
   },
   {
     href: "/adjusted-net-income-calculator",

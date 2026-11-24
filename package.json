@@ -62,7 +62,11 @@
     "verify:taper": "node scripts/verify-tapered-annual-allowance.ts",
     "verify:spl": "node scripts/verify-shared-parental-leave.ts",
     "verify:nhs-annual-leave": "node scripts/verify-nhs-annual-leave.ts",
-    "verify:teacher-pay": "node scripts/verify-teacher-pay.ts"
+    "verify:teacher-pay": "node scripts/verify-teacher-pay.ts",
+    "verify:second-job": "node scripts/verify-second-job.ts",
+    "verify:salary-comparison": "node scripts/verify-salary-comparison.ts",
+    "verify:dividend-tax": "node scripts/verify-dividend-tax.ts",
+    "verify:corporation-tax": "node scripts/verify-corporation-tax.ts"
   },
   "version": "0.1.0"
 }
