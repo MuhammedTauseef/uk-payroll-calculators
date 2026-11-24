@@ -202,7 +202,7 @@ export default function SiteNav() {
         </button>
 
         {open && (
-          <div className="absolute top-full right-0 z-50 w-[min(62rem,calc(100vw-3rem))] pt-2">
+          <div className="fixed top-16 left-1/2 z-50 w-[min(62rem,calc(100vw-3rem))] -translate-x-1/2 pt-2">
             <div
               role="menu"
               aria-label="All calculators by country"
