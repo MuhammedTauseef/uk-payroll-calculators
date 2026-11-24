@@ -150,9 +150,9 @@ export default function SiteNav() {
           >
             {item.icon}
           </span>
-          <span className="whitespace-nowrap">{item.label}</span>
+          <span className="min-w-0 leading-snug">{item.label}</span>
           {item.flag ? (
-            <span aria-hidden="true" className="ml-auto pl-2">
+            <span aria-hidden="true" className="ml-auto shrink-0 pl-2">
               {item.flag}
             </span>
           ) : null}
@@ -200,7 +200,7 @@ export default function SiteNav() {
             <div
               role="menu"
               aria-label="All calculators by country"
-              className="rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900"
+              className="max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-2xl border border-slate-200 bg-white shadow-xl dark:border-slate-800 dark:bg-slate-900"
             >
             <div className="grid grid-cols-4 gap-6 p-5">
               <div className="col-span-2">
