@@ -56,6 +56,7 @@
     "verify:redundancy": "node scripts/verify-redundancy.ts",
     "verify:maternity-pay": "node scripts/verify-maternity-pay.ts",
     "verify:neonatal": "node scripts/verify-neonatal.ts",
+    "verify:cis": "node scripts/verify-cis.ts",
     "verify:holiday-pay": "node scripts/verify-holiday-pay.ts",
     "verify:pay-rise": "node scripts/verify-pay-rise.ts",
     "verify:childcare": "node scripts/verify-childcare.ts",

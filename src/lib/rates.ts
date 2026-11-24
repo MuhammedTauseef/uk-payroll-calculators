@@ -416,3 +416,64 @@ export const NEONATAL = {
 
 /** Tax years the neonatal calculator supports. */
 export type NeonatalTaxYear = keyof typeof NEONATAL.years;
+
+/**
+ * Construction Industry Scheme (CIS) — deduction rates and the
+ * monthly admin deadlines.
+ *
+ * Verified against GOV.UK on 24 November 2026 ("Construction
+ * Industry Scheme: contractor guide" and "Construction Industry
+ * Scheme: subcontractor guide", plus the policy paper
+ * "Simplification and administrative improvements to the
+ * Construction Industry Scheme"):
+ *   - Contractors deduct 20% from payments to subcontractors who
+ *     are registered for CIS and verified, 30% where the
+ *     subcontractor is not registered or cannot be verified, and
+ *     nothing (0%) where the subcontractor holds gross payment
+ *     status. HMRC tells the contractor which rate applies at
+ *     verification — the contractor does not choose.
+ *   - The deduction applies to the LABOUR element only: VAT,
+ *     materials at direct cost, consumable stores, fuel other
+ *     than for travelling, plant hire and materials used in
+ *     manufacturing or prefabricating materials are all taken off
+ *     the payment first. Travel and subsistence recharged stay in.
+ *   - The rates are unchanged for 2026/27; the April 2026 changes
+ *     were administrative (nil CIS300 returns reinstated, payments
+ *     to local authorities and certain public bodies exempted) and
+ *     anti-fraud (Finance Act 2026).
+ *   - Monthly cycle: the CIS300 return is due by the 19th of the
+ *     following month, the deductions reach HMRC by the 22nd
+ *     (19th by post), and each subcontractor's payment and
+ *     deduction statement is due within 14 days of the end of the
+ *     tax month (tax months run 6th to 5th). Records are kept for
+ *     at least 3 years after the tax year they relate to.
+ */
+export const CIS = {
+  /** Deduction rate for a registered, verified subcontractor. */
+  standardRate: 0.2,
+  /** Deduction rate for an unregistered / unverifiable subcontractor. */
+  higherRate: 0.3,
+  /** Deduction rate with gross payment status — no deduction. */
+  grossRate: 0,
+  /** CIS300 monthly return due day of the following month. */
+  returnDueDay: 19,
+  /** Deductions due to HMRC, electronic payment. */
+  payDueDayElectronic: 22,
+  /** Deductions due to HMRC, payment by post. */
+  payDueDayPost: 19,
+  /** Payment and deduction statement due within this many days of the tax month end. */
+  statementDays: 14,
+  /** Years CIS records must be kept after the tax year. */
+  recordsYears: 3,
+  /** A business spending more than this on construction in 12 months is a deemed contractor. */
+  deemedContractorThreshold: 3000000,
+  /** Work on the subcontractor's own property below this value (excl. materials) is exempt. */
+  ownPropertyExemptionLimit: 1000,
+  /** Gross payment status turnover test: net construction turnover per relevant person. */
+  grossStatusTurnoverPerPerson: 30000,
+  /** Gross payment status turnover test: whole-business alternative. */
+  grossStatusTurnoverWholeBusiness: 100000,
+} as const;
+
+/** The three CIS payment statuses, keyed by the rate HMRC sets at verification. */
+export type CisStatus = "verified" | "unverified" | "gross";
