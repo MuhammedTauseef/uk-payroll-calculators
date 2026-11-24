@@ -84,6 +84,14 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        {/* AdSense site verification (account created 24 Nov 2026) —
+            loads the adsbygoogle library only; no ad units are placed
+            by this tag, ad display stays under owner control. */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8300728790043914"
+          strategy="beforeInteractive"
+          crossOrigin="anonymous"
+        />
         <PageSchema />
         <BaseTemplate
           leftNav={<SiteNav />}
