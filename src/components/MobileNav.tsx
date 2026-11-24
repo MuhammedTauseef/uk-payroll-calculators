@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AppConfig } from "@/utils/AppConfig";
+import Flag from "@/components/Flag";
 
 /**
  * Mobile navigation: a hamburger button in the header (below the lg
@@ -22,10 +23,10 @@ export default function MobileNav() {
   const home = AppConfig.nav.find((item) => item.href === "/");
   const blog = AppConfig.nav.find((item) => item.href === "/blog");
   const groups = [
-    { heading: "UK Calculators 🇬🇧", flag: "🇬🇧" },
-    { heading: "US Calculators 🇺🇸", flag: "🇺🇸" },
-    { heading: "AU Calculators 🇦🇺", flag: "🇦🇺" },
-    { heading: "CH Calculators 🇨🇭", flag: "🇨🇭" },
+    { heading: "UK Calculators", flag: "🇬🇧" },
+    { heading: "US Calculators", flag: "🇺🇸" },
+    { heading: "AU Calculators", flag: "🇦🇺" },
+    { heading: "CH Calculators", flag: "🇨🇭" },
   ].map((group) => ({
     ...group,
     items: AppConfig.nav.filter((item) => item.flag === group.flag),
@@ -63,8 +64,11 @@ export default function MobileNav() {
           </span>
           <span>{item.label}</span>
           {item.flag ? (
-            <span aria-hidden="true" className="ml-auto pl-3 text-lg">
-              {item.flag}
+            <span aria-hidden="true" className="ml-auto pl-3">
+              <Flag
+                flag={item.flag}
+                className="block h-5 w-7 rounded-[3px] object-cover"
+              />
             </span>
           ) : null}
         </Link>
@@ -143,6 +147,10 @@ export default function MobileNav() {
                     className="flex min-h-11 w-full items-center px-3 pt-2 text-xs font-semibold tracking-wider text-slate-400 uppercase dark:text-slate-500"
                   >
                     {group.heading}
+                    <Flag
+                      flag={group.flag}
+                      className="ml-1.5 inline-block h-3 w-[18px] rounded-[2px] object-cover"
+                    />
                     <svg
                       aria-hidden="true"
                       viewBox="0 0 20 20"

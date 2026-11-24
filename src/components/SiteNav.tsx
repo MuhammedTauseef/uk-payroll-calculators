@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AppConfig } from "@/utils/AppConfig";
+import Flag from "@/components/Flag";
 
 /**
  * Main navigation with active-page highlighting, rendered inside the
@@ -19,16 +20,18 @@ import { AppConfig } from "@/utils/AppConfig";
  * Groups are derived from AppConfig.nav by flag, so a new calculator
  * lands in the right country group automatically.
  *
- * The visible set (6 pills + Calculators + Blog) stays inside the
- * ~854px the header leaves for the nav at 1280px, and the panel is
- * width-capped to the viewport, so neither can push the page sideways.
+ * The visible set (4 pills + Calculators + Blog) stays inside what
+ * the header leaves for the nav at 1280px — with 6 pills the row
+ * overflowed on smaller laptop screens and pushed the header's
+ * "Try SSP" button off the right edge (owner report, 24 Nov 2026);
+ * the two pills removed here (Tax Code Checker, Annual Leave) live
+ * in the mega menu instead. The panel is width-capped to the
+ * viewport, so neither can push the page sideways.
  */
 const VISIBLE_HREFS = [
   "/ssp-calculator",
   "/40k-after-tax-uk",
   "/payslip-generator",
-  "/hmrc-tax-code-checker",
-  "/annual-leave-calculator",
   "/overtime-calculator",
 ];
 
@@ -153,7 +156,10 @@ export default function SiteNav() {
           <span className="min-w-0 leading-snug">{item.label}</span>
           {item.flag ? (
             <span aria-hidden="true" className="ml-auto shrink-0 pl-2">
-              {item.flag}
+              <Flag
+                flag={item.flag}
+                className="block h-4 w-6 rounded-[2px] object-cover"
+              />
             </span>
           ) : null}
         </Link>
@@ -204,21 +210,21 @@ export default function SiteNav() {
             >
             <div className="grid grid-cols-4 gap-6 p-5">
               <div className="col-span-2">
-                <p className={GROUP_HEADING_CLASS}>UK Calculators 🇬🇧</p>
+                <p className={GROUP_HEADING_CLASS}>UK Calculators <Flag flag="🇬🇧" /></p>
                 <ul className="mt-2 grid grid-cols-2 gap-x-3">
                   {ukItems.map(renderPanelLink)}
                 </ul>
               </div>
 
               <div>
-                <p className={GROUP_HEADING_CLASS}>US Calculators 🇺🇸</p>
+                <p className={GROUP_HEADING_CLASS}>US Calculators <Flag flag="🇺🇸" /></p>
                 <ul className="mt-2">{usItems.map(renderPanelLink)}</ul>
                 <p className={`${GROUP_HEADING_CLASS} mt-5`}>
-                  AU Calculators 🇦🇺
+                  AU Calculators <Flag flag="🇦🇺" />
                 </p>
                 <ul className="mt-2">{auItems.map(renderPanelLink)}</ul>
                 <p className={`${GROUP_HEADING_CLASS} mt-5`}>
-                  CH Calculators 🇨🇭
+                  CH Calculators <Flag flag="🇨🇭" />
                 </p>
                 <ul className="mt-2">{chItems.map(renderPanelLink)}</ul>
                 <p className="px-2 pt-4 text-xs leading-relaxed text-slate-400 dark:text-slate-500">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import SalaryHeroBox from "@/components/SalaryHeroBox";
 import ToolsDirectory, { type DirectoryTool } from "@/components/ToolsDirectory";
+import Flag from "@/components/Flag";
 import { SSP_GUIDES } from "@/components/GuideSections";
 import { pageMetadata } from "@/utils/metadata";
 import { AppConfig } from "@/utils/AppConfig";
@@ -1246,7 +1247,7 @@ export default async function HomePage() {
 
       <section id="calculators" className="scroll-mt-32">
         <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          The calculators 🇬🇧
+          The calculators <Flag flag="🇬🇧" />
         </h2>
         <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">
           Every calculator and converter on the hub in one list —
