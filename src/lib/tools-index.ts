@@ -84,6 +84,7 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/overtime-calculator": "Pay & Salary",
   "/hourly-rate-converter": "Pay & Salary",
   "/ir35-calculator": "Business Tools",
+  "/cis-deduction-calculator": "Business Tools",
   "/vat-calculator": "Tax & HMRC",
   "/annuity-calculator": "Money & Finance",
   "/childcare-calculator": "Family & Baby",
@@ -138,6 +139,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/ssp-calculator",
     "/redundancy-pay-calculator",
     "/payslip-generator",
+    "/cis-deduction-calculator",
   ],
   "/nhs-maternity-pay-calculator": [
     "/maternity-pay-calculator",
@@ -262,6 +264,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/day-rate-calculator",
     "/hourly-rate-converter",
     "/dividend-tax-calculator",
+    "/cis-deduction-calculator",
   ],
   "/capital-gains-tax-calculator": [
     "/vat-calculator",
@@ -313,6 +316,15 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/employer-cost-calculator",
     "/side-hustle-tax-calculator-uk",
     "/dividend-tax-calculator",
+    "/cis-deduction-calculator",
+  ],
+  "/cis-deduction-calculator": [
+    "/ir35-calculator",
+    "/umbrella-company-calculator",
+    "/free-invoice-generator-uk",
+    "/employer-cost-calculator",
+    "/vat-calculator",
+    "/day-rate-calculator",
   ],
   "/vat-calculator": [
     "/capital-gains-tax-calculator",
@@ -472,6 +484,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/day-rate-calculator",
     "/umbrella-company-calculator",
     "/side-hustle-tax-calculator-uk",
+    "/cis-deduction-calculator",
   ],
   "/marriage-allowance-calculator": [
     "/hmrc-tax-code-checker",
@@ -560,6 +573,7 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/dividend-tax-calculator": "dividend tax calculator uk dividend tax calculator tax on dividends dividend allowance 500 salary vs dividends director salary dividend optimiser best salary dividend mix limited company take home self assessment set aside",
   "/corporation-tax-calculator": "corporation tax calculator uk corporation tax calculator limited company tax calculator ltd company tax marginal relief small profits rate 19% 25% associated companies taxable profit builder ct600 deadline pay corporation tax",
   "/ir35-calculator": "ir35 off payroll contractor status",
+  "/cis-deduction-calculator": "cis deduction construction industry scheme cis tax subcontractor contractor 20% 30% gross payment status",
   "/vat-calculator": "vat value added tax add remove 20%",
   "/annuity-calculator": "annuity pension income retirement",
   "/adjusted-net-income-calculator": "adjusted net income ani 100k tax trap child benefit charge personal allowance grossed up pension gift aid",

@@ -398,6 +398,16 @@ function Ir35Icon() {
   );
 }
 
+function CisIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M3 21h18" />
+      <path d="M5 21v-8l7-6 7 6v8" />
+      <path d="M10 21v-5h4v5" />
+    </svg>
+  );
+}
+
 function TexasIcon() {
   return (
     <svg {...iconProps}>
@@ -839,6 +849,15 @@ const CALCULATORS = [
       "Check whether a contract is inside or outside IR35 from eight questions about control, substitution and the other status factors.",
     audience: "Then compare inside vs outside take-home pay on your day rate.",
     linkText: "Open the IR35 calculator →",
+  },
+  {
+    href: "/cis-deduction-calculator",
+    icon: <CisIcon />,
+    title: "CIS Deduction Calculator",
+    description:
+      "Work out a Construction Industry Scheme deduction: 20% of the labour element for a verified subcontractor, 30% if unverified, 0% with gross payment status — materials, plant hire and VAT are never deducted from.",
+    audience: "With the CIS300 deadlines, the reclaim routes and the April 2026 changes.",
+    linkText: "Open the CIS deduction calculator →",
   },
   {
     href: "/vat-calculator",
