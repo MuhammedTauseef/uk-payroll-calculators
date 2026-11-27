@@ -408,6 +408,27 @@ function CisIcon() {
   );
 }
 
+function PilonIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M6 3h8l4 4v14H6z" />
+      <path d="M14 3v4h4" />
+      <path d="M9 12h6M9 16h6" />
+    </svg>
+  );
+}
+
+function BonusIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 11h16v10H4z" />
+      <path d="M3 7h18v4H3z" />
+      <path d="M12 7v14" />
+      <path d="M12 7a3 3 0 1 1 3-3c0 2-3 3-3 3zM12 7a3 3 0 1 0-3-3c0 2 3 3 3 3z" />
+    </svg>
+  );
+}
+
 function TexasIcon() {
   return (
     <svg {...iconProps}>
@@ -680,6 +701,15 @@ const CALCULATORS = [
     linkText: "Open the redundancy pay calculator →",
   },
   {
+    href: "/pilon-calculator",
+    icon: <PilonIcon />,
+    title: "PILON & PENP Calculator",
+    description:
+      "Pay in lieu of notice and termination payments taxed the HMRC way: post-employment notice pay from the ((BP × D) ÷ P) − T formula, taxed as earnings, with what is left measured against the £30,000 exemption.",
+    audience: "For anyone leaving a job with notice unworked — or settling a package.",
+    linkText: "Open the PILON calculator →",
+  },
+  {
     href: "/holiday-pay-calculator",
     icon: <HolidayPayIcon />,
     title: "Holiday Pay Calculator",
@@ -939,6 +969,15 @@ const CALCULATORS = [
       "Enter a rise as a percentage, an amount or a target salary — and see the extra take-home pay after tax, National Insurance, pension and student loan.",
     audience: "Not just the gross headline.",
     linkText: "Open the pay rise calculator →",
+  },
+  {
+    href: "/bonus-tax-calculator",
+    icon: <BonusIcon />,
+    title: "Bonus Tax Calculator",
+    description:
+      "There is no special bonus tax rate — a bonus is taxed where it lands on your salary. See the Income Tax, National Insurance and student loan on yours, including the 60% trap over £100,000.",
+    audience: "And what paying some of it into a pension instead would save.",
+    linkText: "Open the bonus tax calculator →",
   },
   {
     href: "/salary-sacrifice-calculator",

@@ -477,3 +477,54 @@ export const CIS = {
 
 /** The three CIS payment statuses, keyed by the rate HMRC sets at verification. */
 export type CisStatus = "verified" | "unverified" | "gross";
+
+/**
+ * Termination payments and post-employment notice pay (PENP) —
+ * sections 401 to 416 and 402A to 402E ITEPA 2003.
+ *
+ * Verified against HMRC's Employment Income Manual on
+ * 27 November 2026 (EIM13874 "Relevant termination awards" and
+ * EIM13880 "Post-employment notice pay (PENP) formula"):
+ *   - Where employment ends on or after 6 April 2018 and the
+ *     employee does not work their full notice period, the part of
+ *     a termination award that represents basic pay for the
+ *     unworked notice period is post-employment notice pay. PENP
+ *     is chargeable to Income Tax as general earnings (and to
+ *     Class 1 National Insurance) and does NOT benefit from the
+ *     £30,000 threshold.
+ *   - The statutory formula (section 402D) is:
+ *       PENP = ((BP × D) ÷ P) − T
+ *     BP = basic pay in the last pay period ending before the
+ *     trigger date (before any salary sacrifice is deducted;
+ *     overtime, bonuses, commission, allowances and taxable
+ *     benefits are excluded). D = calendar days in the
+ *     post-employment notice period. P = calendar days in that
+ *     last pay period. T = payments or benefits received in
+ *     connection with the termination that are already chargeable
+ *     to tax as earnings apart from the termination-payments
+ *     rules (a contractual PILON, typically) — holiday pay and
+ *     termination bonuses are NOT part of T.
+ *   - Monthly shortcut (section 402D(6)): where the last pay
+ *     period is a month, basic pay is paid in equal monthly
+ *     instalments, the minimum notice is expressed in whole
+ *     months and the post-employment notice period is a whole
+ *     number of months, P is 1 and D is the period in months.
+ *     In any other monthly-paid case P is 30.42, the average
+ *     number of days in a month (section 402D(6A)).
+ *   - A negative formula result means PENP is nil, and PENP can
+ *     never exceed the total relevant termination award.
+ *   - The rest of the award (the award minus PENP), together with
+ *     statutory redundancy pay and approved contractual payments,
+ *     is taxed under section 403: the first £30,000 is exempt,
+ *     and any excess is chargeable to Income Tax — and, since
+ *     April 2020, to employer-only Class 1A National Insurance.
+ */
+export const TERMINATION = {
+  /** Section 403 threshold: the tax-free amount for the non-PENP part of a termination package, £. */
+  taxFreeThreshold: 30000,
+  /** Average days in a month — P in the PENP formula for monthly-paid employees outside the whole-months shortcut (s.402D(6A)). */
+  averageDaysPerMonth: 30.42,
+} as const;
+
+/** Date the termination-payments figures above were verified against HMRC guidance. */
+export const TERMINATION_RULES_VERIFIED = "27 November 2026";

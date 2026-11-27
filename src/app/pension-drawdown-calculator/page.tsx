@@ -417,6 +417,17 @@ export default function PensionDrawdownCalculatorPage() {
           income.
         </p>
         <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
+          If you are weighing drawdown against a guaranteed income,
+          our{" "}
+          <Link
+            href="/blog/pension-annuity-comparison-uk"
+            className="font-semibold text-brand-700 dark:text-brand-300 underline decoration-brand-300 underline-offset-2 hover:text-brand-800 dark:hover:text-brand-300"
+          >
+            pension annuity comparison UK guide
+          </Link>{" "}
+          compares the annuity types, rates and tax side by side.
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-slate-700 dark:text-slate-300">
           One warning belongs on every drawdown plan: taking a taxable
           withdrawal (beyond tax-free cash alone) triggers the Money
           Purchase Annual Allowance, cutting what you can pay into

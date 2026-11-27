@@ -318,7 +318,7 @@ export default function AnnuityCalculatorPage() {
           single best quote available. In the Which? best-buy table
           published in November 2026 (figures from the MoneyHelper
           annuity calculator, correct at 16 November 2026), the same
-          £100,000 at 65 was quoted between £6,703 and £8,151 a year
+          £100,000 at 65 was quoted between £6,704 and £8,151 a year
           depending on the provider — a spread of more than £1,400 a
           year, every year, for life, on identical options. Retirement
           Line&apos;s best standard rate on 12 November 2026 was
@@ -765,7 +765,7 @@ export default function AnnuityCalculatorPage() {
           <strong>Accepting their own provider&apos;s first quote.</strong>{" "}
           You do not have to buy from the provider that held the pot,
           and the November 2026 Which? table shows why it matters:
-          identical £100,000 purchases at 65 were quoted from £6,703
+          identical £100,000 purchases at 65 were quoted from £6,704
           to £8,151 a year. Exercising the open market option is the
           closest thing to free money in retirement planning.
         </p>

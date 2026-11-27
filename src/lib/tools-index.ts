@@ -59,6 +59,8 @@ export const CATEGORY_BY_HREF: Record<string, string> = {
   "/shared-parental-leave-calculator": "Family & Baby",
   "/neonatal-care-pay-calculator": "Family & Baby",
   "/redundancy-pay-calculator": "Pay & Salary",
+  "/pilon-calculator": "Pay & Salary",
+  "/bonus-tax-calculator": "Pay & Salary",
   "/holiday-pay-calculator": "Pay & Salary",
   "/40k-after-tax-uk": "Pay & Salary",
   "/pay-rise-calculator": "Pay & Salary",
@@ -118,6 +120,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
   ],
   "/notice-period-calculator": [
     "/redundancy-pay-calculator",
+    "/pilon-calculator",
     "/employer-cost-calculator",
     "/annual-leave-calculator",
     "/pro-rata-salary-calculator",
@@ -196,9 +199,25 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
   ],
   "/redundancy-pay-calculator": [
     "/notice-period-calculator",
+    "/pilon-calculator",
     "/employer-cost-calculator",
     "/40k-after-tax-uk",
     "/ssp-calculator",
+  ],
+  "/pilon-calculator": [
+    "/redundancy-pay-calculator",
+    "/notice-period-calculator",
+    "/payslip-calculator",
+    "/40k-after-tax-uk",
+    "/employer-cost-calculator",
+  ],
+  "/bonus-tax-calculator": [
+    "/payslip-calculator",
+    "/40k-after-tax-uk",
+    "/salary-sacrifice-calculator",
+    "/student-loan-repayment-calculator",
+    "/pay-rise-calculator",
+    "/adjusted-net-income-calculator",
   ],
   "/holiday-pay-calculator": [
     "/annual-leave-calculator",
@@ -220,6 +239,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/overtime-calculator",
     "/reverse-salary-calculator",
     "/salary-comparison-calculator",
+    "/bonus-tax-calculator",
   ],
   "/payslip-calculator": [
     "/payslip-generator",
@@ -228,6 +248,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/marriage-allowance-calculator",
     "/reverse-salary-calculator",
     "/second-job-tax-calculator",
+    "/bonus-tax-calculator",
   ],
   "/reverse-salary-calculator": [
     "/payslip-calculator",
@@ -250,6 +271,7 @@ export const RELATED_BY_HREF: Record<string, string[]> = {
     "/40k-after-tax-uk",
     "/pay-rise-calculator",
     "/salary-comparison-calculator",
+    "/bonus-tax-calculator",
   ],
   "/student-loan-repayment-calculator": [
     "/40k-after-tax-uk",
@@ -548,6 +570,8 @@ const KEYWORDS_BY_HREF: Record<string, string> = {
   "/shared-parental-leave-calculator": "shared parental leave shpp shared parental pay spl blocks partner curtail maternity split leave",
   "/neonatal-care-pay-calculator": "statutory neonatal care pay sncp neonatal care leave nicu baby hospital neonatal pay",
   "/redundancy-pay-calculator": "statutory redundancy pay severance laid off",
+  "/pilon-calculator": "pilon penp pay in lieu of notice post employment notice pay termination payment 30000 exemption settlement agreement leaving job notice pay tax",
+  "/bonus-tax-calculator": "bonus tax how much tax on bonus bonus taxed 40 percent bonus payslip bonus salary sacrifice pension bonus student loan bonus",
   "/holiday-pay-calculator": "holiday pay rolled up accrued leave pay",
   "/40k-after-tax-uk": "take home pay after tax net salary 40k after tax",
   "/pay-rise-calculator": "pay rise salary increase raise promotion new salary after tax",

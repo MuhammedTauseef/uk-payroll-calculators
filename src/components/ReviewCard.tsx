@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { RATES_LAST_VERIFIED } from "@/lib/rates";
 
 /**
  * The expertise & review card (UX Izafa 5, 2026-11-20), shown at the
@@ -32,9 +31,9 @@ export default function ReviewCard() {
       </p>
       <p className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
         The figures on this page were verified against {authority},
-        benchmarked against worked examples, and re-checked on{" "}
-        {RATES_LAST_VERIFIED}. How that checking works is written down
-        in full — no figure here asks to be taken on trust.
+        benchmarked against worked examples, and re-checked whenever
+        the published rates change. How that checking works is written
+        down in full — no figure here asks to be taken on trust.
       </p>
       <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-semibold">
         <Link
