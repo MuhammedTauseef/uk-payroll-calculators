@@ -300,6 +300,56 @@ export const MARRIAGE_ALLOWANCE = {
   ],
 } as const;
 
+/**
+ * Income Tax — Scotland, 2026/27 (Scottish Income Tax on
+ * non-savings, non-dividend income).
+ *
+ * The bands below are the limits on TAXABLE income (income above
+ * the Personal Allowance), exactly as the Scottish Rate Resolution
+ * states them. Source: the Scottish Rate Resolution for 2026-27
+ * (motion S6M-20844, agreed by the Scottish Parliament on
+ * 19 February 2026), proposed at the Scottish Budget on
+ * 13 January 2026 and published by the Scottish Government in
+ * "Scottish Income Tax: rates and bands — 2026 to 2027" (gov.scot)
+ * and the Scottish Income Tax technical factsheet. Verified
+ * against gov.scot on 28 November 2026:
+ *   - Starter rate 19% on taxable income up to £3,967
+ *     (gross £12,571–£16,537 with the standard allowance).
+ *   - Scottish basic rate 20% up to £16,956 (gross to £29,526).
+ *   - Intermediate rate 21% up to £31,092 (gross to £43,662).
+ *   - Higher rate 42% up to £62,430 (gross to £75,000).
+ *   - Advanced rate 45% up to £125,140 (gross to £125,140 — the
+ *     two framings meet at this figure because the Personal
+ *     Allowance is fully tapered away at £125,140 of income).
+ *   - Top rate 48% on taxable income above £125,140.
+ * Against 2025/26, the starter limit rose from £2,827 to £3,967
+ * and the basic limit from £14,921 to £16,956 (the gross starter
+ * and basic thresholds each rose 7.4% at the January 2026 Budget);
+ * the intermediate, higher, advanced and top limits were frozen.
+ * The Personal Allowance is the UK-wide one (£12,570, tapering
+ * from £100,000) and employee National Insurance is UK-wide too —
+ * both are reused from INCOME_TAX / EMPLOYEE_NI, never restated
+ * here.
+ */
+export const SCOTTISH_TAX = {
+  /** Bands in order, each with its rate and its taxable-income limit. */
+  bands: [
+    { name: "Starter", rate: 0.19, limit: 3967 },
+    { name: "Basic", rate: 0.2, limit: 16956 },
+    { name: "Intermediate", rate: 0.21, limit: 31092 },
+    { name: "Higher", rate: 0.42, limit: 62430 },
+    { name: "Advanced", rate: 0.45, limit: 125140 },
+    { name: "Top", rate: 0.48, limit: Number.POSITIVE_INFINITY },
+  ],
+} as const;
+
+/** Dating label for Scottish take-home figures (2026/27). */
+export const SCOTTISH_TAX_RATES_LABEL =
+  "2026/27 Scottish rates — Scottish Rate Resolution (S6M-20844)";
+
+/** Date the Scottish figures above were verified against gov.scot. */
+export const SCOTTISH_TAX_RATES_VERIFIED = "28 November 2026";
+
 /** Dating label for take-home (PAYE) figures (2026/27 — GOV.UK-verified). */
 export const PAYE_RATES_LABEL = "2026/27 rates — verified against GOV.UK";
 

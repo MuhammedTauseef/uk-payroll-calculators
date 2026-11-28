@@ -120,6 +120,8 @@ export const AppConfig = {
     { href: "/bonus-tax-calculator", label: "Bonus Tax Calculator", icon: "🎁", flag: "🇬🇧" },
     { href: "/payslip-calculator", label: "Payslip Calculator", icon: "🧮", flag: "🇬🇧" },
     { href: "/reverse-salary-calculator", label: "Required Salary Calculator", icon: "🎯", flag: "🇬🇧" },
+    { href: "/salary-calculator-scotland", label: "Scotland Salary Calculator", icon: "🏴󐁧󐁢󐁳󐁣󐁴󐁿", flag: "🇬🇧" },
+    { href: "/monthly-salary-calculator", label: "Monthly Salary Calculator", icon: "🗓️", flag: "🇬🇧" },
     { href: "/payslip-generator", label: "Payslip Generator", icon: "🧾", flag: "🇬🇧" },
     {
       href: "/salary-sacrifice-calculator",

@@ -68,7 +68,9 @@
     "verify:second-job": "node scripts/verify-second-job.ts",
     "verify:salary-comparison": "node scripts/verify-salary-comparison.ts",
     "verify:dividend-tax": "node scripts/verify-dividend-tax.ts",
-    "verify:corporation-tax": "node scripts/verify-corporation-tax.ts"
+    "verify:corporation-tax": "node scripts/verify-corporation-tax.ts",
+    "verify:scotland-tax": "node scripts/verify-scotland-tax.ts",
+    "verify:monthly-salary": "node scripts/verify-monthly-salary.ts"
   },
   "version": "0.1.0"
 }

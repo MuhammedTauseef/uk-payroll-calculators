@@ -398,6 +398,26 @@ function Ir35Icon() {
   );
 }
 
+function ScotlandIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 5h16v14H4z" />
+      <path d="M4 5l16 14M20 5L4 19" />
+    </svg>
+  );
+}
+
+function MonthlyIcon() {
+  return (
+    <svg {...iconProps}>
+      <path d="M4 6h16v14H4z" />
+      <path d="M4 10h16" />
+      <path d="M8 3v4M16 3v4" />
+      <path d="M8 15h3" />
+    </svg>
+  );
+}
+
 function CisIcon() {
   return (
     <svg {...iconProps}>
@@ -888,6 +908,24 @@ const CALCULATORS = [
       "Work out a Construction Industry Scheme deduction: 20% of the labour element for a verified subcontractor, 30% if unverified, 0% with gross payment status — materials, plant hire and VAT are never deducted from.",
     audience: "With the CIS300 deadlines, the reclaim routes and the April 2026 changes.",
     linkText: "Open the CIS deduction calculator →",
+  },
+  {
+    href: "/salary-calculator-scotland",
+    icon: <ScotlandIcon />,
+    title: "Salary Calculator Scotland",
+    description:
+      "Take-home pay on Scotland's six Income Tax bands for 2026/27 — starter 19%, intermediate 21%, higher 42% from £43,663 — with your tax shown band by band.",
+    audience: "With the exact point where Scotland starts costing more than England: £33,494.",
+    linkText: "Open the Scotland salary calculator →",
+  },
+  {
+    href: "/monthly-salary-calculator",
+    icon: <MonthlyIcon />,
+    title: "Monthly Salary Calculator",
+    description:
+      "Enter your pay per month, per year or per week and see the monthly take-home pay for 2026/27 after Income Tax and National Insurance, broken down month by month.",
+    audience: "Built on the same engine as the payslip calculator, so the two can never disagree.",
+    linkText: "Open the monthly salary calculator →",
   },
   {
     href: "/vat-calculator",
